@@ -1,3 +1,4 @@
+
 .DS_Store
 __pycache__/
 .vscode/
@@ -17,3 +18,4 @@ packaged/
 # PowerPoint temporary
 ~$*.ppt*
 *.jzip
+-digit-judgement
