@@ -7,7 +7,7 @@ import { countDownTimer, convertTime } from "@coglabuzh/webpsy.js";
 // Global variables
 import { expInfo } from "../settings";
 let { TIMING } = expInfo;
-import { TEXT } from "../task-fun/text";
+import { SCREEN_INFO } from "../task-fun/text";
 import { jsPsych } from "../jsp";
 
 // display a cue screen with a countdown timer.
@@ -15,7 +15,7 @@ export const trial_start_screen = {
   type: htmlKeyboardResponse,
   stimulus: function () {
     return `<div class="fb-text">
-    ${TEXT.startTrial[expInfo.LANG]}
+    ${SCREEN_INFO.startTrial[expInfo.LANG]}
     <br>
     <br>
   </div>`;
