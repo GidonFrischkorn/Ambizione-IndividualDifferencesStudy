@@ -6,6 +6,7 @@ import { expInfo } from "../settings";
 // Third party plugins
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { jsPsych } from "../jsp";
+import psychophysics from "@kurokida/jspsych-psychophysics";
 
 /**
  * A function used to create a single trial.
