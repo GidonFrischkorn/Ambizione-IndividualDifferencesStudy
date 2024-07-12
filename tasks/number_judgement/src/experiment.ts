@@ -1,7 +1,7 @@
 /**
  * @title Digit Processing Task 
  * @description Participant has to tell whether the number is odd or even as fast as possible. 
- * @author Chenyu Li and Hannah (Dames) Tschannen
+ * @author Elena Venturi 
  * @version 0.2.1
  *
  *

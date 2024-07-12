@@ -46,11 +46,15 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
         } else {
           return "experiment"
         }
-      }
+      },
+      stimulus: targetStim, 
     },
     on_finish: function (data) {
       let correct = data.response == (data.is_odd ? 'o' : 'e');
       jsPsych.data.get().addToLast({correct: correct});
+      
+      let stimulus_value = jsPsych.data.get().last(1).values()[0];
+      stimulus_value.stimulus = targetStim;
     }
   }
 
