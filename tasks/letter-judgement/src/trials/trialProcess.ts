@@ -6,6 +6,7 @@ import { expInfo } from "../settings";
 // Third party plugins
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { jsPsych } from "../jsp";
+import psychophysics from "@kurokida/jspsych-psychophysics";
 
 /**
  * A function used to create a single trial.
@@ -15,7 +16,7 @@ import { jsPsych } from "../jsp";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, condition: string, targetStim: number) {  
+export function createNewTrial(XY: number, isPractice: boolean, condition: string, targetStim: string) {  
   let trial_line: any[] = [];
 
   // Fixation Screen 
@@ -34,9 +35,9 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
     data: {
-      is_odd: function (data){
+      is_vowel: function (data){
         let response = targetStim;
-        return response % 2 != 0;
+        return response == "A" || response == "E" || response == "I" || response == "O" || response == "U";
       },
       trial_number: XY,
       condition: condition, 
@@ -50,7 +51,7 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
       stimulus: targetStim, 
     },
     on_finish: function (data) {
-      let correct = data.response == (data.is_odd ? 'o' : 'e');
+      let correct = data.response == (data.is_vowel ? 'e' : 'o');
       jsPsych.data.get().addToLast({correct: correct});
       
       let stimulus_value = jsPsych.data.get().last(1).values()[0];

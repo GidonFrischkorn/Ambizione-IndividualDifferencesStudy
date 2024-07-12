@@ -1,8 +1,8 @@
 /**
- * @title Digit Processing Task 
- * @description Participant has to tell whether the number is odd or even as fast as possible. 
+ * @title Letter Processing Task 
+ * @description Participant has to tell whether the letter is a vowel or a consonant as fast as possible. 
  * @author Elena Venturi 
- * @version 0.2.1
+ * @version 0.3.1
  *
  *
  * @assets assets/

@@ -12,16 +12,15 @@ setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "Numerical Processing Speed Task", // the title of the experiment
+  TITLE: "Letter Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
   // design of the experiment
   DESIGN:{
-    nTRIALS: 12, // number of experiment trials for each condition
-    nPRACTICE: 6, // number of practice trials for each condition
+    nTRIALS: 50, // number of experiment trials for each condition
+    nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
-    CONDITIONS: ["odd","even"], // conditions of the experiment
-    StimLimits: [10,99], // limits for the stimuli
+    CONDITIONS: ["vowel","consonant"], // conditions of the experiment
     CHOICES: ["o", "e"], // choices for the participants
   },
   
@@ -40,7 +39,9 @@ export const expInfo = {
   // you can set them here and use them in the end of the experiment (jsp.ts)
   CODES: {
     SUCCESS: "success", // the code for a successfully completion of the experiment
-    FAIL: "fail", // the code for the failed experiment
+    OFFLINE: "offline", // the code for the offline situation
+    FAILED_ATTENTION: "failedAttention", // the code for the failed experiment
+    FAILED_OTHERS: "failedOthers", // the code for other failed situations (e.g., failed to resize the window)
     // You can specify the codes for different situations here.
   },
   
@@ -70,5 +71,6 @@ export const varSystem = {
   MAX_BLUR: 3, // the maximum number of times participants can leave the browser
   LOOP: true, // a switch to control whether participants need to read the instruction and practice again
   RUN_TIMER: false, // a switch to control the countdown timer
-  FAILED_ATTENTION_CHECK: false,
+  STATUS: "success", // the status of the experiment
+
 };

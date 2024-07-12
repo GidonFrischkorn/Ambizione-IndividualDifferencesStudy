@@ -2,46 +2,34 @@ import { jsPsych } from "../jsp";
 import { expInfo } from "../settings";
 
 /**
- * A function used to create random odd numbers.
- * @param ntrials The number of odd trials (half of the total trials).
- * @param max The highest number to be generated.
+ * A function used to create random vowels.
+ * 
  *
- * @returns An array containing all the random odd numbers.
+ * @returns An array containing all the random vowels.
  */
-function create_odd_number (min: number, max: number): number {
-    let odd_number: number = NaN;
-    let random_number = NaN;
-    while (Number.isNaN(odd_number)) {
-        random_number = Math.floor(min + Math.random() * (max-min+1));
-        if (random_number % 2 !== 0) {
-            odd_number = random_number;
-        }
-    } 
-    return odd_number;
-}
-let odd_number = create_odd_number(10,99);
-console.log(odd_number);
+
+function create_vowel() : any {
+    let vowel: string[] = ['A', 'E', 'I', 'O', 'U'];
+    let random_vowel = Math.floor(Math.random() * vowel.length);
+    return vowel[random_vowel];
+};
+let vowel = create_vowel();
+console.log(vowel);
 
 /**
- * A function used to create random even numbers.
- * @param ntrials The number of even trials (half of the total trials).
- * @param max The highest number to be generated.
+ * A function used to create random consonants.
  *
- * @returns An array containing all the random even numbers.
+ * @returns An array containing all the random consonants.
  */
-function create_even_number (min: number, max: number): number {
-    let even_number: number = NaN;
-    let random_number = NaN;
-    while (Number.isNaN(even_number)) {
-        random_number = Math.floor(min + Math.random() * (max-min+1));
-        if (random_number % 2 === 0) {
-            even_number = random_number;
-        }
-    } 
-    return even_number;
-}
-let even_number = create_even_number(10,99);
-console.log(even_number);
+
+function create_consonant() : any {
+    let consonant: string[] = ['B', 'V', 'T', 'F', 'Z'];
+    let random_consonant = Math.floor(Math.random() * consonant.length);
+    return consonant[random_consonant];
+};
+
+let consonant = create_consonant();
+console.log(consonant);
 
 /**
  * A function used to create a list of trials.
@@ -57,10 +45,10 @@ export function create_trialList () {
     console.log(block_conditions);
 
     block_conditions.forEach((trial, i) => {
-        if(trial.condition == "odd") {
-            trial.stimulus = create_odd_number(expInfo.DESIGN.StimLimits[0],expInfo.DESIGN.StimLimits[1]);
-        } else if (trial.condition == "even") {
-            trial.stimulus = create_even_number(expInfo.DESIGN.StimLimits[0],expInfo.DESIGN.StimLimits[1]);
+        if(trial.condition == "vowel") {
+            trial.stimulus = create_vowel();
+        } else if (trial.condition == "consonant") {
+            trial.stimulus = create_consonant();
         }
         trial.trial_number = i + 1;
     });
