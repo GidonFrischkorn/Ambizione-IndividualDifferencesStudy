@@ -7,6 +7,7 @@ import { expInfo } from "../settings";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { jsPsych } from "../jsp";
 import psychophysics from "@kurokida/jspsych-psychophysics";
+import exp from "constants";
 
 /**
  * A function used to create a single trial.
@@ -27,11 +28,15 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     trial_duration: expInfo.TIMING.FIXATION,
   }
 
-  // Taget and Response Screen 
+  // Target and Response Screen 
   const target_response_screen = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
     choices: expInfo.DESIGN.CHOICES, 
+    mapping: {
+      vowel: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("vowel")]], 
+      consonant: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("consonant")]],
+    },
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
     data: {
@@ -51,12 +56,12 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
       stimulus: targetStim, 
     },
     on_finish: function (data) {
-      let correct = data.response == (data.is_vowel ? 'e' : 'o');
+      let correct = data.response == (data.is_vowel ? this.mapping.vowel : this.mapping.consonant);
       jsPsych.data.get().addToLast({correct: correct});
       
       let stimulus_value = jsPsych.data.get().last(1).values()[0];
       stimulus_value.stimulus = targetStim;
-    }
+    } 
   }
 
   // Feedback Stimuls for Practice Trials

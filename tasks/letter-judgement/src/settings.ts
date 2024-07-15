@@ -21,7 +21,8 @@ export const expInfo = {
     nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
     CONDITIONS: ["vowel","consonant"], // conditions of the experiment
-    CHOICES: ["o", "e"], // choices for the participants
+    CHOICES: ["d", "k"], // choices for the participants
+    MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
   // settings for each trial
