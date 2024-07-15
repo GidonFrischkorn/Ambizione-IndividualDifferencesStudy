@@ -17,12 +17,13 @@ export const expInfo = {
 
   // design of the experiment
   DESIGN:{
-    nTRIALS: 12, // number of experiment trials for each condition
-    nPRACTICE: 6, // number of practice trials for each condition
+    nTRIALS: 50, // number of experiment trials for each condition
+    nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
     CONDITIONS: ["odd","even"], // conditions of the experiment
     StimLimits: [10,99], // limits for the stimuli
     CHOICES: ["o", "e"], // choices for the participants
+    MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
   // settings for each trial
