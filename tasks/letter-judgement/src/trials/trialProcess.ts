@@ -42,7 +42,8 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     data: {
       is_vowel: function (data){
         let response = targetStim;
-        return response == "A" || response == "E" || response == "I" || response == "O" || response == "U";
+        const vowel: string[] = ['A', 'E', 'I', 'O', 'U'];
+        return vowel.includes(response);
       },
       trial_number: XY,
       condition: condition, 
@@ -70,9 +71,9 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     stimulus: function () {
       let lastTrialCorrect = jsPsych.data.get().last(1).values()[0].correct;
       if (lastTrialCorrect) {
-        return "<div style='font-size:60px; color:green;'>Correct :)</div>";
+        return "<div style='font-size:60px; color:green;'>Richtig :)</div>";
       } else {
-        return "<div style='font-size:60px; color:red'>Incorrect :(</div>";
+        return "<div style='font-size:60px; color:red'>Falsch :(</div>";
       }
     },
     trial_duration: expInfo.TIMING.FEEDBACK,

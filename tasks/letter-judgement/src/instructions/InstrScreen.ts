@@ -1,5 +1,6 @@
 // jsPsych official plugin
 import instructions from "@jspsych/plugin-instructions";
+import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { BUTTON_INFO } from "../task-fun/text";
 import { expInfo } from "../settings";
 
@@ -15,4 +16,24 @@ export const instructions_screen = {
     allow_backward: true,
     allow_keys: false,
     show_clickable_nav: true,
+};
+
+export const fingers_instructions_practice = {
+    type: htmlKeyboardResponse,
+    stimulus: `<div style='font-size:40px; line-height: 1.5;'>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten D und K.<br>
+    Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
+    </div>`,
+    choices: "ALL_KEYS",
+    trial_duration: expInfo.TIMING.FINGERS,
+};
+
+export const fingers_instructions_exp = {
+    type: htmlKeyboardResponse,
+    stimulus: `<div style='font-size:40px; line-height: 1.5;'>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten D und K.<br>
+    Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
+    </div>`,
+    choices: "ALL_KEYS",
+    trial_duration: expInfo.TIMING.FINGERS,
 };
