@@ -17,12 +17,13 @@ export const expInfo = {
 
   // design of the experiment
   DESIGN:{
-    nTRIALS: 12, // number of experiment trials for each condition
-    nPRACTICE: 6, // number of practice trials for each condition
+    nTRIALS: 50, // number of experiment trials for each condition
+    nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
     CONDITIONS: ["odd","even"], // conditions of the experiment
     StimLimits: [10,99], // limits for the stimuli
     CHOICES: ["o", "e"], // choices for the participants
+    MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
   // settings for each trial
@@ -33,6 +34,7 @@ export const expInfo = {
     ITI: 1500, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
+    FINGERS: 5000 // duration of the finger instruction
   },
 
   // when using Prolific, you can set customized completion codes for different situations

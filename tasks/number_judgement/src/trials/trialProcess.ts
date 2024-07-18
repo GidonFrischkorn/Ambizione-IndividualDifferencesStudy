@@ -32,6 +32,10 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
     choices: expInfo.DESIGN.CHOICES, 
+    mapping: {
+      odd: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("odd")]], 
+      even: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("even")]],
+    },
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
     data: {
@@ -51,7 +55,7 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
       stimulus: targetStim, 
     },
     on_finish: function (data) {
-      let correct = data.response == (data.is_odd ? 'o' : 'e');
+      let correct = data.response == (data.is_odd ? this.mapping.odd : this.mapping.even);
       jsPsych.data.get().addToLast({correct: correct});
       
       let stimulus_value = jsPsych.data.get().last(1).values()[0];
