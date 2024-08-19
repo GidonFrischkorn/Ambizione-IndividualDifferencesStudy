@@ -2,58 +2,76 @@
 
 import { jsPsych } from "../jsp";
 import { expInfo } from "../settings";
+import { words } from "../../assets/stimuli";
+import { removeItem } from "../task-fun/removeItems";
+import exp from "constants";
+
+
 
 /**
- * A function used to create random vowels.
- * 
- *
- * @returns An array containing all the random vowels.
+ * Generates a stimulus array.
+ * @param animacy Is the object animated or inanimated.
+ * @param wordlength How long is the word.
  */
+export const chooseStimuli = function (stimArray: any[], animacy: string, wordlength: number) {
 
-function create_vowel() : any {
-    let vowel: string[] = ['A', 'E', 'I', 'O', 'U'];
-    let random_vowel = Math.floor(Math.random() * vowel.length);
-    return vowel[random_vowel];
-};
-let vowel = create_vowel();
-console.log(vowel);
+    // Filter words based on the animacy and word length
+    let filteredWords = stimArray.filter(word => 
+        word.Animacy == animacy && Number(word.Wordlength) == wordlength
+    );
+    console.log(filteredWords);
 
-/**
- * A function used to create random consonants.
- *
- * @returns An array containing all the random consonants.
- */
+    console.log("Stimuli array before removal: ", stimArray);
+    // Choose a random word from the filtered list
+    let randomIndex = Math.floor(Math.random() * filteredWords.length);
+    let chosenWord = filteredWords[randomIndex].Word;
+    console.log("Chosen word: ", chosenWord);
+    stimArray = removeItem(stimArray, chosenWord);
+    console.log("Remaining words: ", stimArray);
 
-function create_consonant() : any {
-    let consonant: string[] = ['B', 'V', 'T', 'F', 'Z'];
-    let random_consonant = Math.floor(Math.random() * consonant.length);
-    return consonant[random_consonant];
-};
+    return chosenWord;
 
-let consonant = create_consonant();
-console.log(consonant);
+    
+}
 
 /**
  * A function used to create a list of trials.
  *
  * @returns A list of trials.
  */
+
 export function create_trialList () {
     let target_conditions = {
-        condition: expInfo.DESIGN.CONDITIONS
+        animacy: expInfo.DESIGN.CONDITIONS.ANIMACY,
+        wordlength: expInfo.DESIGN.CONDITIONS.WORDLENGTH,
     };
     
     let block_conditions = jsPsych.randomization.factorial(target_conditions, expInfo.DESIGN.nTRIALS, false);
     console.log(block_conditions);
-
+  
     block_conditions.forEach((trial, i) => {
-        if(trial.condition == "vowel") {
-            trial.stimulus = create_vowel();
-        } else if (trial.condition == "consonant") {
-            trial.stimulus = create_consonant();
+      if(trial.animacy == "animate") {
+          trial.word_animacy = expInfo.DESIGN.ANIMACY_VALUE[1];
+      } else if (trial.animacy == "inanimate") {
+        trial.word_animacy = expInfo.DESIGN.ANIMACY_VALUE[0];
+      }
+  
+      if(trial.wordlength == 4) {
+          trial.word_length = 4;
+      } else if (trial.wordlength == 5) {
+          trial.word_length = 5;
+      } else if (trial.wordlength == 6) {
+          trial.word_length = 6;
+      } else if (trial.wordlength == 7) {
+            trial.word_length = 7;
+        } else if (trial.wordlength == 8) {
+            trial.word_length = 8;
         }
-        trial.trial_number = i + 1;
-    });
-
+  
+      trial.stimulus = chooseStimuli(words, trial.word_animacy, trial.word_length);
+      trial.trial_number = i + 1;
+  });
+  
     return block_conditions;
-}
+  };
+

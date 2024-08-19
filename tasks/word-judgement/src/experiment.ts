@@ -53,29 +53,34 @@ export async function run({
     // audio: assetPaths.audio,
     // video: assetPaths.video,
   };
+  
 
   /************************************** Instruction **************************************/
 
   /************************************** Practice **************************************/
+  
   const prac_list = create_trialList();
   
   let practice_line: any[] = [];
   for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
-    let practice_trial = createNewTrial(j, true, prac_list[j].condition, prac_list[j].stimulus);
+    let practice_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, prac_list[j].stimulus);
     practice_line = practice_line.concat(practice_trial);
+    console.log("Stimulus: ",prac_list[j].stimulus)
+  
   }
-
+  console.log(practice_line);
   
   /************************************** Experiment **************************************/
+  
   const trial_list = create_trialList();
   
   let exp_line: any[] = [];
   for(let j = 0; j < trial_list.length; j++){
-    let exp_trial = createNewTrial(j, false, trial_list[j].condition, trial_list[j].stimulus);
+    let exp_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, prac_list[j].stimulus);
     exp_line = exp_line.concat(exp_trial);
   }
+  console.log(exp_line);
   
-
   /************************************** Procedure **************************************/
 
 
@@ -85,7 +90,7 @@ export async function run({
   timeline.push(welcome_screen);
   timeline.push(consent_screen);
   timeline.push(notice_screen);
-  timeline.push(browser_screen);
+  //timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);

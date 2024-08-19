@@ -10,9 +10,10 @@ import { setCSS } from "./task-fun/setCSS";
 
 setCSS();
 
+
 export const expInfo = {
   // settings for the experiment
-  TITLE: "Letter Processing Speed Task", // the title of the experiment
+  TITLE: "Word Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
   // design of the experiment
@@ -20,16 +21,20 @@ export const expInfo = {
     nTRIALS: 50, // number of experiment trials for each condition
     nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
-    CONDITIONS: ["vowel","consonant"], // conditions of the experiment
-    CHOICES: ["d", "k"], // choices for the participants
+    CONDITIONS: {
+      ANIMACY: ["animate", "inanimate"], 
+      WORDLENGTH: [4, 5, 6, 7, 8]
+    }, // conditions of the experiment
+    ANIMACY_VALUE: [0, 1],
+    CHOICES: ["f", "j"], // choices for the participants
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
   // settings for each trial
   TIMING: {
-    FIXATION: 1000, // duration of the fixation cross
+    FIXATION: 800, // duration of the fixation cross
     TARGET: 5000, // duration of the target stimulus
-    FEEDBACK: 1500, // duration of the feedback
+    FEEDBACK: 1000, // duration of the feedback
     ITI: 1500, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds

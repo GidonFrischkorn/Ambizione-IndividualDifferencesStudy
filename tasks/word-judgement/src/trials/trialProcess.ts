@@ -17,7 +17,7 @@ import exp from "constants";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, condition: string, targetStim: string) {  
+export function createNewTrial(XY: number, isPractice: boolean, animacy: string, wordlength: number, targetStim: string) {  
   let trial_line: any[] = [];
 
   // Fixation Screen 
@@ -34,19 +34,15 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
     choices: expInfo.DESIGN.CHOICES, 
     mapping: {
-      vowel: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("vowel")]], 
-      consonant: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("consonant")]],
+      animate: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("animate")]], 
+      inanimate: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("inanimate")]],
     },
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
     data: {
-      is_vowel: function (data){
-        let response = targetStim;
-        const vowel: string[] = ['A', 'E', 'I', 'O', 'U'];
-        return vowel.includes(response);
-      },
       trial_number: XY,
-      condition: condition, 
+      animacy: animacy,
+      wordlength: wordlength, 
       practice: function (data) {
         if (isPractice) {
           return "practice";
@@ -57,13 +53,11 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
       stimulus: targetStim, 
     },
     on_finish: function (data) {
-      let correct = data.response == (data.is_vowel ? this.mapping.vowel : this.mapping.consonant);
+      let correct = data.response == (data.animacy == 1 ? this.mapping.animate : this.mapping.inanimate);
       jsPsych.data.get().addToLast({correct: correct});
-      
-      let stimulus_value = jsPsych.data.get().last(1).values()[0];
-      stimulus_value.stimulus = targetStim;
     } 
   }
+  console.log(target_response_screen);
 
   // Feedback Stimuls for Practice Trials
   const feedback = {
