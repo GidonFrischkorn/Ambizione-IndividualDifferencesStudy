@@ -65,10 +65,7 @@ export async function run({
   for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
     let practice_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, prac_list[j].stimulus);
     practice_line = practice_line.concat(practice_trial);
-    console.log("Stimulus: ",prac_list[j].stimulus)
-  
   }
-  console.log(practice_line);
   
   /************************************** Experiment **************************************/
   
@@ -79,7 +76,6 @@ export async function run({
     let exp_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, prac_list[j].stimulus);
     exp_line = exp_line.concat(exp_trial);
   }
-  console.log(exp_line);
   
   /************************************** Procedure **************************************/
 
@@ -90,7 +86,7 @@ export async function run({
   timeline.push(welcome_screen);
   timeline.push(consent_screen);
   timeline.push(notice_screen);
-  //timeline.push(browser_screen);
+  timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);

@@ -26,7 +26,7 @@ export const expInfo = {
       WORDLENGTH: [4, 5, 6, 7, 8]
     }, // conditions of the experiment
     ANIMACY_VALUE: [0, 1],
-    CHOICES: ["f", "j"], // choices for the participants
+    CHOICES: ["d", "j"], // choices for the participants
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   

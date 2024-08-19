@@ -57,7 +57,6 @@ export function createNewTrial(XY: number, isPractice: boolean, animacy: string,
       jsPsych.data.get().addToLast({correct: correct});
     } 
   }
-  console.log(target_response_screen);
 
   // Feedback Stimuls for Practice Trials
   const feedback = {
