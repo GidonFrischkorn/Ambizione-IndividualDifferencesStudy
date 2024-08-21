@@ -31,7 +31,7 @@ export const fingers_instructions_practice = {
 export const fingers_instructions_exp = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:40px; line-height: 1.5;'>
-    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten D und K.<br>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>J</strong>.<br>
     Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
     </div>`,
     choices: "ALL_KEYS",

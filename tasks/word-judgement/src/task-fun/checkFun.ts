@@ -31,7 +31,9 @@ export const checkConsent = function () {
     //@ts-ignore
     document.getElementById("checkbox3").checked &
     //@ts-ignore
-    document.getElementById("checkbox4").checked
+    document.getElementById("checkbox4").checked &
+    //@ts-ignore
+    document.getElementById("checkbox5").checked
   ) {
     jsPsych.data.addProperties({
       participant: prolificID,

@@ -25,10 +25,11 @@ import { browser_screen } from "./instructions/browserCheck";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { exp_start_screen, pra_instr_screen } from "./instructions/InstrTrial";
 import { createNewTrial } from "./trials/trialProcess";
-import { create_trialList } from "./trials/trialStim";
+import { create_trialList, chooseStimuli } from "./trials/trialStim";
 import { instructions_screen } from "./instructions/InstrScreen";
 import { fingers_instructions_practice } from "./instructions/InstrScreen";
 import { fingers_instructions_exp } from "./instructions/InstrScreen";
+import { words } from "./../assets/stimuli";
 
 
 /**
@@ -58,23 +59,29 @@ export async function run({
   /************************************** Instruction **************************************/
 
   /************************************** Practice **************************************/
-  
+  let usedWords: string[] = [];
+
   const prac_list = create_trialList();
   
   let practice_line: any[] = [];
   for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
-    let practice_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, prac_list[j].stimulus);
+    let chosenStimulus = chooseStimuli(words, prac_list[j].word_animacy, prac_list[j].word_length);
+    usedWords.push(chosenStimulus);
+    let practice_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus);
     practice_line = practice_line.concat(practice_trial);
+    console.log("chosen stimulus for practice: ", chosenStimulus);
   }
   
   /************************************** Experiment **************************************/
   
-  const trial_list = create_trialList();
+  const trial_list = create_trialList(usedWords);
   
   let exp_line: any[] = [];
   for(let j = 0; j < trial_list.length; j++){
-    let exp_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, prac_list[j].stimulus);
+    let chosenStimulus = chooseStimuli(words, trial_list[j].word_animacy, trial_list[j].word_length, usedWords);
+    let exp_trial = createNewTrial(j, false, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus);
     exp_line = exp_line.concat(exp_trial);
+    console.log("chosen stimulus for experiment: ", chosenStimulus);
   }
   
   /************************************** Procedure **************************************/

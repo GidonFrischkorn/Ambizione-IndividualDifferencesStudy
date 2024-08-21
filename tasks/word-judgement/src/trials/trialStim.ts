@@ -3,7 +3,7 @@
 import { jsPsych } from "../jsp";
 import { expInfo } from "../settings";
 import { words } from "../../assets/stimuli";
-import { removeItem } from "../task-fun/removeItems";
+import { removeItem, removeItems } from "../task-fun/removeItems";
 import exp from "constants";
 
 
@@ -13,21 +13,32 @@ import exp from "constants";
  * @param animacy Is the object animated or inanimated.
  * @param wordlength How long is the word.
  */
-export const chooseStimuli = function (stimArray: any[], animacy: string, wordlength: number) {
+export const chooseStimuli = function (stimArray, animacy: string, wordlength: number, excludeWords: string[] = []) {
+
+    let localStimArray = [...stimArray];
+
 
     // Filter words based on the animacy and word length
-    let filteredWords = stimArray.filter(word => 
-        word.Animacy == animacy && Number(word.Wordlength) == wordlength
+    let filteredWords = localStimArray.filter((word) => 
+        word.Animacy == animacy && Number(word.Wordlength) == wordlength && !excludeWords.includes(word.Word)
     );
-    console.log(filteredWords);
 
-    console.log("Stimuli array before removal: ", stimArray);
+    // Check if filteredWords is empty
+    if (filteredWords.length === 0) {
+        throw new Error("No stimuli available that match the criteria. Please check your filtering conditions.");
+    }
+    
     // Choose a random word from the filtered list
     let randomIndex = Math.floor(Math.random() * filteredWords.length);
     let chosenWord = filteredWords[randomIndex].Word;
-    console.log("Chosen word: ", chosenWord);
-    stimArray = removeItem(stimArray, chosenWord);
-    console.log("Remaining words: ", stimArray);
+    //stimArray = removeItem(stimArray, chosenWord);
+
+    const remainingWords = removeItem(localStimArray, chosenWord);
+    stimArray.length = 0; // Clear the original array
+    stimArray.push(...remainingWords); // Refill it with the updated array
+    console.log("Chosen Word: ",chosenWord);
+    console.log("Remaining Words: ", stimArray);
+
 
     return chosenWord;
 
@@ -40,14 +51,15 @@ export const chooseStimuli = function (stimArray: any[], animacy: string, wordle
  * @returns A list of trials.
  */
 
-export function create_trialList () {
+export function create_trialList (excludeWords: string[] = []) {
+    let localWords = [...words];
+    
     let target_conditions = {
         animacy: expInfo.DESIGN.CONDITIONS.ANIMACY,
         wordlength: expInfo.DESIGN.CONDITIONS.WORDLENGTH,
     };
     
     let block_conditions = jsPsych.randomization.factorial(target_conditions, expInfo.DESIGN.nTRIALS, false);
-    console.log(block_conditions);
   
     block_conditions.forEach((trial, i) => {
       if(trial.animacy == "animate") {
@@ -68,7 +80,7 @@ export function create_trialList () {
             trial.word_length = 8;
         }
   
-      trial.stimulus = chooseStimuli(words, trial.word_animacy, trial.word_length);
+      trial.stimulus = chooseStimuli(localWords, trial.word_animacy, trial.word_length, excludeWords);
       trial.trial_number = i + 1;
   });
   

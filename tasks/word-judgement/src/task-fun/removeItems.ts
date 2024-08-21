@@ -25,16 +25,29 @@ export const getIndex = function (
   return indexes;
 };
 
-/*export const removeItems = (array, itemsToRemove) => { 
+export const removeItems = (array, itemsToRemove) => { 
   return array.filter(v => { 
         return !itemsToRemove.includes(v); 
     });
-}*/
+}
 
 // changed the original function to only remove one item 
 
-export const removeItem = (array, itemToRemove) => {
+/*export const removeItem = (array, itemToRemove) => {
   return array.filter(v => {
     return JSON.stringify(v) !== JSON.stringify(itemToRemove)
   });
+}*/
+
+export const removeItem = (array, wordToRemove) => {
+  return array.filter(v => v.Word !== wordToRemove);
 }
+
+/*export const removeItem = (array, itemToRemove) => {
+  const index = array.findIndex(v => v.Word === itemToRemove.Word && v.Animacy === itemToRemove.Animacy && v.Wordlength === itemToRemove.Wordlength);
+
+  if (index !== -1) {
+    array.splice(index, 1); // Directly remove the item from the array
+  } else {
+  }
+};*/
