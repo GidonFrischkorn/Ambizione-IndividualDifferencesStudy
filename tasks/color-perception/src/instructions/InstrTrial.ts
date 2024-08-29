@@ -8,8 +8,29 @@ import { countDownTimer, convertTime } from "@coglabuzh/webpsy.js";
 // Global variables
 import { expInfo } from "../settings";
 let { TIMING } = expInfo;
-import { SCREEN_INFO } from "../task-fun/text";
 import { jsPsych } from "../jsp";
+import { SCREEN_INFO, BUTTON_INFO } from "../task-fun/text";
+
+
+export const exp_start_screen = {
+  type: htmlButtonResponse,
+  stimulus: function () {
+    return SCREEN_INFO.startExperiment[expInfo.LANG];
+  },
+  choices: function () {
+    return BUTTON_INFO.continueButton[expInfo.LANG];
+  },
+};
+
+export const pra_instr_screen = {
+  type: htmlButtonResponse,
+  stimulus: function () {
+    return SCREEN_INFO.startPractice[expInfo.LANG];
+  },
+  choices: function () {
+    return BUTTON_INFO.continueButton[expInfo.LANG];
+  },
+};
 
 // display a cue screen with a countdown timer.
 export const trial_start_screen = {

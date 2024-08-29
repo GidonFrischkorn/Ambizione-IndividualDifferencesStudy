@@ -5,6 +5,7 @@
 
 
 // Task functions
+import { ChildProcess } from "child_process";
 import { setCSS } from "./task-fun/setCSS";
 
 
@@ -12,20 +13,40 @@ setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "the_name_of_your_experiment",
+  TITLE: "Color Perception Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 1, // number of experiment trials for each condition
+    nTRIALS: 50, // number of experiment trials for each condition
+    nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
-    CONDITIONS: [5, 6, 7, 8],
+    nDOTS: 101, // number of dots in the grid
+    CONDITIONS: {
+      MAJORITY: ["moreBlue", "moreRed"],
+      DIFFICULTY: ["easy", "hard"]}, // conditions of the experiment
+    CHOICES: ["d", "k"], 
+    MAPPING: [0, 1], 
+    COLORS: ["blue", "red"],
+    backgroundCOLOR: "#FFFFFF", // white background
+    OFFSET: {
+      DIFF_EASY: [60, 41], 
+      DIFF_HARD: [51, 50]
+    },
+    positionX: [-104, -88, -72, -56, -40, -24, -8, 8, 24, 40, 56, 72, 88, 104], // x-axis positions of the dots
+    positionY: [-104, -88, -72, -56, -40, -24, -8, 8, 24, 40, 56, 72, 88, 104], // y-axis positions of the dots
+
   },
 
   // settings for each trial
   TIMING: {
+    FIXATION: 500, // duration of the fixation cross
+    TARGET: 5000, // duration of the target stimulus
+    FEEDBACK: 1500, // duration of the feedback
+    ITI: 1500, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
+    FINGERS: 5000 // duration of the finger instruction
   },
 
   // when using Prolific, you can set customized completion codes for different situations
