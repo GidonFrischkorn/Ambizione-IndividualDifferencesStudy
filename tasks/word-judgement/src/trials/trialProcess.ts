@@ -50,7 +50,8 @@ export function createNewTrial(XY: number, isPractice: boolean, animacy: string,
           return "experiment"
         }
       },
-      stimulus: targetStim, 
+      stimulus: targetStim,
+      correct_response: animacy 
     },
     on_finish: function (data) {
       let correct = data.response == (data.animacy == 1 ? this.mapping.animate : this.mapping.inanimate);
