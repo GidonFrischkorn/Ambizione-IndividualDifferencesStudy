@@ -41,7 +41,7 @@ export const expInfo = {
   // settings for each trial
   TIMING: {
     START: 10 * 1000, // time for the countdown before a new trial starts
-    BREAK: 30, // break duration in seconds
+    BREAK: 60 * 1000, // break duration in seconds
     STIMULI: 3000, // stimuli duration in milliseconds
     FIXATION: 250, // fixation duration in milliseconds
     FEEDBACK: 1000, // feedback duration in milliseconds

@@ -37,3 +37,13 @@ export const fingers_instructions_exp = {
     choices: "ALL_KEYS",
     trial_duration: expInfo.TIMING.FINGERS,
 };
+
+export const break_screen = {
+    type: htmlKeyboardResponse,
+    stimulus: `<div style='font-size:40px; line-height: 2em;'>
+    <strong>Kleine Pause</strong><br>
+    Das Experiment fängt in 1 Minute wieder an oder wenn Sie entweder die Taste <strong>Y</strong> oder <strong>N</strong> drücken.<br>
+    </div>`,
+    choice: ["y", "n"],
+    trial_duration: expInfo.TIMING.BREAK,
+}

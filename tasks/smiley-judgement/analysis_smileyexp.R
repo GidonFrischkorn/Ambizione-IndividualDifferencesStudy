@@ -1,14 +1,13 @@
 ############## Analysis Smiley Processing Task ##############
 
 #install packages 
-install.packages("rjson")
 library(rjson)
 library(dplyr)
 library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-smiley_result <- read_json_data("") %>% 
+smiley_result <- read_json_data(".json") %>% 
   filter(response %in% c("y", "n"), practice == "experiment", correct == "TRUE") 
 
 # Exclude columns we don't need 
