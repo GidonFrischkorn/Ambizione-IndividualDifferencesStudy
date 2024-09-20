@@ -1,6 +1,6 @@
 /**
- * @title Letter Processing Task 
- * @description Participant has to tell whether the letter is a vowel or a consonant as fast as possible. 
+ * @title Word Processing Task 
+ * @description Participant has to tell whether the word represents somthing animate or inanimate. 
  * @author Elena Venturi 
  * @version 0.3.1
  *

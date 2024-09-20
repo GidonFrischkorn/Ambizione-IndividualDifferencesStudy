@@ -17,7 +17,7 @@ import exp from "constants";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, animacy: string, wordlength: number, targetStim: string) {  
+export function createNewTrial(XY: number, isPractice: boolean, animacy: number, wordlength: number, targetStim: string) {  
   let trial_line: any[] = [];
 
   // Fixation Screen 
@@ -51,11 +51,11 @@ export function createNewTrial(XY: number, isPractice: boolean, animacy: string,
         }
       },
       stimulus: targetStim,
-      correct_response: animacy 
     },
     on_finish: function (data) {
       let correct = data.response == (data.animacy == 1 ? this.mapping.animate : this.mapping.inanimate);
-      jsPsych.data.get().addToLast({correct: correct});
+      let correctKey = data.animacy == 1 ? this.mapping.animate : this.mapping.inanimate;
+      jsPsych.data.get().addToLast({correct: correct, correct_key: correctKey});
     } 
   }
 
