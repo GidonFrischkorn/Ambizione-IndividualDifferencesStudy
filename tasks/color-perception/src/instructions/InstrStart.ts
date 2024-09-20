@@ -37,3 +37,13 @@ export const fingers_instructions_exp = {
     choices: "ALL_KEYS",
     trial_duration: expInfo.TIMING.FINGERS,
 };
+
+export const break_screen = {
+    type: htmlKeyboardResponse,
+    stimulus: `<div style='font-size:40px; line-height: 2em;'>
+    <strong>Kleine Pause</strong><br>
+    Drücken Sie entweder die Taste <strong>D</strong> oder <strong>K</strong>, um fortzufahren.<br>
+    </div>`,
+    choice: ["d", "k"],
+    trial_duration: expInfo.TIMING.BREAK,
+}

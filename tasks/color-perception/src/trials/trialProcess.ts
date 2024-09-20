@@ -14,7 +14,7 @@ import { jsPsych } from "../jsp";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, majority: string, nBlueDots: number, nRedDots:number, targetStim:any): string[] {
+export function createNewTrial(XY: number, isPractice: boolean, majority: string, difficulty: string, nBlueDots: number, nRedDots:number, targetStim:any): string[] {
   var trial_line: any[] = [];
 
   // Fixation Screen 
@@ -41,7 +41,7 @@ export function createNewTrial(XY: number, isPractice: boolean, majority: string
     trial_duration: expInfo.TIMING.TARGET,
     data: {
       trial_number: XY,
-      condition: expInfo.DESIGN.CONDITIONS.DIFFICULTY, // da rivedere 
+      condition: difficulty, 
       majorityBLUE: nBlueDots > nRedDots,
       practice: function () {
         if (isPractice) {

@@ -45,7 +45,7 @@ export const expInfo = {
     FEEDBACK: 1500, // duration of the feedback
     ITI: 1500, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
-    BREAK: 30, // break duration in seconds
+    BREAK: 60*1000, // break duration in seconds
     FINGERS: 5000 // duration of the finger instruction
   },
 
