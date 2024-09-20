@@ -29,7 +29,7 @@ export const generateStims = function (diff: number, bigL: number, bigR: number,
     startX: expInfo.STIMULI.landolt_width / 2, 
     startY: 0 + location_right,
     width: expInfo.STIMULI.gap_width,
-    height: expInfo.STIMULI.gap_height + diff*bigR, 
+    height: expInfo.STIMULI.gap_height[0] + Math.round(Math.random() * expInfo.STIMULI.gap_height[1]) + diff*bigR, 
     fill_color: expInfo.STIMULI.gap_color
   }
   
@@ -39,7 +39,7 @@ export const generateStims = function (diff: number, bigL: number, bigR: number,
     startX: -expInfo.STIMULI.landolt_width / 2, 
     startY: 0 + location_left,
     width: expInfo.STIMULI.gap_width, 
-    height: expInfo.STIMULI.gap_height + diff*bigL, 
+    height: expInfo.STIMULI.gap_height[0] + Math.round(Math.random() * expInfo.STIMULI.gap_height[1]) + diff*bigL, 
     fill_color: expInfo.STIMULI.gap_color
   }
 

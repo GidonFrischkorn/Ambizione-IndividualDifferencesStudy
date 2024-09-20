@@ -12,12 +12,12 @@ setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "Smiley Processing Task",
+  TITLE: "Landolt Gap Processing Task",
   LANG: "de", // the default language of the experiment
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 50, // number of experiment trials per condition 
+    nTRIALS: 2, // number of experiment trials per condition 
     nPRACTICE: 10, // number of practice trials 
     nBLOCKS: 1, // number of blocks in the experiment
     CHOICES: ["d", "k"], // the choices for the task
@@ -36,8 +36,8 @@ export const expInfo = {
     landolt_width: 100, // the height of the ladolt like stimulus
     landolt_height: 100, // the width of the ladolt like stimulus
     ladolt_line: 15, // the border of the ladolt like stimulus
-    gap_height: 15, // the height of the gap in the ladolt like stimulus
-    gap_width: 15, // the width of the gap in the ladolt like stimulus
+    gap_height: [10, 20], // the height of the gap in the ladolt like stimulus
+    gap_width: 20, // the width of the gap in the ladolt like stimulus
     gap_color: '#FFFFFF', // the color of the gap in the ladolt like stimulus
     OFFSET_DIFF: [10, 2], 
     OFFSET_BIG: [0, 1],
@@ -47,7 +47,7 @@ export const expInfo = {
   // settings for each trial
   TIMING: {
     START: 10 * 1000, // time for the countdown before a new trial starts
-    BREAK: 30, // break duration in seconds
+    BREAK: 60 * 1000, // break duration in seconds
     STIMULI: 5000, // stimuli duration in milliseconds
     FIXATION: 500, // fixation duration in milliseconds
     FEEDBACK: 1000, // feedback duration in milliseconds

@@ -14,7 +14,7 @@ import { jsPsych } from "../jsp";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, diff: number, bigL: number, bigR: number, location_right: number, location_left: number, targetStim: any) {
+export function createNewTrial(XY: number, isPractice: boolean, difficulty: string, diff: number, bigL: number, bigR: number, location_right: number, location_left: number, targetStim: any) {
   var trial_line: any[] = [];
   
   // Fixation Screen 
@@ -40,6 +40,7 @@ export function createNewTrial(XY: number, isPractice: boolean, diff: number, bi
     data: {
       trial_number: XY,
       left_bigger: bigL == 1,
+      condition: difficulty,
       practice: function () {
         if (isPractice) {
           return "practice";
@@ -50,7 +51,8 @@ export function createNewTrial(XY: number, isPractice: boolean, diff: number, bi
     },
     on_finish: function (data) {
       let correct = data.response == (data.left_bigger ? this.mapping.left : this.mapping.right);
-      jsPsych.data.get().addToLast({correct: correct});
+      let correctKey = data.left_bigger ? this.mapping.left : this.mapping.right;
+      jsPsych.data.get().addToLast({correct: correct, correct_key: correctKey});
     }
   }
 
