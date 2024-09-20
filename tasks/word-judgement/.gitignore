@@ -1,14 +1,21 @@
-# ignore all node_modules & jspsych-builder directories
-*/node_modules/
-*/.jspsych-builder
-*/packaged/
 
-# file-types to ignore
 .DS_Store
-.history
 __pycache__/
 .vscode/
 .log
 .jspsych-builder/
 ~$*
 *.tmp
+node_modules/
+packaged/
+
+# Word temporary
+~$*.doc*
+
+# Excel temporary
+~$*.xls*
+
+# PowerPoint temporary
+~$*.ppt*
+*.jzip
+-digit-judgement
