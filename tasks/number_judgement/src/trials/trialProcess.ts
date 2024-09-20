@@ -56,7 +56,8 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     },
     on_finish: function (data) {
       let correct = data.response == (data.is_odd ? this.mapping.odd : this.mapping.even);
-      jsPsych.data.get().addToLast({correct: correct});
+      let correctKey = data.is_odd ? this.mapping.odd : this.mapping.even;
+      jsPsych.data.get().addToLast({correct: correct, correct_key: correctKey});
       
       let stimulus_value = jsPsych.data.get().last(1).values()[0];
       stimulus_value.stimulus = targetStim;
