@@ -53,7 +53,8 @@ export function createNewTrial(XY: number, isPractice: boolean, majority: string
     },
     on_finish: function (data) {
       let correct = data.response == (data.majorityBLUE ? this.mapping.moreBlue : this.mapping.moreRed);
-      jsPsych.data.get().addToLast({correct: correct});
+      let correctKey = data.majorityBLUE ? stimuli_screen.mapping.moreBlue : stimuli_screen.mapping.moreRed;
+      jsPsych.data.get().addToLast({correct: correct, correct_key: correctKey});
     }
   }
   
