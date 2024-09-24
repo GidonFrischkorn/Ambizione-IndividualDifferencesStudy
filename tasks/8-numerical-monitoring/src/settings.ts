@@ -12,20 +12,31 @@ setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "the_name_of_your_experiment",
-  LANG: "en", // the default language of the experiment
+  TITLE: "Numerical Monitoring Task",
+  LANG: "de", // the default language of the experiment
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 1, // number of experiment trials for each condition
-    nBLOCKS: 1, // number of blocks
-    CONDITIONS: [5, 6, 7, 8],
+    nTRIALS: 50, // number of experiment trials for each condition
+    nPRACTICE: 10, // number of practice trials
+    nBLOCKS: 4, // number of blocks
+    practiceBLOCKS: 2, 
+    nNUMBERS: 9, // number of numbers in each trial
+    CHOICES: " ", 
+    lineCOLOR: "#000000", // black border line
+    backgroundCOLOR: "#C5C5C5", // light-grey background color
+    positionX: [-70, 0, 70], 
+    positionY: [70, 0, -70],
+    cellWIDTH: 70, 
+    cellHEIGHT: 70
   },
 
   // settings for each trial
   TIMING: {
     START: 10 * 1000, // time for the countdown before a new trial starts
+    TRIAL: 1500, // duration of each trial
     BREAK: 30, // break duration in seconds
+    FIXATION: 1500, // duration of the fixation screen
   },
 
   // when using Prolific, you can set customized completion codes for different situations
