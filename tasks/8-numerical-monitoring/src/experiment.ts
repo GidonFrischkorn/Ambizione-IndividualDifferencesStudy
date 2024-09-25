@@ -24,6 +24,7 @@ import { browser_screen } from "./instructions/browserCheck";
 import { expInfo } from "./settings";
 import { createNewTrial } from "./trials/trialProcess";
 import { instructions_screen, practice_break_screen, break_screen } from "./instructions/InstrStart";
+import { generateStims } from "./trials/trialStim";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -54,9 +55,11 @@ export async function run({
   /************************************** Practice **************************************/
   
   let practiceLine: any[] = [];
+  let gridNumbers = generateStims();
+  
 for (let i = 0; i < expInfo.DESIGN.nPRACTICE * expInfo.DESIGN.practiceBLOCKS; i++) {
-  const prac_list = createNewTrial(expInfo.DESIGN.nPRACTICE);
-  practiceLine.push(prac_list);
+  var prac_list = createNewTrial(expInfo.DESIGN.nPRACTICE, gridNumbers);
+  practiceLine = practiceLine.concat(prac_list);
 
   if ((i + 1) % 10 === 0 && (i + 1) <= 19) {
     practiceLine.push(practice_break_screen);
@@ -67,9 +70,10 @@ console.log("Practice Line: ", practiceLine)
 
   /************************************** Experiment **************************************/
   let expLine: any[] = [];
+  let gridNumbersExp = generateStims();
   for (let i = 0; i < expInfo.DESIGN.nTRIALS * expInfo.DESIGN.nBLOCKS; i++) {
-    const exp_list = createNewTrial(expInfo.DESIGN.nTRIALS);
-    expLine.push(exp_list);
+    const exp_list = createNewTrial(expInfo.DESIGN.nTRIALS, gridNumbersExp);
+    expLine = expLine.concat(exp_list);
 
     if ((i + 1) % 50 === 0 && (i + 1) <= 199) {
       expLine.push(break_screen);

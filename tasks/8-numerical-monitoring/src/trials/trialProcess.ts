@@ -19,28 +19,28 @@ import exp from "constants";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number): any[] {
+export function createNewTrial(XY: number, gridNumbers): any[] {
   var trial_line: any[] = [];
-  let gridNumbers = generateStims();
 
-
+  let gridNumbersUpdate = updateRandomNumber(gridNumbers)
+  
   const trial_screen = {
     type: psychophysics, 
-    stimuli: gridNumbers,
+    stimuli: gridNumbersUpdate,
     canvas_width: 210,
     canvas_height: 210,
     background_color: expInfo.DESIGN.backgroundCOLOR,
     choices: expInfo.DESIGN.CHOICES, 
     trial_duration: expInfo.TIMING.TRIAL, 
-    on_start: function() {
-      updateRandomNumber(gridNumbers);
+    on_start: function(trial) {
+      //trial.stimuli = updateRandomNumber(gridNumbers);
     },
     on_finish: (data) => {
-      let match = checkForSameLastDigit(gridNumbers);
-      data.correct = match && data.response === " ";
+      //let match = checkForSameLastDigit(gridNumbers);
+      //data.correct = match && data.response === " ";
     }
   }
-
+  
   trial_line.push(trial_screen);
 
 
