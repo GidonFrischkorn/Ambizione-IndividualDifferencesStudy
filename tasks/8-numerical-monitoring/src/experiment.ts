@@ -23,7 +23,7 @@ import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
 import { expInfo } from "./settings";
 import { createNewTrial } from "./trials/trialProcess";
-import { practice_break_screen, break_screen } from "./instructions/InstrStart";
+import { instructions_screen, practice_break_screen, break_screen } from "./instructions/InstrStart";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -89,6 +89,7 @@ console.log("Practice Line: ", practiceLine)
   timeline.push(consent_screen);
   timeline.push(notice_screen);
   timeline.push(browser_screen);
+  timeline.push(instructions_screen);
   timeline = timeline.concat(practiceLine);
   timeline = timeline.concat(expLine);
 
