@@ -35,7 +35,7 @@ export const expInfo = {
   TIMING: {
     START: 10 * 1000, // time for the countdown before a new trial starts
     TRIAL: 1500, // duration of each trial
-    BREAK: 30, // break duration in seconds
+    BREAK: 60 * 1000, // break duration in seconds
     FIXATION: 1500, // duration of the fixation screen
   },
 

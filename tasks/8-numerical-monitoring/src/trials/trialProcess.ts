@@ -34,7 +34,6 @@ export function createNewTrial(XY: number): any[] {
     trial_duration: expInfo.TIMING.TRIAL, 
     on_start: function() {
       updateRandomNumber(gridNumbers);
-      console.log("Updated gridNumbers:", gridNumbers);
     },
     on_finish: (data) => {
       let match = checkForSameLastDigit(gridNumbers);

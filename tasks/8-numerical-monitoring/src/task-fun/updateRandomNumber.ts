@@ -8,6 +8,7 @@ export function updateRandomNumber(gridNumbers) {
     let randomNumber = Math.floor(Math.random() * 90) + 10;
     // Update the selected number object
     numberObjects[randomIndex].content = randomNumber.toString();
+    console.log(" New Random Number: ", numberObjects[randomIndex].content);
   }
   
 
