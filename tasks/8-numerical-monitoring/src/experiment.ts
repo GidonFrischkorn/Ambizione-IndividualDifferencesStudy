@@ -54,6 +54,7 @@ export async function run({
 
   /************************************** Practice **************************************/
   
+
   let practiceLine: any[] = [];
   let gridNumbers = generateStims();
   
@@ -76,10 +77,9 @@ console.log("Practice Line: ", practiceLine)
     expLine = expLine.concat(exp_list);
 
     if ((i + 1) % 50 === 0 && (i + 1) <= 199) {
-      expLine.push(break_screen);
-    }
+    expLine.push(break_screen);
   }
-
+}
   console.log("Experiment Line: ", expLine)
 
 
@@ -88,12 +88,12 @@ console.log("Practice Line: ", practiceLine)
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
-  timeline.push(preload_screen);
-  timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
-  timeline.push(browser_screen);
-  timeline.push(instructions_screen);
+  //timeline.push(preload_screen);
+  //timeline.push(welcome_screen);
+  //timeline.push(consent_screen);
+  //timeline.push(notice_screen);
+  //timeline.push(browser_screen);
+  //timeline.push(instructions_screen);
   timeline = timeline.concat(practiceLine);
   timeline = timeline.concat(expLine);
 
