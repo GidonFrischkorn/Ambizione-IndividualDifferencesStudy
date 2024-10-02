@@ -47,6 +47,7 @@ export const generateStims = function () {
 
 
 
+
 /** SECOND VERSION - TRYING TO MAKE ONLY UNIQUE NUMBERS IN THE GRID 
  * Generates a stimulus array based on the specified condition, ensuring each number in the grid is unique.
  * @returns An array of stimulus objects for the grid.

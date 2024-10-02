@@ -77,8 +77,3 @@ export function updateRandomNumber(gridNumbers: any[]): any[] {
 
   return gridNumbersCopy;
 }
-
-
-
- 
-  

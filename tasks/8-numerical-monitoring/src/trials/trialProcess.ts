@@ -22,7 +22,7 @@ import exp from "constants";
 export function createNewTrial(XY: number, gridNumbers): any[] {
   var trial_line: any[] = [];
 
-  let gridNumbersUpdate = updateRandomNumber(gridNumbers)
+  let gridNumbersUpdate = updateRandomNumber(gridNumbers);
   
   const trial_screen = {
     type: psychophysics, 

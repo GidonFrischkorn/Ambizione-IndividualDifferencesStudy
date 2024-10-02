@@ -52,36 +52,35 @@ export async function run({
   /************************************** Instruction **************************************/
 
 
-  /************************************** Practice **************************************/
-  
+/************************************** Practice **************************************/
 
-  let practiceLine: any[] = [];
-  let gridNumbers = generateStims();
-  
+
+let practiceLine: any[] = [];
+let gridNumbers = generateStims();
+
 for (let i = 0; i < expInfo.DESIGN.nPRACTICE * expInfo.DESIGN.practiceBLOCKS; i++) {
-  var prac_list = createNewTrial(expInfo.DESIGN.nPRACTICE, gridNumbers);
-  practiceLine = practiceLine.concat(prac_list);
-
-  if ((i + 1) % 10 === 0 && (i + 1) <= 19) {
-    practiceLine.push(practice_break_screen);
-  }
+var prac_list = createNewTrial(expInfo.DESIGN.nPRACTICE, gridNumbers);
+practiceLine = practiceLine.concat(prac_list);
+if ((i + 1) % 10 === 0 && (i + 1) <= 19) {
+  practiceLine.push(practice_break_screen);
 }
-
+}
 console.log("Practice Line: ", practiceLine)
+/************************************** Experiment **************************************/
+let expLine: any[] = [];
+let gridNumbersExp = generateStims();
+for (let i = 0; i < expInfo.DESIGN.nTRIALS * expInfo.DESIGN.nBLOCKS; i++) {
+  const exp_list = createNewTrial(expInfo.DESIGN.nTRIALS, gridNumbersExp);
+  expLine = expLine.concat(exp_list);
 
-  /************************************** Experiment **************************************/
-  let expLine: any[] = [];
-  let gridNumbersExp = generateStims();
-  for (let i = 0; i < expInfo.DESIGN.nTRIALS * expInfo.DESIGN.nBLOCKS; i++) {
-    const exp_list = createNewTrial(expInfo.DESIGN.nTRIALS, gridNumbersExp);
-    expLine = expLine.concat(exp_list);
-
-    if ((i + 1) % 50 === 0 && (i + 1) <= 199) {
+  if ((i + 1) % 50 === 0 && (i + 1) <= 199) {
     expLine.push(break_screen);
   }
+  expLine.push(break_screen);
 }
-  console.log("Experiment Line: ", expLine)
 
+
+console.log("Experiment Line: ", expLine)
 
   /************************************** Procedure **************************************/
 
