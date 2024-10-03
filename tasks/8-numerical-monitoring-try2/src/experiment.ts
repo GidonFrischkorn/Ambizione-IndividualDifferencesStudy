@@ -98,12 +98,12 @@ console.log("Practice Line: ", practice_line)
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
-  timeline.push(preload_screen);
-  timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
-  timeline.push(browser_screen);
-  timeline = timeline.concat(practice_line);
+  //timeline.push(preload_screen);
+  //timeline.push(welcome_screen);
+  //timeline.push(consent_screen);
+  //timeline.push(notice_screen);
+  //timeline.push(browser_screen);
+  //timeline = timeline.concat(practice_line);
   timeline = timeline.concat(expLine);
 
   await jsPsych.run(timeline);

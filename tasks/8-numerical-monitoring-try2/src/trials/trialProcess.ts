@@ -22,17 +22,17 @@ export function createNewTrial(XY: number, isPractice: boolean, isMatch: boolean
   const grid_screen = {
     type: htmlKeyboardResponse,
     stimulus: `
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; text-align: center; font-size: 24px; width: 150px;">
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[0]}</div>
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[1]}</div>
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[2]}</div>
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[3]}</div>
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[4]}</div>
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[5]}</div>
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[6]}</div>
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[7]}</div>
-        <div style="background-color: grey; padding: 20px; border: 1px solid black;">${targetStim[8]}</div>
-      </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; text-align: center; font-size: 24px; width: 150px;">
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[0]}</div>
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[1]}</div>
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[2]}</div>
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[3]}</div>
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[4]}</div>
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[5]}</div>
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[6]}</div>
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[7]}</div>
+      <div style="background-color: #C5C5C5; padding: 20px; border: 0.5px solid black;">${targetStim[8]}</div>
+  </div>
     `,
     choices: expInfo.DESIGN.CHOICES,
     trial_duration: expInfo.TIMING.GRID,
