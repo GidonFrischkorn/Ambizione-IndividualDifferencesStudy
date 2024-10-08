@@ -64,6 +64,128 @@ export const generateStims = function (itsAMatch: boolean, currentGrid: number[]
   return currentGrid;
 };
 
+/*export const generateStims = function (
+  itsAMatch: boolean,
+  currentGrid: number[],
+  indexChangeCounter: number[]
+): { updatedGrid: number[]; updatedIndexChangeCounter: number[] } {
+  // Initialize the number pool from 10 to 99
+  const numberPool: number[] = Array.from({ length: 90 }, (_, k) => k + 10);
+
+  // Define the type for group indices
+  type GroupIndices = {
+    rowIndices: number[];
+    colIndices: number[];
+    diag1Indices: number[];
+    diag2Indices: number[];
+  };
+
+  // Function to get groups (row, column, diagonals) for a given position
+  const getGroups = (pos: number): GroupIndices => {
+    const row: number = Math.floor(pos / 3);
+    const col: number = pos % 3;
+
+    const rowIndices: number[] = [row * 3, row * 3 + 1, row * 3 + 2];
+    const colIndices: number[] = [col, col + 3, col + 6];
+    const diag1Indices: number[] = pos % 4 === 0 ? [0, 4, 8] : [];
+    const diag2Indices: number[] = pos % 2 === 0 && pos !== 4 ? [2, 4, 6] : [];
+
+    return { rowIndices, colIndices, diag1Indices, diag2Indices };
+  };
+
+  // Get numbers not currently in the grid
+  const notGridNumbers: number[] = numberPool.filter(
+    (num) => !currentGrid.includes(num)
+  );
+
+  // Filter positions based on indexChangeCounter
+  let positions: number[] = Array.from({ length: 9 }, (_, i) => i).filter(
+    (index) => indexChangeCounter[index] >= 3
+  );
+
+  if (positions.length === 0) {
+    // If no positions are available, cannot proceed
+    throw new Error(
+      "No positions available to satisfy the index change condition"
+    );
+  }
+
+  // Shuffle positions
+  positions = positions.sort(() => Math.random() - 0.5);
+
+  for (const pos of positions) {
+    const { rowIndices, colIndices, diag1Indices, diag2Indices } =
+      getGroups(pos);
+    const groups: number[][] = [rowIndices, colIndices];
+    if (diag1Indices.length > 0) groups.push(diag1Indices);
+    if (diag2Indices.length > 0) groups.push(diag2Indices);
+
+    for (const group of groups) {
+      // Exclude the position pos
+      const otherIndices: number[] = group.filter((index) => index !== pos);
+      // Map to numbers, filter out undefined
+      const otherNumbers = otherIndices
+        .map((index) => currentGrid[index])
+        .filter((num): num is number => num !== undefined);
+
+      if (otherNumbers.length !== 2) {
+        // We expect two other numbers; if not, skip
+        continue;
+      }
+
+      const otherLastDigits = otherNumbers.map((num) => num % 10);
+
+      let possibleNumbers: number[] = [];
+
+      if (itsAMatch) {
+        if (otherLastDigits[0] === otherLastDigits[1]) {
+          const L: number = otherLastDigits[0];
+          // Find numbers not in currentGrid whose last digit is L
+          possibleNumbers = notGridNumbers.filter((num) => num % 10 === L);
+        }
+      } else {
+        if (otherLastDigits[0] !== otherLastDigits[1]) {
+          // Find numbers not in currentGrid whose last digit is different from both
+          possibleNumbers = notGridNumbers.filter(
+            (num) =>
+              num % 10 !== otherLastDigits[0] &&
+              num % 10 !== otherLastDigits[1]
+          );
+        }
+      }
+
+      if (possibleNumbers.length > 0) {
+        // Pick a random number from possibleNumbers
+        const newNumber: number =
+          possibleNumbers[Math.floor(Math.random() * possibleNumbers.length)];
+        // Replace the number at position pos with the new number
+        currentGrid[pos] = newNumber;
+
+        // Update indexChangeCounter
+        indexChangeCounter = indexChangeCounter.map((counter, idx) => {
+          if (idx === pos) {
+            return 0; // Reset counter for changed index
+          } else {
+            return counter + 1; // Increment counter for other indices
+          }
+        });
+
+        // Return the updated grid and indexChangeCounter
+        return {
+          updatedGrid: currentGrid,
+          updatedIndexChangeCounter: indexChangeCounter,
+        };
+      }
+    }
+  }
+
+  // If no suitable number was found
+  throw new Error("No valid number found to satisfy the condition");
+};*/
+
+
+
+
 
 
 export const createTrialList = function () {
