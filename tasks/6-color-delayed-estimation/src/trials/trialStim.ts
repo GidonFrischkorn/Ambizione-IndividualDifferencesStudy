@@ -1,6 +1,8 @@
 // Purpose: Generates a stimulus array based on the specified condition.
 
 import { random } from "@coglabuzh/webpsy.js"
+import { expInfo } from "../settings";
+import { jsPsych } from "../jsp";
 
 /**
  * Generates a stimulus array based on the specified condition.

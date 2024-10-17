@@ -1,7 +1,7 @@
 /**
- * @title The name of the task
- * @description A short description of the task
- * @author Chenyu Li and Hannah (Dames) Tschannen
+ * @title Color Delayed Estimation Task
+ * @description Participants have to remember the colors of the squares presented to them and after a delay, they have to reproduce the color of the one that its being cued. 
+ * @author Elena Venturi 
  * @version 0.3.1
  *
  *
@@ -21,6 +21,11 @@ import { jsPsych } from "./jsp";
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
+import { colorsEncodingScreen } from "./trials/colorsEncodingScreen";
+import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
+import { circleOfSquares } from "@coglabuzh/webpsy.js";
+import { random } from "@coglabuzh/webpsy.js";
+import { expInfo } from "./settings";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -57,11 +62,40 @@ export async function run({
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
-  timeline.push(preload_screen);
-  timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
-  timeline.push(browser_screen);
+  //timeline.push(preload_screen);
+  //timeline.push(welcome_screen);
+  //timeline.push(consent_screen);
+  //timeline.push(notice_screen);
+  //timeline.push(browser_screen);
+  const numberOfFrames = random.sample(expInfo.DESIGN.CONDITIONS, 1)[0];
+
+// b. Initialize the frames array
+const framesArray: any[] = [];
+
+// c. Populate the frames array using a for loop
+for (let i = 0; i < numberOfFrames; i++) {
+  const randomColor = random.sample(expInfo.DESIGN.squaresCOLORS, 1)[0];
+    const frame = {
+        content: "",
+        width: expInfo.DESIGN.squaresWIDTH,
+        height: expInfo.DESIGN.squaresHEIGHT,
+        border_color: randomColor,
+        bg_color: randomColor
+    };
+    framesArray.push(frame);
+}
+
+    const circle : string = circleOfSquares({
+        frames: framesArray,
+        radius: 100
+    })
+
+  timeline.push({
+    type: htmlKeyboardResponse,
+    response_ends_trial: false,
+    stimulus: circle,
+    trial_duration: 500000,
+  });
 
   await jsPsych.run(timeline);
 

@@ -12,20 +12,27 @@ setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "the_name_of_your_experiment",
-  LANG: "en", // the default language of the experiment
+  TITLE: "Color Delayed Estimation Task", // the title of the experiment
+  LANG: "de", // the default language of the experiment
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 1, // number of experiment trials for each condition
+    nTRIALS: 50, // number of experiment trials for each condition
     nBLOCKS: 1, // number of blocks
-    CONDITIONS: [5, 6, 7, 8],
+    CONDITIONS: [4, 5, 6],
+    squaresWIDTH: 20, 
+    squaresHEIGHT: 20, 
+    squaresCOLORS: ["red", "green", "blue", "yellow", "purple", "orange"]
   },
 
   // settings for each trial
   TIMING: {
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
+    ENCODING: 1000, // encoding duration in milliseconds
+    RETENTION: 1500, // retention duration in milliseconds
+    REPRODUCTION: 10 * 1000, // reproduction duration in seconds
+    ITI: 1500, // inter-trial interval in milliseconds
   },
 
   // when using Prolific, you can set customized completion codes for different situations
