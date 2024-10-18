@@ -21,11 +21,13 @@ import { jsPsych } from "./jsp";
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
-import { colorsEncodingScreen } from "./trials/colorsEncodingScreen";
+import { encodingColors } from "./trials/colorsEncodingScreen";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { circleOfSquares } from "@coglabuzh/webpsy.js";
 import { random } from "@coglabuzh/webpsy.js";
 import { expInfo } from "./settings";
+import { drawColorWheel } from "@coglabuzh/webpsy.js";
+import psychophysics from "@kurokida/jspsych-psychophysics";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -67,35 +69,53 @@ export async function run({
   //timeline.push(consent_screen);
   //timeline.push(notice_screen);
   //timeline.push(browser_screen);
-  const numberOfFrames = random.sample(expInfo.DESIGN.CONDITIONS, 1)[0];
+  
+  // Define parameters 
+const radius: number = expInfo.DESIGN.wheelRADIUS;
+const ratio: number = expInfo.DESIGN.wheelRATIO;
+const pos: [number, number] = [expInfo.CANVAS.canW/ 2, expInfo.CANVAS.canH / 2]
 
-// b. Initialize the frames array
-const framesArray: any[] = [];
+// Create the color wheel stimulus
+const colorWheelStimulus = drawColorWheel(radius, ratio, pos);
 
-// c. Populate the frames array using a for loop
-for (let i = 0; i < numberOfFrames; i++) {
-  const randomColor = random.sample(expInfo.DESIGN.squaresCOLORS, 1)[0];
-    const frame = {
-        content: "",
-        width: expInfo.DESIGN.squaresWIDTH,
-        height: expInfo.DESIGN.squaresHEIGHT,
-        border_color: randomColor,
-        bg_color: randomColor
-    };
-    framesArray.push(frame);
+// Create fixation cross 
+const fixation_cross = {
+    obj_type: "cross", 
+    origin_center: true,
+    line_length: 30, 
+    line_width: 3
 }
 
-    const circle : string = circleOfSquares({
-        frames: framesArray,
-        radius: 100
-    })
+const retrieval_screen = {
+  type: psychophysics, 
+  stimuli: [colorWheelStimulus],
+  background_color: 'white',
+  canvas_width: expInfo.CANVAS.canW,
+  canvas_height: expInfo.CANVAS.canH,
+  response_type: 'mouse', // Enable mouse interactions
+  choices: 'NO_KEYS', // Disable keyboard responses
+  mouse_down_func: function(event) {
+    // Get the mouse click coordinates
+    const x = event.offsetX;
+    const y = event.offsetY;
 
-  timeline.push({
-    type: htmlKeyboardResponse,
-    response_ends_trial: false,
-    stimulus: circle,
-    trial_duration: 500000,
-  });
+    // Calculate the difference from the center
+    const dx = x - pos[0];
+    const dy = y - pos[1];
+
+    // Calculate the angle of the click
+    let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    if (angle < 0) angle += 360; // Normalize angle to [0, 360)
+
+    // Save the selected hue (angle) to the data
+    jsPsych.data.write({
+      selected_hue: angle
+    });
+
+  }
+};
+
+timeline.push(retrieval_screen);
 
   await jsPsych.run(timeline);
 

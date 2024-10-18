@@ -21,8 +21,16 @@ export const expInfo = {
     nBLOCKS: 1, // number of blocks
     CONDITIONS: [4, 5, 6],
     squaresWIDTH: 20, 
-    squaresHEIGHT: 20, 
-    squaresCOLORS: ["red", "green", "blue", "yellow", "purple", "orange"]
+    squaresHEIGHT: 20,  
+    wheelRADIUS: 300,
+    wheelRATIO: 0.7, 
+    wheelPOSX: 0,
+    wheelPOSY: 0
+  },
+
+  CANVAS: {
+    canW: Math.min(screen.width, (screen.height / 9) * 16) * 0.9, // width of the canvas
+    canH: Math.min(screen.width, (screen.height / 9) * 16) * 0.9 * 0.5, // height of the canvas
   },
 
   // settings for each trial
