@@ -34,7 +34,8 @@ export const expInfo = {
     ITI: 1500, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
-    FINGERS: 5000 // duration of the finger instruction
+    FINGERS: 5000, // duration of the finger instruction
+    CUE: 1000, // duration of the cue screen
   },
 
   // when using Prolific, you can set customized completion codes for different situations

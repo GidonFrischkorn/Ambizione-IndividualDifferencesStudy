@@ -1,7 +1,7 @@
 # ignore all node_modules & jspsych-builder directories
-*/node_modules/
-*/.jspsych-builder
-*/packaged/
+node_modules/
+.jspsych-builder
+packaged/
 
 # file-types to ignore
 .DS_Store

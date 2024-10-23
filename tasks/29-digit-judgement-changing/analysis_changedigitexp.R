@@ -1,15 +1,16 @@
 ############## Analysis Digit Processing Task ##############
 
 #install packages 
-install.packages("rjson")
 library(rjson)
 library(dplyr)
 library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-digit_result <- read_json_data(" ") %>% 
-  filter(response %in% c("e", "o"), practice == "experiment", correct == "TRUE") 
+digit_result <- read_json_data(".json") %>% 
+  filter(response %in% c("e", "o"), practice == "experiment"
+         #, correct == "TRUE"
+         ) 
 
 # Exclude columns we don't need 
 digit_result <- digit_result %>% 
