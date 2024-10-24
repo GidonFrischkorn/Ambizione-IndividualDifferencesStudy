@@ -7,7 +7,7 @@
     "jatos": "npm run jspsych -- build --jatos"
   },
   "dependencies": {
-    "@coglabuzh/webpsy.js": "^1.1.5",
+    "@coglabuzh/webpsy.js": "^1.1.0",
     "@jspsych/plugin-browser-check": "^1.0.2",
     "@jspsych/plugin-external-html": "^1.1.2",
     "@jspsych/plugin-fullscreen": "^1.2.0",
@@ -22,7 +22,7 @@
     "ml-matrix": "^6.10.4",
     "numeric": "^1.2.6",
     "pixi.js": "^7.2.4",
-    "sweetalert2": "^11.7.5"
+    "sweetalert2": "^11.6.13"
   },
   "devDependencies": {
     "@types/node": "^20.2.3",
