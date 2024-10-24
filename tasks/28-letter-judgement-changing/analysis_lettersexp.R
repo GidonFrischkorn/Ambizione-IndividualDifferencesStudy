@@ -8,8 +8,8 @@ library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-digit_result <- read_json_data(" .json") %>% 
-  filter(response %in% c("d", "k"), procedure == "experiment"
+digit_result <- read_json_data(".json") %>% 
+  filter(response %in% c("d", "j"), procedure == "experiment"
          #, correct == "TRUE"
          ) 
 
