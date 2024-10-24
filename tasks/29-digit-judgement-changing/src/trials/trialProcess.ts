@@ -86,9 +86,9 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     stimulus: function () {
       let lastTrialCorrect = jsPsych.data.get().last(1).values()[0].correct;
       if (lastTrialCorrect) {
-        return "<div style='font-size:60px; color:green;'>Correct :)</div>";
+        return "<div style='font-size:60px; color:green;'>Richtig :)</div>";
       } else {
-        return "<div style='font-size:60px; color:red'>Incorrect :(</div>";
+        return "<div style='font-size:60px; color:red'>Falsch :(</div>";
       }
     },
     trial_duration: expInfo.TIMING.FEEDBACK,
