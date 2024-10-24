@@ -21,7 +21,7 @@ export const expInfo = {
     nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
     CONDITIONS: ["vowel","consonant"], // conditions of the experiment
-    CHOICES: ["d", "k"], // choices for the participants
+    CHOICES: ["d", "j"], // choices for the participants
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
@@ -34,6 +34,7 @@ export const expInfo = {
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
     FINGERS: 5000, // duration of the finger instruction
+    CUE: 1000, // duration of the cue
   },
 
   // when using Prolific, you can set customized completion codes for different situations

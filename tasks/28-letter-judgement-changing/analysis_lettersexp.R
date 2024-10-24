@@ -8,12 +8,14 @@ library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-digit_result <- read_json_data(" ") %>% 
-  filter(response %in% c("d", "k"), practice == "experiment", correct == "TRUE") 
+digit_result <- read_json_data(" .json") %>% 
+  filter(response %in% c("d", "k"), procedure == "experiment"
+         #, correct == "TRUE"
+         ) 
 
 # Exclude columns we don't need 
 digit_result <- digit_result %>% 
-  select(-c(1:5, 16:29))
+  select(-c(1:9, 11, 12, 16:29))
 
 # Convert rt to seconds and create a new column for the converted RTs
 digit_result <- digit_result %>%

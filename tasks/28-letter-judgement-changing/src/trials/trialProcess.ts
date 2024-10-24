@@ -17,8 +17,24 @@ import exp from "constants";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, condition: string, targetStim: string) {  
+export function createNewTrial(XY: number, isPractice: boolean, condition: string, targetStim: string, mapping: string) {  
   let trial_line: any[] = [];
+
+  // Compute the correct response based on mapping
+  let correct_response = "";
+  if (mapping === "normal") {
+      if (condition === "vowel") {
+          correct_response = "d"; // Press "D" for vowels
+      } else {
+          correct_response = "j"; // Press "J" for consonants
+      }
+  } else if (mapping === "switched") {
+      if (condition === "vowel") {
+          correct_response = "j"; // Press "J" for vowels (switched)
+      } else {
+          correct_response = "d"; // Press "D" for consonants (switched)
+      }
+  }
 
   // Fixation Screen 
   const fixation_screen = {
@@ -28,15 +44,25 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
     trial_duration: expInfo.TIMING.FIXATION,
   }
 
+  // Cue Screen
+  const cue_screen = {
+    type: htmlKeyboardResponse,
+    stimulus: function() {
+        if (mapping === "normal") {
+            return "<div style='font-size:60px;'>V&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;K</div>";
+        } else if (mapping === "switched") {
+            return "<div style='font-size:60px;'>K&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;V</div>";
+        }
+    },
+    choices: "NO-KEYS",
+    trial_duration: expInfo.TIMING.CUE, // Show for a fixed time
+  }
+
   // Target and Response Screen 
   const target_response_screen = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
     choices: expInfo.DESIGN.CHOICES, 
-    mapping: {
-      vowel: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("vowel")]], 
-      consonant: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("consonant")]],
-    },
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
     data: {
@@ -47,22 +73,14 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
       },
       trial_number: XY,
       condition: condition, 
-      practice: function (data) {
-        if (isPractice) {
-          return "practice";
-        } else {
-          return "experiment"
-        }
-      },
+      procedure: isPractice ? "practice" : "experiment",
       stimulus: targetStim, 
+      correct_response: correct_response,
     },
     on_finish: function (data) {
-      let correct = data.response == (data.is_vowel ? this.mapping.vowel : this.mapping.consonant);
-      jsPsych.data.get().addToLast({correct: correct});
-      
-      let stimulus_value = jsPsych.data.get().last(1).values()[0];
-      stimulus_value.stimulus = targetStim;
-    } 
+      let correct = data.response === data.correct_response;
+      data.correct = correct;
+    }
   }
 
   // Feedback Stimuls for Practice Trials
@@ -91,9 +109,9 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
   // Push screens into trial_line
 
   if (isPractice) {
-    trial_line.push(fixation_screen, target_response_screen, feedback, inter_trial_interval); 
+    trial_line.push(fixation_screen, cue_screen, target_response_screen, feedback, inter_trial_interval); 
   } else {
-    trial_line.push(fixation_screen, target_response_screen, inter_trial_interval);
+    trial_line.push(fixation_screen, cue_screen, target_response_screen, inter_trial_interval);
   };
   
 
