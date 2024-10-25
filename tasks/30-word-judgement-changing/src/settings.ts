@@ -18,7 +18,7 @@ export const expInfo = {
 
   // design of the experiment
   DESIGN:{
-    nTRIALS: 1, // number of experiment trials for each condition
+    nTRIALS: 10, // number of experiment trials for each condition
     nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
     CONDITIONS: {
@@ -32,14 +32,14 @@ export const expInfo = {
   
   // settings for each trial
   TIMING: {
-    FIXATION: 800, // duration of the fixation cross
+    FIXATION: 1000, // duration of the fixation cross
     TARGET: 5000, // duration of the target stimulus
     FEEDBACK: 1000, // duration of the feedback
     ITI: 1500, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
     FINGERS: 5000, // duration of the finger instruction
-    CUE: 1500, // duration of the cue screen
+    CUE: 1000, // duration of the cue screen
   },
 
   // when using Prolific, you can set customized completion codes for different situations

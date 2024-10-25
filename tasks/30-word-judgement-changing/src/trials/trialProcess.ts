@@ -76,8 +76,7 @@ const cue_screen = {
     },
     on_finish: function (data) {
       let correct = data.response === data.correct_response;
-      let correctKey = data.correct_response;
-      jsPsych.data.get().addToLast({correct: correct, correct_key: correctKey});
+      jsPsych.data.get().addToLast({correct: correct});
     }
   }
 

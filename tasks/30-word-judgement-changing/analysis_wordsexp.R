@@ -13,11 +13,11 @@ words_result <- read_json_data(".json") %>%
          ) 
 
 # Exclude columns we don't need 
-words_result <- letter_result %>% 
+words_result <- words_result %>% 
   select(-c(1:9, 11, 12, 16:29))
 
 # Convert rt to seconds and create a new column for the converted RTs
-words_result <- letter_result %>%
+words_result <- words_result %>%
   mutate(rt_seconds = rt/ 1000)
 
 # Calculate the mean and standard deviation of the RTs
