@@ -15,8 +15,7 @@ function create_vowel() : any {
     let random_vowel = Math.floor(Math.random() * vowel.length);
     return vowel[random_vowel];
 };
-let vowel = create_vowel();
-console.log(vowel);
+
 
 /**
  * A function used to create random consonants.
@@ -30,8 +29,6 @@ function create_consonant() : any {
     return consonant[random_consonant];
 };
 
-let consonant = create_consonant();
-console.log(consonant);
 
 /**
  * A function used to generate a sequence of mappings.
