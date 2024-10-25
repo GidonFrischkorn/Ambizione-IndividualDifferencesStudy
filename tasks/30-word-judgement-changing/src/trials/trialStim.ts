@@ -39,10 +39,51 @@ export const chooseStimuli = function (stimArray, animacy: string, wordlength: n
     console.log("Chosen Word: ",chosenWord);
     console.log("Remaining Words: ", stimArray);
 
-
     return chosenWord;
+}
 
-    
+/**
+ * A function used to generate a sequence of mappings.
+ * @param nTrials The number of trials.
+ *
+ * @returns An array containing the mapping for each trial.
+ */
+function generate_mapping_sequence(nTrials: number): string[] {
+    const mappings = ["normal", "switched"];
+    let mapping_sequence: string[] = [];
+    const max_repeat = 3;
+
+    // Initialize previous mapping
+    let last_mapping: string | null = null;
+    // Counter for how many times the last mapping has repeated
+    let repeat_count = 0;
+
+    for (let i = 0; i < nTrials; i++) {
+        let available_mappings = mappings.slice();
+
+        // If the last mapping has repeated max_repeat times, we must switch
+        if (repeat_count >= max_repeat && last_mapping !== null) {
+            // Remove last_mapping from available_mappings
+            available_mappings = available_mappings.filter(mapping => mapping !== last_mapping);
+        }
+
+        // Randomly select a mapping from available_mappings
+        let random_index = Math.floor(Math.random() * available_mappings.length);
+        let selected_mapping = available_mappings[random_index];
+
+        // Append selected_mapping to sequence
+        mapping_sequence.push(selected_mapping);
+
+        // Update last_mapping and repeat_count
+        if (selected_mapping === last_mapping) {
+            repeat_count += 1;
+        } else {
+            last_mapping = selected_mapping;
+            repeat_count = 1;
+        }
+    }
+
+    return mapping_sequence;
 }
 
 /**
@@ -60,6 +101,8 @@ export function create_trialList (excludeWords: string[] = []) {
     };
     
     let block_conditions = jsPsych.randomization.factorial(target_conditions, expInfo.DESIGN.nTRIALS, false);
+     // Generate the mapping sequence
+     let mapping_sequence = generate_mapping_sequence(expInfo.DESIGN.nTRIALS*expInfo.DESIGN.CONDITIONS.ANIMACY.length*expInfo.DESIGN.CONDITIONS.WORDLENGTH.length);
   
     block_conditions.forEach((trial, i) => {
       if(trial.animacy == "animate") {
@@ -82,8 +125,9 @@ export function create_trialList (excludeWords: string[] = []) {
   
       trial.stimulus = chooseStimuli(localWords, trial.word_animacy, trial.word_length, excludeWords);
       trial.trial_number = i + 1;
+      trial.mapping = mapping_sequence[i]; // Assign mapping to each trial
   });
-  
+  console.log(mapping_sequence);
     return block_conditions;
   };
 
