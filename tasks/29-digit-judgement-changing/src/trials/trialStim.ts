@@ -21,8 +21,7 @@ function create_odd_number (min: number, max: number): number {
     } 
     return odd_number;
 }
-let odd_number = create_odd_number(10,99);
-console.log(odd_number);
+
 
 /**
  * A function used to create random even numbers.
@@ -42,8 +41,7 @@ function create_even_number (min: number, max: number): number {
     } 
     return even_number;
 }
-let even_number = create_even_number(10,99);
-console.log(even_number);
+
 
 /**
  * A function used to generate a sequence of mappings.
@@ -115,7 +113,6 @@ export function create_trialList() {
         trial.trial_number = i + 1;
         trial.mapping = mapping_sequence[i]; // Assign mapping to each trial
     });
-    console.log(mapping_sequence)
 
     return block_conditions;
 }
