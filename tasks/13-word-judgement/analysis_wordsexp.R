@@ -8,11 +8,13 @@ library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
 words_result <- read_json_data(".json") %>% 
-  filter(response %in% c("d", "j"), practice == "experiment", correct == TRUE) 
+  filter(response %in% c("d", "j"), procedure == "experiment"
+         #, correct == TRUE
+         ) 
 
 # Exclude columns we don't need 
 words_result <- letter_result %>% 
-  select(-c(1:5, 16:29))
+  select(-c(1:9, 11, 12, 16:29))
 
 # Convert rt to seconds and create a new column for the converted RTs
 words_result <- letter_result %>%
