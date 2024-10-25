@@ -12,6 +12,7 @@ export const instructions_screen = {
         '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_3.jpg"></img>', 
         '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_4.jpg"></img>',
         '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_5.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_6.jpg"></img>',
     ],
     button_label_next: BUTTON_INFO.continueButton[expInfo.LANG],
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],
@@ -23,7 +24,7 @@ export const instructions_screen = {
 export const fingers_instructions_practice = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:40px; line-height: 1.5;'>
-    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>E</strong> und <strong>O</strong>.<br>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>J</strong>.<br>
     Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
     </div>`,
     choices: "ALL_KEYS",
@@ -33,7 +34,7 @@ export const fingers_instructions_practice = {
 export const fingers_instructions_exp = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:40px; line-height: 1.5;'>
-    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>E</strong> und <strong>O</strong>.<br>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>J</strong>.<br>
     Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
     </div>`,
     choices: "ALL_KEYS",

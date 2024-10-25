@@ -25,15 +25,15 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
   let correct_response = "";
   if (mapping === "normal") {
       if (targetStim % 2 !== 0) {
-          correct_response = "o";
+          correct_response = "j";
       } else {
-          correct_response = "e";
+          correct_response = "d";
       }
   } else if (mapping === "switched") {
       if (targetStim % 2 !== 0) {
-          correct_response = "e";
+          correct_response = "d";
       } else {
-          correct_response = "o";
+          correct_response = "j";
       }
   }
 
