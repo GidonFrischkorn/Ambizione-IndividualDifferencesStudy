@@ -31,8 +31,7 @@ export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
       data: { // data to be saved
         screenID: 'retrieval_proc',
         task: 'procedural',
-        session: exp_info.session,
-  
+       
         procedure: exp_trial.phase,
         blockID: exp_trial.block,
         trialID: exp_trial.trial,
