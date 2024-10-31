@@ -239,7 +239,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
                   if (correct_last_practice_if < 4) {
                     
-                    endExpPractice(varOnline.FAIL_CODE);
+                    endExpPractice(varOnline.CODES.FAILED_OTHERS);
 
                   } else { //correct_last_practice_if = 4
 

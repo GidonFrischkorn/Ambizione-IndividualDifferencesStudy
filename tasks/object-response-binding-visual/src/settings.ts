@@ -9,18 +9,28 @@ setCSS();
 export const varOnline = {
     RUN_JATOS: false, // true, if you run your experiment in jatos
     RUN_PROLIFIC: false, // true, if you run your experiment in Prolific 
-    COMPLETION_CODE: "CVTIZNRL", // for Prolific
-    FAIL_CODE: "C1AD5NL2", // for Prolific
-    INTERNET_CODE: "C18UGLPR", // for Prolific
-    DRIVE_LINK: 'https://drive.switch.ch/index.php/s/2Th2hnM0dfMtNzS'
+
+    CODES: {
+        SUCCESS: "success", // the code for a successfully completion of the experiment
+        OFFLINE: "offline", // the code for the offline situation
+        FAILED_ATTENTION: "failedAttention", // the code for the failed experiment
+        FAILED_OTHERS: "failedOthers", // the code for other failed situations (e.g., failed to resize the window)
+        // You can specify the codes for different situations here.
+    },
+
+    TIMING: {
+        BREAK: 30
+    } 
 }
 
 export const varSystem = {
+    TITLE: "BindingVisualProcedural", // experiment name
+    LANG: "de", // the language of the instructions
     TRACK: false, // a switch to track participants' interactions with the browser
     nBLUR: 0, // use to count how many times participants left the browser
     MAX_BLUR: 3, // the maximum number of times participants can leave the browser
     LOOP: true, // a switch to control whether participants need to read the instruction and practice again
-    FAILED_ATTENTION_CHECK: false
+    STATUS: "success"
   };
 
 // define experimental variables and color condition
