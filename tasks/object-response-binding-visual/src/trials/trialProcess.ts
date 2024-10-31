@@ -5,9 +5,6 @@ import { screen_cue } from "./trialScreens/ScreenRetrievalCue";
 import { screen_iti } from "./trialScreens/ScreenITI";
 import { screen_isi } from "./trialScreens/ScreenISI";
 
-import { screen_info_color_check } from "./trialScreens/ScreenInfoColorCheck";
-import { screen_color_check } from "./trialScreens/ScreenColorCheck";
-import { screen_feedback_color_check } from "./trialScreens/ScreenFeedbackColorCheck";
 import { screen_info_finger_check } from "./trialScreens/ScreenInfoFingerCheck";
 import { screen_finger_check } from "./trialScreens/ScreenFingerCheck";
 import { screen_feedback_finger_check } from "./trialScreens/ScreenFeedbackFinger";
@@ -66,16 +63,7 @@ trialStim.prototype.memoryPhase = function () {
   phase_line.push(preload_screen);
   
   // finger check task
-  if (this.task == "color_check") {
-
-    if (this.exp_trial.trial == 0) {
-      
-      // display info for finger check
-      const info_color_check_screen = screen_info_color_check(this.exp_info, this.exp_trial);
-      phase_line.push(info_color_check_screen);
-    };
-
-  } else if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_speed_declarative" || this.task == "finger_check_procedural" || this.task == "finger_check_declarative") {
+  if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_speed_declarative" || this.task == "finger_check_procedural" || this.task == "finger_check_declarative") {
     
     if (this.exp_trial.trial == 0) {
       
@@ -212,21 +200,7 @@ trialStim.prototype.retrievalPhase = function () {
   var phase_line: any[] = [];
 
   // finger check task
-  if (this.task == "color_check") {
-
-    // display key assignment of colors
-    const color_check_screen = screen_color_check(this.exp_info, this.exp_trial, 0);
-    phase_line.push(color_check_screen);
-
-    // display feedback
-    const feedback_color_check_screen = screen_feedback_color_check(this.exp_info);
-    phase_line.push(feedback_color_check_screen);
-
-    // isi
-    const isi_screen = screen_isi(this.exp_info);
-    phase_line.push(isi_screen);
-
-  } else if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_speed_declarative" || this.task == "finger_check_procedural" || this.task == "finger_check_declarative") {
+  if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_speed_declarative" || this.task == "finger_check_procedural" || this.task == "finger_check_declarative") {
 
     // define task for finger check trials
     if (this.task == "finger_check_speed_procedural") {

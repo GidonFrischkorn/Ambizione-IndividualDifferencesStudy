@@ -68,14 +68,10 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
  // define whether to run practice, color check, finger check, and processing speed task (0 = no, 1 = yes)
  var is_practice = 1;
- var is_color_check = 1;
  var is_finger_check = 1;
  var is_proc_speed = 1;
  
   // create timeline variables
-  let color_check_instr_line:any[] = [];
-  let color_check_line:any[] = [];
-  let color_check_loop_line:any[] = [];
   let finger_check_line_speed_task:any[] = [];
   let finger_check_loop_line_speed_task:any = [];
   let finger_check_line_task:any[] = [];
@@ -89,102 +85,6 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   let exp_line_task:any[] = [];
   let end_instr_line_task:any[] = [];
 
-  /************************************** Color Check Task **************************************/
-
-  // color check task 
-  if (is_color_check == 1) {
-
-    // create color checl instructions
-    color_check_instr_line.push(createInstr(exp_info, 'Color_Check_Instructions', 1, exp_info.n_color_check_slides));
-    color_check_instr_line.push(createSingleInstr(exp_info, 'General_Instructions', 'ColorCheckStart'));
-
-    // define local variables: practice = no
-    let is_prac_local = 0;
-
-    // create color check trials
-    var {Trial, stim_idx} = MakeTrial(exp_info, is_prac_local, "color_check"); // no stim_index
-    var color_check_trials = Trial, stim_index_color_check = stim_idx;
-
-    // chunk finger check trials into blocks
-    const color_check_chunks = chunkTrials(color_check_trials, exp_info.n_color_check_blocks);
-
-    // loop through finger check blocks
-    for (var [block, color_check_block_trials] of color_check_chunks.entries()) {
-
-      // define first setsize for showing setsize instructions for practice trials
-      var last_setsize = 0;
-
-      // loop through finger check trials
-      for (let [trial, color_check_trial] of color_check_block_trials.entries()) {
-
-        // create new trial
-        var {trial_line, trial_body} = createNewTrial(exp_info, color_check_trial, is_prac_local, last_setsize, "color_check");
-        
-        // add trial to processing speed timeline
-        color_check_line = color_check_line.concat(trial_line);
-
-      };
-    };
-
-    // coutner for color check loop (repeat 1x)
-    var counter_loop_color_check = 0;
-
-    // create loop timeline for finger check timeline
-    var loop_color_check = {
-      timeline: color_check_line,
-      loop_function: function() {
-
-        // accuracy of color check trial
-        var color_check_correct = jsPsych.data.get().filter({screenID: 'color_check'}).last(exp_info.n_color_check_trials).filter({ acc : 1}).count();
-        
-        // repeat 1x
-        if (counter_loop_color_check < 1) {
-
-          // loop if more than 2 mistakes
-          if (color_check_correct < 6) {
-
-            counter_loop_color_check ++;
-            
-            return true; // loop
-
-          } else {
-
-            return false; // stop
-
-          }
-
-        } else { // counter_loop = 1 then end study and redirect to Prolific 
-          
-          // loop if more than 2 mistakes
-          if (color_check_correct < 6) {
-            
-            endExpColorCheck(varOnline.FAIL_CODE);
-            
-          } else { // color_check_correct >= 6
-
-            return false; // stop
-
-          };
-
-        };
-      }
-    };
-
-    // add a filler screen to color check timeline so that experiment ends when color check fails
-    let filler_color_check = {
-      type: psychophysics,
-      background_color: 'white',
-      stimuli: '',
-      response_type: 'key',
-      choices: 'NO_KEYS',
-      trial_duration: 500
-    };
-
-    // add finger check loop and filler to color check timeline
-    color_check_loop_line = color_check_loop_line.concat(loop_color_check);
-    color_check_loop_line = color_check_loop_line.concat(filler_color_check);
-  }
-  
   /************************************** Finger Check Tasks **************************************/
 
   if (is_finger_check == 1) {
@@ -583,8 +483,6 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline.push(notice_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
-  timeline = timeline.concat(color_check_instr_line);
-  timeline = timeline.concat(color_check_loop_line);
   timeline = timeline.concat(proc_speed_instr_line_task);
   timeline = timeline.concat(finger_check_loop_line_speed_task); 
   timeline = timeline.concat(proc_speed_line_task);
