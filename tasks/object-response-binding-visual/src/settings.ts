@@ -24,15 +24,11 @@ export const varSystem = {
   };
 
 // define experimental variables and color condition
-export function MakeExpInfo(task_condition, condition_pool) {
+export function MakeExpInfo(task_condition) {
     
     // determine task condition
     // declarative or procedural task
-    if (task_condition == 'declarative') {
-
-        var exp_task = 'declarative';
-
-    } else if (task_condition == 'procedural') {
+    if (!isNaN(task_condition)) {
 
         var exp_task = 'procedural';
 
@@ -70,9 +66,8 @@ export function MakeExpInfo(task_condition, condition_pool) {
     const expInfo = {
 
         // experiment name
-        exp_name: "ProcDecBindingExp2_Session1_" + exp_task , // experiment name
-        session: 1, // session 2
-
+        exp_name: "BindingVisual_" + exp_task , // experiment name
+        
         // define list conditions
         list_condition: ['Control', 'Control', 'Hebb'], // list conditions
 
