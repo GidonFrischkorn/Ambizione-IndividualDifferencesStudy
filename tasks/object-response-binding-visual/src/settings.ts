@@ -130,7 +130,7 @@ export function MakeExpInfo(task_condition) {
         response_image: 'resp.jpg',
         finger_image: 'finger_allocation.jpg'
         
-    }
+    };
 
     // return experimental variables
     return expInfo;

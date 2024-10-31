@@ -12,8 +12,8 @@ export const screen_proc_speed1_dec = function(exp_info, exp_trial, stim) {
                       -3.6*exp_info.canW/72, 
                       3.6*exp_info.canW/72, 
                       4.6*exp_info.canW/72, 
-                      5.6*exp_info.canH/36, 
-                      6.6*exp_info.canH/36];
+                      5.6*exp_info.canH/72, 
+                      6.6*exp_info.canH/72];
   
     // y coordinates of the retrieval color dots
     var ret_dots_y = [2*exp_info.canH/36, 
