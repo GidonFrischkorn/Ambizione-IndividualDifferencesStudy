@@ -4,7 +4,7 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
 // screen to display setsize for practice trials
 export const screen_info_finger_check = function(exp_info, exp_trial) {
   
-    // text object with finger check info
+    // text object with info
     const stim_cue = {
       obj_type: 'text',
       content: `Please make yourself ready to check the position of your fingers on the keyboard`,
@@ -28,6 +28,6 @@ export const screen_info_finger_check = function(exp_info, exp_trial) {
       }
     };
   
-    // return screen with text for finger check info
+    // return screen with text for info
     return info_screen;
   };

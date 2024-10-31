@@ -4,7 +4,7 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
 // screen to display info for processing speed task
 export const screen_info_proc_speed = function(exp_info, exp_trial) {
   
-    // text object with finger check info
+    // text object with info
     const stim_cue = {
       obj_type: 'text',
       content: `Please make yourself ready for the reaction time task`,
@@ -28,6 +28,6 @@ export const screen_info_proc_speed = function(exp_info, exp_trial) {
       }
     };
   
-    // return screen with text for finger check info
+    // return screen with text for info
     return info_screen;
   };

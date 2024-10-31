@@ -6,14 +6,8 @@ export const screen_preload = function(exp_info, exp_trial, task) {
   // create images array
   var images_trial:any = [];
 
-  // images to preload for finger check
-  if (task == "finger_check_procedural" || task == "finger_check_declarative") {
-
-    // add response image
-    images_trial.push(exp_info.image_path + exp_info.response_image);
-
   // images to preload for procedural task
-  } else if (task == 'procedural') {
+  if (task == 'procedural') {
 
     // add images for stimuli
     for (let stim = 0; stim < exp_trial.setsize; stim++) {
