@@ -1,8 +1,7 @@
 /**
- * @title Pilot ProcDecBindingExp2_Session1
- * @description Pilot Experiment 2 - Procedural and declarative bindings task from Experiment 1 with calibrated colors
- * Session 1 - Declarative/Procedural Task as defined in Batch Session
- * @version 0.1.1 // change to 0.1.0: save certain variables properly
+ * @title Object Response Binding Task Visual
+ * @description Visual bindings (objects-responses)
+ * @version 0.0.1 
  *
  * @assets assets/
  */
@@ -42,8 +41,8 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   
   /************************************** Preparation **************************************/
   
-  // define possible conditions (declarative or procedural)
-  var condition_pool = ['declarative', 'procedural'];
+  // define possible conditions (procedural)
+  var condition_pool = ['procedural'];
 
   // retrieve color condition from jatos batch session or randomly sample if jatos is not used
   if (varOnline.RUN_JATOS) { // jatos
