@@ -5,7 +5,7 @@ import { initJsPsych } from "jspsych";
 import { trackInteractions } from "./task-fun/attentionCheck";
 
 // Global variables
-import { varSystem, varOnline} from "./settings";
+import { varSystem, varOnline } from "./settings";
 let { RUN_JATOS, CODES } = varOnline;
 import { END_INFO } from "./task-fun/text";
 

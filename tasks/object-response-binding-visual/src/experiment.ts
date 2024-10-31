@@ -238,7 +238,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
                 } else { // counter_loop_task >= 1 then end study and redirect to Prolific 
 
                   if (correct_last_practice_if < 4) {
-                    
+                   
                     endExpPractice(varOnline.CODES.FAILED_OTHERS);
 
                   } else { //correct_last_practice_if = 4

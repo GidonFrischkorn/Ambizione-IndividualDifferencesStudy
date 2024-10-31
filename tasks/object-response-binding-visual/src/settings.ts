@@ -21,7 +21,7 @@ export const varOnline = {
     TIMING: {
         BREAK: 30
     } 
-}
+};
 
 export const varSystem = {
     TITLE: "BindingVisualProcedural", // experiment name
@@ -30,30 +30,16 @@ export const varSystem = {
     nBLUR: 0, // use to count how many times participants left the browser
     MAX_BLUR: 3, // the maximum number of times participants can leave the browser
     LOOP: true, // a switch to control whether participants need to read the instruction and practice again
-    STATUS: "success"
-  };
+    STATUS: "offline"
+};
 
 // define experimental variables and color condition
 export function MakeExpInfo(task_condition) {
     
     // determine task condition
     // declarative or procedural task
-    if (!isNaN(task_condition)) {
-
-        var exp_task = 'procedural';
-
-    } else {
-
-        var exp_task = '';
-
-        // show error message if jatos is used
-        if (varOnline.RUN_JATOS) {
-            
-            jsPsych.endExperiment("Condition not defined. Please contact the experimenter.");
-
-        }
-    }
-
+    var exp_task = 'procedural';
+    
     // color condition
     // determined based on calibration experiment (fall back for start values)
     // within color group: 39 degrees, from ProcDecBindingCaliStair
@@ -148,5 +134,5 @@ export function MakeExpInfo(task_condition) {
 
     // return experimental variables
     return expInfo;
-}
+};
 

@@ -1,5 +1,5 @@
 import { varOnline } from "../settings";
-let { CODES } = varOnline;
+let { CODES, TIMING } = varOnline;
 
 // Text on the screens 
 export const SCREEN_INFO = {
@@ -37,7 +37,7 @@ export const SCREEN_INFO = {
           <h1 class='title'>休息一下吧</h1>
           <p class='fb-text'>
             你已经完成了 ${blockID}/${nBlock} 的实验,
-            实验将在 <span id='break' style='color:red'>${varOnline.TIMING.BREAK}</span> 秒后继续。
+            实验将在 <span id='break' style='color:red'>${TIMING.BREAK}</span> 秒后继续。
           </p>
           <p class="fb-text">你可以按下空格键直接开始</p>
           <br>
@@ -48,7 +48,7 @@ export const SCREEN_INFO = {
           <h1 class='title'>Take a break</h1>
           <p class='fb-text'>
             You have completed ${blockID}/${nBlock} blocks. 
-            The next block will start in <span id='break' style='color:red'>${varOnline.TIMING.BREAK}</span> seconds.
+            The next block will start in <span id='break' style='color:red'>${TIMING.BREAK}</span> seconds.
           </p>
           <p class="fb-text">Press the space bar to skip the break</p>
           <br>
