@@ -2,11 +2,8 @@
  * This file contains the settings for the experiment.
  */
 
-
-
 // Task functions
 import { setCSS } from "./task-fun/setCSS";
-
 
 setCSS();
 
@@ -17,8 +14,9 @@ export const expInfo = {
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 25, // number of experiment trials per condition 
-    nPRACTICE: 10, // number of practice trials 
+    nTRIALS: 25, // number of experiment trials per condition
+    nPRACTICE: 10, // number of practice trials
+    BreaksAt: 0.5, // the proportion of trials after which a break is given
     nBLOCKS: 1, // number of blocks in the experiment
     CHOICES: ["y", "n"], // the choices for the task
     MAPPING: [0, 1], // the mapping of the choices
@@ -27,15 +25,17 @@ export const expInfo = {
       FIT: ["fit", "nofit"], // the fit of the task
       LOCATION: ["top", "bottom"], // the location of the task
     },
-    backgroundCOLOR: '#FFFFFF' // the color of the background
+    backgroundCOLOR: "#FFFFFF", // the color of the background
   },
 
   STIMULI: {
-    objectCOLOR: '#000000', // black objects 
+    objectCOLOR: "#000000", // black objects
     HEIGHT: 10, // the height of the objects
+    minLineLength: 60, // the minimum length of the line
+    maxLineLength: 120, // the maximum length of the line
     dotWIDTH: 10, // the width of the dots
-    OFFSET_DIFF: [10, 1], 
-    OFFSET_LOCATION: 20
+    OFFSET_DIFF: [10, 1],
+    OFFSET_LOCATION: 20,
   },
 
   // settings for each trial
@@ -43,10 +43,11 @@ export const expInfo = {
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 60 * 1000, // break duration in seconds
     STIMULI: 3000, // stimuli duration in milliseconds
-    FIXATION: 250, // fixation duration in milliseconds
+    FIXATION: 200, // fixation duration in milliseconds
+    JITTER: 200, // jitter duration in milliseconds
     FEEDBACK: 1000, // feedback duration in milliseconds
-    ITI: 1000, // inter-trial interval in milliseconds
-    FINGERS: 5000 // duration of the finger instruction
+    ITI: 800, // inter-trial interval in milliseconds
+    FINGERS: 5000, // duration of the finger instruction
   },
 
   // when using Prolific, you can set customized completion codes for different situations

@@ -14,25 +14,39 @@ import { jsPsych } from "../jsp";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, difficulty: string, diff: number, fit: number, location: number, targetStim: any) {
+export function createNewTrial(
+  XY: number,
+  isPractice: boolean,
+  difficulty: string,
+  diff: number,
+  fit: number,
+  location: number,
+  targetStim: any
+) {
   var trial_line: any[] = [];
-  
-  // Fixation Screen 
+
+  // Fixation Screen
   const fixation_screen = {
     type: htmlKeyboardResponse,
     stimulus: "<div style='font-size:60px;'>+</div>",
     choices: "NO-KEYS",
-    trial_duration: expInfo.TIMING.FIXATION,
-  }
+    trial_duration:
+      expInfo.TIMING.FIXATION + Math.random() * expInfo.TIMING.JITTER,
+  };
 
-  // Stimuli Screen 
+  // Stimuli Screen
   const stimuli_screen = {
     type: psychophysics,
     stimuli: targetStim,
     choices: expInfo.DESIGN.CHOICES,
     mapping: {
-      fit: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.FIT.indexOf("fit")]],
-      nofit: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.FIT.indexOf("nofit")]],
+      fit: expInfo.DESIGN.CHOICES[
+        expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.FIT.indexOf("fit")]
+      ],
+      nofit:
+        expInfo.DESIGN.CHOICES[
+          expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.FIT.indexOf("nofit")]
+        ],
     },
     background_color: expInfo.DESIGN.backgroundCOLOR, // white background
     response_ends_trial: true,
@@ -45,16 +59,20 @@ export function createNewTrial(XY: number, isPractice: boolean, difficulty: stri
         if (isPractice) {
           return "practice";
         } else {
-          return "experiment"
+          return "experiment";
         }
       },
     },
     on_finish: function (data) {
-      let correct = data.response == (data.does_fit ? this.mapping.fit : this.mapping.nofit);
+      let correct =
+        data.response ==
+        (data.does_fit ? this.mapping.fit : this.mapping.nofit);
       let correctKey = data.does_fit ? this.mapping.fit : this.mapping.nofit;
-      jsPsych.data.get().addToLast({correct: correct, correct_key: correctKey});
-    }
-  }
+      jsPsych.data
+        .get()
+        .addToLast({ correct: correct, correct_key: correctKey });
+    },
+  };
 
   // Feedback Screen
   const feedback = {
@@ -68,24 +86,29 @@ export function createNewTrial(XY: number, isPractice: boolean, difficulty: stri
       }
     },
     trial_duration: expInfo.TIMING.FEEDBACK,
-  } 
+  };
 
-  // Inter Trial Interval Screen 
+  // Inter Trial Interval Screen
   const inter_trial_interval = {
     type: htmlKeyboardResponse,
     stimulus: "",
     choices: "NO-KEYS",
-    trial_duration: expInfo.TIMING.ITI,
-  }
+    trial_duration:
+      expInfo.TIMING.ITI + 2 * Math.random() * expInfo.TIMING.JITTER,
+  };
 
   // Push screens into trial_line
 
   if (isPractice) {
-    trial_line.push(fixation_screen, stimuli_screen, feedback, inter_trial_interval); 
+    trial_line.push(
+      fixation_screen,
+      stimuli_screen,
+      feedback,
+      inter_trial_interval
+    );
   } else {
     trial_line.push(fixation_screen, stimuli_screen, inter_trial_interval);
-  };
-  
+  }
 
   // return
   return trial_line;

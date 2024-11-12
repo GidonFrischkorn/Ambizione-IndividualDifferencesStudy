@@ -1,10 +1,8 @@
 /**
  * @title Smiley Processing Task
- * @description Two dots and a line are shown and participants have to judge if the line fits in between the two dots or not. 
- * @author Elena Venturi 
+ * @description Two dots and a line are shown and participants have to judge if the line fits in between the two dots or not.
+ * @author Elena Venturi
  * @version 0.3.1
- *
- *
  * @assets assets/
  */
 
@@ -25,8 +23,13 @@ import { create_trialList } from "./trials/trialStim";
 import { createNewTrial } from "./trials/trialProcess";
 import { expInfo } from "./settings";
 import { pra_instr_screen, exp_start_screen } from "./instructions/InstrTrial";
-import { fullMode_screen } from "./instructions/fullScreen";
-import { instructions_screen, fingers_instructions_practice, fingers_instructions_exp, break_screen } from "./instructions/InstrStart";
+import { fullMode_screen } from "./instructions/fullScreen";
+import {
+  instructions_screen,
+  fingers_instructions_practice,
+  fingers_instructions_exp,
+  break_screen,
+} from "./instructions/InstrStart";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -46,40 +49,53 @@ export async function run({
   // Preload assets
   const preload_screen = {
     type: preload,
-    images: assetPaths.images
+    images: assetPaths.images,
   };
 
   /************************************** Instruction **************************************/
 
-
   /************************************** Practice **************************************/
   const prac_list = create_trialList();
-  
+
   let practice_line: any[] = [];
-  for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
-    let practice_trial = createNewTrial(j, true, prac_list[j].difficulty, prac_list[j].offset_diff, prac_list[j].offset_fit, prac_list[j].offset_location, prac_list[j].stimulus);
+  for (let j = 0; j < expInfo.DESIGN.nPRACTICE; j++) {
+    let practice_trial = createNewTrial(
+      j,
+      true,
+      prac_list[j].difficulty,
+      prac_list[j].offset_diff,
+      prac_list[j].offset_fit,
+      prac_list[j].offset_location,
+      prac_list[j].stimulus
+    );
     practice_line = practice_line.concat(practice_trial);
   }
-  
-
 
   /************************************** Experiment **************************************/
   const trial_list = create_trialList();
 
   let exp_line: any[] = [];
-  for(let j = 0; j < trial_list.length; j++){
-    let exp_trial = createNewTrial(j, false, trial_list[j].difficulty, trial_list[j].offset_diff, trial_list[j].offset_fit, trial_list[j].offset_location, trial_list[j].stimulus);
+  for (let j = 0; j < trial_list.length; j++) {
+    let exp_trial = createNewTrial(
+      j,
+      false,
+      trial_list[j].difficulty,
+      trial_list[j].offset_diff,
+      trial_list[j].offset_fit,
+      trial_list[j].offset_location,
+      trial_list[j].stimulus
+    );
     exp_line = exp_line.concat(exp_trial);
 
-    if ((j + 1) % 100 === 0) {
+    if (
+      j != trial_list.length && // don't add a break screen at the end
+      (j + 1) % (trial_list.length * expInfo.DESIGN.BreaksAt) === 0 // add a break screen as specified by BreaksAt proportion of trials
+    ) {
       exp_line.push(break_screen);
     }
   }
-  
 
-  
   /************************************** Procedure **************************************/
-
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
