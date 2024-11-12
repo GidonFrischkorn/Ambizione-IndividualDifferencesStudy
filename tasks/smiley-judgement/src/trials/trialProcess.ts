@@ -55,6 +55,8 @@ export function createNewTrial(
       trial_number: XY,
       condition: difficulty,
       does_fit: fit == 1,
+      line_length: targetStim[0].width,
+      fix_duration: fixation_screen.trial_duration,
       practice: function () {
         if (isPractice) {
           return "practice";
