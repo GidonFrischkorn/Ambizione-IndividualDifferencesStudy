@@ -88,7 +88,7 @@ export async function run({
     exp_line = exp_line.concat(exp_trial);
 
     if (
-      j != trial_list.length && // don't add a break screen at the end
+      j + 1 != trial_list.length && // don't add a break screen at the end
       (j + 1) % (trial_list.length * expInfo.DESIGN.BreaksAt) === 0 // add a break screen as specified by BreaksAt proportion of trials
     ) {
       exp_line.push(break_screen);
@@ -101,8 +101,8 @@ export async function run({
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
+  // timeline.push(consent_screen);
+  // timeline.push(notice_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
