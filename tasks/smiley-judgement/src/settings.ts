@@ -14,7 +14,7 @@ export const expInfo = {
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 25, // number of experiment trials per condition
+    nTRIALS: 10, // number of experiment trials per condition
     nPRACTICE: 10, // number of practice trials
     BreaksAt: 0.5, // the proportion of trials after which a break is given
     nBLOCKS: 1, // number of blocks in the experiment

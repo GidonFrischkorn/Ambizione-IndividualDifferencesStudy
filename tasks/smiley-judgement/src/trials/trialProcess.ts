@@ -30,8 +30,9 @@ export function createNewTrial(
     type: htmlKeyboardResponse,
     stimulus: "<div style='font-size:60px;'>+</div>",
     choices: "NO-KEYS",
-    trial_duration:
-      expInfo.TIMING.FIXATION + Math.random() * expInfo.TIMING.JITTER,
+    trial_duration: Math.floor(
+      expInfo.TIMING.FIXATION + Math.random() * expInfo.TIMING.JITTER
+    ),
   };
 
   // Stimuli Screen
@@ -56,6 +57,7 @@ export function createNewTrial(
       condition: difficulty,
       does_fit: fit == 1,
       line_length: targetStim[0].width,
+      line_location: targetStim[0].startY > 0 ? "top" : "bottom",
       fix_duration: fixation_screen.trial_duration,
       practice: function () {
         if (isPractice) {
@@ -95,8 +97,9 @@ export function createNewTrial(
     type: htmlKeyboardResponse,
     stimulus: "",
     choices: "NO-KEYS",
-    trial_duration:
-      expInfo.TIMING.ITI + 2 * Math.random() * expInfo.TIMING.JITTER,
+    trial_duration: Math.floor(
+      expInfo.TIMING.ITI + 2 * Math.random() * expInfo.TIMING.JITTER
+    ),
   };
 
   // Push screens into trial_line
