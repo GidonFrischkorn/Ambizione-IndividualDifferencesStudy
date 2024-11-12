@@ -10,7 +10,7 @@ export const expInfo = {
   RESEARCHER: "Chenyu Li", // researcher's name
   EMAIL: "chenyu.li@uzh.ch", // researcher's email
   DURATION: 20, // duration of the experiment in minutes
-  LANG: "cn", // the language of the experiment
+  LANG: "eng", // the language of the experiment
 
   // experiment design
   DESIGN: {
