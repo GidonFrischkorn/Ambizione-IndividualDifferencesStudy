@@ -37,6 +37,7 @@ export const checkConsent = function () {
       participant: prolificID,
       resultID: resultID,
       comResultID: comResultID,
+      question: expInfo.DESIGN.QUESTION,
     });
     return true;
   } else {

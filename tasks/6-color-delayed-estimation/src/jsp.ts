@@ -14,6 +14,7 @@ import { setCSS } from "./task-fun/setCSS";
 
 // Do something in the beginning of the experiment
 setCSS(); // set the CSS style of the experiment
+document.body.style.backgroundColor = expInfo.COLORS.BACKGROUND; // set the background color of the experiment
 
 // Set for the condition in which the data fails to be uploaded to JATOS
 if (RUN_JATOS) {
@@ -57,10 +58,10 @@ export const jsPsych = initJsPsych({
         endInfo = "FINISHED";
         endStatus = true;
         if (RUN_JATOS && navigator.onLine === true) {
-          endScreen = END_INFO.completedOnline[expInfo.LANG];
+          endScreen = END_INFO.completed[expInfo.LANG];
           redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.SUCCESS}`;
         } else {
-          endScreen = END_INFO.completedOffline[expInfo.LANG];
+          endScreen = END_INFO.completed[expInfo.LANG];
           redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.OFFLINE}`;
         }
         break;
@@ -82,9 +83,14 @@ export const jsPsych = initJsPsych({
       jatos.submitResultData(resultJson);
       // redirect to the Prolific page after 10 seconds
       setTimeout(function () {
-        //@ts-ignore
-        jatos.endStudyAndRedirect(redirectLink, endStatus, endInfo);
-      }, 10000);
+        if (expInfo.RUN_PROLIFIC) {
+          //@ts-ignore
+          jatos.endStudyAndRedirect(redirectLink, endStatus, endInfo);
+        } else {
+          //@ts-ignore
+          jatos.endStudy(endStatus, endInfo);
+        }
+      }, 3000);
     } else {
       // if the participants are offline, download the data as a json file
       if (varSystem.STATUS === "success") {

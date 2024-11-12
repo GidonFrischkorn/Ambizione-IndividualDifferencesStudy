@@ -1,46 +1,57 @@
-/**
- * This file contains the settings for the experiment.
- */
 
-
-
-// Task functions
-import { setCSS } from "./task-fun/setCSS";
-
-
-setCSS();
+import { imageObj } from "./task-fun/imageObject";
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "Color Delayed Estimation Task", // the title of the experiment
-  LANG: "de", // the default language of the experiment
+  TITLE: "complex_span", // the title of the experiment
+  RESEARCHER: "Chenyu Li", // researcher's name
+  EMAIL: "chenyu.li@uzh.ch", // researcher's email
+  DURATION: 15, // duration of the experiment in minutes
+  LANG: "cn", // the language of the experiment
 
-  // design of the experiment
+  // experiment design
   DESIGN: {
-    nTRIALS: 50, // number of experiment trials for each condition
-    nBLOCKS: 1, // number of blocks
-    CONDITIONS: [4, 5, 6],
-    squaresWIDTH: 20, 
-    squaresHEIGHT: 20,  
-    wheelRADIUS: 300,
-    wheelRATIO: 0.7, 
-    wheelPOSX: 0,
-    wheelPOSY: 0
+    nPRACTICE: 3, // number of memory trials in the retro-cue condition
+    nTRIALS: 35, // number of experiment trials for each condition
+    SETSIZE: 4, // set size
+    UPDSTEP: 2, // updating steps
+    nNPL: 6, // number of not-presented lures
   },
 
-  CANVAS: {
-    canW: Math.min(screen.width, (screen.height / 9) * 16) * 0.9, // width of the canvas
-    canH: Math.min(screen.width, (screen.height / 9) * 16) * 0.9 * 0.5, // height of the canvas
+  OBJECTS: {
+    imagePath: "assets/images/objects/",
+    POOL: Object.keys(imageObj),
+    MEMORY: {} as { [key: number]: string[] },
+  },
+
+  COLORS: {
+    BG_NAME: "grey",
+    BACKGROUND: "#bababa",
+    POOL: [
+      "#2e8a3c",
+      "#e9ae0c",
+      "#e35431",
+      "#c81919",
+      "#299ac7",
+      "#4d3bb5",
+      "#b234a1",
+    ],
   },
 
   // settings for each trial
   TIMING: {
+    ENCODING: 1000, // presentation time of each stimulus in milliseconds
+    UPDATING: 1500, // updating time in milliseconds
+    ISI: 500, // inter-stimulus interval in milliseconds
+    IPI: 1000, // inter-phase interval in milliseconds
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
-    ENCODING: 1000, // encoding duration in milliseconds
-    RETENTION: 1500, // retention duration in milliseconds
-    REPRODUCTION: 10 * 1000, // reproduction duration in seconds
-    ITI: 1500, // inter-trial interval in milliseconds
+    RETRIEVAL: 10 * 1000, // time for retrieval
+    DEBRIEF: 2000, // time for feedback
+  },
+
+  SIZE: {
+    WINDOW_RATIO: 16 / 9,
   },
 
   // when using Prolific, you can set customized completion codes for different situations
@@ -54,31 +65,23 @@ export const expInfo = {
     // You can specify the codes for different situations here.
   },
 
-  /** The key is case-sensitive and position-sensitive.
-   * It is recommended to allow both upper and lower case keys.
-   * You can use the `convertCase` function to prevent the issue.
-   * Be cautious, the names of the number keys on the top of the keyboard
-   * are different from those on the right side of the keyboard.
-   */
-  KEYS: {
-    CONTINUE: ["enter"],
-    START_TRIAL: [" "],
-  },
-
-  // If you want to use the keyCode rather than key name,
-  // you can go to the following link to get the key code:
-  // https://www.toptal.com/developers/keycode/
-
   // Running environment variables
   RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_PROLIFIC: false, // a switch to run the experiment on Prolific
 };
+
+let maxWidth = Math.min(screen.width, screen.height * expInfo.SIZE.WINDOW_RATIO)
 
 // Global variables for the system. Normally, you don't need to change them.
 export const varSystem = {
   TRACK: false, // a switch to track participants' interactions with the browser
   nBLUR: 0, // use to count how many times participants left the browser
   MAX_BLUR: 3, // the maximum number of times participants can leave the browser
-  LOOP: true, // a switch to control whether participants need to read the instruction and practice again
+  FAILED_ATTENTION_CHECK: false,
+  CANVAS_WIDTH: maxWidth * 0.95,
+  CANVAS_HEIGHT: maxWidth * 0.95 / expInfo.SIZE.WINDOW_RATIO,
+  PAGE_WIDTH: Math.min(maxWidth, 1300) * 0.95,
   RUN_TIMER: false, // a switch to control the countdown timer
   STATUS: "success", // the status of the experiment
 };
+

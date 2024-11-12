@@ -1,13 +1,14 @@
 // Third party plugins
 import jss from "jss-browserify";
 
-var winW = Math.min(window.innerWidth, window.innerHeight * 1.5);
-var Width = Math.min(winW * 0.95, 1200);
-var fontSize = Width * 0.02;
+// Global variables
+import { varSystem } from "../settings";
+
+var fontSize = varSystem.PAGE_WIDTH * 0.02;
 
 export const setCSS = function () {
   jss.set(".main", {
-    width: `${Width}px`,
+    width: `${varSystem.PAGE_WIDTH}px`,
     "font-size": `${fontSize}px`,
     "font-family": "Arial",
     margin: "0 auto",
@@ -31,7 +32,7 @@ export const setCSS = function () {
 
   jss.set(".image", {
     float: "center",
-    width: `${Width}px`,
+    width: `${varSystem.PAGE_WIDTH}px`,
   });
 
   jss.set(".subtitle", {
@@ -40,7 +41,7 @@ export const setCSS = function () {
   });
 
   jss.set(".fb-text", {
-    width: `${Width}px`,
+    width: `${varSystem.PAGE_WIDTH}px`,
     "text-align": "center",
     "font-size": `${fontSize * 1.5}px`,
     "font-family": "Arial",
@@ -83,9 +84,27 @@ export const setCSS = function () {
   });
 
   jss.set(".text-box", {
-    width: `${Width * 0.8}px`,
+    width: `${varSystem.PAGE_WIDTH * 0.8}px`,
     "font-size": "1em",
     "font-family": "Arial",
+  });
+
+
+  jss.set(".sv_container", {
+    width: `${varSystem.PAGE_WIDTH}px`,
+  });
+
+  jss.set(".sv_body", {
+    "background-color": "grey",
+  });
+
+  jss.set(".sv_header", {
+    "font-size": `2em`,
+    "font-family": "Arial",
+    color: "#0d3b83",
+    "text-align": "center",
+    padding: "0.5em 1em",
+    "margin-top": "50px",
   });
 };
 

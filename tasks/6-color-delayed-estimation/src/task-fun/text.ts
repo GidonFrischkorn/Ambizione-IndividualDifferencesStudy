@@ -1,26 +1,36 @@
 import { expInfo } from "../settings";
-let { TIMING, CODES } = expInfo;
 
 // Text on the screens
 export const SCREEN_INFO = {
-  welcome: {
+  startPractice: {
     en: `<div class='main'>
-    <h1 class='title'>Welcome!</h1>
-    <p class='fb-text'>
-      Thank you very much for participating in this experiment.
-    </p>
-    </div>`,
+        <h1 class='title'>Practice</h1>
+        <p class='fb-text'>We will do some practice to get familiar with the experiment.</p>
+      </div>`,
     de: `<div class='main'>
-    <h1 class='title'>Willkommen!</h1>
-    <p class='fb-text'>
-      Vielen Dank für Ihre Teilnahme an diesem Experiment.
-    </p>
-    </div>`,
+        <h1 class='title'>Übung</h1>
+        <p class='fb-text'>Wir werden nun einige Übungen machen, damit Sie mit dem Experiment vertraut werden.</p>
+      </div>`,
     cn: `<div class='main'>
-    <h1 class='title'>欢迎您参与本实验!</h1>
-    </div>`,
+        <h1 class='title'>练习环节</h1>
+        <p class='fb-text'>接下来我们将进行一些练习以熟悉实验流程。</p>
+      </div>`,
   },
 
+  startExperiment: {
+    en: `<div class='main'>
+        <h1 class='title'>Experiment</h1>
+        <p class='fb-text'>Good job! Now we will start running the experiment.</p>
+      </div>`,
+    de: `<div class='main'>
+        <h1 class='title'>Experiment</h1>
+        <p class='fb-text'>Gut gemacht! Jetzt beginnen wir mit dem Experiment.</p>
+      </div>`,
+    cn: `<div class='main'>
+        <h1 class='title'>实验环节</h1>
+        <p class='fb-text'>练习结束！现在我们将开始进行正式实验。</p>
+      </div>`,
+  },
 
   startTrial: {
     en: ` <p>The next trial will start in <span id="clock" style="color:red">10</span> seconds.</p>
@@ -42,7 +52,9 @@ export const SCREEN_INFO = {
           </p>
           <p class="fb-text">你可以按下空格键直接开始</p>
           <br>
-
+          <br>
+          <p class="body-center" style="color:red">正确率低为正常现象，请不要为此沮丧，坚持完成实验！</p>
+          <br>
         </div>`;
       case "en":
         return `<div class='main'>
@@ -52,6 +64,9 @@ export const SCREEN_INFO = {
             The next block will start in <span id='break' style='color:red'>${expInfo.TIMING.BREAK}</span> seconds.
           </p>
           <p class="fb-text">Press the space bar to skip the break</p>
+          <br>
+          <br>
+          <p class="body-center" style="color:red">A low accuracy has been expected, please don't feel bad if you just have low accuracy!</p>
           <br>
         </div>`;
     }
@@ -63,15 +78,57 @@ export const SCREEN_INFO = {
     cn: "即将进入全屏模式",
   },
 
+  loginWarning: {
+    en: "Please enter your student ID",
+    de: "Bitte geben Sie Ihre Matrikelnummer ein",
+    cn: "请输入您的学号",
+  },
+
+  smaller: {
+    en: "Which object is smaller?",
+    cn: "哪个物体更小？",
+    de: "Welches Objekt ist kleiner?",
+  },
+
+  larger: {
+    en: "Which object is larger?",
+    cn: "哪个物体更大？",
+    de: "Welches Objekt ist größer?",
+  },
+
   feedback: function (accuracy: number, nTest: number, lang: string) {
     switch (lang) {
       case "en":
-        return `<div class='fb-text'>You correctly recalled ${accuracy} out of ${nTest} letters.</div>`;
+        return `<div class='fb-text'>You correctly recalled ${accuracy} out of ${nTest} objects.</div>`;
       case "de":
-        return `<div class='fb-text'>Sie haben ${accuracy} von ${nTest} Buchstaben korrekt erinnert.</div>`;
+        return `<div class='fb-text'>Sie haben ${accuracy}/${nTest} Objekte korrekt erinnert.</div>`;
       case "cn":
-        return `<div class='fb-text'>您正确回忆了${accuracy}/${nTest}个字符。</div>`;
+        return `<div class='fb-text'>您正确回忆了${accuracy}/${nTest}个物体。</div>`;
     }
+  },
+
+  failed_memory: {
+    en: `<div class="main">
+      <p class="fb-text">Sorry, your accuracy is lower than 50%. Please try again.</p>
+      </div>`,
+    de: `<div class="main">
+      <p class="fb-text">Entschuldigung, Ihre Genauigkeit ist niedriger als 50%. Bitte versuchen Sie es erneut.</p>
+      </div>`,
+    cn: `<div class="main">
+      <p class="fb-text">抱歉，您的准确率低于50%。请再试一次。</p>
+      </div>`,
+  },
+
+  failed_judgement: {
+    en: `<div class="main">
+      <p class="fb-text">Sorry, your accuracy is lower than 60%. Please try again.</p>
+      </div>`,
+    de: `<div class="main">
+      <p class="fb-text">Entschuldigung, Ihre Genauigkeit ist niedriger als 60%. Bitte versuchen Sie es erneut.</p>
+      </div>`,
+    cn: `<div class="main">
+      <p class="fb-text">抱歉，您的准确率低于60%。请再试一次。</p>
+      </div>`,
   },
 };
 
@@ -151,44 +208,13 @@ export const END_INFO = {
     </div>`,
   },
 
-  completedOnline: {
-    en: `<div class="main">
-    <h1 class="title">Congratulations!</h1>
-    <p>
-        You have successfully completed the experiment! 
-        We are now transferring data to the server. 
-        Please copy the following completion code: ${CODES.OFFLINE}. 
-        If the window is not redirected to Prolific after 5 minutes, 
-        you can just close it and submit the completion code to Prolific.
-    </p>
-    </div>`,
+  completed: {
     cn: `<div class="main">
-    <h1 class="title">实验结束</h1>
-    <p>
-        恭喜你顺利完成实验！我们正在将数据上传至服务器。
-        请复制以下完成代码：${CODES.OFFLINE}。
-        如果窗口在5分钟内未重定向到Prolific，请直接关闭窗口并将完成代码提交至Prolific。
-    </p>
+    <h1 class="title">即将开始下一个任务 ... </h1>
     </div>`,
-  },
-
-  completedOffline: {
     en: `<div class="main">
-          <p h1 class="title">Congratulation!(Offline Mode)</h1>
-          <p class="body-center">
-          You have successfully completed the experiment while in offline mode.
-          Your data failed to transfer to the server due to network issues.
-          It has been automatically downloaded to your "Downloads" folder.
-          Please contact the researcher for further assistance.
-          </p>
-          </div>`,
-    cn: `<div class="main">
-          <p h1 class="title">恭喜你！（离线模式）</h1>
-          <p class="body-center">
-          您已成功完成了实验，但是由于网络问题，您的数据未能上传至服务器。
-          数据已自动下载至您的“下载”文件夹，请联系研究人员以获取进一步的帮助。
-          </p>
-          </div>`,
+    <h1 class="title">We are switching to the next task ... </h1>
+    </div>`,
   },
 };
 
@@ -221,6 +247,31 @@ export const SURVEY_INFO = {
     en: ["Male", "Female", "Other"],
     de: ["Männlich", "Weiblich", "Andere"],
     cn: ["男", "女", "其他"],
+  },
+
+  KOREAN_QUES: {
+    cn: "您是否学习过韩文？",
+    en: "Have you ever learned Korean?",
+  },
+  KOREAN_OPT: {
+    cn: [
+      "从未学习过",
+      "接触过个别词语",
+      "了解一定的语法和词汇",
+      "系统学习过",
+      "能够流利地阅读和交流",
+    ],
+    en: [
+      "Never learned",
+      "Know a few words",
+      "Know some grammar and vocabulary",
+      "Learned systematically",
+      "Fluent in reading and communication",
+    ],
+  },
+  STRATEGY_QUES: {
+    cn: "您在实验中是否采用了某些策略来帮助记忆？",
+    en: "Did you use any strategies to help you remember the characters?",
   },
 
   ATTENTION_QUES: {

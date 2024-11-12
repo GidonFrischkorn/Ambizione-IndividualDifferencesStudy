@@ -1,21 +1,362 @@
-// Purpose: Functions for generating stimuli and creating elements
+
+
+// jsPsych official plugin
+import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
+import Psychophysics from '@kurokida/jspsych-psychophysics';
+
+// Basic Functions
+import { random } from "@coglabuzh/webpsy.js";
+
+// Task functions
+import { createButtonMatrix, createAlterButtons } from "../task-fun/responseMatrix";
+import { returnImages } from '../task-fun/returnImages';
+import { drawImageObject } from "./elements";
 
 // Global variables
-import { expInfo } from "../settings";
+import { jsPsych } from "../jsp";
+import { expInfo, varSystem } from "../settings";
+let { OBJECTS, TIMING, COLORS, DESIGN } = expInfo;
+import { SCREEN_INFO } from "../task-fun/text";
 
-// Third party plugins
-import psychophysics from "@kurokida/jspsych-psychophysics";
+// screens
+import { trial_start_screen } from "../instructions/InstrTrial";
+
+
+class createTrialBody {
+  blockID: number;
+  trialID: number;
+  setsize: number;
+  updStep: number;
+  canW: number;
+  canH: number;
+  center: number[];
+
+  colorList: string[];
+  updColorList: string[];
+  objectList: string[];
+  initialResp: object;
+  updatingResp: object;
+  responseList: string[];
+  correctResp: object;
+
+  constructor(setsize, updStep, blockID, trialID) {
+    // trial information
+    this.blockID = blockID;
+    this.trialID = trialID;
+    this.setsize = setsize;
+    this.updStep = updStep;
+
+    // center of the canvas
+    this.canW = varSystem.CANVAS_WIDTH;
+    this.canH = varSystem.CANVAS_HEIGHT;
+    this.center = [this.canW / 2, this.canH / 2];
+
+    // generate colors
+    this.colorList = random.sample(COLORS.POOL, this.setsize, false);
+    this.updColorList = random.sample(this.colorList, this.updStep, false);
+
+    // random select the objects and assign colors and positions to them
+    this.objectList = random.sample(
+      OBJECTS.POOL,
+      this.setsize + this.updStep,
+      false
+    );
+
+    // assign colors to the objects (initial)
+    this.initialResp = {};
+    this.colorList.forEach((color, index) => {
+
+      let selectedObject = this.objectList[index];
+
+      this.initialResp[color] = {};
+      this.initialResp[color].image = selectedObject;
+      this.initialResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
+      this.initialResp[color].color = color;
+    });
+
+    // assign colors to the objects (updating)
+    this.updatingResp = {};
+    this.correctResp = JSON.parse(JSON.stringify(this.initialResp));
+    this.updColorList.forEach((color, index) => {
+
+      let selectedObject = this.objectList[index + this.setsize];
+
+      // updating object
+      this.updatingResp[color] = {};
+      this.updatingResp[color].image = selectedObject;
+      this.updatingResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
+      this.updatingResp[color].color = color;
+
+      // update the correct response
+      this.correctResp[color].image = selectedObject;
+      this.correctResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
+
+    });
+
+    // random select six not presented objects
+    this.responseList = random.sample(OBJECTS.POOL, DESIGN.nNPL, false);
+    // put the used objects into the response list
+    this.responseList = this.responseList.concat(this.objectList);
+    // shuffle the response list
+    random.shuffle(this.responseList);
+
+    // return the images
+    returnImages(OBJECTS.POOL, OBJECTS.MEMORY, 20);
+  }
+
+  // display the memory phase
+  displayEncodingPhase() {}
+
+  // display the updating phase
+  displayUpdatingPhase() {}
+
+  // ask participants to recall the color
+  displayRetrievalPhase() {}
+
+  // display the feedback
+  displayDebriefingPhase() {}
+}
 
 
 /**
- * A function used to create a single trial.
- * @param XY The number of items in a trial.
- *
- * @returns An array containing all the slides of a trial.
+ * Display the encoding phase
  */
-export function createNewTrial(XY: number): string[] {
-  var trial_line: any[] = [];
+createTrialBody.prototype.displayEncodingPhase = function () {
 
-  // return
-  return trial_line;
+    let encoding_line:any[] = [];
+
+    Object.keys(this.initialResp).forEach((color, index) => {
+      // the object
+      let object = this.initialResp[color];
+
+      // interval
+      let post_trial_gap = index < this.setsize - 1 ? TIMING.ISI : TIMING.IPI;
+
+      // encoding object
+      let encodingObject = drawImageObject(
+        object,
+        this.center,
+        this.canH * 0.18
+      );
+
+      // encoding screen
+      let encodingScreen = {
+        type: Psychophysics,
+        canvas_width: this.canW,
+        canvas_height: this.canH,
+        background_color: COLORS.BACKGROUND,
+        stimuli: encodingObject,
+        trial_duration: TIMING.ENCODING,
+        post_trial_gap: post_trial_gap,
+        data: {
+          screenID: "encoding",
+          blockID: this.blockID,
+          trialID: this.trialID,
+          stepID: index,
+          setsize: this.setsize,
+          color: color,
+          initial_item: object.image,
+        },
+      };
+
+      encoding_line.push(encodingScreen);
+    });
+
+    return encoding_line;
+}
+
+
+/**
+ * Display the updating phase
+ */
+createTrialBody.prototype.displayUpdatingPhase = function () {
+
+    let updating_line:any[] = [];
+
+
+    Object.keys(this.updatingResp).forEach((color, index) => {
+      // the object
+      let object = this.correctResp[color];
+
+      // interval
+      let post_trial_gap = index < this.updStep - 1 ? TIMING.ISI : TIMING.IPI;
+
+      // encoding object
+      let updatingObject = drawImageObject(
+        object,
+        this.center,
+        this.canH * 0.18
+      );
+
+      // encoding screen
+      let updatingScreen = {
+        type: Psychophysics,
+        canvas_width: this.canW,
+        canvas_height: this.canH,
+        background_color: COLORS.BACKGROUND,
+        stimuli: updatingObject,
+        trial_duration: TIMING.UPDATING,
+        post_trial_gap: post_trial_gap,
+        data: {
+          screenID: "updating",
+          blockID: this.blockID,
+          trialID: this.trialID,
+          stepID: index,
+          setsize: this.setsize,
+          color: color,
+          initial_item: this.initialResp[color].image,
+          final_item: object.image,
+        },
+      };
+
+      updating_line.push(updatingScreen);
+    });
+
+    return updating_line;
+}
+
+
+/**
+ * Ask participants to recall the object corresponding to the color
+ */
+createTrialBody.prototype.displayRetrievalPhase = function () {
+  // copy the information from the current object
+  const info = {
+    responseList: this.responseList,
+  };
+
+  const retrieval_line: any[] = [];
+
+  // shuffle the color list
+  random.shuffle(this.colorList);
+
+  // create the button html for the current trial
+  let buttonHtmlIndex = `${this.blockID}${this.trialID}`;
+  const colorButtonHtml = createButtonMatrix(
+    3, 4, // number of rows and columns
+    this.canW * 0.4,
+    this.canH * 0.5, // size of the whole matrix
+    [this.canW * 0.75, this.canH * 0.5], // center position of the matrix
+    this.canH * 0.18, // button width
+    "#FFFFFF", // color
+    buttonHtmlIndex
+  );
+
+  for (let color of this.colorList) {
+    let testColor: any[] = [
+      {
+        obj_type: "circle",
+        startX: this.center[0] * 0.6,
+        startY: this.center[1],
+        fill_color: color,
+        line_color: color,
+        radius: this.canH * 0.15,
+      },
+    ];
+
+    const testScreen = {
+      type: Psychophysics,
+      canvas_width: this.canW,
+      canvas_height: this.canH,
+      background_color: COLORS.BACKGROUND,
+      stimuli: testColor,
+      response_type: "button",
+      button_choices: this.responseList.map(
+        (image: any) => OBJECTS.imagePath + image + ".png"
+      ),
+      button_html: colorButtonHtml,
+      trial_duration: TIMING.RETRIEVAL,
+      data: {
+        screenID: "retrieval",
+        blockID: this.blockID,
+        trialID: this.trialID,
+        setsize: this.setsize,
+        color: color,
+        initial_item: this.initialResp[color].image,
+        final_item: this.correctResp[color].image,
+      },
+      on_finish: function (data) {
+        data.response =
+          data.response === null ? "null" : info.responseList[data.response];
+        data.acc = data.response === data.correctObject ? true : false;
+      },
+    };
+
+    retrieval_line.push(testScreen);
+  }
+
+  return retrieval_line;
+}
+
+
+createTrialBody.prototype.displayDebriefingPhase = function() {
+
+    let nTest = this.setsize;
+    
+    let debriefingScreen:object;
+
+    debriefingScreen = {
+      type: htmlKeyboardResponse,
+      trial_duration: TIMING.DEBRIEF,
+      stimulus: function () {
+        let accuracy = jsPsych.data
+          .get()
+          .filter({ screenID: "retrieval" })
+          .last(nTest)
+          .filter({ acc: true })
+          .count();
+
+        return SCREEN_INFO.feedback(accuracy, nTest, expInfo.LANG);
+      },
+      choices: "NO_KEYS",
+      data: {
+        screenID: "debrief",
+        expPart: this.expPart,
+        blockID: this.blockID,
+        trialID: this.trialID,
+        setsize: this.setsize,
+      },
+      on_finish: function (data) {
+        let accuracy = jsPsych.data
+          .get()
+          .filter({ screenID: "retrieval" })
+          .last(nTest)
+          .filter({ acc: true })
+          .count();
+
+        data.response = accuracy / nTest;
+      },
+    };
+
+    return debriefingScreen;
+}
+
+
+
+export function createNewTrial(
+  setsize: number,
+  updStep: number,
+  blockID: number,
+  trialID: number
+) {
+  let trialBody = new createTrialBody(setsize, updStep, blockID, trialID);
+
+  let trialLine: any[] = [];
+
+  // start screen
+  trialLine.push(trial_start_screen);
+  // encoding screen
+  let encodingLine = trialBody.displayEncodingPhase();
+  trialLine = trialLine.concat(encodingLine);
+  // updating screen
+  let updatingLine = trialBody.displayUpdatingPhase();
+  trialLine = trialLine.concat(updatingLine);
+  // retrieval screen
+  let retrievalLine = trialBody.displayRetrievalPhase();
+  trialLine = trialLine.concat(retrievalLine);
+  // debriefing screen
+  let debriefingScreen = trialBody.displayDebriefingPhase();
+  trialLine.push(debriefingScreen);
+
+  return trialLine;
 }
