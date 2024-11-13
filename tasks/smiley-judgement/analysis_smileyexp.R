@@ -7,8 +7,8 @@ library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-smiley_result <- read_json_data(".json") %>% 
-  filter(response %in% c("y", "n"), practice == "experiment", correct == "TRUE") 
+smiley_result <- read_json_data("Smiley Processing Task_undefined-2.json") %>% 
+  filter(response %in% c("y", "n"), practice == "experiment") 
 
 # Exclude columns we don't need 
 smiley_result <- smiley_result %>% 

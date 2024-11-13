@@ -1,8 +1,8 @@
 /**
  * @title Landolt Gap Processing Task
- * @description One rectangle is presented with a gap on the left and on the right side. 
+ * @description One rectangle is presented with a gap on the left and on the right side.
  * The participant has to indicat on which side the gap is bigger.
- * @author Elena Venturi 
+ * @author Elena Venturi
  * @version 0.3.1
  *
  *
@@ -26,8 +26,13 @@ import { create_trialList } from "./trials/trialStim";
 import { createNewTrial } from "./trials/trialProcess";
 import { expInfo } from "./settings";
 import { pra_instr_screen, exp_start_screen } from "./instructions/InstrTrial";
-import { fullMode_screen } from "./instructions/fullScreen";
-import { instructions_screen, fingers_instructions_practice, fingers_instructions_exp, break_screen } from "./instructions/InstrStart";
+import { fullMode_screen } from "./instructions/fullScreen";
+import {
+  instructions_screen,
+  fingers_instructions_practice,
+  fingers_instructions_exp,
+  break_screen,
+} from "./instructions/InstrStart";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -47,48 +52,66 @@ export async function run({
   // Preload assets
   const preload_screen = {
     type: preload,
-    images: assetPaths.images
+    images: assetPaths.images,
   };
 
   /************************************** Instruction **************************************/
 
-
   /************************************** Practice **************************************/
   const prac_list = create_trialList();
-  
+
   let practice_line: any[] = [];
-  for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
-    let practice_trial = createNewTrial(j, true, prac_list[j].difficutly, prac_list[j].offset_diff, prac_list[j].offset_bigL, prac_list[j].offset_bigR, prac_list[j].offset_location_right, prac_list[j].offset_location_left, prac_list[j].stimulus);
+  for (let j = 0; j < expInfo.DESIGN.nPRACTICE; j++) {
+    let practice_trial = createNewTrial(
+      j,
+      true,
+      prac_list[j].difficutly,
+      prac_list[j].offset_diff,
+      prac_list[j].offset_bigL,
+      prac_list[j].offset_bigR,
+      prac_list[j].offset_location_right,
+      prac_list[j].offset_location_left,
+      prac_list[j].stimulus
+    );
     practice_line = practice_line.concat(practice_trial);
   }
   console.log(practice_line);
-
 
   /************************************** Experiment **************************************/
   const trial_list = create_trialList();
 
   let exp_line: any[] = [];
-  for(let j = 0; j < trial_list.length; j++){
-    let exp_trial = createNewTrial(j, false, trial_list[j].difficulty, trial_list[j].offset_diff, trial_list[j].offset_bigL, prac_list[j].offset_bigR, trial_list[j].offset_location_right, prac_list[j].offset_location_left, trial_list[j].stimulus);
+  for (let j = 0; j < trial_list.length; j++) {
+    let exp_trial = createNewTrial(
+      j,
+      false,
+      trial_list[j].difficulty,
+      trial_list[j].offset_diff,
+      trial_list[j].offset_bigL,
+      prac_list[j].offset_bigR,
+      trial_list[j].offset_location_right,
+      prac_list[j].offset_location_left,
+      trial_list[j].stimulus
+    );
     exp_line = exp_line.concat(exp_trial);
 
-    if ((j + 1) % 100 === 0) {
+    if (
+      j + 1 != trial_list.length && // don't add a break screen at the end
+      (j + 1) % (trial_list.length * expInfo.DESIGN.BreaksAt) === 0 // add a break screen as specified by BreaksAt proportion of trials
+    ) {
       exp_line.push(break_screen);
     }
-
   }
   console.log(exp_line);
 
-  
   /************************************** Procedure **************************************/
-
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
+  // timeline.push(consent_screen);
+  // timeline.push(notice_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
