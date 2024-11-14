@@ -14,50 +14,76 @@ import { jsPsych } from "../jsp";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, majority: string, difficulty: string, nBlueDots: number, nRedDots:number, targetStim:any): string[] {
+export function createNewTrial(
+  XY: number,
+  isPractice: boolean,
+  majority: string,
+  difficulty: string,
+  nBlueDots: number,
+  nRedDots: number,
+  targetStim: any
+): string[] {
   var trial_line: any[] = [];
 
-  // Fixation Screen 
+  // Fixation Screen
   const fixation_screen = {
     type: htmlKeyboardResponse,
     stimulus: "<div style='font-size:60px;'>+</div>",
     choices: "NO-KEYS",
-    trial_duration: expInfo.TIMING.FIXATION,
-  }
+    trial_duration:
+      expInfo.TIMING.FIXATION +
+      Math.floor(Math.random() * (expInfo.TIMING.JITTER + 1)),
+  };
 
   console.log(targetStim);
-  
-  // Stimuli Screen 
+
+  // Stimuli Screen
   const stimuli_screen = {
     type: psychophysics,
     stimuli: targetStim,
     choices: expInfo.DESIGN.CHOICES,
     mapping: {
-      moreBlue: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreBlue")]],
-      moreRed: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreRed")]],
+      moreBlue:
+        expInfo.DESIGN.CHOICES[
+          expInfo.DESIGN.MAPPING[
+            expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreBlue")
+          ]
+        ],
+      moreRed:
+        expInfo.DESIGN.CHOICES[
+          expInfo.DESIGN.MAPPING[
+            expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreRed")
+          ]
+        ],
     },
     background_color: expInfo.DESIGN.backgroundCOLOR, // white background
     response_ends_trial: true,
     trial_duration: expInfo.TIMING.TARGET,
     data: {
       trial_number: XY,
-      condition: difficulty, 
+      condition: difficulty,
       majorityBLUE: nBlueDots > nRedDots,
+      fix_duration: fixation_screen.trial_duration,
       practice: function () {
         if (isPractice) {
           return "practice";
         } else {
-          return "experiment"
+          return "experiment";
         }
       },
     },
     on_finish: function (data) {
-      let correct = data.response == (data.majorityBLUE ? this.mapping.moreBlue : this.mapping.moreRed);
-      let correctKey = data.majorityBLUE ? stimuli_screen.mapping.moreBlue : stimuli_screen.mapping.moreRed;
-      jsPsych.data.get().addToLast({correct: correct, correct_key: correctKey});
-    }
-  }
-  
+      let correct =
+        data.response ==
+        (data.majorityBLUE ? this.mapping.moreBlue : this.mapping.moreRed);
+      let correctKey = data.majorityBLUE
+        ? stimuli_screen.mapping.moreBlue
+        : stimuli_screen.mapping.moreRed;
+      jsPsych.data
+        .get()
+        .addToLast({ correct: correct, correct_key: correctKey });
+    },
+  };
 
   // Feedback Screen
   const feedback = {
@@ -71,27 +97,30 @@ export function createNewTrial(XY: number, isPractice: boolean, majority: string
       }
     },
     trial_duration: expInfo.TIMING.FEEDBACK,
-  } 
+  };
 
-  // Inter Trial Interval Screen 
+  // Inter Trial Interval Screen
   const inter_trial_interval = {
     type: htmlKeyboardResponse,
     stimulus: "",
     choices: "NO-KEYS",
-    trial_duration: expInfo.TIMING.ITI,
-  }
+    trial_duration:
+      expInfo.TIMING.ITI +
+      Math.floor(Math.random() * expInfo.TIMING.JITTER + 1),
+  };
 
   // Push screens into trial_line
 
   if (isPractice) {
-    trial_line.push(fixation_screen, 
-      stimuli_screen, 
-      feedback, inter_trial_interval); 
+    trial_line.push(
+      fixation_screen,
+      stimuli_screen,
+      feedback,
+      inter_trial_interval
+    );
   } else {
-    trial_line.push(fixation_screen, 
-      stimuli_screen, 
-      inter_trial_interval);
-  };
+    trial_line.push(fixation_screen, stimuli_screen, inter_trial_interval);
+  }
 
   // return
   return trial_line;

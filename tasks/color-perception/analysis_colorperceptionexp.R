@@ -7,8 +7,23 @@ library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-color_result <- read_json_data(".json") %>% 
-  filter(response %in% c("d", "k"), practice == "experiment", correct == "TRUE") 
+color_result <- read_json_data("Color Perception Task_undefined.json") %>% 
+  filter(response %in% c("d", "k"), practice == "experiment") 
+
+ggplot(data = color_result,
+       aes(y = rt, x = condition, fill = correct)) +
+  geom_boxplot()
+
+# average proportion correct
+color_result %>% group_by(condition) %>% summarise(pCorr = mean(correct), n = n())
+
+# mean & sd of correct response times
+color_result %>% group_by(condition) %>%  filter(correct == T) %>%  summarise(meanRT = mean(rt), sdRT = sd(rt))
+
+ggplot(data = color_result,
+       aes(x = rt, y = fix_duration)) +
+  facet_grid(correct ~ condition) +
+  geom_point()
 
 # Exclude columns we don't need 
 color_result <- color_result %>% 
