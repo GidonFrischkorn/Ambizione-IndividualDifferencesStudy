@@ -9,8 +9,8 @@ import { random } from "@coglabuzh/webpsy.js";
 
 // Task functions
 import { createButtonMatrix, createAlterButtons } from "../task-fun/responseMatrix";
-import { returnImages } from '../task-fun/returnImages';
-import { drawImageObject } from "./elements";
+import { returnLetters } from '../task-fun/returnImages';
+import { drawTextObject } from "./elements";
 
 // Global variables
 import { jsPsych } from "../jsp";
@@ -57,7 +57,7 @@ class createTrialBody {
 
     // random select the objects and assign colors and positions to them
     this.objectList = random.sample(
-      OBJECTS.POOL,
+      OBJECTS.letterPOOL, // changed for letters
       this.setsize + this.updStep,
       false
     );
@@ -68,9 +68,12 @@ class createTrialBody {
 
       let selectedObject = this.objectList[index];
 
-      this.initialResp[color] = {};
-      this.initialResp[color].image = selectedObject;
-      this.initialResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
+      this.initialResp[color] = {
+        letter: selectedObject,
+        color: color,
+      };
+      this.initialResp[color].letter = selectedObject;
+      //this.initialResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
       this.initialResp[color].color = color;
     });
 
@@ -82,26 +85,29 @@ class createTrialBody {
       let selectedObject = this.objectList[index + this.setsize];
 
       // updating object
-      this.updatingResp[color] = {};
-      this.updatingResp[color].image = selectedObject;
-      this.updatingResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
+      this.updatingResp[color] = {
+        letter: selectedObject, // Store the letter
+        color: color,
+      };
+      this.updatingResp[color].letter = selectedObject; //image to letter
+      //this.updatingResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
       this.updatingResp[color].color = color;
 
       // update the correct response
-      this.correctResp[color].image = selectedObject;
-      this.correctResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
+      this.correctResp[color].letter = selectedObject; // image to letter 
+      //this.correctResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
 
     });
 
     // random select six not presented objects
-    this.responseList = random.sample(OBJECTS.POOL, DESIGN.nNPL, false);
+    this.responseList = random.sample(OBJECTS.letterPOOL, DESIGN.nNPL, false); // changed for letters
     // put the used objects into the response list
     this.responseList = this.responseList.concat(this.objectList);
     // shuffle the response list
     random.shuffle(this.responseList);
 
     // return the images
-    returnImages(OBJECTS.POOL, OBJECTS.MEMORY, 20);
+    returnLetters(OBJECTS.letterPOOL, OBJECTS.MEMORY, 4);// changed for letters
   }
 
   // display the memory phase
@@ -133,8 +139,9 @@ createTrialBody.prototype.displayEncodingPhase = function () {
       let post_trial_gap = index < this.setsize - 1 ? TIMING.ISI : TIMING.IPI;
 
       // encoding object
-      let encodingObject = drawImageObject(
-        object,
+      let encodingObject = drawTextObject( // changed for letters
+        { letter: object.letter, 
+          color: object.color },
         this.center,
         this.canH * 0.18
       );
@@ -182,8 +189,8 @@ createTrialBody.prototype.displayUpdatingPhase = function () {
       let post_trial_gap = index < this.updStep - 1 ? TIMING.ISI : TIMING.IPI;
 
       // encoding object
-      let updatingObject = drawImageObject(
-        object,
+      let updatingObject = drawTextObject(
+        { letter: object.letter, color: object.color },
         this.center,
         this.canH * 0.18
       );
@@ -261,9 +268,9 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
       background_color: COLORS.BACKGROUND,
       stimuli: testColor,
       response_type: "button",
-      button_choices: this.responseList.map(
+      button_choices: this.responseList /*.map(
         (image: any) => OBJECTS.imagePath + image + ".png"
-      ),
+      )*/,
       button_html: colorButtonHtml,
       trial_duration: TIMING.RETRIEVAL,
       data: {
@@ -276,6 +283,8 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
         final_item: this.correctResp[color].image,
       },
       on_finish: function (data) {
+        console.log("User response:", data.response);
+        console.log("Correct object:", data.correctResp);
         data.response =
           data.response === null ? "null" : info.responseList[data.response];
         data.acc = data.response === data.correctObject ? true : false;

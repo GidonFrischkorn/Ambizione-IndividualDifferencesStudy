@@ -1,7 +1,7 @@
 import jss from "jss-browserify";
 import { expInfo } from "../settings";
 
-/**
+/** OLD FUNCTION 
  * 
  * @param nRow The number of rows in the matrix
  * @param nCol The number of columns in the matrix
@@ -10,7 +10,7 @@ import { expInfo } from "../settings";
  * @param fontSize The size of the font is determined by the ratio of the matrix height.
  * @returns {Array}
  */
-export function createButtonMatrix(
+/*export function createButtonMatrix(
     nRow: number,
     nCol: number,
     matrixW: number,
@@ -54,9 +54,61 @@ export function createButtonMatrix(
     }
   
     return buttonCSS;
+  }*/
+
+
+  export function createButtonMatrix(
+    nRow: number,
+    nCol: number,
+    matrixW: number,
+    matrixH: number,
+    center: number[],
+    buttonWidth: number,
+    fillColor: string,
+    index: string
+  ): Array<any> {
+    const nTotal = nRow * nCol;
+    const intervalW = nCol === 1 ? 0 : matrixW / (nCol - 1);
+    const intervalH = nRow === 1 ? 0 : matrixH / (nRow - 1);
+  
+    let buttonCSS: string[] = [];
+  
+    for (let i = 0; i < nTotal; i++) {
+      let buttonName = `.alter-button${i}-${index}`;
+      let className = `alter-button${i}-${index}`;
+  
+      let buttonX = center[0] + intervalW * (Math.floor(i % nCol) - (nCol - 1) / 2);
+      let buttonY = center[1] + intervalH * (Math.floor(i / nCol) - (nRow - 1) / 2);
+  
+      jss.set(buttonName, {
+        position: "absolute",
+        top: `${buttonY}px`,
+        left: `${buttonX}px`,
+        "-webkit-transform": "translate(-50%,-50%)",
+        "-moz-transform": "translate(-50%,-50%)",
+        transform: "translate(-50%,-50%)",
+        "font-family": "Arial",
+        "text-align": "center",
+        "background-color": fillColor,
+        "width": `${buttonWidth}px`,
+        "height": `${buttonWidth}px`,
+        "font-size": `${buttonWidth * 0.4}px`, // Adjust font size to fit within the button
+        "display": "flex",
+        "align-items": "center",
+        "justify-content": "center",
+        "border": "0px solid #ccc", // Optional: add a border to distinguish the buttons
+        "border-radius": "5px" // Optional: add some rounding
+      });
+  
+      // Use a <button> or <div> to display the letter instead of an image.
+      buttonCSS.push(
+        `<button class="${className}" style="background-color: ${fillColor}; width: ${buttonWidth}px; height: ${buttonWidth}px;">%choice%</button>`
+      );
+    }
+  
+    return buttonCSS;
   }
-
-
+  
   export function createAlterButtons(
     left_images: object,
     right_images: object,
@@ -98,4 +150,3 @@ export function createButtonMatrix(
 
     return buttonCSS;
   }
-  

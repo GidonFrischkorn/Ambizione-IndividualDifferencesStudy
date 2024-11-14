@@ -7,7 +7,7 @@ export const expInfo = {
   RESEARCHER: "Chenyu Li", // researcher's name
   EMAIL: "chenyu.li@uzh.ch", // researcher's email
   DURATION: 15, // duration of the experiment in minutes
-  LANG: "cn", // the language of the experiment
+  LANG: "de", // the language of the experiment
 
   // experiment design
   DESIGN: {
@@ -21,12 +21,14 @@ export const expInfo = {
   OBJECTS: {
     imagePath: "assets/images/objects/",
     POOL: Object.keys(imageObj),
+    letterPOOL: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
     MEMORY: {} as { [key: number]: string[] },
+    SIZE: "80px",
   },
 
   COLORS: {
-    BG_NAME: "grey",
-    BACKGROUND: "#bababa",
+    BG_NAME: "white",
+    BACKGROUND: "#FFFFFF",
     POOL: [
       "#2e8a3c",
       "#e9ae0c",
