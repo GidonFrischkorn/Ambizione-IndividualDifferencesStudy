@@ -7,12 +7,23 @@ library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-landolt_result <- read_json_data(".json") %>% 
-  filter(response %in% c("d", "k"), practice == "experiment", correct == "true") 
+landolt_result <- read_json_data("Landolt Gap Processing Task_undefined-4.json") %>% 
+  filter(response %in% c("d", "k"), practice == "experiment") 
+
+ggplot(data = landolt_result,
+       aes(y = rt, x = condition, fill = correct)) +
+  geom_boxplot()
+
+# average proportion correct
+landolt_result %>% group_by(condition) %>% summarise(pCorr = mean(correct), n = n())
+
+# mean & sd of correct response times
+landolt_result %>% group_by(condition) %>%  filter(correct == T) %>%  summarise(meanRT = mean(rt), sdRT = sd(rt))
 
 # Exclude columns we don't need 
 landolt_result <- landolt_result %>% 
   select(-c(1:5, 16:29))
+
 
 # Convert rt to seconds and create a new column for the converted RTs
 landolt_result <- landolt_result %>%
