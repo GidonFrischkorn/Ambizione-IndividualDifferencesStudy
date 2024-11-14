@@ -1,7 +1,7 @@
 /**
- * @title Word Processing Task 
- * @description Participant has to tell whether the word represents somthing animate or inanimate. 
- * @author Elena Venturi 
+ * @title Word Processing Task
+ * @description Participant has to tell whether the word represents somthing animate or inanimate.
+ * @author Elena Venturi
  * @version 0.3.1
  *
  *
@@ -31,7 +31,6 @@ import { fingers_instructions_practice } from "./instructions/InstrScreen";
 import { fingers_instructions_exp } from "./instructions/InstrScreen";
 import { words } from "./../assets/stimuli";
 
-
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
  *
@@ -54,45 +53,64 @@ export async function run({
     // audio: assetPaths.audio,
     // video: assetPaths.video,
   };
-  
 
   /************************************** Instruction **************************************/
 
   /************************************** Practice **************************************/
-  let usedWords: string[] = [];
+  let usedWords: any[] = [];
 
   const prac_list = create_trialList();
-  
+
   let practice_line: any[] = [];
-  for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
-    let chosenStimulus = chooseStimuli(words, prac_list[j].word_animacy, prac_list[j].word_length);
+  for (let j = 0; j < expInfo.DESIGN.nPRACTICE; j++) {
+    let chosenStimulus = chooseStimuli(
+      words,
+      prac_list[j].word_animacy,
+      prac_list[j].word_length
+    );
     usedWords.push(chosenStimulus);
-    let practice_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus);
+    let practice_trial = createNewTrial(
+      j,
+      true,
+      chosenStimulus.animacy,
+      chosenStimulus.wordlength,
+      chosenStimulus.word
+    );
     practice_line = practice_line.concat(practice_trial);
     console.log("chosen stimulus for practice: ", chosenStimulus);
   }
-  
+
   /************************************** Experiment **************************************/
-  
+
   const trial_list = create_trialList(usedWords);
-  
+
   let exp_line: any[] = [];
-  for(let j = 0; j < trial_list.length; j++){
-    let chosenStimulus = chooseStimuli(words, trial_list[j].word_animacy, trial_list[j].word_length, usedWords);
-    let exp_trial = createNewTrial(j, false, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus);
+  for (let j = 0; j < trial_list.length; j++) {
+    let chosenStimulus = chooseStimuli(
+      words,
+      trial_list[j].word_animacy,
+      trial_list[j].word_length,
+      usedWords
+    );
+    let exp_trial = createNewTrial(
+      j,
+      false,
+      chosenStimulus.animacy,
+      chosenStimulus.wordlength,
+      chosenStimulus.word
+    );
     exp_line = exp_line.concat(exp_trial);
     console.log("chosen stimulus for experiment: ", chosenStimulus);
   }
-  
-  /************************************** Procedure **************************************/
 
+  /************************************** Procedure **************************************/
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
+  // timeline.push(consent_screen);
+  // timeline.push(notice_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
