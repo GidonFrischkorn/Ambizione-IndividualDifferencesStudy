@@ -99,12 +99,26 @@ class createTrialBody {
 
     });
 
-    // random select six not presented objects
-    this.responseList = random.sample(OBJECTS.letterPOOL, DESIGN.nNPL, false); // changed for letters
-    // put the used objects into the response list
+    // Create a copy of the letter pool for sampling
+    let availableLetters = OBJECTS.letterPOOL.filter(letter => !this.objectList.includes(letter));
+
+    // Randomly select six unique letters that aren’t already in objectList
+    this.responseList = [];
+    while (this.responseList.length < DESIGN.nNPL) { // assuming DESIGN.nNPL is 6
+        let newLetter = random.sample(availableLetters, 1, false)[0];
+        
+        // Add the letter if it's not already in the responseList
+        if (!this.responseList.includes(newLetter)) {
+            this.responseList.push(newLetter);
+        }
+    }
+    
+    // Combine this.responseList with objectList to get a full set of options
     this.responseList = this.responseList.concat(this.objectList);
-    // shuffle the response list
+    
+    // Shuffle the final response list to randomize the display order
     random.shuffle(this.responseList);
+
 
     // return the images
     returnLetters(OBJECTS.letterPOOL, OBJECTS.MEMORY, 4);// changed for letters
@@ -268,9 +282,7 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
       background_color: COLORS.BACKGROUND,
       stimuli: testColor,
       response_type: "button",
-      button_choices: this.responseList /*.map(
-        (image: any) => OBJECTS.imagePath + image + ".png"
-      )*/,
+      button_choices: this.responseList,
       button_html: colorButtonHtml,
       trial_duration: TIMING.RETRIEVAL,
       data: {
