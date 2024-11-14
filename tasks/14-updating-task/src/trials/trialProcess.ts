@@ -73,7 +73,6 @@ class createTrialBody {
         color: color,
       };
       this.initialResp[color].letter = selectedObject;
-      //this.initialResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
       this.initialResp[color].color = color;
     });
 
@@ -90,13 +89,10 @@ class createTrialBody {
         color: color,
       };
       this.updatingResp[color].letter = selectedObject; //image to letter
-      //this.updatingResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
       this.updatingResp[color].color = color;
 
       // update the correct response
       this.correctResp[color].letter = selectedObject; // image to letter 
-      //this.correctResp[color].imagePath = OBJECTS.imagePath + selectedObject + ".png";
-
     });
 
     // Create a copy of the letter pool for sampling
@@ -106,16 +102,16 @@ class createTrialBody {
     this.responseList = [];
     while (this.responseList.length < DESIGN.nNPL) { // assuming DESIGN.nNPL is 6
         let newLetter = random.sample(availableLetters, 1, false)[0];
-        
+
         // Add the letter if it's not already in the responseList
         if (!this.responseList.includes(newLetter)) {
             this.responseList.push(newLetter);
         }
     }
-    
+
     // Combine this.responseList with objectList to get a full set of options
     this.responseList = this.responseList.concat(this.objectList);
-    
+
     // Shuffle the final response list to randomize the display order
     random.shuffle(this.responseList);
 

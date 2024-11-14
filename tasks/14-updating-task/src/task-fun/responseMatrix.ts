@@ -70,7 +70,6 @@ import { expInfo } from "../settings";
 
       let img = images[side];
 
-      // let buttonName = `.button-${side}-${index}`;
       let className = `button-${side}-${index}`;
 
       jss.set(`.${className}`, {
@@ -86,7 +85,6 @@ import { expInfo } from "../settings";
         "justify-content": "center",
       });
 
-      // buttonCSS.push(`<img class=${className} src=%choice% width=${img.width}px></img>`);
       buttonCSS.push(`<img class=${className} src=%choice% width=${img.width}px></img>`
       );
 

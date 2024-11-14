@@ -19,6 +19,7 @@ let { DESIGN } = expInfo;
 
 // screens
 import { welcome_screen } from "./instructions/welcome";
+import { browser_screen } from "./instructions/browserCheck";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { createNewTrial } from "./trials/trialProcess";
 import { prac_start_screen, exp_start_screen } from "./instructions/InstrStart";
@@ -43,7 +44,7 @@ export async function run({
   // Preload assets
   const preload_screen = {
     type: preload,
-    images: assetPaths.images,
+    //images: assetPaths.images,
     // audio: assetPaths.audio,
     // video: assetPaths.video,
   };
@@ -84,7 +85,8 @@ export async function run({
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(browser_screen);
+  timeline.push(fullMode_screen);
   timeline.push(instr_line);
   timeline = timeline.concat(practice_line);
   timeline = timeline.concat(experiment_line);
