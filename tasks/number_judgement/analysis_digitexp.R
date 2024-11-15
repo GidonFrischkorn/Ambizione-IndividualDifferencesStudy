@@ -8,8 +8,19 @@ library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-digit_result <- read_json_data(".json") %>% 
-  filter(response %in% c("e", "o"), practice == "experiment", correct == "TRUE") 
+digit_result <- read_json_data("Number Judgement Task_undefined-2.json") %>% 
+  filter(response %in% c("e", "o"), practice == "experiment") 
+
+ggplot(data = digit_result,
+       aes(y = rt, x = as.factor(condition), fill = correct)) +
+  geom_boxplot()
+
+# average proportion correct
+digit_result %>% group_by(condition) %>% summarise(pCorr = mean(correct), n = n())
+
+# mean & sd of correct response times
+digit_result %>% group_by(condition) %>%  filter(correct == T) %>%  summarise(meanRT = mean(rt), sdRT = sd(rt))
+
 
 # Exclude columns we don't need 
 digit_result <- digit_result %>% 

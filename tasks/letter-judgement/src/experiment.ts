@@ -1,7 +1,7 @@
 /**
- * @title Letter Processing Task 
- * @description Participant has to tell whether the letter is a vowel or a consonant as fast as possible. 
- * @author Elena Venturi 
+ * @title Letter Judgement Task
+ * @description Participant has to tell whether the letter is a vowel or a consonant as fast as possible.
+ * @author Elena Venturi
  * @version 0.3.1
  *
  *
@@ -30,7 +30,6 @@ import { instructions_screen } from "./instructions/InstrScreen";
 import { fingers_instructions_practice } from "./instructions/InstrScreen";
 import { fingers_instructions_exp } from "./instructions/InstrScreen";
 
-
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
  *
@@ -58,33 +57,40 @@ export async function run({
 
   /************************************** Practice **************************************/
   const prac_list = create_trialList();
-  
+
   let practice_line: any[] = [];
-  for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
-    let practice_trial = createNewTrial(j, true, prac_list[j].condition, prac_list[j].stimulus);
+  for (let j = 0; j < expInfo.DESIGN.nPRACTICE; j++) {
+    let practice_trial = createNewTrial(
+      j,
+      true,
+      prac_list[j].condition,
+      prac_list[j].stimulus
+    );
     practice_line = practice_line.concat(practice_trial);
   }
 
-  
   /************************************** Experiment **************************************/
   const trial_list = create_trialList();
-  
+
   let exp_line: any[] = [];
-  for(let j = 0; j < trial_list.length; j++){
-    let exp_trial = createNewTrial(j, false, trial_list[j].condition, trial_list[j].stimulus);
+  for (let j = 0; j < trial_list.length; j++) {
+    let exp_trial = createNewTrial(
+      j,
+      false,
+      trial_list[j].condition,
+      trial_list[j].stimulus
+    );
     exp_line = exp_line.concat(exp_trial);
   }
-  
 
   /************************************** Procedure **************************************/
-
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
+  // timeline.push(consent_screen);
+  // timeline.push(notice_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline.push(instructions_screen);

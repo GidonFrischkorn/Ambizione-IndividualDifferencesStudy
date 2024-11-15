@@ -59,7 +59,7 @@ export function createNewTrial(
       line_length: targetStim[0].width,
       line_location: targetStim[0].startY > 0 ? "top" : "bottom",
       fix_duration: fixation_screen.trial_duration,
-      practice: function () {
+      procedure: function () {
         if (isPractice) {
           return "practice";
         } else {
