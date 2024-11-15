@@ -66,7 +66,7 @@ export function createNewTrial(
       gapHeight_left: targetStim[2].height,
       fix_duration: fixation_screen.trial_duration,
       condition: difficulty,
-      practice: function () {
+      procedure: function () {
         if (isPractice) {
           return "practice";
         } else {
