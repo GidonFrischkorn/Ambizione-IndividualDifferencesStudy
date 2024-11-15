@@ -7,10 +7,8 @@ library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-words_result <- read_json_data("Word Processing Speed Task_undefined-3.json") %>% 
-  filter(response %in% c("d", "j"),
-         #, correct == TRUE
-         ) 
+words_result <- read_json_data("Word Processing Speed Task_undefined-4.json") %>% 
+  filter(response %in% c("d", "j"), procedure == "experiment")
 
 ggplot(data = words_result,
        aes(y = rt, x = as.factor(animacy), fill = correct)) +
