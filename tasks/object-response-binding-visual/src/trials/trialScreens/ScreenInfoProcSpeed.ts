@@ -7,7 +7,7 @@ export const screen_info_proc_speed = function(exp_info, exp_trial) {
     // text object with info
     const stim_cue = {
       obj_type: 'text',
-      content: `Please make yourself ready for the reaction time task`,
+      content: `Bitte machen Sie sich bereit für die Reaktionszeit-Aufgabe`,
       font: exp_info.font_cues,
       startX: exp_info.center[0],
       startY: exp_info.center[1]
