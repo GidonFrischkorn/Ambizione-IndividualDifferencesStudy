@@ -69,8 +69,8 @@ export const screen_finger_check = function(exp_info, exp_trial, task) {
         task: task,
   
         procedure: exp_trial.phase,
-        blockID: exp_trial.block,
-        trialID: exp_trial.trial,
+        block_number: exp_trial.block,
+        trial_number: exp_trial.trial,
         trialBlockID: exp_trial.trial2block,
 
         ret_order: exp_trial.retrieval_order,
