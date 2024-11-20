@@ -74,14 +74,14 @@ export function MakeExpInfo(task_condition, condition_pool) {
         session: 1, // session 2
 
         // define list conditions
-        list_condition: ['Control', 'Control', 'Hebb', 'Interference'], // list conditions
+        list_condition: ['Control', 'Control', 'Hebb'], // list conditions
 
         // number of blocks and trials
         n_color_check_trials: 8, // number of color check trials
         n_finger_check_trials: 8, // number of finger check trials
         n_proc_speed_trials: 64, // number of processing speed trials
         n_prac_trials: 8, // number of practice trials
-        n_exp_trials: 4, // number of experiment trials within mini block
+        n_exp_trials: 3, // number of experiment trials within mini block
         n_color_check_blocks: 1, // number of color check blocks
         n_finger_check_blocks: 1, // number of finger check blocks
         n_proc_speed_blocks: 1, // number of processing speed blocks

@@ -283,15 +283,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
       stim_idx = removeItems(stim_idx, hebb_stims);
     };
     
-    // sample Interference stimuli
-    var int_stims = random.sample(stim_idx, exp_info.setsize);
-    var int_bindings = random.sample(exp_info.cols_name, exp_info.setsize);
-
-    // remove Interference stimuli from stimulus index
-    if (is_practice == 0) { // experimental trials
-      stim_idx = removeItems(stim_idx, int_stims);
-    };
-
     // loop through blocks
     for(let block = 0; block < n_blocks; block ++) {
 
@@ -341,37 +332,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
           // Hebb bindings
           binding_cols_name.push(rand_hebb_bindings);
           
-        } else if (list_cond == "Interference"){ // Interference conditio
-
-          // randomly order Interfernce stims and  bindings
-          var rand_order = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-
-          // check if any bindings are the same in the last Interference trial
-          // if yes, shuffle again
-          if (block != 0) { // for every mini-block except block 0
-    
-            // while loop: shuffle until all binding elements from current and previous interfernce trial are unequal
-            while ( ! rand_order.every((val, index) => val != rand_orders_int[block-1][index]) ) { 
-              
-              rand_order = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-            
-            };  
-          };
-
-          // update orders for Interference bindings after while loop
-          rand_orders_int.push(rand_order);
-          var rand_orders_int_bindings = rand_order.map(i => int_bindings[i]);
-
-          // randomly order Interference bindings at encoding
-          var rand_order2 = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-         
-          // reorder and add stims and bindings to array
-          var rand_int_stims = rand_order2.map(i => int_stims[i]);
-          var rand_int_bindings = rand_order2.map(i => rand_orders_int_bindings[i]);
-
-          rand_stims.push(rand_int_stims);
-          binding_cols_name.push(rand_int_bindings);          
-
         } else if (list_cond == "Control"){ // Control condition
 
           if (is_practice == 1) { // practice trials
@@ -381,7 +341,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
 
           } else { // experimental trials
 
-            // check to make sure that Hebb and Interference stimuli are not used for Control
+            // check to make sure that Hebb stimuli are not used for Control
             let overlap = 1;
 
             while (overlap == 1) {
@@ -389,7 +349,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
               // randomly select Control stimuli from stimulus index
               var sample_stims:any = random.sample(stim_idx, setsize[trial]);
 
-              if (sample_stims.some((val) => hebb_stims.includes(val)) || sample_stims.some((val) => int_stims.includes(val))) {
+              if (sample_stims.some((val) => hebb_stims.includes(val))) {
                 overlap = 1;
               } else {
                 overlap = 0;
@@ -599,15 +559,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
      if (is_practice == 0) { // experimental trials
       stim_idx = removeItems(stim_idx, hebb_stims);      
     };
-     
-     // sample Interference stimuli
-     var int_stims = random.sample(stim_idx, exp_info.setsize);
-     var int_bindings = random.sample(exp_info.pos, exp_info.setsize);
-
-     // remove Interference stimuli from stimulus index
-     if (is_practice == 0) { // experimental trials
-      stim_idx = removeItems(stim_idx, int_stims);
-    };
 
     // loop through blocks
     for(let block = 0; block < n_blocks; block ++) {
@@ -654,37 +605,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
           // Hebb bindings
           binding_pos.push(rand_hebb_bindings);
           
-        } else if (list_cond == "Interference"){ // Interference condition
-
-          // randomly order Interference bindings
-          var rand_order = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-
-          // check if any bindings are the same in the last Interference trial
-          // if yes, shuffle again
-          if (block != 0) { // for every mini-block except block 0
-    
-            // while loop: shuffle until all binding elements from current and previous interfernce trial are unequal
-            while ( ! rand_order.every((val, index) => val != rand_orders_int[block-1][index]) ) { 
-              
-              rand_order = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-            
-            };  
-          };
-
-          // update orders for Interference bindings after while loop
-          rand_orders_int.push(rand_order);
-          var rand_orders_int_bindings = rand_order.map(i => int_bindings[i]);
-
-          // randomly order Interference bindings at encoding
-          var rand_order2 = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-         
-          // reorder and add stims and bindings to array
-          var rand_int_stims = rand_order2.map(i => int_stims[i]);
-          var rand_int_bindings = rand_order2.map(i => rand_orders_int_bindings[i]);
-
-          rand_stims.push(rand_int_stims);
-          binding_pos.push(rand_int_bindings);          
-
         } else if (list_cond == "Control"){ // Control condition
 
           if (is_practice == 1) { // practice trials
@@ -694,7 +614,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
 
           } else { // experimental trials
 
-            // check to make sure that Hebb and Interference stimuli are not used for Control
+            // check to make sure that Hebb stimuli are not used for Control
             let overlap = 1;
 
             while (overlap == 1) {
@@ -702,7 +622,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
               // randomly select Control stimuli from stimulus index
               var sample_stims:any = random.sample(stim_idx, setsize[trial]);
 
-              if (sample_stims.some((val) => hebb_stims.includes(val)) || sample_stims.some((val) => int_stims.includes(val))) {
+              if (sample_stims.some((val) => hebb_stims.includes(val))) {
                 overlap = 1;
               } else {
                 overlap = 0;
