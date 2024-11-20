@@ -7,8 +7,8 @@ import { random } from "@coglabuzh/webpsy.js";
 setCSS();
 
 export const varOnline = {
-    RUN_JATOS: true, // true, if you run your experiment in jatos
-    RUN_PROLIFIC: true, // true, if you run your experiment in Prolific 
+    RUN_JATOS: false, // true, if you run your experiment in jatos
+    RUN_PROLIFIC: false, // true, if you run your experiment in Prolific 
     COMPLETION_CODE: "CVTIZNRL", // for Prolific
     FAIL_CODE: "C1AD5NL2", // for Prolific
     INTERNET_CODE: "C18UGLPR", // for Prolific
