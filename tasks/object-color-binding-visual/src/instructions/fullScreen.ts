@@ -10,7 +10,7 @@ import { varSystem } from "../settings";
     type: fullscreen,
     fullscreen_mode: true,
     message: `<div class="main">
-      <p class = 'fb-text'>The experiment will switch to full screen</p>
+      <p class = 'fb-text'>Das Experiment wechselt in den Vollbildschirm-Modus</p>
     </div>`,
     on_finish: function() {
       // start to count that how many times participants has left the browser.
