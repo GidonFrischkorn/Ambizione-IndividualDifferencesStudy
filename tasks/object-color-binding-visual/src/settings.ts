@@ -24,29 +24,10 @@ export const varSystem = {
   };
 
 // define experimental variables and color condition
-export function MakeExpInfo(task_condition, condition_pool) {
+export function MakeExpInfo(task_condition) {
     
     // determine task condition
-    // declarative or procedural task
-    if (task_condition == 'declarative') {
-
-        var exp_task = 'declarative';
-
-    } else if (task_condition == 'procedural') {
-
-        var exp_task = 'procedural';
-
-    } else {
-
-        var exp_task = '';
-
-        // show error message if jatos is used
-        if (varOnline.RUN_JATOS) {
-            
-            jsPsych.endExperiment("Condition not defined. Please contact the experimenter.");
-
-        }
-    }
+    var exp_task = 'declarative';
 
     // color condition
     // determined based on calibration experiment (fall back for start values)
