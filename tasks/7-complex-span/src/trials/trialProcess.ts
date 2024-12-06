@@ -8,16 +8,15 @@ import Psychophysics from '@kurokida/jspsych-psychophysics';
 import { random } from "@coglabuzh/webpsy.js";
 
 // Task functions
-import { createButtonMatrix, createAlterButtons } from "../task-fun/responseMatrix";
-import { generateColors } from './trialStim';
+import { createNumberButtonMatrix, createAlterButtons } from "../task-fun/responseMatrix";
 import { samplePair } from '../task-fun/samplePair';
-import { returnImages } from '../task-fun/returnImages';
-import { drawImageObject } from "./elements";
+import { returnNumbers } from '../task-fun/returnImages';
+import { drawNumberObject } from "./elements";
 
 // Global variables
 import { jsPsych } from "../jsp";
 import { expInfo, varSystem } from "../settings";
-let { OBJECTS, TIMING, COLORS, DESIGN } = expInfo;
+let { NUMBERS, TIMING, COLORS, DESIGN } = expInfo;
 import { SCREEN_INFO } from "../task-fun/text";
 
 // screens
@@ -35,131 +34,118 @@ class createTrialBody {
     canW: number;
     canH: number;
     center: number[];
-
-    colorList: string[];
+    pairList: number[];
     cueList: string[];
     consistencyList: string[];
-    objectObj: object;
-    responseList: string[];
+    numberObj: object;
+    responseList: number[];
     retrievalInfo: object;
+    procedure: string;
 
 
-    constructor(condition, question, blockID, trialID) {
+    constructor(condition, question, blockID, trialID, procedure) {
         // trial information
         this.condition = condition;
         this.question = question;
         this.blockID = blockID;
         this.trialID = trialID;
         this.trialIndex = 1000 + blockID * 100 + trialID;
+        this.procedure = procedure;
 
         // center of the canvas
         this.canW = varSystem.CANVAS_WIDTH;
         this.canH = varSystem.CANVAS_HEIGHT;
         this.center = [this.canW / 2, this.canH / 2];
 
-        // generate colors
-        this.colorList = random.sample(COLORS.POOL, DESIGN.SETSIZE, false);
+        this.pairList = Array.from({ length: DESIGN.SETSIZE }, (_, i) => i + 1);
 
-        // define fixObject
-        let fixObject = this.condition === "control" ? true : false
+        let availableNumbers = [...NUMBERS.POOL];
 
-        // random select the objects and assign colors and positions to them
-        this.objectObj = {};
+        // random select the NUMBERS
+        this.numberObj = {};
         for (let i = 0; i < DESIGN.SETSIZE; i++) {
 
-            let pair = samplePair(OBJECTS.POOL, OBJECTS.MEMORY, 2, this.trialIndex, fixObject);
-            this.objectObj[i] = pair;
-            // assign colors
-            if (
-              this.objectObj[i].left.image === OBJECTS.CONTROL_OBJECT &&
-              this.condition === "control"
-            ) {
-              this.objectObj[i].left.color = "#FFFFFF";
-            } else {
-              this.objectObj[i].left.color = this.colorList[i];
-            }
+          let pairNumbers = random.sample(availableNumbers, 2, false);
 
-            if (
-              this.objectObj[i].right.image === OBJECTS.CONTROL_OBJECT &&
-              this.condition === "control"
-            ) {
-              this.objectObj[i].left.color = "#FFFFFF";
-              this.objectObj[i].right.color = "#FFFFFF";
-            } else {
-              this.objectObj[i].right.color = this.colorList[i];
-            }
+          availableNumbers = availableNumbers.filter(num => !pairNumbers.includes(num));
 
-            if (this.condition === "control") {
-              this.objectObj[i].left.color = "#FFFFFF";
-              this.objectObj[i].right.color = "#FFFFFF";
-            }
+          this.numberObj[i] = {
+            left: {
+              number: pairNumbers[0],
+              pair: this.pairList[i],
+              width: this.canH * 0.18,
+              position: [this.canW * 0.38, this.canH / 2],
+            },
+            right: {
+              number: pairNumbers[1],
+              pair: this.pairList[i],
+              width: this.canH * 0.18,
+              position: [this.canW * 0.62, this.canH / 2],
+            },
+          };
 
             // assign positions
-            this.objectObj[i].left.position = [this.canW * 0.38, this.canH / 2];
-            this.objectObj[i].right.position = [this.canW * 0.62, this.canH / 2];
-            // assign image path
-            this.objectObj[i].left.imagePath = OBJECTS.imagePath + this.objectObj[i].left.image + '.png';
-            this.objectObj[i].right.imagePath = OBJECTS.imagePath + this.objectObj[i].right.image + '.png';
-            // assign image scale
-            this.objectObj[i].left.width = this.canH * 0.18;
-            this.objectObj[i].right.width = this.canH * 0.18;
+            this.numberObj[i].left.position = [this.canW * 0.40, this.canH / 2];
+            this.numberObj[i].right.position = [this.canW * 0.65, this.canH / 2];
+            
+        }
+        
+        // collect the numbers that have been used for the current block
+        let usedNumbers: number[] = [];
+          for (let i = 0; i < DESIGN.SETSIZE; i++) {
+            usedNumbers.push(this.numberObj[i].left.number);
+            usedNumbers.push(this.numberObj[i].right.number);
         }
 
-        // random select six not presented objects
-        let nNPL = condition === "control" ? 9 : 6;
-        this.responseList = random.sample(
-          Object.keys(OBJECTS.POOL).filter((image)=> image !== OBJECTS.CONTROL_OBJECT), 
-          nNPL, false);
-        // put the used objects into the response list
-        for (let i = 0; i < DESIGN.SETSIZE; i++) {
-            let left_image = this.objectObj[i].left.image;
-            let right_image = this.objectObj[i].right.image;
+        // remove used numbers from the pool
+        let unusedNumbers = NUMBERS.POOL.filter(num => !usedNumbers.includes(num));
 
-            if (!(left_image === OBJECTS.CONTROL_OBJECT)) this.responseList.push(left_image);
-            if (!(right_image === OBJECTS.CONTROL_OBJECT)) this.responseList.push(right_image);
-        }
+        // random select six numbers that were not presented as others distractors 
+        let nNPL = 6;
+        let additionalNumbers = random.sample(unusedNumbers, nNPL, false);
+
+        this.responseList = usedNumbers.concat(additionalNumbers);
+        this.responseList = [...new Set(this.responseList)];
+
         // shuffle the response list
         random.shuffle(this.responseList);
 
         // return the images
-        returnImages(OBJECTS.POOL, OBJECTS.MEMORY, 15, OBJECTS.CONTROL_OBJECT)
+        returnNumbers(NUMBERS.POOL, NUMBERS.MEMORY, 15)
 
         // correct judgement
         this.correctJudge = [];
         for (let i = 0; i < DESIGN.SETSIZE; i++) {
-            if (this.question === "smaller") {
-                this.correctJudge[i] = this.objectObj[i].left.size < this.objectObj[i].right.size ? "left" : "right";
-            } else {
-                this.correctJudge[i] = this.objectObj[i].left.size > this.objectObj[i].right.size ? "left" : "right";
-            }
+          if (this.question === "smaller") {
+            this.correctJudge[i] =
+              this.numberObj[i].left.number < this.numberObj[i].right.number
+                ? "left"
+                : "right";
+          } else {
+            this.correctJudge[i] =
+              this.numberObj[i].left.number > this.numberObj[i].right.number
+                ? "left"
+                : "right";
+          }
         }
 
         // cue list
-        if (this.condition === "control") {
-            this.cueList = [];
-            for (let i = 0; i < DESIGN.SETSIZE; i++) {
-                if (this.objectObj[i].left.image === OBJECTS.CONTROL_OBJECT) {
-                    this.cueList.push("right");
-                } else {
-                    this.cueList.push("left");
-
-                }
-            }
-        } else {
             this.cueList = random.sample(
               ["left", "right"],
               DESIGN.SETSIZE,
               true
             );
-        }
 
         // correct object
         this.retrievalInfo = {};
-        this.colorList.forEach((color, index) => {
-            this.retrievalInfo[color] = {};
-            this.retrievalInfo[color].object = this.objectObj[index][this.cueList[index]].image;
-            this.retrievalInfo[color].congruency = this.correctJudge[index] === this.cueList[index] ? "congruent" : "incongruent";
-        });
+        for (let i = 0; i < DESIGN.SETSIZE; i++) {
+          let cueSide = this.cueList[i]; // 'left' or 'right'
+          let pair = this.pairList[i];
+          this.retrievalInfo[pair] = {
+            number: this.numberObj[i][cueSide].number,
+            congruency: this.correctJudge[i] === cueSide ? "congruent" : "incongruent",
+          };
+        }
 
     }
 
@@ -197,7 +183,7 @@ createTrialBody.prototype.displayMemoryPhase = function () {
             font: `bold ${this.canH * 0.15}px Arial`,
         }
 
-        // pre-cue screen
+        // pre-cue screen - WE DON'T HAVE A PRE CUE 
         const preCueScreen = {
           type: Psychophysics,
           canvas_width: this.canW,
@@ -226,12 +212,12 @@ createTrialBody.prototype.displayMemoryPhase = function () {
         screen_line.push(preCueScreen);
 
         let memoryScreen: object;
-        let stepImages = this.objectObj[i];
+        let stepNumbers = this.numberObj[i];
 
         if (this.question === "null") {
 
-          // draw the image objects
-          const elementList = drawImageObject([stepImages.left, stepImages.right]);
+          // draw the image NUMBERS
+          const elementList = drawNumberObject([stepNumbers.left, stepNumbers.right]);
 
           // memory screen
           memoryScreen = {
@@ -247,15 +233,13 @@ createTrialBody.prototype.displayMemoryPhase = function () {
               screenID: "memory",
               blockID: this.blockID,
               trialID: this.trialID,
-              stepID: i + 1,
               condition: this.condition,
+              procedure: this.procedure,
+              pair: this.pairList[i],
               cue: this.cueList[i],
-              color: this.colorList[i],
-              leftImage: stepImages.left.image,
-              rightImage: stepImages.right.image,
-              leftSize: stepImages.left.size,
-              rightSize: stepImages.right.size,
-            }
+              leftNumber: stepNumbers.left.number,
+              rightNumber: stepNumbers.right.number,
+            },
           };
         } else {
           let questionContent = SCREEN_INFO[this.question][expInfo.LANG];
@@ -264,7 +248,7 @@ createTrialBody.prototype.displayMemoryPhase = function () {
           const questionMark = {
             obj_type: "text",
             content: questionContent,
-            font: `bold ${this.canH * 0.05}px Arial`,
+            font: `${this.canH * 0.05}px Arial`,
             text_color: "#000000",
             startX: this.center[0],
             startY: this.center[1] * 0.2,
@@ -273,8 +257,8 @@ createTrialBody.prototype.displayMemoryPhase = function () {
           // create the button html for the current screen
           let buttonHtmlIndex = `${this.condition}${this.blockID}${this.trialID}${i}`;
           const buttonHtml = createAlterButtons(
-            stepImages.left,
-            stepImages.right,
+            stepNumbers.left,
+            stepNumbers.right,
             buttonHtmlIndex
           );
 
@@ -287,23 +271,22 @@ createTrialBody.prototype.displayMemoryPhase = function () {
             stimuli: [questionMark],
             response_type: "button",
             button_choices: [
-              stepImages.left.imagePath,
-              stepImages.right.imagePath,
+              stepNumbers.left.number,
+              stepNumbers.right.number,
             ],
+            response_ends_trial: false,
             button_html: buttonHtml,
             trial_duration: TIMING.STIMULUS,
             data: {
               screenID: "memory",
               blockID: this.blockID,
               trialID: this.trialID,
-              stepID: i + 1,
               condition: this.condition,
+              procedure: this.procedure,
+              pair: this.pairList[i],
               cue: this.cueList[i],
-              color: this.colorList[i],
-              leftImage: stepImages.left.image,
-              rightImage: stepImages.right.image,
-              leftSize: stepImages.left.size,
-              rightSize: stepImages.right.size,
+              leftNumber: stepNumbers.left.number,
+              rightNumber: stepNumbers.right.number,
               correctJudge: this.correctJudge[i],
             },
             on_finish: function (data) {
@@ -362,50 +345,59 @@ createTrialBody.prototype.displayMemoryPhase = function () {
  * Ask participants to recall the object corresponding to the color
  */
 createTrialBody.prototype.displayRetrievalPhase = function () {
+  
+  const button_choices = this.responseList.map((number: number) => number.toString());
+
   // copy the information from the current object
   const info = {
     responseList: this.responseList,
+    button_choices: button_choices,
   };
 
   const retrievalLine: any[] = [];
 
   // shuffle the color list
-  random.shuffle(this.colorList);
+  //random.shuffle(this.pairList);
 
   // create the button html for the current trial
   let buttonHtmlIndex = `${this.condition}${this.blockID}${this.trialID}`;
-  const colorButtonHtml = createButtonMatrix(
+  const colorButtonHtml = createNumberButtonMatrix(
     3, 4, // number of rows and columns
     this.canW * 0.4,
     this.canH * 0.5, // size of the whole matrix
     [this.canW * 0.75, this.canH * 0.5], // center position of the matrix
     this.canH * 0.18, // button width
     "#FFFFFF", // color
-    buttonHtmlIndex
+    buttonHtmlIndex,
+    this.responseList
   );
 
-  for (let color of this.colorList) {
-    let testColor: any[] = [
-      {
-        obj_type: "circle",
-        startX: this.center[0] * 0.6,
-        startY: this.center[1],
-        fill_color: color,
-        line_color: color,
-        radius: this.canH * 0.15,
-      },
-    ];
+  for (let pair of this.pairList) {
+    let cueStimuli: any[];
+
+    let positionIndex = pair;
+
+    let cueText = {
+      obj_type: "text",
+      content: `Paar ${positionIndex}`,
+      font: `bold ${this.canH * 0.05}px Arial`,
+      text_color: "#000000",
+      startX: this.center[0] * 0.6,
+      startY: this.center[1],
+      text_align: "center",
+      text_baseline: "middle",
+    };
+
+    cueStimuli = [cueText];
 
     const testScreen = {
       type: Psychophysics,
       canvas_width: this.canW,
       canvas_height: this.canH,
       background_color: COLORS.BACKGROUND,
-      stimuli: testColor,
+      stimuli: cueStimuli,
       response_type: "button",
-      button_choices: this.responseList.map(
-        (image: any) => OBJECTS.imagePath + image + ".png"
-      ),
+      button_choices: this.responseList.map((number: number) => number.toString()),
       button_html: colorButtonHtml,
       trial_duration: TIMING.RETRIEVAL,
       data: {
@@ -413,17 +405,25 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
         blockID: this.blockID,
         trialID: this.trialID,
         condition: this.condition,
-        color: color,
-        correctObject: this.retrievalInfo[color].object,
-        congruency: this.retrievalInfo[color].congruency,
+        procedure: this.procedure,
+        pair: pair,
+        cue: positionIndex,
+        correctNumber: this.retrievalInfo[pair].number,
+        congruency: this.retrievalInfo[pair].congruency,
       },
       on_finish: function (data) {
 
-        data.response =
-          data.response === null ? "null" : info.responseList[data.response];
-
-        data.acc = data.response === data.correctObject ? true : false;
+        if (data.response === null) {
+          data.response = "null";
+      } else {
+          const responseIndex = data.response;
+          const responseValue = info.button_choices[responseIndex];
+          data.response = parseInt(responseValue);
+      }
+      data.acc = data.response === data.correctNumber;
+      
       },
+  
     };
 
     retrievalLine.push(testScreen);
@@ -461,6 +461,7 @@ createTrialBody.prototype.displayDebriefingPhase = function(results:string = "me
           blockID: this.blockID,
           trialID: this.trialID,
           condition: this.condition,
+          procedure: this.procedure
         },
         on_finish: function (data) {
           let accuracy = jsPsych.data
@@ -495,6 +496,7 @@ createTrialBody.prototype.displayDebriefingPhase = function(results:string = "me
           blockID: this.blockID,
           trialID: this.trialID,
           condition: this.condition,
+          procedure: this.procedure
         },
         on_finish: function (data) {
           let accuracy = jsPsych.data
@@ -514,9 +516,9 @@ createTrialBody.prototype.displayDebriefingPhase = function(results:string = "me
 
 
 
-export function createNewTrial(condition:string, question:string, blockID:number, trialID:number) {
+export function createNewTrial(condition:string, question:string, blockID:number, trialID:number, procedure:string) {
 
-    let trialBody = new createTrialBody(condition, question, blockID, trialID);
+    let trialBody = new createTrialBody(condition, question, blockID, trialID, procedure);  
 
     let trialLine:any[] = [];
 
@@ -529,16 +531,18 @@ export function createNewTrial(condition:string, question:string, blockID:number
     let retrievalLine = trialBody.displayRetrievalPhase();
     trialLine = trialLine.concat(retrievalLine);
     // debriefing screen
-    let debriefingScreen = trialBody.displayDebriefingPhase();
-    trialLine.push(debriefingScreen);
+    if (procedure !== "experiment") {
+      let debriefingScreen = trialBody.displayDebriefingPhase();
+      trialLine.push(debriefingScreen);
+    }
 
     return trialLine;
 
 }
 
-export function createSizeJudgement(question:string, blockID:number, trialID:number) {
+export function createSizeJudgement(question:string, blockID:number, trialID:number, procedure:string) {
 
-    let trialBody = new createTrialBody("control", question, blockID, trialID);
+    let trialBody = new createTrialBody("control", question, blockID, trialID, procedure);
 
     let trialLine:any[] = [];
 
@@ -548,8 +552,10 @@ export function createSizeJudgement(question:string, blockID:number, trialID:num
     let memoryScreen = trialBody.displayMemoryPhase();
     trialLine = trialLine.concat(memoryScreen);
     // debriefing screen
-    let debriefingScreen = trialBody.displayDebriefingPhase("sizeJudgement");
-    trialLine.push(debriefingScreen);
+    if (procedure !== "experiment") {
+      let debriefingScreen = trialBody.displayDebriefingPhase("sizeJudgement");
+      trialLine.push(debriefingScreen);
+    }
 
     return trialLine;
 

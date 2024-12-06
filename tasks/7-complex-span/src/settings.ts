@@ -7,10 +7,10 @@ import { random } from "@coglabuzh/webpsy.js";
 export const expInfo = {
   // settings for the experiment
   TITLE: "complex_span", // the title of the experiment
-  RESEARCHER: "Chenyu Li", // researcher's name
-  EMAIL: "chenyu.li@uzh.ch", // researcher's email
+  RESEARCHER: " ", // researcher's name
+  EMAIL: " ", // researcher's email
   DURATION: 20, // duration of the experiment in minutes
-  LANG: "eng", // the language of the experiment
+  LANG: "de", // the language of the experiment
 
   // experiment design
   DESIGN: {
@@ -19,7 +19,7 @@ export const expInfo = {
     nDUAL: 3, // number of dual-task trials
     nTRIALS: 35, // number of experiment trials for each condition
     SETSIZE: 3, // set size
-    QUESTION: "larger", // questions
+    QUESTION: "question", // questions
   },
 
   OBJECTS: {
@@ -29,9 +29,14 @@ export const expInfo = {
     MEMORY: {} as { [key: number]: object },
   },
 
+  NUMBERS: {
+    POOL: Array.from({ length: 90 }, (_, i) => i + 10), // Numbers from 10 to 99 (2 digits)
+    MEMORY: {} as { [key: number]: number[] },
+  },
+
   COLORS: {
-    BG_NAME: "grey",
-    BACKGROUND: "#bababa",
+    BG_NAME: "white",
+    BACKGROUND: "#FFFFFF",
     POOL: [
       "#2e8a3c",
       "#e9ae0c",

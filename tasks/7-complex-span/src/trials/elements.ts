@@ -6,6 +6,40 @@ interface ImageObject {
     position: number[];
   }
 
+interface NumberObject {
+  number: number;
+  color?: string;
+  width: number;
+  position: number[];
+}
+
+export function drawNumberObject(numbers: NumberObject[]) {
+    let objectList: any[] = [];
+  
+    numbers.forEach((numberObj) => {
+      const { number, color, width, position } = numberObj;
+        
+        // deleted rect_object 
+
+      var text_object = {
+        obj_type: 'text',
+        content: number.toString(),
+        font: `72px Arial`,
+        text_color: '#000000',
+        startX: position[0],
+        startY: position[1],
+        text_align: 'center',
+        text_baseline: 'middle',
+      };
+  
+      objectList.push(text_object);
+    });
+  
+    return objectList;
+  }
+  
+
+/*
 export function drawImageObject(images:ImageObject[]) {
 
     let objectList:any[] = [];
@@ -37,4 +71,4 @@ export function drawImageObject(images:ImageObject[]) {
     });
 
     return objectList;
-}
+}*/

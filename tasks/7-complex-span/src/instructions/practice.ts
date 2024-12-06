@@ -38,7 +38,7 @@ const instr_memory_task_screen = {
 
 let trial_memory_task_line:any[] = [];
 for (let i = 0; i < DESIGN.nPRACTICE_RETRO; i++) {
-  var tmp_line = createNewTrial("retro", "null", -2, i);
+  var tmp_line = createNewTrial("retro", "null", -2, i, "practice");
   trial_memory_task_line = trial_memory_task_line.concat(tmp_line);
 }
 
@@ -118,7 +118,7 @@ let trial_judgement_task_line:any[] = [];
 
 for (let i = 0; i < DESIGN.nJUDGE; i++) {
   
-  let tmp_line = createSizeJudgement(DESIGN.QUESTION, -3, i);
+  let tmp_line = createSizeJudgement(DESIGN.QUESTION, -3, i, "practice");
   trial_judgement_task_line = trial_judgement_task_line.concat(tmp_line);
 
 }
@@ -198,7 +198,7 @@ let trial_dual_tasks_line:any[] = [];
 
 for (let i = 0; i < DESIGN.nDUAL; i++) {
 
-  let tmp_line = createNewTrial("retro", DESIGN.QUESTION, -4, i);
+  let tmp_line = createNewTrial("retro", DESIGN.QUESTION, -4, i, "practice");
   trial_dual_tasks_line = trial_dual_tasks_line.concat(tmp_line);
 
 }

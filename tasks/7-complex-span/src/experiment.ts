@@ -50,7 +50,7 @@ export async function run({
   // Preload assets
   const preload_screen = {
     type: preload,
-    images: assetPaths.images,
+    //images: assetPaths.images,
     // audio: assetPaths.audio,
     // video: assetPaths.video,
   };
@@ -68,7 +68,8 @@ export async function run({
       "retro",
       DESIGN.QUESTION,
       1,
-      iTrial + 1
+      iTrial + 1,
+      "experiment"
     );
     experiment_line = experiment_line.concat(trialLine);
   };
@@ -82,7 +83,7 @@ export async function run({
   timeline = timeline.concat(practice_judgement_task_line);
   timeline = timeline.concat(practice_dual_tasks_line);
   timeline = timeline.concat(experiment_line);
-  timeline.push(survey_screen);
+  //timeline.push(survey_screen);
 
   
 

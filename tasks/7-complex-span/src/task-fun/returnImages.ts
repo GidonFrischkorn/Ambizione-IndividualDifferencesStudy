@@ -2,48 +2,32 @@
 /**
  * return the images back to the pool after several trials
  * 
- * @param pool [object] the pool of images
- * @param memory [object] the memory of images that have been used over previous trials
- * @param afterTrials  [number] the number of trials after which the images are returned back to the pool
+ * @param pool {number[]} Il pool di numeri disponibili.
+ * @param memory { { [key: number]: number[] } } La memoria dei numeri utilizzati nei trial precedenti.
+ * @param afterTrials {number} Il numero di trial dopo il quale i numeri vengono restituiti al pool.*
  * 
  * @returns void
  */
-export function returnImages(
-    pool: { [key: string]: number },
-    memory: { [key: number]: object },
-    afterTrials: number = 10,
-    exclusion: string = "image5"
-){
+export function returnNumbers(
+    pool: number[],
+    memory: { [key: number]: number[] },
+    afterTrials: number = 10
+  ){
 
-    // check the length of the memory
-    let memoryLength = Object.keys(memory).length;
-
-    // if the length of the memory is more than the threshold
-    // return the additional images back to the pool
-    if (memoryLength > afterTrials) {
-
-        // return the earlist images back to the pool
-        let imageList = Object.keys(memory)
-            .map((x) => parseInt(x))
-          .sort(function (a, b) {return a - b;});
+  const trialKeys = Object.keys(memory)
+  .map((key) => parseInt(key))
+  .sort((a, b) => a - b);
 
 
-        // iterate through the memory
-        for (let key of imageList) {
-          // get the images from the memory
-          let images = memory[key];
+while (trialKeys.length > afterTrials) {
+  const oldestTrialKey: any = trialKeys.shift(); 
+  const numbersToReturn = memory[oldestTrialKey];
 
-          // return the images back to the pool
-          for (let image of Object.keys(images)) {
-            if (image !== exclusion) pool[image] = images[image];
-          }
+  // Restituisci i numeri al pool
+  pool.push(...numbersToReturn);
 
-          // delete the memory
-          delete memory[key];
-
-          // break the loop if the length of the memory is less than the threshold
-          if (Object.keys(memory).length <= afterTrials) break;
-        }
-    }
+  // Rimuovi il trial dalla memoria
+  delete memory[oldestTrialKey];
+}
 
 }

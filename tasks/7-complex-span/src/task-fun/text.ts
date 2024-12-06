@@ -3,6 +3,10 @@ import { expInfo } from "../settings";
 
 // Text on the screens
 export const SCREEN_INFO = {
+  question: {
+    de: "Welche Zahl ist grösser?"
+  },
+
   startPractice: {
     en: `<div class='main'>
         <h1 class='title'>Practice</h1>
@@ -107,7 +111,7 @@ export const SCREEN_INFO = {
       case "en":
         return `<div class='fb-text'>You correctly recalled ${accuracy} out of ${nTest} objects.</div>`;
       case "de":
-        return `<div class='fb-text'>Sie haben ${accuracy}/${nTest} Objekte korrekt erinnert.</div>`;
+        return `<div class='fb-text'>Sie haben ${accuracy}/${nTest} Zahlen korrekt erinnert.</div>`;
       case "cn":
         return `<div class='fb-text'>您正确回忆了${accuracy}/${nTest}个物体。</div>`;
     }
@@ -118,7 +122,7 @@ export const SCREEN_INFO = {
       case "en":
         return `<div class='fb-text'>You correctly judged ${accuracy} out of ${nTest} pairs of objects.</div>`;
       case "de":
-        return `<div class='fb-text'>Sie haben ${accuracy}/${nTest} Objektpaare korrekt beurteilt.</div>`;
+        return `<div class='fb-text'>Sie haben ${accuracy}/${nTest} Zahlenpaare korrekt beurteilt.</div>`;
       case "cn":
         return `<div class='fb-text'>您正确判断了${accuracy}/${nTest}对物体。</div>`;
     }
