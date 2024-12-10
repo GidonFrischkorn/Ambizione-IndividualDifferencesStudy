@@ -29,7 +29,7 @@ export const varSystem = {
     nBLUR: 0, // use to count how many times participants left the browser
     MAX_BLUR: 3, // the maximum number of times participants can leave the browser
     LOOP: true, // a switch to control whether participants need to read the instruction and practice again
-    STATUS: "success"
+    STATUS: "offline"
 };
 
 // define experimental variables and color condition
@@ -129,7 +129,7 @@ export function MakeExpInfo(task_condition) {
         response_image: 'resp.jpg',
         finger_image: 'finger_allocation.jpg'
         
-    }
+    };
 
     // return experimental variables
     return expInfo;
