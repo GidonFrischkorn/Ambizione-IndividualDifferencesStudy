@@ -1,5 +1,4 @@
 // import
-import { jsPsych } from "./jsp";
 import { setCSS } from "./task-fun/setCSS";
 import { sampleColorWheel } from "./task-fun/sampleColorWheel";
 import { random } from "@coglabuzh/webpsy.js";
@@ -27,6 +26,7 @@ export const varSystem = {
 export function MakeExpInfo(task_condition) {
     
     // determine task condition
+    // declarative or procedural task
     var exp_task = 'declarative';
 
     // color condition
@@ -51,18 +51,16 @@ export function MakeExpInfo(task_condition) {
     const expInfo = {
 
         // experiment name
-        exp_name: "ProcDecBindingExp2_Session1_" + exp_task , // experiment name
+        exp_name: "BindingVisual_" + exp_task , // experiment name
         session: 1, // session 2
 
         // define list conditions
         list_condition: ['Control', 'Control', 'Hebb'], // list conditions
 
         // number of blocks and trials
-        n_finger_check_trials: 8, // number of finger check trials
         n_proc_speed_trials: 64, // number of processing speed trials
         n_prac_trials: 8, // number of practice trials
         n_exp_trials: 3, // number of experiment trials within mini block
-        n_finger_check_blocks: 1, // number of finger check blocks
         n_proc_speed_blocks: 1, // number of processing speed blocks
         n_prac_blocks: 1, // number of practice blocks
         n_exp_blocks: 20, // number of experimental blocks

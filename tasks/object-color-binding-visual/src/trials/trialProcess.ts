@@ -62,19 +62,10 @@ trialStim.prototype.memoryPhase = function () {
   const preload_screen = screen_preload(this.exp_info, this.exp_trial, this.task);
   phase_line.push(preload_screen);
   
-  // finger check task
-  if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_speed_declarative" || this.task == "finger_check_procedural" || this.task == "finger_check_declarative") {
+  // processing speed task
+  if (this.task == "proc_speed_declarative") { // practice or experimental trials
     
-    if (this.exp_trial.trial == 0) {
-      
-      // display info for finger check
-      const info_finger_check_screen = screen_info_finger_check(this.exp_info, this.exp_trial);
-      phase_line.push(info_finger_check_screen);
-    };
-
-  } else if (this.task == "proc_speed_declarative") { // practice or experimental trials
-    
-    // show info after finger check
+    // show info
     if (this.exp_trial.trial == 0) {
       // display info for finger check
       const info_proc_speed_screen = screen_info_proc_speed(this.exp_info, this.exp_trial);
@@ -91,9 +82,9 @@ trialStim.prototype.memoryPhase = function () {
     
   } else if (this.task == "proc_speed_procedural") { // practice or experimental trials
     
-    // show info after finger check
+    // show info 
     if (this.exp_trial.trial == 0) {
-      // display info for finger check
+      // display info 
       const info_proc_speed_screen = screen_info_proc_speed(this.exp_info, this.exp_trial);
       phase_line.push(info_proc_speed_screen);
     }
@@ -119,9 +110,9 @@ trialStim.prototype.memoryPhase = function () {
       
     } 
 
-    // show info after finger check
+    // show info
     if (this.is_practice == 0 && this.exp_trial.trial == 0) {
-      // display info for finger check
+      // display info
       const info_dec_screen = screen_info_dec(this.exp_info, this.exp_trial);
       phase_line.push(info_dec_screen);
     }
@@ -158,9 +149,9 @@ trialStim.prototype.memoryPhase = function () {
       
     } 
 
-    // show info after finger check
+    // show info 
     if (this.is_practice == 0 && this.exp_trial.trial == 0) {
-      // display info for finger check
+      // display info 
       const info_proc_screen = screen_info_proc(this.exp_info, this.exp_trial);
       phase_line.push(info_proc_screen);
     }
@@ -199,41 +190,7 @@ trialStim.prototype.retrievalPhase = function () {
   // create phase_line for retieval phase
   var phase_line: any[] = [];
 
-  // finger check task
-  if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_speed_declarative" || this.task == "finger_check_procedural" || this.task == "finger_check_declarative") {
-
-    // define task for finger check trials
-    if (this.task == "finger_check_speed_procedural") {
-
-      var task_finger = 'procedural_proc_speed';
-
-    } else if (this.task == "finger_check_procedural") {
-
-      var task_finger = 'procedural';
-
-    } else if (this.task == "finger_check_speed_declarative") {
-
-      var task_finger = 'declarative_proc_speed';
-
-    } else { //this.task == "finger_check_declarative"
-
-      var task_finger = 'declarative';
-      
-    }
-
-    // display color together with key assignment of colors
-    const finger_check_screen = screen_finger_check(this.exp_info, this.exp_trial, task_finger);
-    phase_line.push(finger_check_screen);
-
-    // display feedback
-    const feedback_finger_check_screen = screen_feedback_finger_check(this.exp_info);
-    phase_line.push(feedback_finger_check_screen);
-
-    // isi
-    const isi_screen = screen_isi(this.exp_info);
-    phase_line.push(isi_screen);
-
-  } else if (this.task == "proc_speed_declarative") { // practice or experimental trials
+  if (this.task == "proc_speed_declarative") { // practice or experimental trials
 
      // display color together with key assignment of colors
      const proc_speed2_dec_screen = screen_proc_speed2_dec(this.exp_info, this.exp_trial, 0);
