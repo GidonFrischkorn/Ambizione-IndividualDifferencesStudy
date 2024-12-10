@@ -2,17 +2,20 @@
 __pycache__/
 .vscode/
 .log
+.jspsych-builder/
 ~$*
 *.tmp
 
 # Dependencies
 node_modules/
+pacakged/
 
 # Word temporary
-# ~$*.doc*
+~$*.doc*
 
 # Excel temporary
-# ~$*.xls*
+~$*.xls*
 
 # PowerPoint temporary
-# ~$*.ppt*
+~$*.ppt*
+*.jzip
