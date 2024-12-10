@@ -52,8 +52,7 @@ export function MakeExpInfo(task_condition) {
 
         // experiment name
         exp_name: "BindingVisual_" + exp_task , // experiment name
-        session: 1, // session 2
-
+        
         // define list conditions
         list_condition: ['Control', 'Control', 'Hebb'], // list conditions
 

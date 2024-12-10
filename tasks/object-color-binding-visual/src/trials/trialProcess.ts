@@ -5,10 +5,6 @@ import { screen_cue } from "./trialScreens/ScreenRetrievalCue";
 import { screen_iti } from "./trialScreens/ScreenITI";
 import { screen_isi } from "./trialScreens/ScreenISI";
 
-import { screen_info_finger_check } from "./trialScreens/ScreenInfoFingerCheck";
-import { screen_finger_check } from "./trialScreens/ScreenFingerCheck";
-import { screen_feedback_finger_check } from "./trialScreens/ScreenFeedbackFinger";
-
 import { screen_info_proc_speed } from "./trialScreens/ScreenInfoProcSpeed";
 import { screen_proc_speed1_dec } from "./trialScreens/ScreenProcSpeed1Dec";
 import { screen_proc_speed2_dec } from "./trialScreens/ScreenProcSpeed2Dec";

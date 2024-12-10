@@ -98,8 +98,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
       data: { // data to be saved
         screenID: 'retrieval2_dec',
         task: 'declarative',
-        session: exp_info.session,
-  
+        
         col_dist: exp_info.col_dist,
         group_dist: exp_info.group_dist,
         start_cols: exp_info.cols_start,

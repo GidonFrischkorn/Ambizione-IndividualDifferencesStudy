@@ -63,8 +63,7 @@ export const screen_proc_speed_proc = function(exp_info, exp_trial, stim) {
       data: { // data to be saved
         screenID: 'proc_speed_proc',
         task: 'procedural',
-        session: exp_info.session,
-
+        
         procedure: exp_trial.phase,
         blockID: exp_trial.block,
         trialID: exp_trial.trial,
