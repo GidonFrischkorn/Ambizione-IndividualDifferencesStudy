@@ -23,8 +23,8 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     var n_blocks = exp_info.n_finger_check_blocks;
     var n_trials = exp_info.n_finger_check_trials;
     
-    // define the conditions: cross colors and key positions
-    finger_check_pos.push(Array(exp_info.cols.length).fill(exp_info.pos).flat());
+    // define the conditions: key positions
+    finger_check_pos.push(Array(exp_info.pos.length).fill(exp_info.pos).flat());
     
     // loop through blocks
     for(let block = 0; block < n_blocks; block ++) {
