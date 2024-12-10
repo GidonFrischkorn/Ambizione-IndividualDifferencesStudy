@@ -57,7 +57,6 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
  // define whether to run practice, finger check, and processing speed task (0 = no, 1 = yes)
  var is_practice = 1;
- var is_finger_check = 1;
  var is_proc_speed = 1;
  
   // create timeline variables
@@ -237,7 +236,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
                   if (correct_last_practice_if < 4) {
                     
-                    endExpPractice(varOnline.FAIL_CODE);
+                    endExpPractice(varOnline.CODES.FAILED_OTHERS);
 
                   } else { //correct_last_practice_if = 4
 
