@@ -106,8 +106,8 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
         cols_angles: exp_info.cols_angles,
     
         procedure: exp_trial.phase,
-        blockID: exp_trial.block,
-        trialID: exp_trial.trial,
+        block_number: exp_trial.block,
+        trial_number: exp_trial.trial,
         trialBlockID: exp_trial.trial2block,
         list_condition: exp_trial.list_condition,
           

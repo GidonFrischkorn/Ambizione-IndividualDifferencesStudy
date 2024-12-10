@@ -60,10 +60,6 @@ export async function run({ assetPaths, input = {}, environment, title, version 
  var is_proc_speed = 1;
  
   // create timeline variables
-  let finger_check_line_speed_task:any[] = [];
-  let finger_check_loop_line_speed_task:any = [];
-  let finger_check_line_task:any[] = [];
-  let finger_check_loop_line_task:any = [];
   let proc_speed_instr_line_task:any[] = [];
   let proc_speed_line_task:any[] = [];
   let prac_instr_line_task:any[] = [];
@@ -315,11 +311,9 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline = timeline.concat(proc_speed_instr_line_task);
-  timeline = timeline.concat(finger_check_loop_line_speed_task); 
   timeline = timeline.concat(proc_speed_line_task);
   timeline = timeline.concat(prac_line_all_task); 
   timeline = timeline.concat(exp_instr_line_task);
-  timeline = timeline.concat(finger_check_loop_line_task);
   timeline = timeline.concat(exp_line_task);
   timeline = timeline.concat(end_instr_line_task);
   timeline.push(question_serious_participation);
