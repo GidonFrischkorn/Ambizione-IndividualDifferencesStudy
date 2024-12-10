@@ -3,7 +3,9 @@ import htmlButtonResponse from '@jspsych/plugin-html-button-response';
 
 export const welcome_screen = {
     type: htmlButtonResponse,
-    stimulus: `<p class="fb-text">
+    stimulus: `<p class="title">Willkommen!</p>
+      <div class="main">
+        <p class="fb-text">
         Binding Task Visual (declarative) <br> <br>
         </p>
       </div>`,
