@@ -10,18 +10,16 @@
 
 import "../styles/main.scss"; // stylesheets (.scss or .css)
 import preload from '@jspsych/plugin-preload'; // plugins from jspsych
-import psychophysics from "@kurokida/jspsych-psychophysics"; // import psychophysics plugin
+
 import { MakeExpInfo, varOnline} from "./settings"; // settings
 import { jsPsych } from "./jsp";
-import { setConditions, finishCondition } from "./task-fun/setConditions";
 import { createInstr, createSingleInstr } from "./instructions/createInstrStart";
 import { createNewTrial } from "./trials/trialProcess";
 import { MakeTrial } from "./trials/trialStims";
 import { chunkTrials } from "@coglabuzh/webpsy.js";
 import { calculateMods } from "./task-fun/calculateMods";
 import { createIfNode } from "./task-fun/createIfNode";
-import { endExpPractice, endExpFingerCheck, endExpColorCheck } from "./task-fun/endExperiment";
-import { random } from "@coglabuzh/webpsy.js";
+import { endExpPractice, endExpFingerCheck} from "./task-fun/endExperiment";
 
 import { welcome_screen } from "./instructions/welcome";
 import { browser_screen } from "./instructions/browserCheck";
@@ -488,11 +486,6 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // run the experiment
   await jsPsych.run(timeline);
   
-  // finish jatos batch session
-  if (varOnline.RUN_JATOS) {
-    finishCondition(task_condition)
-  }
-
   // return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
   return jsPsych;
