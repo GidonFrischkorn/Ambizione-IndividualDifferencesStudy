@@ -1,8 +1,7 @@
 /**
- * @title Pilot ProcDecBindingExp2_Session1
- * @description Pilot Experiment 2 - Procedural and declarative bindings task from Experiment 1 with calibrated colors
- * Session 1 - Declarative/Procedural Task as defined in Batch Session
- * @version 0.1.1 // change to 0.1.0: save certain variables properly
+ * @title Object Color Binding Task Visual
+ * @description Visual bindings (objects-colors)
+ * @version 0.0.1
  *
  * @assets assets/
  */
