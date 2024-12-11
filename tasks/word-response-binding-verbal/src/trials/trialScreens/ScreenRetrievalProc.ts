@@ -10,10 +10,10 @@ export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
     var img_height = exp_info.canH/3.5;
   
     // stimulus image
-    const stim_img = {
-      obj_type: 'image',
-      file: exp_info.image_path + `stim_${exp_trial.ret_stim[stim]}.jpg`, 
-      image_height: img_height,
+    const stim_text = {
+      obj_type: 'text',
+      content: exp_info.stim_words[stim], 
+      fontSize: 20,
       startX: exp_info.center[0],
       startY: exp_info.center[1]
     };
@@ -24,7 +24,7 @@ export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
       background_color: 'white',
       canvas_width: exp_info.canW,
       canvas_height: exp_info.canH,
-      stimuli: [stim_img],
+      stimuli: [stim_text],
       response_type: 'key',
       trial_duration: exp_info.max_rt,
       choices: exp_info.resp_keys,

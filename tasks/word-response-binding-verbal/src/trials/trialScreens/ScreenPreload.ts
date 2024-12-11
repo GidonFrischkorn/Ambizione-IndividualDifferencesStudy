@@ -11,7 +11,7 @@ export const screen_preload = function(exp_info, exp_trial, task) {
 
     // add images for stimuli
     for (let stim = 0; stim < exp_trial.setsize; stim++) {
-      images_trial.push(exp_info.image_path + `stim_${exp_trial.ret_stim[stim]}.jpg`);
+      images_trial.push(exp_info.stim_words[stim]);
     }
 
     // add response image

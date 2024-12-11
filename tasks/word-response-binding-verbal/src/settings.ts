@@ -85,8 +85,9 @@ export function MakeExpInfo(task_condition) {
         setsize: 6, // number of stimulus in experimental trials
         prac_setsize: [2, 2, 3, 3, 4, 4, 6, 6], // setsizes for practice trials
         stim_count: 274, // number of stimuli
-        stim_index_dec: random.sample(Array.from(Array(274).keys()).map(i => i + 1), 252),
-        stim_index_proc: words.map(i => i.Word), 
+        stim_index_dec: Array.from(Array(332).keys()).map(i => i),
+        stim_index_proc: Array.from(Array(332).keys()).map(i => i),
+        stim_words: words.map(i => i.Word), 
         resp_keys:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys
         pos: Array.from(Array(8).keys()), // positions of responses
             
