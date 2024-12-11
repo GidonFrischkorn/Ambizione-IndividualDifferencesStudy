@@ -457,14 +457,15 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
       var n_trials = exp_info.n_exp_trials;
     }
     
+    console.log(['words', exp_info.stim_index_proc]);
     // define stimlus arrays
     if (is_practice == 1) { // practice trials
 
-      var stim_idx = removeItems(Array.from(Array(exp_info.stim_count).keys()).map(i => i + 1), exp_info.stim_index_proc);
+      var stim_idx:any = removeItems(Array.from(Array(exp_info.stim_count).keys()).map(i => i + 1), exp_info.stim_index_proc);
 
     } else { // experimental trials
     
-      var stim_idx = exp_info.stim_index_proc;
+      var stim_idx:any = exp_info.stim_index_proc;
     }
 
      // sample Hebb stimuli
