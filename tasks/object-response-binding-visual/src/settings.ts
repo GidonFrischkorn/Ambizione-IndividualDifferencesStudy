@@ -77,8 +77,6 @@ export function MakeExpInfo(task_condition) {
         n_blocks_break: 4, // number of mini blocks before break
 
         // number of slides for isntructions
-        n_proc_speed_slides_dec: 10,
-        n_prac_slides_dec: 12,
         n_proc_speed_slides_proc: 6,
         n_prac_slides_proc: 8,
 

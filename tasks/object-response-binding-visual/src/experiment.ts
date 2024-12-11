@@ -76,15 +76,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   if (is_proc_speed == 1) { // processing speed task
 
-    if (task_condition == "declarative") {
-
-      var slides_num_proc_speed = exp_info.n_proc_speed_slides_dec
-
-    } else { // procedural
-
-      var slides_num_proc_speed = exp_info.n_proc_speed_slides_proc
-
-    }
+    var slides_num_proc_speed = exp_info.n_proc_speed_slides_proc;
 
     // create instructions for processing speed task
     proc_speed_instr_line_task.push(createInstr(exp_info, 'Processing_Speed_Instructions_' + task_condition, 1, slides_num_proc_speed))
@@ -119,15 +111,8 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // create instructions practice
   // define slide numbers for declarative and procedural task
-  if (task_condition == "declarative") {
-
-    var slides_num_prac = exp_info.n_prac_slides_dec;
-
-  } else { // procedural
-
-    var slides_num_prac = exp_info.n_prac_slides_proc;
-
-  }
+  
+  var slides_num_prac = exp_info.n_prac_slides_proc;
 
   prac_instr_line_task.push(createInstr(exp_info, 'Instructions_' + task_condition, 1, slides_num_prac));
   prac_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'PracStart_' + task_condition));
