@@ -1,6 +1,6 @@
 /**
- * @title Object Response Binding Task Visual
- * @description Visual bindings (objects-responses)
+ * @title Word Response Binding Task Verbal
+ * @description Verbal bindings (word-responses)
  * @version 0.0.1 
  *
  * @assets assets/
