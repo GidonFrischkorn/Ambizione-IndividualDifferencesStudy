@@ -457,7 +457,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
       var n_trials = exp_info.n_exp_trials;
     }
     
-    console.log(['words', exp_info.stim_index_proc]);
     // define stimlus arrays
     if (is_practice == 1) { // practice trials
 
