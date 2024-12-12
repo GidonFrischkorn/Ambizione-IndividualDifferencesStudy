@@ -13,7 +13,7 @@ export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
     const stim_text = {
       obj_type: 'text',
       content: exp_info.stim_words[stim], 
-      fontSize: 20,
+      fontSize: '60px',
       startX: exp_info.center[0],
       startY: exp_info.center[1]
     };
