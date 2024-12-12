@@ -6,10 +6,7 @@ import { varSystem } from "../../settings";
 export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
 
     // define variables    
-    // height of the response image
-    var img_height = exp_info.canH/3.5;
-  
-    // stimulus image
+    // stimulus text
     const stim_text = {
       obj_type: 'text',
       content: exp_info.stim_words[stim], 

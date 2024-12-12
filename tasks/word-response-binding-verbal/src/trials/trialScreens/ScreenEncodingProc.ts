@@ -28,8 +28,7 @@ export const screen_encoding_proc = function(exp_info, exp_trial, stim) {
     var ret_dots_rad = exp_info.canH/72; // radius of retrieval color dots
     var img_height = exp_info.canH/3.5; // height of stimulus image
   
-    console.log('stimulus', exp_info.stim_words[stim]);
-    // stimulus image
+    // stimulus text
     const stim_text = {
       obj_type: 'text',
       content: exp_info.stim_words[stim], 
@@ -37,8 +36,7 @@ export const screen_encoding_proc = function(exp_info, exp_trial, stim) {
       startX: exp_info.center[0],
       startY: exp_info.top
     };
-    console.log('stimulus', stim_text);
-  
+    
     // response image
     const resp_img = {
       obj_type: 'image',
