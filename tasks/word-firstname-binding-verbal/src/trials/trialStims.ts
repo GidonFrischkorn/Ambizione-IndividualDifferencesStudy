@@ -184,7 +184,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     // define stimlus arrays
     if (is_practice == 1) { // practice trials
 
-      var stim_idx = removeItems(Array.from(Array(exp_info.stim_count).keys()).map(i => i + 1), exp_info.stim_index_dec);
+      var stim_idx = removeItems(Array.from(Array(exp_info.stim_count).keys()).map(i => i), exp_info.stim_index_dec);
 
     } else { // experimental trials
     
@@ -460,7 +460,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     // define stimlus arrays
     if (is_practice == 1) { // practice trials
 
-      var stim_idx = removeItems(Array.from(Array(exp_info.stim_count).keys()).map(i => i + 1), exp_info.stim_index_proc);
+      var stim_idx = removeItems(Array.from(Array(exp_info.stim_count).keys()).map(i => i), exp_info.stim_index_proc);
 
     } else { // experimental trials
     
