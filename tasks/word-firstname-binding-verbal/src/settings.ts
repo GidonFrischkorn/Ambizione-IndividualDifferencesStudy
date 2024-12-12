@@ -1,7 +1,7 @@
 // import
 import { setCSS } from "./task-fun/setCSS";
 import { sampleColorWheel } from "./task-fun/sampleColorWheel";
-import { random } from "@coglabuzh/webpsy.js";
+import { words } from "../assets/stimuli";
 
 setCSS();
 
@@ -84,7 +84,8 @@ export function MakeExpInfo(task_condition) {
         prac_setsize: [2, 2, 3, 3, 4, 4, 6, 6], // setsizes for practice trials
         stim_count: 274, // number of stimuli
         stim_index_dec: Array.from(Array(332).keys()).map(i => i),
-        stim_index_proc: Array.from(Array(332).keys()).map(i => i), 
+        stim_index_proc: Array.from(Array(332).keys()).map(i => i),
+        stim_words: words.map(i => i.Word),  
         resp_keys:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys
         pos: Array.from(Array(8).keys()), // positions of responses
             
