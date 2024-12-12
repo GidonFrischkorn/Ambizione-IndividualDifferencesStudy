@@ -9,11 +9,6 @@ export const screen_preload = function(exp_info, exp_trial, task) {
   // images to preload for procedural task
   if (task == 'procedural') {
 
-    // add images for stimuli
-    for (let stim = 0; stim < exp_trial.setsize; stim++) {
-      images_trial.push(exp_info.stim_words[stim]);
-    }
-
     // add response image
     images_trial.push(exp_info.image_path + exp_info.response_image);
 
