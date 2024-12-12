@@ -31,11 +31,11 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
     // height of the response image
     var img_height = exp_info.canH/3.5;
   
-    // stimulus image
-    const stim_img = {
-      obj_type: 'image',
-      file: exp_info.image_path + `stim_ (${exp_trial.ret_stim[stim]}).jpg`, 
-      image_height: img_height,
+    // stimulus text
+    const stim_text = {
+      obj_type: 'text',
+      content: exp_info.stim_words[stim], 
+      fontSize: '60px',
       startX: exp_info.center[0],
       startY: exp_info.top
     };
@@ -64,7 +64,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
     };
     
     // array displaying color dots on response image and color circle for retrieval
-    let ret_dots = [stim_img, resp_img, resp_col_circle]
+    let ret_dots = [stim_text, resp_img, resp_col_circle]
     
     // loop through other dot responses for retrieval
     for (let dot = 0; dot < (exp_info.pos.length - 1); dot++){
