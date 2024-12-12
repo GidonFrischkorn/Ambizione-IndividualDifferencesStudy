@@ -47,13 +47,13 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   var timeline:any[] = [];
   
   // preload assets
-  /*
+  
   const preload_screen = {
     type: preload,
     images: assetPaths.images,
     // audio: assetPaths.audio,
     // video: assetPaths.video,
-  };*/
+  };
 
   /************************************** Experiment **************************************/
 
@@ -295,7 +295,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   /************************************** Procedure **************************************/
 
   // push all the screen slides into timeline
-  //timeline.push(preload_screen);
+  timeline.push(preload_screen);
   timeline.push(welcome_screen);
   /*timeline.push(browser_screen);
   timeline.push(fullMode_screen);
