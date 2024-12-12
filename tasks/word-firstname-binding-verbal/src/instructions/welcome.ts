@@ -6,7 +6,7 @@ export const welcome_screen = {
     stimulus: `<p class="title">Willkommen!</p>
       <div class="main">
         <p class="fb-text">
-        Binding Task Visual (declarative) <br> <br>
+        Binding Task Verbal (declarative) <br> <br>
         </p>
       </div>`,
     choices: ["&nbsp;Weiter&nbsp;"],
