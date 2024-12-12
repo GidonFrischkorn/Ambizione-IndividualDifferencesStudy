@@ -1,6 +1,6 @@
 /**
- * @title Object Color Binding Task Visual
- * @description Visual bindings (objects-colors)
+ * @title Word Firstname Binding Task Verbal
+ * @description Verbal bindings (words-firstnames)
  * @version 0.0.1
  *
  * @assets assets/
