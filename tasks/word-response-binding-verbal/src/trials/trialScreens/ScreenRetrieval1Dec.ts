@@ -6,7 +6,7 @@ export const screen_retrieval1_dec = function(exp_info, exp_trial, stim){
 
     // define variables
     // x coordinates of the retrieval names
-    var ret_dots_x = [-7*exp_info.canW/72, 
+    var ret_resp_x = [-7*exp_info.canW/72, 
                       -6*exp_info.canW/72, 
                       -4.6*exp_info.canW/72, 
                       -3.2*exp_info.canW/72, 
@@ -16,7 +16,7 @@ export const screen_retrieval1_dec = function(exp_info, exp_trial, stim){
                       7*exp_info.canW/72];
 
     // y coordinates of the retrieval names
-    var ret_dots_y = [3*exp_info.canH/36, 
+    var ret_resp_y = [3*exp_info.canH/36, 
                       4*exp_info.canH/36, 
                       4.6*exp_info.canH/36, 
                       4*exp_info.canH/36, 
@@ -42,29 +42,29 @@ export const screen_retrieval1_dec = function(exp_info, exp_trial, stim){
       obj_type: 'text',
       content: exp_info.firsts[Number(exp_trial.ret_binding_firsts[stim].split('name')[1])],
       fontSize: '17px',
-      startX: exp_info.center[0] + ret_dots_x[exp_trial.ret_binding_first_pos[stim]], // location in the canvas
-      startY: exp_info.bottom - ret_dots_y[exp_trial.ret_binding_first_pos[stim]]
+      startX: exp_info.center[0] + ret_resp_x[exp_trial.ret_binding_first_pos[stim]], // location in the canvas
+      startY: exp_info.bottom - ret_resp_y[exp_trial.ret_binding_first_pos[stim]]
   
     };
     
     // create array displaying names on response image for retrieval
-    let ret_dots = [resp_img, resp_first_text];
+    let ret_resp = [resp_img, resp_first_text];
     
-    // loop through other dot responses for retrieval
-    for (let dot = 0; dot < (exp_info.pos.length - 1); dot++){
+    // loop through other responses for retrieval
+    for (let resp = 0; resp < (exp_info.pos.length - 1); resp++){
       
-      // other dot responses for retrieval
-      var resp_first_dots = {
+      // other responses for retrieval
+      var resp_first = {
         obj_type: 'text',
-        content: exp_info.firsts[Number(exp_trial.ret_other_firsts[stim][dot].split('name')[1])],
+        content: exp_info.firsts[Number(exp_trial.ret_other_firsts[stim][resp].split('name')[1])],
         fontSize: '17px',
-        startX: exp_info.center[0] + ret_dots_x[exp_trial.ret_other_first_pos[stim][dot]], // location in the canvas
-        startY: exp_info.bottom - ret_dots_y[exp_trial.ret_other_first_pos[stim][dot]] 
+        startX: exp_info.center[0] + ret_resp_x[exp_trial.ret_other_first_pos[stim][resp]], // location in the canvas
+        startY: exp_info.bottom - ret_resp_y[exp_trial.ret_other_first_pos[stim][resp]] 
              
       };
   
       // add each name response
-      ret_dots.push(resp_first_dots);
+      ret_resp.push(resp_first);
     };
     
     // display screen with response image and names
@@ -73,7 +73,7 @@ export const screen_retrieval1_dec = function(exp_info, exp_trial, stim){
       background_color: 'white',
       canvas_width: exp_info.canW,
       canvas_height: exp_info.canH,
-      stimuli: ret_dots,
+      stimuli: ret_resp,
       response_type: 'key',
       trial_duration: exp_info.resp_stim_time,
       choices: 'NO_KEYS',
