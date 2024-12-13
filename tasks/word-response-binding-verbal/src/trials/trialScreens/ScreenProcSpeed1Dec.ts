@@ -5,28 +5,27 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
 export const screen_proc_speed1_dec = function(exp_info, exp_trial, stim) {
   
     // define variables
-    // x coordinates of the retrieval color dots
-    var ret_dots_x = [-6.6*exp_info.canW/72, 
-                      -5.6*exp_info.canW/72, 
+    // x coordinates of the retrieval names
+    var ret_dots_x = [-7*exp_info.canW/72, 
+                      -6*exp_info.canW/72, 
                       -4.6*exp_info.canW/72, 
-                      -3.6*exp_info.canW/72, 
-                      3.6*exp_info.canW/72, 
+                      -3.2*exp_info.canW/72, 
+                      3.2*exp_info.canW/72, 
                       4.6*exp_info.canW/72, 
-                      5.6*exp_info.canW/72, 
-                      6.6*exp_info.canW/72];
+                      6*exp_info.canW/72, 
+                      7*exp_info.canW/72];
+
+    // y coordinates of the retrieval names
+    var ret_dots_y = [3*exp_info.canH/36, 
+                      4*exp_info.canH/36, 
+                      4.6*exp_info.canH/36, 
+                      4*exp_info.canH/36, 
+                      4*exp_info.canH/36, 
+                      4.6*exp_info.canH/36, 
+                      4*exp_info.canH/36, 
+                      3*exp_info.canH/36];
   
-    // y coordinates of the retrieval color dots
-    var ret_dots_y = [2*exp_info.canH/36, 
-                      3*exp_info.canH/36, 
-                      3.6*exp_info.canH/36, 
-                      3*exp_info.canH/36, 
-                      3*exp_info.canH/36, 
-                      3.6*exp_info.canH/36, 
-                      3*exp_info.canH/36, 
-                      2*exp_info.canH/36];
-  
-    // radius of retrieval color dots
-    var ret_dots_rad = exp_info.canH/72;
+    
     // height of the response image
     var img_height = exp_info.canH/3.5;
   
@@ -39,41 +38,35 @@ export const screen_proc_speed1_dec = function(exp_info, exp_trial, stim) {
       startY: exp_info.bottom
     };
   
-    // target color dot response for retrieval
-    const resp_col_circle = {
-      obj_type: 'circle',
+    // target name response for retrieval
+    const resp_first_text = {
+      obj_type: 'text',
+      content: exp_info.firsts[Number(exp_trial.proc_speed_firsts.split('name')[1])],
+      fontSize: '17px',
       startX: exp_info.center[0] + ret_dots_x[exp_trial.proc_speed_pos], // location in the canvas
-      startY: exp_info.bottom - ret_dots_y[exp_trial.proc_speed_pos], 
-      radius: ret_dots_rad,
+      startY: exp_info.bottom - ret_dots_y[exp_trial.proc_speed_pos]
   
-      // RGB values of corresponding color
-      fill_color: `rgb(${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][0]},
-                      ${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][1]}, 
-                      ${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][2]})` 
     };
-    
-    // create array displaying color dots on response image for retrieval
-    let ret_dots = [resp_img, resp_col_circle]; // target color dot on top of response image
+
+    // create array displaying names on response image for retrieval
+    let ret_dots = [resp_img, resp_first_text]; // target name on top of response image
     
     // other dot responses for retrieval
     for (let dot = 0; dot < (exp_info.pos.length - 1); dot++){
-      var resp_col_dots = {
-        obj_type: 'circle',
-        startX: exp_info.center[0] + ret_dots_x[exp_trial.ret_other_col_pos[dot]], // location in the canvas
-        startY: exp_info.bottom - ret_dots_y[exp_trial.ret_other_col_pos[dot]], 
-        radius: ret_dots_rad,
-  
-        // RGB values of corresponding color
-        fill_color: `rgb(${exp_info.cols[Number(exp_trial.ret_other_col[dot].split('col')[1])][0]}, 
-                        ${exp_info.cols[Number(exp_trial.ret_other_col[dot].split('col')[1])][1]}, 
-                        ${exp_info.cols[Number(exp_trial.ret_other_col[dot].split('col')[1])][2]})`
+      var resp_first_dots = {
+        obj_type: 'text',
+        content: exp_info.firsts[Number(exp_trial.ret_other_firsts[dot].split('name')[1])],
+        fontSize: '17px',
+        startX: exp_info.center[0] + ret_dots_x[exp_trial.ret_other_first_pos[dot]], // location in the canvas
+        startY: exp_info.bottom - ret_dots_y[exp_trial.ret_other_first_pos[dot]] 
+             
       };
     
-      // add each color dot response
-      ret_dots.push(resp_col_dots);
-    }
+      // add each name response
+      ret_dots.push(resp_first_dots);
+    };
     
-    // display screen with response image and color dots
+    // display screen with response image and names
     let stim_screen = {
       type: psychophysics,
       background_color: 'white',
@@ -89,6 +82,6 @@ export const screen_proc_speed1_dec = function(exp_info, exp_trial, stim) {
       }
     };
   
-    // return screen with response image and color dots
+    // return screen with response image and names
     return stim_screen;
   };

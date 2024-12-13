@@ -13,11 +13,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         trial2block:any = [],
         phase:any = [],
         finger_check_pos:any = [],
-        new_order:any = [],
-        ret_col_pos:any = [],
-        ret_other_col_positions:any = [],
-        ret_other_cols:any = [],
-        ret_other_cols_angs:any = [];
+        new_order:any = []
 
     // define number of blocks and trials
     var n_blocks = exp_info.n_finger_check_blocks;
@@ -65,31 +61,29 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     var mini_block:any = [],
         trial2block:any = [],
         phase:any = [],
-        proc_speed_col:any = [],
+        proc_speed_firsts:any = [],
         proc_speed_pos:any = [],
         new_order:any = [],
-        ret_col_pos:any = [],
-        ret_other_col_positions:any = [],
-        ret_other_cols:any = [],
-        ret_other_cols_angs:any = [];
-
+        ret_first_pos:any = [],
+        ret_other_first_positions:any = [],
+        ret_other_firsts:any = [];
+        
     // define number of blocks and trials
     var n_blocks = exp_info.n_proc_speed_blocks;
     var n_trials = exp_info.n_proc_speed_trials;
     
-    // define the conditions: cross colors and key positions
-    proc_speed_col.push(Array(exp_info.pos.length).fill(exp_info.cols_name).flat().sort());
-    proc_speed_pos.push(Array(exp_info.cols.length).fill(exp_info.pos).flat());
+    // define the conditions: cross names and key positions
+    proc_speed_firsts.push(Array(exp_info.pos.length).fill(exp_info.firsts_name).flat().sort());
+    proc_speed_pos.push(Array(exp_info.firsts_name.length).fill(exp_info.pos).flat());
     
     // loop through blocks
     for(let block = 0; block < n_blocks; block ++) {
 
       // randomize order of conditions
-      var order_shuffle = Array.from(Array(exp_info.cols.length * exp_info.pos.length).keys());
+      var order_shuffle = Array.from(Array(exp_info.firsts_name.length * exp_info.pos.length).keys());
       random.shuffle(order_shuffle);
       new_order.push(order_shuffle);
-      var proc_speed_col_block = new_order[0].map(i => proc_speed_col[0][i])
-      var proc_speed_col_block_angs = new_order[0].map(i => exp_info.cols_angles[Number(proc_speed_col[0][i].split('col')[1])]);
+      var proc_speed_first_block = new_order[0].map(i => proc_speed_firsts[0][i])
       var proc_speed_pos_block = new_order[0].map(i => proc_speed_pos[0][i])
 
       // loop through trials
@@ -100,24 +94,21 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         trial2block.push(trial);
         phase.push('processing_speed');
 
-        // shuffle the order of key assignment for non-target color dots
-        ret_col_pos.push(exp_info.pos.map((x) => x));
-        random.shuffle(ret_col_pos[trial]);
+        // shuffle the order of key assignment for non-target names
+        ret_first_pos.push(exp_info.pos.map((x) => x));
+        random.shuffle(ret_first_pos[trial]);
         
-        // array with 8 shuffled colors and positions for the remaining non-target color dots
-        var ret_other_col = exp_info.cols_name.map(x => x);
-        var ret_other_col_angs = Array.from(Array(exp_info.cols_angles.length - 1).keys());
-        var ret_other_col_pos = ret_col_pos[trial].map(x => x);
+        // array with 8 shuffled names and positions for the remaining non-target names
+        var ret_other_first = exp_info.firsts_name.map(x => x);
+        var ret_other_first_pos = ret_first_pos[trial].map(x => x);
         
-        // remove the target color and position from the array for the remaining non-target color dots
-        ret_other_col_pos.splice(ret_other_col_pos.indexOf(proc_speed_pos_block[trial]), 1);
-        ret_other_col.splice(ret_other_col.indexOf(proc_speed_col_block[trial]), 1);
-        ret_other_col_angs = ret_other_col_angs.map(i => exp_info.cols_angles[Number(ret_other_col[i].split('col')[1])]);
-
+        // remove the target name and position from the array for the remaining non-target names
+        ret_other_first_pos.splice(ret_other_first_pos.indexOf(proc_speed_pos_block[trial]), 1);
+        ret_other_firsts.splice(ret_other_firsts.indexOf(proc_speed_first_block[trial]), 1);
+        
         // add to array for all trials
-        ret_other_col_positions.push(ret_other_col_pos)
-        ret_other_cols.push(ret_other_col)
-        ret_other_cols_angs.push(ret_other_col_angs)
+        ret_other_first_positions.push(ret_other_first_pos)
+        ret_other_firsts.push(ret_other_first)
         
       };
     };
@@ -131,13 +122,11 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
       phase: phase[index],
       
       retrieval_order: new_order[0],
-      proc_speed_col: proc_speed_col_block[index],
-      proc_speed_col_angle: proc_speed_col_block_angs[index],
+      proc_speed_firsts: proc_speed_first_block[index],
       proc_speed_pos: proc_speed_pos_block[index],
       
-      ret_other_col_pos: ret_other_col_positions[index],
-      ret_other_col: ret_other_cols[index],
-      ret_other_cols_angles: ret_other_cols_angs[index]
+      ret_other_first_pos: ret_other_first_positions[index],
+      ret_other_firsts: ret_other_firsts[index],
       
       });
     })        
@@ -151,24 +140,23 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         list_conditions:any = [],
         setsize:any = [],
         rand_stims:any = [],
-        binding_cols_name:any = [],
-        binding_cols_pos:any = [],
+        rand_stims_word:any = [],
+        binding_first_names:any = [],
+        binding_first_pos:any = [],
         position:any = [],
         new_order:any = [],
-        ret_col_pos:any = [],
-        ret_col:any = [],
-        ret_col_angs:any = [],
-        ret_other_col_positions:any = [],
-        ret_other_cols:any = [],
-        ret_other_cols_angles:any = [],
+        ret_first_pos:any = [],
+        ret_firsts:any = [],
+        ret_other_first_positions:any = [],
+        ret_other_firsts:any = [],
         ret_stim:any = [],
-        ret_binding_cols_name:any = [],
-        ret_binding_cols_angs:any = [],
-        ret_binding_cols_pos:any = [],
+        ret_stim_word:any = [],
+        ret_binding_first_name:any = [],
+        ret_binding_first_pos:any = [],
         ret_stims:any = [],
-        ret_binding_col_name:any = [],
-        ret_binding_col_angs:any = [],
-        ret_binding_cols_positions:any = [];
+        ret_stims_word:any = [],
+        ret_binding_first_names:any = [],
+        ret_binding_first_positions:any = [];
     
     // define number of blocks  and trials
     var trial = 0;
@@ -193,7 +181,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
 
     // sample Hebb stimuli
     var hebb_stims = random.sample(stim_idx, exp_info.setsize);
-    var hebb_bindings = random.sample(exp_info.cols_name, exp_info.setsize);
+    var hebb_bindings = random.sample(exp_info.firsts_name, exp_info.setsize);
 
     // remove Hebb stimuli from stimulus index
     if (is_practice == 0) { // experimental trials
@@ -247,7 +235,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
           // Hebb stimuli
           rand_stims.push(rand_hebb_stims);
           // Hebb bindings
-          binding_cols_name.push(rand_hebb_bindings);
+          binding_first_names.push(rand_hebb_bindings);
           
         } else if (list_cond == "Control"){ // Control condition
 
@@ -280,21 +268,23 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
           };
 
           // randomly sample Control bindings
-          binding_cols_name.push(random.sample(exp_info.cols_name, setsize[trial]));
+          binding_first_names.push(random.sample(exp_info.firsts_name, setsize[trial]));
 
         };
         
+        // define stimuli words for encoding
+        rand_stims_word.push(rand_stims[trial].map(i => exp_info.stim_words[i]));
+        
         // create empty arrays for retrieval variables
         ret_stim = Array(setsize[trial]).fill(0);
-        ret_binding_col_name = Array(setsize[trial]).fill('');
-        ret_binding_col_angs = Array(setsize[trial]).fill(0);
-        ret_binding_cols_pos = Array(setsize[trial]).fill(0);
-        ret_col_pos = Array(setsize[trial]).fill(0);
-        ret_col = Array(setsize[trial]).fill(0);
-        ret_col_angs = Array(setsize[trial]).fill(0);
+        ret_stim_word = Array(setsize[trial]).fill('');
+        ret_binding_first_names = Array(setsize[trial]).fill('');
+        ret_binding_first_pos = Array(setsize[trial]).fill(0);
+        ret_first_pos = Array(setsize[trial]).fill(0);
+        ret_firsts = Array(setsize[trial]).fill(0);
         
         // define binding postions
-        binding_cols_pos.push(random.sample(exp_info.pos, setsize[trial]));
+        binding_first_pos.push(random.sample(exp_info.pos, setsize[trial]));
         
         // define retrieval order
         position.push(Array.from(Array(setsize[trial]).keys()));
@@ -302,42 +292,38 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
 
         // order variables according to retrieval order
         ret_stim = new_order[trial].map(i => rand_stims[trial][i]);
-        ret_binding_col_name = new_order[trial].map(i => binding_cols_name[trial][i]);
-        ret_binding_col_angs = new_order[trial].map(i => exp_info.cols_angles[Number(binding_cols_name[trial][i].split('col')[1])]);
-        ret_binding_cols_pos = new_order[trial].map(i => binding_cols_pos[trial][i]);
+        ret_stim_word = new_order[trial].map(i => exp_info.stim_words[rand_stims[trial][i]]);
+        ret_binding_first_names = new_order[trial].map(i => binding_first_names[trial][i]);
+        ret_binding_first_pos = new_order[trial].map(i => binding_first_pos[trial][i]);
         
         // loop through stimuli
-        // create array of 8 colors and positions for the remaining non-target color dots
+        // create array of 8 names and positions for the remaining non-target names
         for (let round = 0; round < setsize[trial]; round ++) {
-          ret_col_pos[round] = random.sample(exp_info.pos, exp_info.pos.length);
-          ret_col[round] = exp_info.cols_name.map(x => x);
-          ret_col_angs[round] = Array.from(Array(exp_info.cols_angles.length - 1).keys());
+          ret_first_pos[round] = random.sample(exp_info.pos, exp_info.pos.length);
+          ret_firsts[round] = exp_info.firsts_name.map(x => x);
           
         };
 
-        var ret_other_col_pos = ret_col_pos.map(x => x);
-        var ret_other_col = ret_col.map(x => x);
-        var ret_other_cols_angs = ret_col_angs.map(x => x);
+        var ret_other_first_pos = ret_first_pos.map(x => x);
+        var ret_other_first = ret_firsts.map(x => x);
         
-        // remove target color and position from array  and define colors in degrees of color wheel 
-        // for the remaining non-target color dots
+        // remove target first name and position from array and define names 
+        // for the remaining non-target names
         for (let stim = 0; stim < setsize[trial]; stim ++) {
           
-          ret_other_col_pos[stim].splice(ret_other_col_pos[stim].indexOf(ret_binding_cols_pos[stim]), 1);
-          ret_other_col[stim].splice(ret_other_col[stim].indexOf(ret_binding_col_name[stim]), 1);
-          ret_other_cols_angs[stim] = ret_other_cols_angs[stim].map(i => exp_info.cols_angles[Number(ret_other_col[stim][i].split('col')[1])]);
+          ret_other_first_pos[stim].splice(ret_other_first_pos[stim].indexOf(ret_binding_first_pos[stim]), 1);
+          ret_other_first[stim].splice(ret_other_first[stim].indexOf(ret_binding_first_names[stim]), 1);
           
         }
 
         // add to arrays for all trials
         ret_stims.push(ret_stim);
-        ret_binding_cols_name.push(ret_binding_col_name);
-        ret_binding_cols_angs.push(ret_binding_col_angs);
-        ret_binding_cols_positions.push(ret_binding_cols_pos);
-        ret_other_col_positions.push(ret_other_col_pos);
-        ret_other_cols.push(ret_other_col);
-        ret_other_cols_angles.push(ret_other_cols_angs);
-
+        ret_stims_word.push(ret_stim_word);
+        ret_binding_first_names.push(ret_binding_first_name);
+        ret_binding_first_positions.push(ret_binding_first_pos);
+        ret_other_first_positions.push(ret_other_first_pos);
+        ret_other_firsts.push(ret_other_first);
+        
         //update trial counter across blocks
         trial_num.push(trial);
         trial++
@@ -358,18 +344,18 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
       setsize: setsize[index], 
 
       stim_index: rand_stims[index],
-      binding_cols: binding_cols_name[index],
-      binding_cols_pos: binding_cols_pos[index],
+      stim_index_word: rand_stims_word[index],
+      binding_firsts: binding_first_names[index],
+      binding_first_pos: binding_first_pos[index],
       
       retrieval_order: new_order[index],
       ret_stim: ret_stims[index],
-      ret_binding_cols: ret_binding_cols_name[index],
-      ret_binding_cols_angles: ret_binding_cols_angs[index],
-      ret_binding_cols_pos: ret_binding_cols_positions[index],
+      ret_stim_word: ret_stims_word[index],
+      ret_binding_firsts: ret_binding_first_names[index],
+      ret_binding_first_pos: ret_binding_first_positions[index],
 
-      ret_other_col_pos: ret_other_col_positions[index],
-      ret_other_col: ret_other_cols[index],
-      ret_other_col_angles: ret_other_cols_angles[index]
+      ret_other_first_pos: ret_other_first_positions[index],
+      ret_other_firsts: ret_other_firsts[index],
       
       });
     });
@@ -387,7 +373,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     var n_blocks = exp_info.n_proc_speed_blocks;
     var n_trials = exp_info.n_proc_speed_trials;
     
-    // define the conditions: cross colors and key positions
+    // define the conditions: key positions
     proc_speed_pos.push(Array(exp_info.pos.length).fill(exp_info.pos).flat());
     
     // loop through blocks
@@ -407,7 +393,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         trial2block.push(trial);
         phase.push('processing_speed');
 
-        // shuffle the order of key assignment for non-target color dots
+        // shuffle the order of key assignment for non-target names
         ret_pos.push(exp_info.pos.map((x) => x));
         random.shuffle(ret_pos[trial]);
         

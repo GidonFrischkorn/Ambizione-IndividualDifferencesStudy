@@ -5,44 +5,37 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
 export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
 
     // define variables
-    // x coordinates of the retrieval color dots
-    var ret_dots_x = [-6.6*exp_info.canW/72, 
-                      -5.6*exp_info.canW/72, 
+    // x coordinates of the retrieval names
+    var ret_dots_x = [-7*exp_info.canW/72, 
+                      -6*exp_info.canW/72, 
                       -4.6*exp_info.canW/72, 
-                      -3.6*exp_info.canW/72, 
-                      3.6*exp_info.canW/72, 
+                      -3.2*exp_info.canW/72, 
+                      3.2*exp_info.canW/72, 
                       4.6*exp_info.canW/72, 
-                      5.6*exp_info.canW/72, 
-                      6.6*exp_info.canW/72];
-    
-    // y coordinates of the retrieval color dots
-    var ret_dots_y = [2*exp_info.canH/36, 
-                      3*exp_info.canH/36, 
-                      3.6*exp_info.canH/36, 
-                      3*exp_info.canH/36, 
-                      3*exp_info.canH/36, 
-                      3.6*exp_info.canH/36, 
-                      3*exp_info.canH/36, 
-                      2*exp_info.canH/36];
-  
-    // radius of retrieval color dots
-    var ret_dots_rad = exp_info.canH/72;
-    // radius of color circle
-    var col_circle_rad = exp_info.canH/10;
+                      6*exp_info.canW/72, 
+                      7*exp_info.canW/72];
+
+    // y coordinates of the retrieval names
+    var ret_dots_y = [3*exp_info.canH/36, 
+                      4*exp_info.canH/36, 
+                      4.6*exp_info.canH/36, 
+                      4*exp_info.canH/36, 
+                      4*exp_info.canH/36, 
+                      4.6*exp_info.canH/36, 
+                      4*exp_info.canH/36, 
+                      3*exp_info.canH/36];
+
     // height of the response image
     var img_height = exp_info.canH/3.5;
     
-    // color circle
-    const col_circle = {
-      obj_type: 'circle',
+    // first name text
+    const first_text = {
+      obj_type: 'text',
+      content: exp_info.firsts[Number(exp_trial.proc_speed_firsts.split('name')[1])],
+      fontSize: '60px',
       startX: exp_info.center[0], // location in the canvas
-      startY: exp_info.top,
-      radius: col_circle_rad,
-  
-      // RGB values of color circle with target color
-      fill_color: `rgb(${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][0]}, 
-                      ${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][1]}, 
-                      ${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][2]})`
+      startY: exp_info.top
+
     };
   
     // response image
@@ -54,37 +47,35 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
       startY: exp_info.bottom
     };
   
-    // target color dot response for retrieval
-    const resp_col_circle = {
-      obj_type: 'circle',
+    // target name response for retrieval
+    const resp_first_text = {
+      obj_type: 'text',
+      content: exp_info.firsts[Number(exp_trial.proc_speed_firsts.split('name')[1])],
+      fontSize: '17px',
       startX: exp_info.center[0] + ret_dots_x[exp_trial.proc_speed_pos], // location in the canvas
-      startY: exp_info.bottom - ret_dots_y[exp_trial.proc_speed_pos], 
-      radius: ret_dots_rad,
+      startY: exp_info.bottom - ret_dots_y[exp_trial.proc_speed_pos]
   
-      // RGB values of target color dot
-      fill_color: `rgb(${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][0]}, 
-                      ${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][1]}, 
-                      ${exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])][2]})` 
     };
     
-    // create array displaying color dots on response image and color circle for retrieval
-    let ret_dots = [col_circle, resp_img, resp_col_circle]; // target color dot on top of response image and color circle
+    // create array displaying names on response image and target name for retrieval
+    let ret_dots = [first_text, resp_img, resp_first_text]; // target name on top of response image and names
     
     // other dot responses for retrieval
     for (let dot = 0; dot < (exp_info.pos.length - 1); dot++){
-      var resp_col_dots = {
-        obj_type: 'circle',
-        startX: exp_info.center[0] + ret_dots_x[exp_trial.ret_other_col_pos[dot]], // location in the canvas
-        startY: exp_info.bottom - ret_dots_y[exp_trial.ret_other_col_pos[dot]], 
-        radius: ret_dots_rad,
-        fill_color: `rgb(${exp_info.cols[Number(exp_trial.ret_other_col[dot].split('col')[1])][0]} , ${exp_info.cols[Number(exp_trial.ret_other_col[dot].split('col')[1])][1]}, ${exp_info.cols[Number(exp_trial.ret_other_col[dot].split('col')[1])][2]})` //ret_dots_cols[dot]
+      var resp_first_dots = {
+        obj_type: 'text',
+        content: exp_info.firsts[Number(exp_trial.ret_other_firsts[dot].split('name')[1])],
+        fontSize: '17px',
+        startX: exp_info.center[0] + ret_dots_x[exp_trial.ret_other_first_pos[dot]], // location in the canvas
+        startY: exp_info.bottom - ret_dots_y[exp_trial.ret_other_first_pos[dot]], 
+             
       };
   
-      // add each color dot response
-      ret_dots.push(resp_col_dots);
+      // add each name response
+      ret_dots.push(resp_first_dots);
     }
     
-    // display screen with response image, color dots and color circle
+    // display screen with response image, names and target name
     let stim_screen = {
       type: psychophysics,
       background_color: 'white',
@@ -98,25 +89,17 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
         screenID: 'proc_speed2_dec',
         task: 'declarative',
        
-        col_dist: exp_info.col_dist,
-        group_dist: exp_info.group_dist,
-        start_cols: exp_info.cols_start,
-        cols: exp_info.cols,
-        cols_angles: exp_info.cols_angles,
-  
         procedure: exp_trial.phase,
         block_number: exp_trial.block,
         trial_number: exp_trial.trial,
   
         ret_order: exp_trial.retrieval_order,
-        proc_speed_col_name: exp_trial.proc_speed_col,
-        proc_speed_col_angle: exp_trial.proc_speed_col_angle,
-        proc_speed_col: exp_info.cols[Number(exp_trial.proc_speed_col.split('col')[1])],
-        proc_speed_col_pos: exp_trial.proc_speed_pos,
+        proc_speed_first_names: exp_trial.proc_speed_firsts,
+        proc_speed_firsts: exp_info.firsts_name[Number(exp_trial.proc_speed_firsts.split('name')[1])],
+        proc_speed_first_pos: exp_trial.proc_speed_pos,
   
-        ret_other_cols: exp_trial.ret_other_col,
-        ret_other_cols_angles: exp_trial.ret_other_cols_angles,
-        ret_other_cols_pos: exp_trial.ret_other_col_pos,
+        ret_other_firsts: exp_trial.ret_other_firsts,
+        ret_other_first_pos: exp_trial.ret_other_first_pos,
         
         correct_response: exp_info.resp_keys[exp_trial.proc_speed_pos]
       },
@@ -125,22 +108,20 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
         // response equals correct response
         if (data.response === data.correct_response) {
   
-          // create variable accuracy == 1 and response in degress of color
+          // create variable accuracy == 1 and response
           data.acc = 1;
-          data.response_angles = data.proc_speed_col_angle;
-          data.response_name = data.proc_speed_col_name;
+          data.response_name = data.proc_speed_first_name;
   
         } else { // response unequal correct response
   
-          // create variable accuracy == 0 and response in degress of color
+          // create variable accuracy == 0 and response
           data.acc = 0;
-          data.response_angles = data.ret_other_cols_angles[data.ret_other_cols_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];
-          data.response_name = data.ret_other_cols[data.ret_other_cols_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];          
+          data.response_name = data.ret_other_firsts[data.ret_other_first_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];          
         
         }; 
       }
     };
   
-    // return screen with response image, color dots and color circle
+    // return screen with response image, names and target name
     return stim_screen;
   };
