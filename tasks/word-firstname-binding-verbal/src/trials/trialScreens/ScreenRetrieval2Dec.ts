@@ -98,6 +98,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
           
         setsize: exp_trial.setsize,
         stimulusID: exp_trial.ret_stim[stim],
+        stimulusID_word: exp_trial.ret_stim_word[stim],
         ret_order: stim,
         enc_order: exp_trial.retrieval_order[stim],
   
