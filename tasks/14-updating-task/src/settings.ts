@@ -3,16 +3,16 @@ import { imageObj } from "./task-fun/imageObject";
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "complex_span", // the title of the experiment
-  RESEARCHER: "Chenyu Li", // researcher's name
-  EMAIL: "chenyu.li@uzh.ch", // researcher's email
+  TITLE: "color_udating_task", // the title of the experiment
+  RESEARCHER: "", // researcher's name
+  EMAIL: "", // researcher's email
   DURATION: 15, // duration of the experiment in minutes
   LANG: "de", // the language of the experiment
 
   // experiment design
   DESIGN: {
     nPRACTICE: 3, // number of memory trials in the retro-cue condition
-    nTRIALS: 35, // number of experiment trials for each condition
+    nTRIALS: 10, // number of experiment trials for each condition
     SETSIZE: 4, // set size
     UPDSTEP: 2, // updating steps
     nNPL: 6, // number of not-presented lures
