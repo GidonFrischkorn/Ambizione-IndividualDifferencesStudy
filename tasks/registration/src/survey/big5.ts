@@ -15,11 +15,11 @@ export const bfi2 = function (
       "stimme voll und ganz zu",
     ];
 
+    var title = "Big Five Inventory - 2";
     var instruction =
-      "<h1>Big Five Inventory - 2</h1>" +
-      "<p>Nachstehend finden Sie eine Reihe von Eigenschaften, die auf Sie zutreffen könnten.</p>" +
-      "<p>Würden Sie über sich z. B. sagen, dass Sie gerne Zeit mit anderen Menschen verbringen?</p>" +
-      "<p>Bitte geben Sie für jede der folgenden Aussagen an, inwieweit Sie zustimmen.</p>";
+      "Nachstehend finden Sie eine Reihe von Eigenschaften, die auf Sie zutreffen könnten. " +
+      "Würden Sie über sich z. B. sagen, dass Sie gerne Zeit mit anderen Menschen verbringen? " +
+      "Bitte geben Sie für jede der folgenden Aussagen an, inwieweit Sie zustimmen.";
 
     var items = [
       "Ich gehe aus mir heraus, bin gesellig.",
@@ -99,11 +99,11 @@ export const bfi2 = function (
       "Agree strongly",
     ];
 
+    var title = "The Big Five Inventory - 2";
     var instruction =
-      "<h1>The Big Five Inventory - 2</h1>" +
-      "<p>Here are a number of characteristics that may or may not apply to you.</p>" +
-      "<p>For example, do you agree that you are someone who likes to spend time with others?</p>" +
-      "<p>Please indicate for each statement the extent to which you agree or disagree with that statement.</p>";
+      "Here are a number of characteristics that may or may not apply to you." +
+      "For example, do you agree that you are someone who likes to spend time with others?" +
+      "Please indicate for each statement the extent to which you agree or disagree with that statement.";
 
     var items = [
       "I am someone who is outgoing, sociable.", // 1
@@ -178,80 +178,82 @@ export const bfi2 = function (
     throw new Error("Language not supported");
   }
 
+  // Define item labels
   const item_labels: string[] = [
-    "1",
-    "2",
-    "3R",
-    "4R",
-    "5R",
-    "6",
-    "7",
-    "8R",
-    "9R",
-    "10",
-    "11R",
-    "12R",
-    "13",
-    "14",
-    "15",
-    "16R",
-    "17R",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22R",
-    "23R",
-    "24R",
-    "25R",
-    "26R",
-    "27",
-    "28R",
-    "29R",
-    "30R",
-    "31R",
-    "32",
-    "33",
-    "34",
-    "35",
-    "36R",
-    "37R",
-    "38",
-    "39",
-    "40",
-    "41",
-    "42R",
-    "43",
-    "44R",
-    "45R",
-    "46",
-    "47R",
-    "48R",
-    "49R",
-    "50R",
-    "51R",
-    "52",
-    "53",
-    "54",
-    "55R",
-    "56",
-    "57",
-    "58R",
-    "59",
-    "60",
+    "BFI-E-1",
+    "BFI-V-2",
+    "BFI-G-3R",
+    "BFI-NE-4R",
+    "BFI-O-5R",
+    "BFI-E-6",
+    "BFI-V-7",
+    "BFI-G-8R",
+    "BFI-NE-9R",
+    "BFI-O-10",
+    "BFI-E-11R",
+    "BFI-V-12R",
+    "BFI-G-13",
+    "BFI-NE-14",
+    "BFI-O-15",
+    "BFI-E-16R",
+    "BFI-V-17R",
+    "BFI-G-18",
+    "BFI-NE-19",
+    "BFI-O-20",
+    "BFI-E-21",
+    "BFI-V-22R",
+    "BFI-G-23R",
+    "BFI-NE-24R",
+    "BFI-O-25R",
+    "BFI-E-26R",
+    "BFI-V-27",
+    "BFI-G-28R",
+    "BFI-NE-29R",
+    "BFI-O-30R",
+    "BFI-E-31R",
+    "BFI-V-32",
+    "BFI-G-33",
+    "BFI-NE-34",
+    "BFI-O-35",
+    "BFI-E-36R",
+    "BFI-V-37R",
+    "BFI-G-38",
+    "BFI-NE-39",
+    "BFI-O-40",
+    "BFI-E-41",
+    "BFI-V-42R",
+    "BFI-G-43",
+    "BFI-NE-44R",
+    "BFI-O-45R",
+    "BFI-E-46",
+    "BFI-V-47R",
+    "BFI-G-48R",
+    "BFI-NE-49R",
+    "BFI-O-50R",
+    "BFI-E-51R",
+    "BFI-V-52",
+    "BFI-G-53",
+    "BFI-NE-54",
+    "BFI-O-55R",
+    "BFI-E-56",
+    "BFI-V-57",
+    "BFI-G-58R",
+    "BFI-NE-59",
+    "BFI-O-60",
   ];
 
+  // Create array of items
   var scale_items: any[] = [];
   for (let i = 0; i < items.length; i++) {
     var single_item = {
-      prompt: items[i],
-      name: item_labels[i],
-      labels: likert_scale,
+      text: items[i],
+      value: item_labels[i],
     };
 
     scale_items.push(single_item);
   }
 
+  // Define final items based on test version; default is full version
   var final_items: any = [];
   if (version == "full") {
     final_items = scale_items;
@@ -270,14 +272,60 @@ export const bfi2 = function (
     throw new Error("Version not supported");
   }
 
-  var bfi2 = {
-    type: surveyLikert,
-    preamble: instruction,
-    questions: final_items,
-    randomize_question_order: false,
-    scale_width: 600,
-    button_label: label_button,
+  // Code Items to dimensions & facets
+  const item_assignments = {
+    // Dimensions
+    extraversion: [1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56],
+    agreeableness: [2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, 57],
+    conscientiousness: [3, 8, 13, 18, 23, 28, 33, 38, 43, 48, 53, 58],
+    emotional_stability: [4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59],
+    openness: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+    // Facets: only calculate for full & short versions
+    sociability: [1, 16, 31, 46],
+    assertiveness: [6, 21, 36, 51],
+    energy_level: [11, 26, 41, 56],
+    compassion: [2, 17, 32, 47],
+    respectfulness: [7, 22, 37, 52],
+    trust: [12, 27, 42, 57],
+    organization: [3, 18, 33, 48],
+    productiveness: [8, 23, 38, 53],
+    responsibility: [13, 28, 43, 58],
+    anxiety: [4, 19, 34, 49],
+    depression: [9, 24, 39, 54],
+    emotional_volatility: [14, 29, 44, 59],
+    intellectual_curiosity: [5, 20, 35, 50],
+    aesthetic_sensitivity: [10, 25, 40, 55],
+    creative_imaginiation: [15, 30, 45, 60],
   };
 
-  return bfi2;
+  // create array of response colums
+  var likert_columns: any[] = [];
+  for (let i = 0; i < likert_scale.length; i++) {
+    var single_column = {
+      value: i + 1,
+      text: likert_scale[i],
+    };
+
+    likert_columns.push(single_column);
+  }
+
+  // combine everything into a single survey page
+  var bfi2_page = {
+    elements: [
+      {
+        type: "matrix",
+        name: "bfi2-matrix",
+        title: title,
+        description: instruction,
+        alternateRows: true,
+        isAllRowRequired: true,
+        rows: final_items,
+        rowsOrder: "random",
+        columns: likert_columns,
+        rowTitleWidth: "50%",
+      },
+    ],
+  };
+
+  return bfi2_page;
 };

@@ -12,11 +12,11 @@ export const bmw3 = function (language: string) {
       "trifft voll zu",
     ];
 
+    var title = "Skala zur Erfassung gedanklichen Abschweifens (BMW-3)";
     var instruction =
-      "<h1>Skala zur Erfassung gedanklichen Abschweifens (BMW-3)</h1>" +
-      "<p>Sie werden eine Reihe von Aussagen lesen, die ganz allgemein beschreiben, wo Menschen im Alltag mit ihren Gedanken sind.</p>" +
-      "<p>Bitte kennzeichnen Sie auf der Antwortskala, inwieweit diese Aussagen im Allgemeinen auf Sie zutreffen.</p>" +
-      "<p>Es gibt dabei keine richtigen oder falschen Antworten, beantworten Sie die Fragen also einfach aus dem Bauch heraus.</p>";
+      "Sie werden eine Reihe von Aussagen lesen, die ganz allgemein beschreiben, wo Menschen im Alltag mit ihren Gedanken sind." +
+      "Bitte kennzeichnen Sie auf der Antwortskala, inwieweit diese Aussagen im Allgemeinen auf Sie zutreffen." +
+      "Es gibt dabei keine richtigen oder falschen Antworten, beantworten Sie die Fragen also einfach aus dem Bauch heraus.";
 
     var items = [
       "Während ich einen Vortrag höre, wandern meine Gedanken ohne mein Zutun zu anderen Dingen.",
@@ -43,11 +43,11 @@ export const bmw3 = function (language: string) {
       "fully agree",
     ];
 
+    var title = "Brief Mind Wandering Three Factor Scale (BMW-3)";
     var instruction =
-      "<h1>Brief Mind Wandering Three Factor Scale (BMW-3)</h1>" +
-      "<p>You will see a couple of statements that generally describe where people may be with their thoughts in everyday life.</p>" +
-      "<p>Please read each statement and decide how much you agree or disagree with that statement.</p>" +
-      "<p>There are no right or wrong answers, just answer intuitively.</p>";
+      "You will see a couple of statements that generally describe where people may be with their thoughts in everyday life." +
+      "Please read each statement and decide how much you agree or disagree with that statement." +
+      "There are no right or wrong answers, just answer intuitively.";
 
     var items = [
       "While listening to a presentation, my thoughts start to trail off unintentionally. ",
@@ -84,25 +84,45 @@ export const bmw3 = function (language: string) {
     "MW-I4",
   ];
 
+  // Create array of items
   var scale_items: any[] = [];
   for (let i = 0; i < items.length; i++) {
     var single_item = {
-      prompt: items[i],
-      name: item_labels[i],
-      labels: likert_scale,
+      text: items[i],
+      value: item_labels[i],
     };
 
     scale_items.push(single_item);
   }
 
-  var bmw_3 = {
-    type: surveyLikert,
-    preamble: instruction,
-    questions: scale_items,
-    randomize_question_order: true,
-    scale_width: 600,
-    button_label: label_button,
+  // create array of response colums
+  var likert_columns: any[] = [];
+  for (let i = 0; i < likert_scale.length; i++) {
+    var single_column = {
+      value: i + 1,
+      text: likert_scale[i],
+    };
+
+    likert_columns.push(single_column);
+  }
+
+  // combine everything into a single survey page
+  var bmw3_page = {
+    elements: [
+      {
+        type: "matrix",
+        name: "nfc-matrix",
+        title: title,
+        description: instruction,
+        alternateRows: true,
+        isAllRowRequired: true,
+        rows: scale_items,
+        rowsOrder: "random",
+        columns: likert_columns,
+        rowTitleWidth: "50%",
+      },
+    ],
   };
 
-  return bmw_3;
+  return bmw3_page;
 };
