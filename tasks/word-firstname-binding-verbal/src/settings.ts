@@ -1,6 +1,5 @@
 // import
 import { setCSS } from "./task-fun/setCSS";
-import { sampleColorWheel } from "./task-fun/sampleColorWheel";
 import { words } from "../assets/stimuli";
 
 setCSS();
@@ -39,24 +38,6 @@ export function MakeExpInfo(task_condition) {
     // declarative or procedural task
     var exp_task = 'declarative';
 
-    // color condition
-    // determined based on calibration experiment (fall back for start values)
-    // within color group: 39 degrees, from ProcDecBindingCaliStair
-    // between color group: 50 degrees
-    const col_dist = 40;
-    const group_dist = 50;
-    
-    // random start for sampling of colors
-    // sample colors, each color group consists of 4 colors
-    var cols_start = [250] //random.sample(Array.from({length: 360}, (_, i) => i + 1), 1);
-    var sample_cols = sampleColorWheel(4, col_dist, group_dist, cols_start);
-
-    // RGB value of colors
-    var cols_rgb = sample_cols[0];
-
-    // angle values on color wheel of colors
-    var cols_angs = sample_cols[1].concat(sample_cols[2]);
-
     // define object with experimental variables
     const expInfo = {
 
@@ -89,13 +70,9 @@ export function MakeExpInfo(task_condition) {
         resp_keys:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys
         pos: Array.from(Array(8).keys()), // positions of responses
             
-        // define colors
-        col_dist: col_dist, // distance between colors within a group in degrees
-        group_dist: group_dist, // distance between the two color groups in degrees
-        cols_start: cols_start, // random start values for color groups
-        cols: cols_rgb, // RGB value of colors
-        cols_angles: cols_angs, // angle values on color wheel of colors
-        cols_name: ['col0', 'col1', 'col2', 'col3', 'col4', 'col5', 'col6', 'col7'], // color names
+        // define names and colors
+        firsts: ['Anna', 'Eva', 'Lena', 'Sarah', 'Petra', 'Karin', 'Doris', 'Heidi'], // https://doi.org/10.1027/1864-9335/a000383
+        firsts_name: ['name0', 'name1', 'name2', 'name3', 'name4', 'name5', 'name6', 'name7'],
         response_dot_col: "red",
         
         // canvas locations and font sizes
