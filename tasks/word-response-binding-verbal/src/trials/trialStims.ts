@@ -424,12 +424,15 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         list_conditions:any = [],
         setsize:any = [],
         rand_stims:any = [],
+        rand_stims_word:any = [],
         binding_pos:any = [],
         position:any = [],
         new_order:any = [],
         ret_stim:any = [],
+        ret_stim_word:any = [],
         ret_binding_pos:any = [],
         ret_stims:any = [],
+        ret_stims_word:any = [],
         ret_binding_positions:any = [];
     
     // define number of blocks  and trials
@@ -541,9 +544,13 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
           binding_pos.push(random.sample(exp_info.pos, setsize[trial]));
 
         };
-        
+
+        // define stimuli words for encoding
+        rand_stims_word.push(rand_stims[trial].map(i => exp_info.stim_words[i]));
+                
         // create empty arrays for retrieval variables
         ret_stim = Array(setsize[trial]).fill(0);
+        ret_stim_word = Array(setsize[trial]).fill('');
         ret_binding_pos = Array(setsize[trial]).fill(0);
         
         // define retrieval order
@@ -552,10 +559,12 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
 
         // order variables according to retrieval order
         ret_stim = new_order[trial].map(i => rand_stims[trial][i]);
+        ret_stim_word = new_order[trial].map(i => exp_info.stim_words[rand_stims[trial][i]]);
         ret_binding_pos = new_order[trial].map(i => binding_pos[trial][i]);
 
         // add to arrays for all trials
         ret_stims.push(ret_stim);
+        ret_stims_word.push(ret_stim_word);
         ret_binding_positions.push(ret_binding_pos);
       
         //update trial counter across blocks
@@ -578,10 +587,12 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
       setsize: setsize[index], 
 
       stim_index: rand_stims[index],
+      stim_index_word: rand_stims_word[index],
       binding_pos: binding_pos[index],
       
       retrieval_order: new_order[index],
       ret_stim: ret_stims[index],
+      ret_stim_word: ret_stims_word[index],
       ret_binding_pos: ret_binding_positions[index]
       
       });

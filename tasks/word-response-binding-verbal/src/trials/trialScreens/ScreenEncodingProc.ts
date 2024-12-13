@@ -28,10 +28,10 @@ export const screen_encoding_proc = function(exp_info, exp_trial, stim) {
     var ret_dots_rad = exp_info.canH/72; // radius of retrieval color dots
     var img_height = exp_info.canH/3.5; // height of stimulus image
   
-    // stimulus text
+    // stimulus word
     const stim_text = {
       obj_type: 'text',
-      content: exp_info.stim_words[stim], 
+      content: exp_trial.stim_index_word[stim],
       fontSize: '60px',
       startX: exp_info.center[0],
       startY: exp_info.top
@@ -57,7 +57,7 @@ export const screen_encoding_proc = function(exp_info, exp_trial, stim) {
       fill_color: exp_info.response_dot_col
     };
 
-    // display screen with stimulus image and color circle
+    // display screen with stimulus word and response
     const stim_screen = {
       type: psychophysics,
       background_color: 'white',
@@ -72,6 +72,6 @@ export const screen_encoding_proc = function(exp_info, exp_trial, stim) {
       }
     };
   
-    // return screen with stimulus image and color circle
+    // return screen with stimulus word and response
     return stim_screen;
   };

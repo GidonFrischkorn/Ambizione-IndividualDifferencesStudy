@@ -6,16 +6,16 @@ import { varSystem } from "../../settings";
 export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
 
     // define variables    
-    // stimulus text
+    // stimulus word
     const stim_text = {
       obj_type: 'text',
-      content: exp_info.stim_words[stim], 
+      content: exp_trial.ret_stim_word[stim],
       fontSize: '60px',
       startX: exp_info.center[0],
       startY: exp_info.center[1]
     };
     
-    // display screen with response image, color dots and color circle
+    // display screen with response image, word and responses
     let stim_screen = {
       type: psychophysics,
       background_color: 'white',
@@ -37,6 +37,7 @@ export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
           
         setsize: exp_trial.setsize,
         stimulusID: exp_trial.ret_stim[stim],
+        stimulusID_word: exp_trial.ret_stim_word[stim],
         ret_order: stim,
         enc_order: exp_trial.retrieval_order[stim],
   
