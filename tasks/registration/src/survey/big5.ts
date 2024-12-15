@@ -1,7 +1,4 @@
-// Import plugin
-import surveyLikert from "@jspsych/plugin-survey-likert";
-
-// Define survey function for BMW-3 questionnaire
+// Define survey function for BFI-2 questionnaire
 export const bfi2 = function (
   language: string = "DE",
   version: string = "full"
