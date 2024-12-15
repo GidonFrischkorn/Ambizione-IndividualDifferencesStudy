@@ -12,14 +12,32 @@ setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "the_name_of_your_experiment",
-  LANG: "en", // the default language of the experiment
+  TITLE: "Color Delayed Estimation Task",
+  LANG: "de", // the default language of the experiment
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 1, // number of experiment trials for each condition
+    nPRACTICE: 3, // number of practice trials for each set size 
+    nTRIALS: 50, // number of experiment trials for each condition
     nBLOCKS: 1, // number of blocks
-    CONDITIONS: [5, 6, 7, 8],
+    setSIZE: [4, 5, 6], // number of squares 
+  },
+
+  WHEEL: {
+    wheelRADIUS: 200, // the radius of the color wheel
+    wheelRATIO: 0.5, // the ratio of the inner circle to the outer circle
+  },
+
+  COLORS: {
+    POOL: [
+      "#2e8a3c",
+      "#e9ae0c",
+      "#e35431",
+      "#c81919",
+      "#299ac7",
+      "#4d3bb5",
+      "#b234a1",
+    ]
   },
 
   // settings for each trial

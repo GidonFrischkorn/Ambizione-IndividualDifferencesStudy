@@ -21,6 +21,12 @@ import { jsPsych } from "./jsp";
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
+import { fullMode_screen } from "./instructions/fullScreen";
+import { pra_instr_screen, exp_start_screen } from "./instructions/InstrStart";
+import { random } from "./task-fun/random";
+import { createNewTrial } from "./trials/trialProcess";
+import { expInfo } from "./settings";
+import { retrieval_screen } from "./trials/trialStim";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -52,6 +58,8 @@ export async function run({
 
   /************************************** Experiment **************************************/
 
+  
+
   /************************************** Procedure **************************************/
 
 
@@ -62,6 +70,8 @@ export async function run({
   timeline.push(consent_screen);
   timeline.push(notice_screen);
   timeline.push(browser_screen);
+  timeline = timeline.concat(retrieval_screen);
+
 
   await jsPsych.run(timeline);
 
