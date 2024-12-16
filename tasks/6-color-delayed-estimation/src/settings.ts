@@ -29,7 +29,7 @@ export const expInfo = {
   },
 
   WHEEL: {
-    wheelRADIUS: 250, // the radius of the color wheel
+    wheelRADIUS: 280, // the radius of the color wheel
     wheelRATIO: 0.9, // the ratio of the inner circle to the outer circle
   },
 
