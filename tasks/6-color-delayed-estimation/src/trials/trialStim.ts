@@ -10,7 +10,7 @@ import { jsPsych } from "../jsp";
 // Define parameters 
 const radius: number = expInfo.WHEEL.wheelRADIUS;
 const ratio: number = expInfo.WHEEL.wheelRATIO;
-const pos: [number, number] = [500/ 2, 500 / 2]
+const pos: [number, number] = [expInfo.CANVAS.WIDTH / 2, expInfo.CANVAS.HEIGHT / 2]
 
 // Create the color wheel stimulus
 const colorWheelStimulus = drawColorWheel(radius, ratio, pos);
@@ -19,8 +19,8 @@ export const retrieval_screen = {
   type: psychophysics, 
   stimuli: [colorWheelStimulus],
   background_color: 'white',
-  canvas_width: 500,
-  canvas_height: 500,
+  canvas_width: expInfo.CANVAS.WIDTH,
+  canvas_height: expInfo.CANVAS.HEIGHT,
   response_type: 'mouse', // Enable mouse interactions
   choices: 'NO_KEYS', // Disable keyboard responses
   mouse_down_func: function(event) {
@@ -40,6 +40,5 @@ export const retrieval_screen = {
     jsPsych.data.write({
       selected_hue: angle
     });
-
   }
 };

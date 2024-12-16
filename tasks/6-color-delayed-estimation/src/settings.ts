@@ -23,9 +23,14 @@ export const expInfo = {
     setSIZE: [4, 5, 6], // number of squares 
   },
 
+  CANVAS: {
+    WIDTH: 800,
+    HEIGHT: 600,
+  },
+
   WHEEL: {
-    wheelRADIUS: 200, // the radius of the color wheel
-    wheelRATIO: 0.5, // the ratio of the inner circle to the outer circle
+    wheelRADIUS: 250, // the radius of the color wheel
+    wheelRATIO: 0.9, // the ratio of the inner circle to the outer circle
   },
 
   COLORS: {
