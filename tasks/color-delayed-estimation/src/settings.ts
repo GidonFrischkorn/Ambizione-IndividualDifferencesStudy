@@ -4,6 +4,7 @@
 
 // Task functions
 import { setCSS } from "./task-fun/setCSS";
+import { helpers } from "./task-fun/helpers";
 
 setCSS();
 
@@ -16,35 +17,41 @@ export const expInfo = {
   DESIGN: {
     nTRIALS: 50, // number of experiment trials for each condition
     nPRACTICE: 10, // number of practice trials for each condition
+    use_ArcResponse: true, // use the arc response
     BreakAt: 0.5, // the ratio of the trials to take a break
     nBLOCKS: 1, // number of blocks
-    nDOTS: 120, // number of dots in the grid
     CONDITIONS: {
-      MAJORITY: ["moreBlue", "moreRed"],
-      DIFFICULTY: ["easy", "hard"],
+      SETSIZE: [3,4,5],
     }, // conditions of the experiment
-    CHOICES: ["d", "k"],
-    MAPPING: [0, 1],
-    COLORS: ["blue", "red"],
+    nItemsTested: 1, // number of items tested in the experiment
     backgroundCOLOR: "#FFFFFF", // white background
-    OFFSET: {
-      DIFF_EASY: 0.6,
-      DIFF_HARD: 0.52,
-    },
-    positionX: [-88, -72, -56, -40, -24, -8, 8, 24, 40, 56, 72, 88], // x-axis positions of the dots
-    positionY: [-88, -72, -56, -40, -24, -8, 8, 24, 40, 56, 72, 88], // y-axis positions of the dots
+    POS_OFFSET: 10,
   },
 
   // settings for each trial
   TIMING: {
     FIXATION: 400, // duration of the fixation cross
     JITTER: 200, // duration of the jitter
-    TARGET: 5000, // duration of the target stimulus
-    FEEDBACK: 1000, // duration of the feedback
+    ENCODING: 1000, // duration of the encoding stimulus
+    RETENTION: 1000, // duration of the retention interval
+    FEEDBACK: 1500, // duration of the feedback
     ITI: 1000, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 60 * 1000, // break duration in seconds
-    FINGERS: 5000, // duration of the finger instruction
+  },
+
+  COLORWHEEL: {
+      radius: 400,
+      x: Array.from({length: 360}, (x,i) => Math.cos(i * Math.PI / 180) * 200),
+      y: Array.from({length: 360}, (x,i) => Math.sin(i * Math.PI / 180) * 200),
+      size: 40,
+      colors: helpers.sequence(0, 359, 1)
+  },
+
+  ARC_RESPONSE: {
+    offset: 1.1,
+    size_respInd: 30,
+    size_arc: 10,
   },
 
   // when using Prolific, you can set customized completion codes for different situations

@@ -247,6 +247,17 @@ export const checkItemSimilarity = function(array, minDist, gridsize){
   }
 };
 
+export const createDifference = (arr) => {
+	const differenceArray: number[] = [];
+	for(let i = 0; i < arr.length; i++){
+		let array_element = arr[i];
+		for (let j = i + 1; j < arr.length; j++){
+			differenceArray.push(Math.abs(array_element - arr[j]));
+		}
+	};
+	return differenceArray;
+ }
+
 
 //create function that checks, if a newly created array is different from the arrays already in the list
 //the arrays have to differ in at least 2 locations:

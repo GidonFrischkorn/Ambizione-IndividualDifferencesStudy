@@ -6,11 +6,11 @@ export const CIElab = {
     radius: 60,
     
     // Convert CIElab to RGB
-    toRGB: function(l,a,b) {
-        var varY = (l + 16) / 115.0
-        var varX = a / 500.0 + varY
-        var varZ = varY - b / 200.0
-        
+    toRGB: function(l: number, a: number , b: number) {
+        var varY = (l + 16) / 115.0;
+        var varX = a / 500.0 + varY;
+        var varZ = varY - b / 200.0;
+
         varX = CIElab.filter_threshold(varX)
         varY = CIElab.filter_threshold(varY)
         varZ = CIElab.filter_threshold(varZ)
@@ -35,11 +35,11 @@ export const CIElab = {
         G = CIElab.trimming(G)
         B = CIElab.trimming(B)  
         
-        return [R, G, B]
+        return RGBtoHEX(R,G,B)
     },
 
     // Filter threshold for CIElab to RGB conversion
-    filter_threshold: function(xyz) {
+    filter_threshold: function(xyz: number) {
         if(Math.pow(xyz, 3.0) > 0.008856){
             return Math.pow(xyz, 3.0)
         } else{
@@ -48,7 +48,7 @@ export const CIElab = {
     },
 
     // Trimming for CIElab to RGB conversion
-    trimming: function(rgb) {
+    trimming: function(rgb: number) {
         if (rgb > 255){
             rgb = 255
         } else if(rgb < 0){
@@ -57,8 +57,8 @@ export const CIElab = {
         return(Math.floor(rgb))
     },
     
-    //Gamma correction for IEC 61966-2-1 standard
-    gamma_correction: function(rgb) {
+    // Gamma correction for IEC 61966-2-1 standard
+    gamma_correction: function(rgb: number) {
         if (rgb > 0.0031308){
             return(1.055 * (Math.pow(rgb, (1.0/2.4))) - 0.055)
         } else {
@@ -67,7 +67,7 @@ export const CIElab = {
     },
 
     // Convert angle to RGB
-    angle_to_rgb(angle){
+    angle_to_rgb(angle: number){
         var theta = angle * Math.PI / 180.0
         var a = CIElab.a_center + CIElab.radius * Math.cos(theta)
         var b = CIElab.b_center + CIElab.radius * Math.sin(theta)
@@ -75,7 +75,7 @@ export const CIElab = {
         return CIElab.toRGB(l,a,b)
     },
     
-    angle_distance_correction(angles) {
+    angle_distance_correction(angles: number[]) {
         let new_angles: number[] = [];
         for(let i = 0; i < angles.length; i++){
             new_angles[i] = (angles[i] + 360) % 360;
@@ -83,3 +83,12 @@ export const CIElab = {
         return(new_angles);
     }
 }
+
+const componentToHex = function (c: number) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+};
+
+const RGBtoHEX = function(R: number, G: number, B: number) {
+    return "#" + componentToHex(R) + componentToHex(G) + componentToHex(B);
+};

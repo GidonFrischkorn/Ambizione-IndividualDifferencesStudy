@@ -4,7 +4,6 @@
  * @author Elena Venturi
  * @version 0.3.1
  *
- *
  * @assets assets/
  */
 
@@ -21,7 +20,6 @@ import { jsPsych } from "./jsp";
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
-import { create_trialList } from "./trials/trialStim";
 import { createNewTrial } from "./trials/trialProcess";
 import { expInfo } from "./settings";
 import { pra_instr_screen, exp_start_screen } from "./instructions/InstrTrial";
@@ -57,47 +55,28 @@ export async function run({
   };
 
   /************************************** Instruction **************************************/
+  // This still need to be implemebted
+
 
   /************************************** Practice **************************************/
-  const prac_list = create_trialList();
-  console.log(prac_list);
-  let practice_line: any[] = [];
-  for (let j = 0; j < expInfo.DESIGN.nPRACTICE; j++) {
-    let practice_trial = createNewTrial(
-      j,
-      true,
-      prac_list[j].majority,
-      prac_list[j].difficulty,
-      prac_list[j].nBlueDots,
-      prac_list[j].nRedDots,
-      prac_list[j].stimulus
-    );
-    practice_line = practice_line.concat(practice_trial);
+  let prac_line: any[] = [];
+
+  // Here we should create 9 practice trials with 3 from each set size
+  for (let i = 0; i < expInfo.DESIGN.nPRACTICE; i++) {
+    let trial = createNewTrial(1, true, [0]);
+    prac_line = prac_line.concat(trial);
   }
 
   /************************************** Experiment **************************************/
-  const trial_list = create_trialList();
+
+  // Here we need to create the trial_list with 50 trials from each setsize 
 
   let exp_line: any[] = [];
-  for (let j = 0; j < trial_list.length; j++) {
-    let exp_trial = createNewTrial(
-      j,
-      false,
-      trial_list[j].majority,
-      trial_list[j].difficulty,
-      trial_list[j].nBlueDots,
-      trial_list[j].nRedDots,
-      trial_list[j].stimulus
-    );
-    exp_line = exp_line.concat(exp_trial);
-
-    if (
-      j + 1 != trial_list.length &&
-      (j + 1) % (trial_list.length * expInfo.DESIGN.BreakAt) === 0
-    ) {
-      exp_line.push(break_screen);
-    }
+  for (let i = 0; i < expInfo.DESIGN.nTRIALS; i++) {
+    let trial = createNewTrial(1, false, [0]);
+    exp_line = exp_line.concat(trial);
   }
+
 
   /************************************** Procedure **************************************/
 
@@ -108,11 +87,12 @@ export async function run({
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   // timeline.push(instructions_screen);
   // timeline.push(pra_instr_screen);
-  // timeline.push(fingers_instructions_practice);
-  // timeline = timeline.concat(practice_line);
+  //timeline.push(example_trial);
+  timeline = timeline.concat(prac_line);
+  timeline = timeline.concat(exp_line);
   // timeline.push(exp_start_screen);
   // timeline.push(fingers_instructions_exp);
   // timeline = timeline.concat(exp_line);
