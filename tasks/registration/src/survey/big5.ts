@@ -1,7 +1,8 @@
 // Define survey function for BFI-2 questionnaire
 export const bfi2 = function (
   language: string = "DE",
-  version: string = "full"
+  version: string = "full",
+  single_page: boolean = false
 ) {
   if (language == "DE") {
     var likert_scale = [
@@ -306,23 +307,52 @@ export const bfi2 = function (
     likert_columns.push(single_column);
   }
 
-  // combine everything into a single survey page
-  var bfi2_page = {
-    elements: [
-      {
-        type: "matrix",
-        name: "bfi2-matrix",
-        title: title,
-        description: instruction,
-        alternateRows: true,
-        isAllRowRequired: true,
-        rows: final_items,
-        rowsOrder: "random",
-        columns: likert_columns,
-        rowTitleWidth: "50%",
-      },
-    ],
-  };
+  // combine everything into a single or multiple survey pages
+  var bfi2_line: any[] = [];
+  if (single_page) {
+    var bfi2_page = {
+      elements: [
+        {
+          type: "matrix",
+          name: "bfi2-matrix",
+          title: title,
+          description: instruction,
+          alternateRows: true,
+          isAllRowRequired: true,
+          rows: final_items,
+          rowsOrder: "random",
+          columns: likert_columns,
+          rowTitleWidth: "50%",
+        },
+      ],
+    };
 
-  return bfi2_page;
+    bfi2_line.push(bfi2_page);
+  } else {
+    var item_per_page = 10;
+    var num_pages = Math.ceil(final_items.length / item_per_page);
+
+    for(let i = 0; i < num_pages; i++) {
+      var bfi2_page = {
+        elements: [
+          {
+            type: "matrix",
+            name: "bfi2-matrix",
+            title: title,
+            description: instruction,
+            alternateRows: true,
+            isAllRowRequired: true,
+            rows: final_items.slice(i * item_per_page, (i + 1) * item_per_page),
+            rowsOrder: "random",
+            columns: likert_columns,
+            rowTitleWidth: "50%",
+          },
+        ],
+      };
+
+      bfi2_line.push(bfi2_page);
+    }
+  }
+  
+  return bfi2_line;
 };

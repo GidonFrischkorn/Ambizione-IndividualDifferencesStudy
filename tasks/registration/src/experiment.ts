@@ -28,7 +28,7 @@ import { bmw3 } from "./survey/bmw3";
 import { bfi2 } from "./survey/big5";
 import { nfc } from "./survey/nfc";
 import { isi_questionnaire } from "./survey/isi";
-import { mini_q } from "./survey/mini-q";
+//import { mini_q } from "./survey/mini-q.ts";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -62,7 +62,7 @@ export async function run({
   const bmw3_page = bmw3("DE");
 
   /************************************** Big-5 **************************************/
-  const bfi2_page = bfi2("DE", "short");
+  const bfi2_line = bfi2("DE", "short");
 
   /************************************** NFC **************************************/
   const nfc_page = nfc("DE");
@@ -71,16 +71,16 @@ export async function run({
   const isi_page = isi_questionnaire("DE");
 
   /************************************** Mini-Q **************************************/
-  const mini_q_test = mini_q();
-  console.log(mini_q_test);
+  //const mini_q_test = mini_q();
+  //console.log(mini_q_test);
   // Combine all survey pages
 
   var survey_pages: any[] = [];
   survey_pages.push(demographic_page);
-  survey_pages = survey_pages.concat(mini_q_test);
+  //survey_pages = survey_pages.concat(mini_q_test);
   survey_pages.push(isi_page);
   survey_pages.push(bmw3_page);
-  survey_pages.push(bfi2_page);
+  survey_pages = survey_pages.concat(bfi2_line);
   survey_pages.push(nfc_page);
 
   console.log(survey_pages);
