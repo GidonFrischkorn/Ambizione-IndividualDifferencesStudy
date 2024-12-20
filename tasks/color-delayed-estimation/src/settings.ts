@@ -23,7 +23,7 @@ export const expInfo = {
     CONDITIONS: {
       SETSIZE: [3,4,5],
     }, // conditions of the experiment
-    nItemsTested: 1, // number of items tested in the experiment
+    nItemsTested: 4, // number of items tested in the experiment
     backgroundCOLOR: "#FFFFFF", // white background
     POS_OFFSET: 10,
   },

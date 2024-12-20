@@ -30,7 +30,8 @@ export function createNewTrial(
     origin_center: true, // if true, the location is the center of the rectangle
     width: 20, // of the rectangle
     height: 20,
-    line_length: 20
+    line_length: 30, 
+    line_width: 2.5
   };
 
   const fixation_screen = {

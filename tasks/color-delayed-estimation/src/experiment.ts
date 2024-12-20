@@ -59,13 +59,19 @@ export async function run({
 
 
   /************************************** Practice **************************************/
+  
+  // For every set size 3 practice trials 
   let prac_line: any[] = [];
+  let setSizes = expInfo.DESIGN.CONDITIONS.SETSIZE;
 
-  // Here we should create 9 practice trials with 3 from each set size
-  for (let i = 0; i < expInfo.DESIGN.nPRACTICE; i++) {
-    let trial = createNewTrial(1, true, [0]);
-    prac_line = prac_line.concat(trial);
+  for (let setSize of setSizes) {
+    // Create 3 trials for each set size
+    for (let i = 0; i < 3; i++) {
+      let trial = createNewTrial(setSize, true, [0]);
+      prac_line = prac_line.concat(trial);
+    }
   }
+
 
   /************************************** Experiment **************************************/
 
@@ -73,7 +79,7 @@ export async function run({
 
   let exp_line: any[] = [];
   for (let i = 0; i < expInfo.DESIGN.nTRIALS; i++) {
-    let trial = createNewTrial(1, false, [0]);
+    let trial = createNewTrial(3, false, [0]);
     exp_line = exp_line.concat(trial);
   }
 
@@ -87,7 +93,7 @@ export async function run({
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   // timeline.push(instructions_screen);
   // timeline.push(pra_instr_screen);
   //timeline.push(example_trial);

@@ -5,11 +5,7 @@ import { CIElab } from "../task-fun/CIElab";
 import { random, generateArray } from "@coglabuzh/webpsy.js";
 import { createDifference } from "../task-fun/helpers";
 
-/**
- * Generates a stimulus array based on the specified condition.
- * @param nBlueDots - number of blue dots
- * @param nRedDots - number of red dots
- */
+
 export const generateStims = function (
   set_size: number,
   location: string = "circle",
@@ -119,62 +115,6 @@ export const generateRetrievalCue = function (cued_pos, memory_stims) {
   return cue_stim;
 };
 
-/*
-export function create_trialList() {
-  let target_conditions = {
-    difficulty: expInfo.DESIGN.CONDITIONS.DIFFICULTY,
-    majority: expInfo.DESIGN.CONDITIONS.MAJORITY,
-  };
-
-  let block_conditions = jsPsych.randomization.factorial(
-    target_conditions,
-    expInfo.DESIGN.nTRIALS,
-    false
-  );
-  console.log(block_conditions);
-
-  block_conditions.forEach((trial, i) => {
-    if (trial.difficulty == "easy") {
-      if (trial.majority == "moreBlue") {
-        trial.nBlueDots = Math.ceil(
-          expInfo.DESIGN.OFFSET.DIFF_EASY * expInfo.DESIGN.nDOTS
-        );
-        trial.nRedDots =
-          expInfo.DESIGN.nDOTS -
-          Math.ceil(expInfo.DESIGN.OFFSET.DIFF_EASY * expInfo.DESIGN.nDOTS);
-      } else if (trial.majority == "moreRed") {
-        trial.nBlueDots =
-          expInfo.DESIGN.nDOTS -
-          Math.ceil(expInfo.DESIGN.OFFSET.DIFF_EASY * expInfo.DESIGN.nDOTS);
-        trial.nRedDots = Math.ceil(
-          expInfo.DESIGN.OFFSET.DIFF_EASY * expInfo.DESIGN.nDOTS
-        );
-      }
-    } else if (trial.difficulty == "hard") {
-      if (trial.majority == "moreBlue") {
-        trial.nBlueDots = Math.ceil(
-          expInfo.DESIGN.OFFSET.DIFF_HARD * expInfo.DESIGN.nDOTS
-        );
-        trial.nRedDots =
-          expInfo.DESIGN.nDOTS -
-          Math.ceil(expInfo.DESIGN.OFFSET.DIFF_HARD * expInfo.DESIGN.nDOTS);
-      } else if (trial.majority == "moreRed") {
-        trial.nBlueDots =
-          expInfo.DESIGN.nDOTS -
-          Math.ceil(expInfo.DESIGN.OFFSET.DIFF_HARD * expInfo.DESIGN.nDOTS);
-        trial.nRedDots = Math.ceil(
-          expInfo.DESIGN.OFFSET.DIFF_HARD * expInfo.DESIGN.nDOTS
-        );
-      }
-    }
-
-    trial.stimulus = generateStims(trial.nBlueDots, trial.nRedDots);
-    trial.trial_number = i + 1;
-  });
-
-  return block_conditions;
-}
-*/
 
 // function to determine the current location of the mouse
 export const getDirection = function(mouseX, mouseY, itemX, itemY) {
