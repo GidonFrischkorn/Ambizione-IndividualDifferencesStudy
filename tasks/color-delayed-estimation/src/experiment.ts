@@ -25,7 +25,8 @@ import { expInfo } from "./settings";
 import { pra_instr_screen, exp_start_screen } from "./instructions/InstrTrial";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { instructions_screen, break_screen } from "./instructions/InstrStart";
-import { random } from "@coglabuzh/webpsy.js"
+import { create_trialList } from "./trials/trialStim";
+import exp from "constants";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -51,7 +52,6 @@ export async function run({
   };
 
   /************************************** Instruction **************************************/
-  // This still need to be implemebted
 
 
   /************************************** Practice **************************************/
@@ -63,21 +63,22 @@ export async function run({
   for (let setSize of setSizes) {
     // Create 3 trials for each set size
     for (let i = 0; i < 3; i++) {
-      let trial = createNewTrial(setSize, true, [0]);
-      prac_line = prac_line.concat(trial);
+      let prac_trial = createNewTrial(setSize, true, [0]);
+      prac_line = prac_line.concat(prac_trial);
     }
   }
 
   /************************************** Experiment **************************************/
+  
+  const trial_list = create_trialList();
   let exp_line: any[] = [];
   
   for (let setSize of setSizes) {
     for (let i = 0; i < 50; i++) {
-      let trial = createNewTrial(setSize, false, [0]);
-      exp_line = exp_line.concat(trial);
+      let exp_trial = createNewTrial(trial_list[i].setsize, false, [0]);
+      exp_line = exp_line.concat(exp_trial);
     }
   }
-  
 
   /************************************** Procedure **************************************/
 
@@ -91,12 +92,9 @@ export async function run({
   timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
-  //timeline.push(example_trial);
-  //timeline = timeline.concat(prac_line);
+  timeline = timeline.concat(prac_line);
+  timeline.push(exp_start_screen);
   timeline = timeline.concat(exp_line);
-  // timeline.push(exp_start_screen);
-  // timeline.push(fingers_instructions_exp);
-  // timeline = timeline.concat(exp_line);
 
   await jsPsych.run(timeline);
 

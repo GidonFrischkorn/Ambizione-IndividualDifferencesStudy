@@ -249,7 +249,7 @@ export const createFeedbackIndicator = function(startX, startY, radius, width, c
 };
 
 
-/*export function create_trialList() {
+export function create_trialList() {
   let target_conditions = {
     setsize: expInfo.DESIGN.CONDITIONS.SETSIZE,
   };
@@ -270,7 +270,6 @@ export const createFeedbackIndicator = function(startX, startY, radius, width, c
       trial.size = 5;
     }
 
-
     trial.stimulus = generateStims(
       trial.size,
       trial.location,
@@ -282,4 +281,4 @@ export const createFeedbackIndicator = function(startX, startY, radius, width, c
   });
 
   return block_conditions;
-}*/
+}

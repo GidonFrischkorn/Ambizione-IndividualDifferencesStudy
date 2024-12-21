@@ -46,7 +46,7 @@ export function createNewTrial(
 
   // Encoding Screen
   var memory_stims = generateStims(setsize, "circle", 25, "circle", 100);
-  console.log(memory_stims);
+  //console.log(memory_stims);
 
   const encoding_screen = {
     type: psychophysics,
