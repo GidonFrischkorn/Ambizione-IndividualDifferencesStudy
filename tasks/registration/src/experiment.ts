@@ -62,7 +62,7 @@ export async function run({
   const bmw3_page = bmw3("DE");
 
   /************************************** Big-5 **************************************/
-  const bfi2_line = bfi2("DE", "short");
+  const bfi2_line = bfi2("DE", "short", true);
 
   /************************************** NFC **************************************/
   const nfc_page = nfc("DE");
@@ -76,10 +76,10 @@ export async function run({
   // Combine all survey pages
 
   var survey_pages: any[] = [];
-  survey_pages.push(demographic_page);
+  // survey_pages.push(demographic_page);
   //survey_pages = survey_pages.concat(mini_q_test);
   survey_pages.push(isi_page);
-  survey_pages.push(bmw3_page);
+  // survey_pages.push(bmw3_page);
   survey_pages = survey_pages.concat(bfi2_line);
   survey_pages.push(nfc_page);
 

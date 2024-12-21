@@ -310,24 +310,33 @@ export const bfi2 = function (
   // combine everything into a single or multiple survey pages
   var bfi2_line: any[] = [];
   if (single_page) {
-    var bfi2_page = {
-      elements: [
-        {
-          type: "matrix",
-          name: "bfi2-matrix",
-          title: title,
-          description: instruction,
-          alternateRows: true,
-          isAllRowRequired: true,
-          rows: final_items,
-          rowsOrder: "random",
-          columns: likert_columns,
-          rowTitleWidth: "50%",
-        },
-      ],
-    };
+    var header_repeat: number = 10;
+    var num_elements = Math.ceil(final_items.length / header_repeat);
 
-    bfi2_line.push(bfi2_page);
+    var element_array: any[] = [];
+    for (let i = 0; i < num_elements; i++) {
+      var element_title = i == 0 ? title : "";
+      var element_description = i == 0 ? instruction : "";
+
+      var bfi2_element = {
+        type: "matrix",
+        name: "",
+        title: element_title,
+        description: element_description,
+        alternateRows: true,
+        isAllRowRequired: true,
+        rows: final_items.slice(i * header_repeat, (i + 1) * header_repeat),
+        rowsOrder: "random",
+        columns: likert_columns,
+        rowTitleWidth: "50%",
+      };
+
+      element_array.push(bfi2_element);
+    }
+
+    bfi2_line = [{
+      elements: element_array,
+    }];
   } else {
     var item_per_page = 10;
     var num_pages = Math.ceil(final_items.length / item_per_page);
