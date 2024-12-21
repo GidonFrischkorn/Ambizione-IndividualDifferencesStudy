@@ -20,7 +20,7 @@ export function createNewTrial(
   isPractice: boolean,
   retrieval_order: number[]
 ): any[] {
-  var trial_line: any[] = [];
+  var trial_line: any[] = []; 
 
   // Fixation Screen
   const fixation_cross = {
@@ -289,8 +289,6 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
   }
 }
   
-
-
   // Inter Trial Interval Screen
   const inter_trial_interval = {
     type: htmlKeyboardResponse,

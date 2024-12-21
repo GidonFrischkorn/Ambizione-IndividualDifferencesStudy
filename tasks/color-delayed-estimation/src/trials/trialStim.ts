@@ -4,6 +4,7 @@ import { expInfo } from "../settings";
 import { CIElab } from "../task-fun/CIElab";
 import { random, generateArray } from "@coglabuzh/webpsy.js";
 import { createDifference } from "../task-fun/helpers";
+import { jsPsych } from "../jsp";
 
 
 export const generateStims = function (
@@ -247,3 +248,38 @@ export const createFeedbackIndicator = function(startX, startY, radius, width, c
   };
 };
 
+
+/*export function create_trialList() {
+  let target_conditions = {
+    setsize: expInfo.DESIGN.CONDITIONS.SETSIZE,
+  };
+
+  let block_conditions = jsPsych.randomization.factorial(
+    target_conditions,
+    expInfo.DESIGN.nTRIALS,
+    false
+  );
+  
+
+  block_conditions.forEach((trial, i) => {
+    if (trial.setsize == 3) {
+      trial.size = 3;
+    } else if (trial.setsize == 4) {
+      trial.size = 4;
+    } else if (trial.setsize == 5) {
+      trial.size = 5;
+    }
+
+
+    trial.stimulus = generateStims(
+      trial.size,
+      trial.location,
+      trial.patch_size,
+      trial.patch_type,
+      trial.location_size
+    );
+    trial.trial_number = i + 1;
+  });
+
+  return block_conditions;
+}*/

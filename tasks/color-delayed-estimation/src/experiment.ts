@@ -24,12 +24,8 @@ import { createNewTrial } from "./trials/trialProcess";
 import { expInfo } from "./settings";
 import { pra_instr_screen, exp_start_screen } from "./instructions/InstrTrial";
 import { fullMode_screen } from "./instructions/fullScreen";
-import {
-  instructions_screen,
-  fingers_instructions_practice,
-  fingers_instructions_exp,
-  break_screen,
-} from "./instructions/InstrStart";
+import { instructions_screen, break_screen } from "./instructions/InstrStart";
+import { random } from "@coglabuzh/webpsy.js"
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -49,7 +45,7 @@ export async function run({
   // Preload assets
   const preload_screen = {
     type: preload,
-    images: assetPaths.images,
+    //images: assetPaths.images,
     // audio: assetPaths.audio,
     // video: assetPaths.video,
   };
@@ -72,17 +68,16 @@ export async function run({
     }
   }
 
-
   /************************************** Experiment **************************************/
-
-  // Here we need to create the trial_list with 50 trials from each setsize 
-
   let exp_line: any[] = [];
-  for (let i = 0; i < expInfo.DESIGN.nTRIALS; i++) {
-    let trial = createNewTrial(3, false, [0]);
-    exp_line = exp_line.concat(trial);
+  
+  for (let setSize of setSizes) {
+    for (let i = 0; i < 50; i++) {
+      let trial = createNewTrial(setSize, false, [0]);
+      exp_line = exp_line.concat(trial);
+    }
   }
-
+  
 
   /************************************** Procedure **************************************/
 
@@ -94,10 +89,10 @@ export async function run({
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
-  // timeline.push(instructions_screen);
-  // timeline.push(pra_instr_screen);
+  timeline.push(instructions_screen);
+  timeline.push(pra_instr_screen);
   //timeline.push(example_trial);
-  timeline = timeline.concat(prac_line);
+  //timeline = timeline.concat(prac_line);
   timeline = timeline.concat(exp_line);
   // timeline.push(exp_start_screen);
   // timeline.push(fingers_instructions_exp);
