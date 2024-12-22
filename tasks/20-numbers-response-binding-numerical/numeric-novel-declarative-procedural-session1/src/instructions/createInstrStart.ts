@@ -68,6 +68,8 @@ export function createInstr(exp_info, instr_folder: string, start, end) {
     type: instructions,
     pages: instr_slides,
     show_clickable_nav: true,
+    button_label_previous: 'Zurück',
+    button_label_next: 'Weiter',
     data: { screenID: `instruction_${instr_folder}` }
     };
 
