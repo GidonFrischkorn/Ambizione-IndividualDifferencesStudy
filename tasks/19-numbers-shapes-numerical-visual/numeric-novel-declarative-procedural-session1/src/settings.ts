@@ -20,6 +20,7 @@ export const varSystem = {
   MAX_BLUR: 3, // the maximum number of times participants can leave the browser
   LOOP: true, // a switch to control whether participants need to read the instruction and practice again
   FAILED_ATTENTION_CHECK: false,
+  STATUS: "offline",
 };
 
 // define experimental variables and color condition

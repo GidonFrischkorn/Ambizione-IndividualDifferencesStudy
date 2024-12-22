@@ -21,7 +21,6 @@ import { chunkTrials } from "@coglabuzh/webpsy.js";
 import { calculateMods } from "./task-fun/calculateMods";
 import { createIfNode } from "./task-fun/createIfNode";
 import { endExpPractice, endExpFingerCheck } from "./task-fun/endExperiment";
-import { random } from "@coglabuzh/webpsy.js";
 
 import { welcome_screen } from "./instructions/welcome";
 import { browser_screen } from "./instructions/browserCheck";
