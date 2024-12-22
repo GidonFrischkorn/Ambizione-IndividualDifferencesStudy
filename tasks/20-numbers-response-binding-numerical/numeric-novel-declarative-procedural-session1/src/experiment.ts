@@ -49,7 +49,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // preload assets
   const preload_screen = {
     type: preload,
-    images: assetPaths.images
+    //images: assetPaths.images
   };
 
   /************************************** Experiment **************************************/

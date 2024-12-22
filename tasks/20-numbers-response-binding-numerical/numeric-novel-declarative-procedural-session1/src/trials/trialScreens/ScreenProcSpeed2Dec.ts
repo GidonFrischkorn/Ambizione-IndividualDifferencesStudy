@@ -92,8 +92,8 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
         objects: exp_info.objects,
       
         procedure: exp_trial.phase,
-        blockID: exp_trial.block,
-        trialID: exp_trial.trial,
+        block_number: exp_trial.block,
+        trial_number: exp_trial.trial,
   
         ret_order: exp_trial.retrieval_order,
         proc_speed_object_name: exp_trial.proc_speed_object,
