@@ -12,20 +12,6 @@ export let jsPsych = initJsPsych({
         trackInteractions(varSystem, true, instance); // For some weird reason, this function does not work if you write out the name of each variable.
     },
 
-    /*
-    // append results to JATOS after each trial if the experiment is running on JATOS.
-    on_trial_finish: function () {
-        if (varOnline.RUN_JATOS) {
-
-            // add a unique participant id to the data
-            jsPsych.data.addProperties({ subjectID: varOnline.SUBJECT_ID }); 
-
-            var resultJson = jsPsych.data.getLastTrialData().json();
-            //@ts-ignore
-            jatos.appendResultData(resultJson);
-        }
-    },*/
-
     // get data when finished and submit it to jatos and redirect to Prolific
     on_finish: function () {
 
