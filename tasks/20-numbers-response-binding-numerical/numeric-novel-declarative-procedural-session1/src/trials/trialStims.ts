@@ -144,7 +144,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         list_conditions:any = [],
         setsize:any = [],
         rand_stims:any = [],
-        rand_orders_int:any = [],
         binding_objects_name:any = [],
         binding_objects_pos:any = [],
         position:any = [],
@@ -190,16 +189,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     // remove Hebb stimuli from stimulus index
     if (is_practice == 0) { // experimental trials
       number_idx = removeItems(number_idx, hebb_stims);
-    };
-
-
-    // sample Interference stimuli
-    var int_stims = random.sample(number_idx, exp_info.setsize);
-    var int_bindings = random.sample(exp_info.objects_name, exp_info.setsize);
-
-    // remove Interference stimuli from stimulus index
-    if (is_practice == 0) { // experimental trials
-      number_idx = removeItems(number_idx, int_stims);
     };
 
 
@@ -272,37 +261,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
           // Hebb bindings
           binding_objects_name.push(rand_hebb_bindings);
           
-        } else if (list_cond == "Interference"){ // Interference conditio
-
-          // randomly order Interfernce stims and  bindings
-          var rand_order = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-
-          // check if any bindings are the same in the last Interference trial
-          // if yes, shuffle again
-          if (block != 0) { // for every mini-block except block 0
-    
-            // while loop: shuffle until all binding elements from current and previous interfernce trial are unequal
-            while ( ! rand_order.every((val, index) => val != rand_orders_int[block-1][index]) ) { 
-              
-              rand_order = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-            
-            };  
-          };
-
-          // update orders for Interference bindings after while loop
-          rand_orders_int.push(rand_order);
-          var rand_orders_int_bindings = rand_order.map(i => int_bindings[i]);
-
-          // randomly order Interference bindings at encoding
-          var rand_order2 = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-         
-          // reorder and add stims and bindings to array
-          var rand_int_stims = rand_order2.map(i => int_stims[i]);
-          var rand_int_bindings = rand_order2.map(i => rand_orders_int_bindings[i]);
-
-          rand_stims.push(rand_int_stims);
-          binding_objects_name.push(rand_int_bindings);          
-
         } else if (list_cond == "Control"){ // Control condition
 
           if (is_practice == 1) { // practice trials
@@ -469,7 +427,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         list_conditions:any = [],
         setsize:any = [],
         rand_stims:any = [],
-        rand_orders_int:any = [],
         binding_pos:any = [],
         position:any = [],
         new_order:any = [],
@@ -509,14 +466,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
       number_idx = removeItems(number_idx, hebb_stims);      
     };
      
-     // sample Interference stimuli
-     var int_stims = random.sample(number_idx, exp_info.setsize);
-     var int_bindings = random.sample(exp_info.pos, exp_info.setsize);
-
-     // remove Interference stimuli from stimulus index
-     if (is_practice == 0) { // experimental trials
-      number_idx = removeItems(number_idx, int_stims);
-    };
 
     // sample Control stimuli
     let controlPool = number_idx.slice(); // to get random elements
@@ -582,37 +531,6 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
           // Hebb bindings
           binding_pos.push(rand_hebb_bindings);
           
-        } else if (list_cond == "Interference"){ // Interference condition
-
-          // randomly order Interference bindings
-          var rand_order = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-
-          // check if any bindings are the same in the last Interference trial
-          // if yes, shuffle again
-          if (block != 0) { // for every mini-block except block 0
-    
-            // while loop: shuffle until all binding elements from current and previous interfernce trial are unequal
-            while ( ! rand_order.every((val, index) => val != rand_orders_int[block-1][index]) ) { 
-              
-              rand_order = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-            
-            };  
-          };
-
-          // update orders for Interference bindings after while loop
-          rand_orders_int.push(rand_order);
-          var rand_orders_int_bindings = rand_order.map(i => int_bindings[i]);
-
-          // randomly order Interference bindings at encoding
-          var rand_order2 = random.shuffle_new(Array.from(Array(setsize[trial]).keys()));
-         
-          // reorder and add stims and bindings to array
-          var rand_int_stims = rand_order2.map(i => int_stims[i]);
-          var rand_int_bindings = rand_order2.map(i => rand_orders_int_bindings[i]);
-
-          rand_stims.push(rand_int_stims);
-          binding_pos.push(rand_int_bindings);          
-
         } else if (list_cond == "Control"){ // Control condition
 
           if (is_practice == 1) { // practice trials
