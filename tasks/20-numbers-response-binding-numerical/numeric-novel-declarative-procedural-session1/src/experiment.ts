@@ -41,17 +41,10 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   /************************************** Preparation **************************************/
   
   // Procedural task - Session 1 
-  var condition_pool = ['procedural']; 
-
-  // retrieve condition from jatos batch session or randomly sample if jatos is not used
-  if (varOnline.RUN_JATOS) { // jatos
-    var task_condition = setConditions(condition_pool);   
-  } else { // no jatos
-    var task_condition = random.sample(condition_pool, 1)[0];
-  };
+  var task_condition = 'procedural';
 
   // define experimental variables
-  const exp_info = MakeExpInfo(task_condition, condition_pool);
+  const exp_info = MakeExpInfo(task_condition);
  
   var timeline:any[] = [];
   
