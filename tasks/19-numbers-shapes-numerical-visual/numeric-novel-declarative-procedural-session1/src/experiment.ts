@@ -41,25 +41,17 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   
   /************************************** Preparation **************************************/
   
-  // define possible conditions (declarative or procedural)
-  var condition_pool = ['declarative', 'procedural']; 
-
-  // retrieve color condition from jatos batch session or randomly sample if jatos is not used
-  if (varOnline.RUN_JATOS) { // jatos
-    var task_condition = setConditions(condition_pool);   
-  } else { // no jatos
-    var task_condition = random.sample(condition_pool, 1)[0];
-  };
+  var task_condition = 'declarative';
 
   // define experimental variables
-  const exp_info = MakeExpInfo(task_condition, condition_pool);
+  const exp_info = MakeExpInfo(task_condition);
  
   var timeline:any[] = [];
   
   // preload assets
   const preload_screen = {
     type: preload,
-    images: assetPaths.images
+    //images: assetPaths.images
   };
 
   /************************************** Experiment **************************************/
@@ -480,12 +472,12 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 //timeline.push(welcome_screen);
 //timeline.push(browser_screen);
 //timeline.push(fullMode_screen);
-timeline = timeline.concat(proc_speed_instr_line_task);
-timeline = timeline.concat(finger_check_loop_line_speed_task); 
-timeline = timeline.concat(proc_speed_line_task);
-timeline = timeline.concat(prac_line_all_task); 
-timeline = timeline.concat(exp_instr_line_task);
-timeline = timeline.concat(finger_check_loop_line_task);
+//timeline = timeline.concat(proc_speed_instr_line_task);
+//timeline = timeline.concat(finger_check_loop_line_speed_task); 
+//timeline = timeline.concat(proc_speed_line_task);
+//timeline = timeline.concat(prac_line_all_task); 
+//timeline = timeline.concat(exp_instr_line_task);
+//timeline = timeline.concat(finger_check_loop_line_task);
 timeline = timeline.concat(exp_line_task);
 timeline = timeline.concat(end_instr_line_task);
 timeline.push(question_serious_participation);
