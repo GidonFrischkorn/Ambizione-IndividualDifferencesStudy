@@ -477,13 +477,13 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   /************************************** Procedure **************************************/
 
   // push all the screen slides into timeline
-timeline.push(preload_screen);
-timeline.push(welcome_screen);
-timeline.push(consent_screen);
-timeline.push(randomID_screen);
-timeline.push(notice_screen);
-timeline.push(browser_screen);
-timeline.push(fullMode_screen);
+//timeline.push(preload_screen);
+//timeline.push(welcome_screen);
+//timeline.push(consent_screen);
+//timeline.push(randomID_screen);
+//timeline.push(notice_screen);
+//timeline.push(browser_screen);
+//timeline.push(fullMode_screen);
 timeline = timeline.concat(proc_speed_instr_line_task);
 timeline = timeline.concat(finger_check_loop_line_speed_task); 
 timeline = timeline.concat(proc_speed_line_task);
