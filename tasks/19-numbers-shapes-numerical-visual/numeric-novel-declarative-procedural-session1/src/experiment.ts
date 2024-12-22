@@ -56,7 +56,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   /************************************** Experiment **************************************/
 
- // define whether to run practice, color check, finger check, and processing speed task (0 = no, 1 = yes)
+ // define whether to run practice, finger check, and processing speed task (0 = no, 1 = yes)
  var is_practice = 1;
  var is_finger_check = 1;
  var is_proc_speed = 1;
