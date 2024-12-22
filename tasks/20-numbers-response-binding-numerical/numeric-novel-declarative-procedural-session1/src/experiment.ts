@@ -44,7 +44,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // Procedural task - Session 1 
   var condition_pool = ['procedural']; 
 
-  // retrieve color condition from jatos batch session or randomly sample if jatos is not used
+  // retrieve condition from jatos batch session or randomly sample if jatos is not used
   if (varOnline.RUN_JATOS) { // jatos
     var task_condition = setConditions(condition_pool);   
   } else { // no jatos
@@ -64,7 +64,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   /************************************** Experiment **************************************/
 
- // define whether to run practice, color check, finger check, and processing speed task (0 = no, 1 = yes)
+ // define whether to run practice, finger check, and processing speed task (0 = no, 1 = yes)
  var is_practice = 1;
  var is_finger_check = 1;
  var is_proc_speed = 1;

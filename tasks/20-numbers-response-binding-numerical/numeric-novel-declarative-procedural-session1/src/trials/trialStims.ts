@@ -22,7 +22,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     var n_blocks = exp_info.n_finger_check_blocks;
     var n_trials = exp_info.n_finger_check_trials;
     
-    // define the conditions: cross colors and key positions -> matrix with all the possible combinations of colors and positions (?)
+    // define the conditions
     finger_check_pos.push(Array(exp_info.objects.length).fill(exp_info.pos).flat());
     
     // loop through blocks
@@ -76,7 +76,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     var n_blocks = exp_info.n_proc_speed_blocks;
     var n_trials = exp_info.n_proc_speed_trials;
     
-    // define the conditions: cross colors and key positions
+    // define the conditions: cross non-objects and key positions
     proc_speed_object.push(Array(exp_info.pos.length).fill(exp_info.objects_name).flat().sort());
     proc_speed_pos.push(Array(exp_info.objects.length).fill(exp_info.pos).flat());
     
@@ -98,15 +98,15 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         trial2block.push(trial);
         phase.push('processing_speed');
 
-        // shuffle the order of key assignment for non-target color dots
+        // shuffle the order of key assignment for non-target non-objects
         ret_object_pos.push(exp_info.pos.map((x) => x));
         random.shuffle(ret_object_pos[trial]);
         
-        // array with 8 shuffled colors and positions for the remaining non-target color dots
+        // array with 8 shuffled non-objects and positions for the remaining non-target non-objects
         var ret_other_object = exp_info.objects_name.map(x => x);
         var ret_other_object_pos = ret_object_pos[trial].map(x => x);
         
-        // remove the target color and position from the array for the remaining non-target color dots
+        // remove the target non-objects and position from the array for the remaining non-target non-objects
         ret_other_object_pos.splice(ret_other_object_pos.indexOf(proc_speed_pos_block[trial]), 1);
         ret_other_object.splice(ret_other_object.indexOf(proc_speed_object_block[trial]), 1);
 
@@ -311,8 +311,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         var ret_other_object_pos = ret_object_pos.map(x => x);
         var ret_other_object = ret_object.map(x => x);
         
-        // remove target object and position from array and define objects in degrees of color wheel 
-        // for the remaining non-target color dots
+
         for (let stim = 0; stim < setsize[trial]; stim ++) {
           
           ret_other_object_pos[stim].splice(ret_other_object_pos[stim].indexOf(ret_binding_objects_pos[stim]), 1);
@@ -376,7 +375,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
     var n_blocks = exp_info.n_proc_speed_blocks;
     var n_trials = exp_info.n_proc_speed_trials;
     
-    // define the conditions: cross colors and key positions
+    // define the conditions: cross non-objects and key positions
     proc_speed_pos.push(Array(exp_info.pos.length).fill(exp_info.pos).flat());
     
     // loop through blocks
@@ -396,7 +395,7 @@ export function MakeTrial(exp_info, is_practice: number = 0, task) {
         trial2block.push(trial);
         phase.push('processing_speed');
 
-        // shuffle the order of key assignment for non-target color dots
+        // shuffle the order of key assignment for non-target non-objects
         ret_pos.push(exp_info.pos.map((x) => x));
         random.shuffle(ret_pos[trial]);
         

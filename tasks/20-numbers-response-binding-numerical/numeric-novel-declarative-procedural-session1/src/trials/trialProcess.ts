@@ -85,7 +85,7 @@ trialStim.prototype.memoryPhase = function () {
     const fix_screen = screen_fix(this.exp_info, this.exp_trial);
     phase_line.push(fix_screen);
 
-    // display key assignment of colors
+    // display key assignment of non-objects
     const proc_speed1_dec_screen = screen_proc_speed1_dec(this.exp_info, this.exp_trial, 0);
     phase_line.push(proc_speed1_dec_screen);
     
@@ -133,7 +133,7 @@ trialStim.prototype.memoryPhase = function () {
     // loop through each stimulus 
     for (let stim = 0; stim < this.exp_trial.setsize; stim++) {
 
-      // display encoding screen with the stimulus and color
+      // display encoding screen with the number and non-objects
       const encoding_dec_screen = screen_encoding_dec(this.exp_info, this.exp_trial, stim);
       phase_line.push(encoding_dec_screen);
 
@@ -172,7 +172,7 @@ trialStim.prototype.memoryPhase = function () {
     // loop through each stimulus 
     for (let stim = 0; stim < this.exp_trial.setsize; stim++) {
 
-      // display encoding screen with the stimulus and color
+      // display encoding screen with the number and the red dot 
       const encoding_proc_screen = screen_encoding_proc(this.exp_info, this.exp_trial, stim);
       phase_line.push(encoding_proc_screen);
 
@@ -235,7 +235,7 @@ if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_s
 
   } else if (this.task == "proc_speed_declarative") { // practice or experimental trials
 
-     // display color together with key assignment of colors
+     // display non-object together with key assignment of non-objects
      const proc_speed2_dec_screen = screen_proc_speed2_dec(this.exp_info, this.exp_trial, 0);
      phase_line.push(proc_speed2_dec_screen);
  
@@ -251,7 +251,7 @@ if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_s
 
   } else if (this.task == "proc_speed_procedural") {
 
-    // display color together with key assignment of colors
+    // display number together with key assignment of fingers
     const proc_speed_screen = screen_proc_speed_proc(this.exp_info, this.exp_trial, 0);
     phase_line.push(proc_speed_screen);
 
@@ -278,11 +278,11 @@ if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_s
     // loop through each stimulus
     for(let stim = 0; stim < this.exp_trial.setsize; stim++) {
 
-      // display retrieval screen with the key assignment of the colors
+      // display retrieval screen with the key assignment of the non-objects
       const retrieval_dec_screen1 = screen_retrieval1_dec(this.exp_info, this.exp_trial, stim);
       phase_line.push(retrieval_dec_screen1);
 
-      // update the retireval screen and display the object together with the color key assignment
+      // update the retireval screen and display the number together with the non-objects key assignment
       const retrieval_dec_screen2 = screen_retrieval2_dec(this.exp_info, this.exp_trial, stim);
       phase_line.push(retrieval_dec_screen2);
 
@@ -314,7 +314,7 @@ if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_s
     // loop through each stimulus
     for(let stim = 0; stim < this.exp_trial.setsize; stim++) {
 
-      // show retireval screen and display the object together with the color key assignment
+      // show retireval screen and display the number together with the key assignment
       const retrieval_proc_screen = screen_retrieval_proc(this.exp_info, this.exp_trial, stim);
       phase_line.push(retrieval_proc_screen);
 
