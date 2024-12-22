@@ -3,17 +3,12 @@ import htmlButtonResponse from '@jspsych/plugin-html-button-response';
 
 export const welcome_screen = {
     type: htmlButtonResponse,
-    stimulus: `<p class="title">Welcome!</p>
+    stimulus: `<p class="title">Willkommen!</p>
       <div class="main">
         <p class="fb-text">
-          Thank you very much for participating in the study <br>
-          <strong>"Comparing declarative and procedural bindings: <br>
-          Memorizing objects and numbers - Session 1"</strong>.<br><br>
-          This study is conducted by Dr. Gidon Frischkorn and Isabel Courage <br> 
-          at the Department of Psychology, University of Zurich, Switzerland. <br> 
-          If you have any questions, please contact: elena.venturi@uzh.ch <br> <br>
+        Aufgabe "Binding Task Numerical (procedural)" <br><br>
         </p>
       </div>`,
-    choices: ["&nbsp;Continue to informed consent form&nbsp;"],
+    choices: ["&nbsp;Weiter&nbsp;"],
     data: { screenID: "welcome" },
   };
