@@ -25,7 +25,6 @@ import { endExpPractice, endExpFingerCheck } from "./task-fun/endExperiment";
 import { random } from "@coglabuzh/webpsy.js";
 
 import { welcome_screen } from "./instructions/welcome";
-import { consent_screen, notice_screen, randomID_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { end_screen } from "./instructions/end";
@@ -479,9 +478,6 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // push all the screen slides into timeline
 //timeline.push(preload_screen);
 //timeline.push(welcome_screen);
-//timeline.push(consent_screen);
-//timeline.push(randomID_screen);
-//timeline.push(notice_screen);
 //timeline.push(browser_screen);
 //timeline.push(fullMode_screen);
 timeline = timeline.concat(proc_speed_instr_line_task);
