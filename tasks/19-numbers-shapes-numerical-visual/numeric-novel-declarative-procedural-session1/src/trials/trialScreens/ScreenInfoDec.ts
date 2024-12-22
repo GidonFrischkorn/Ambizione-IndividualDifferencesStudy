@@ -7,7 +7,7 @@ export const screen_info_dec = function(exp_info, exp_trial) {
     // text object with finger check info
     const stim_cue = {
       obj_type: 'text',
-      content: `Machen Sie sich bitte bereit für die Binding-Aufgabe`,
+      content: `Bitte machen Sie sich bereit für die Binding-Aufgabe`,
       font: exp_info.font_cues,
       startX: exp_info.center[0],
       startY: exp_info.center[1]
