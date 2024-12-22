@@ -65,7 +65,6 @@ export const screen_finger_check = function(exp_info, exp_trial, task) {
       data: { // data to be saved
         screenID: 'finger_check',
         task: task,
-        session: exp_info.session,
   
         procedure: exp_trial.phase,
         blockID: exp_trial.block,

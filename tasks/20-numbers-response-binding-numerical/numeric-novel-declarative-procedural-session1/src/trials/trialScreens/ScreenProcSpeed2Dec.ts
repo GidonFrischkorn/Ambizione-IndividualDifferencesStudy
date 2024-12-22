@@ -88,7 +88,6 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
       data: { // data to be saved
         screenID: 'proc_speed2_dec',
         task: 'declarative',
-        session: exp_info.session,
           
         objects: exp_info.objects,
       
