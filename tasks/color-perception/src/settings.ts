@@ -23,7 +23,8 @@ export const expInfo = {
       MAJORITY: ["moreBlue", "moreRed"],
       DIFFICULTY: ["easy", "hard"],
     }, // conditions of the experiment
-    CHOICES: ["d", "k"],
+    BOX_CHOICES: ["alt", "ctrl"], // the choices for the experiment if in lab with box
+    CHOICES: ["d", "k"], // the choices for the experiment if online 
     MAPPING: [0, 1],
     COLORS: ["blue", "red"],
     backgroundCOLOR: "#FFFFFF", // white background
