@@ -34,8 +34,8 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, an
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
     choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES, 
     mapping: {
-      animate: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("animate")]], 
-      inanimate: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("inanimate")]],
+      animate: box ? expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("animate")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("animate")]], 
+      inanimate: box ?  expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("inanimate")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("inanimate")]],
     },
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
