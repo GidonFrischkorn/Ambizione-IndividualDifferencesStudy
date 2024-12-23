@@ -67,9 +67,11 @@ export async function run({
   for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
     let chosenStimulus = chooseStimuli(words, prac_list[j].word_animacy, prac_list[j].word_length);
     usedWords.push(chosenStimulus);
-    let practice_trial = createNewTrial(j, true, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus, prac_list[j].mapping);
+
+    // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
+    let practice_trial = createNewTrial(j, true, false, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus, prac_list[j].mapping);
     practice_line = practice_line.concat(practice_trial);
-    console.log("chosen stimulus for practice: ", chosenStimulus);
+  
   }
   
   /************************************** Experiment **************************************/
@@ -79,9 +81,11 @@ export async function run({
   let exp_line: any[] = [];
   for(let j = 0; j < trial_list.length; j++){
     let chosenStimulus = chooseStimuli(words, trial_list[j].word_animacy, trial_list[j].word_length, usedWords);
-    let exp_trial = createNewTrial(j, false, trial_list[j].word_animacy, trial_list[j].word_length, chosenStimulus, trial_list[j].mapping);
+
+    // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
+    let exp_trial = createNewTrial(j, false, false, trial_list[j].word_animacy, trial_list[j].word_length, chosenStimulus, trial_list[j].mapping);
     exp_line = exp_line.concat(exp_trial);
-    console.log("chosen stimulus for experiment: ", chosenStimulus);
+
   }
   
   /************************************** Procedure **************************************/

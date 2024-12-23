@@ -27,6 +27,7 @@ export const expInfo = {
     }, // conditions of the experiment
     ANIMACY_VALUE: [0, 1],
     CHOICES: ["d", "j"], // choices for the participants
+    BOX_CHOICES: ["alt", "ctrl"], // choices for the participants
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
