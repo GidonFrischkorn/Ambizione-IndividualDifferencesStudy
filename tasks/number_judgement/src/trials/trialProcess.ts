@@ -16,7 +16,7 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, condition: string, targetStim: number) {  
+export function createNewTrial(XY: number, isPractice: boolean, box: boolean, condition: string, targetStim: number) {  
   let trial_line: any[] = [];
 
   // Fixation Screen 
@@ -31,10 +31,10 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
   const target_response_screen = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
-    choices: expInfo.DESIGN.CHOICES, 
+    choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES, 
     mapping: {
-      odd: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("odd")]], 
-      even: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("even")]],
+      odd: box ? expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("odd")]] :  expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("odd")]], 
+      even: box ? expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("even")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("even")]],
     },
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
