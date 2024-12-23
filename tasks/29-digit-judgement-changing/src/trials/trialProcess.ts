@@ -7,6 +7,7 @@ import { expInfo } from "../settings";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { jsPsych } from "../jsp";
 import psychophysics from "@kurokida/jspsych-psychophysics";
+import exp from "constants";
 
 /**
  * A function used to create a single trial.
@@ -25,15 +26,31 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, co
   let correct_response = "";
   if (mapping === "normal") {
       if (targetStim % 2 !== 0) {
-          correct_response = "j";
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[1]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[1]
+        };
       } else {
-          correct_response = "d";
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[0]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[0]
+          };
       }
   } else if (mapping === "switched") {
       if (targetStim % 2 !== 0) {
-          correct_response = "d";
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[0]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[0]
+          };
       } else {
-          correct_response = "j";
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[1]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[1]
+          };
       }
   }
 
