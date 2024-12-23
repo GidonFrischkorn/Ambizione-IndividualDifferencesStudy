@@ -65,6 +65,7 @@ export async function run({
     let practice_trial = createNewTrial(
       j,
       true,
+      false, // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
       prac_list[j].difficutly,
       prac_list[j].offset_diff,
       prac_list[j].offset_bigL,
@@ -85,6 +86,7 @@ export async function run({
     let exp_trial = createNewTrial(
       j,
       false,
+      false, // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
       trial_list[j].difficulty,
       trial_list[j].offset_diff,
       trial_list[j].offset_bigL,
