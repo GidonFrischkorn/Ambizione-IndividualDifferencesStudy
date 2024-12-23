@@ -18,7 +18,8 @@ export const expInfo = {
     nPRACTICE: 10, // number of practice trials
     BreaksAt: 0.5, // the proportion of trials after which a break is given
     nBLOCKS: 1, // number of blocks in the experiment
-    CHOICES: ["y", "n"], // the choices for the task
+    BOX_CHOICES: ["alt", "ctrl"], // the keys for the choices if experiment in lab with box
+    CHOICES: ["y", "n"], // the choices for the task if experiment online 
     MAPPING: [0, 1], // the mapping of the choices
     CONDITIONS: {
       DIFFICULTY: ["easy", "hard"], // the difficulty of the task
