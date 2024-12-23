@@ -67,6 +67,12 @@ export function createInstr(exp_info, instr_folder: string, start, end) {
     const slide_line = {
     type: instructions,
     pages: instr_slides,
+    /* IF EXPERIMENT IS RUNNED IN THE LAB WITH THE BOX 
+    key_forward: 'alt',
+    key_backward: 'control',
+    */
+    key_forward: "ArrowRight",
+    key_backward: "ArrowLeft",
     show_clickable_nav: true,
     button_label_previous: 'Zurück',
     button_label_next: 'Weiter',

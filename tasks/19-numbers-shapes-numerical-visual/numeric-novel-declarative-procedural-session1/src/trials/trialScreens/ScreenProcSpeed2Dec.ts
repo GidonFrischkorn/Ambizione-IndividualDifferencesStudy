@@ -84,7 +84,7 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
       stimuli: ret_objects,
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.resp_keys,
+      choices: exp_info.online_resp_keys,
       data: { // data to be saved
         screenID: 'proc_speed2_dec',
         task: 'declarative',
@@ -103,7 +103,7 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
         ret_other_objects: exp_trial.ret_other_object,
         ret_other_objects_pos: exp_trial.ret_other_object_pos,
         
-        correct_response: exp_info.resp_keys[exp_trial.proc_speed_pos]
+        correct_response: exp_info.online_resp_keys[exp_trial.proc_speed_pos]
       },
       on_finish: function (data) {
 
@@ -118,7 +118,7 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
   
           // create variable accuracy == 0 and response in degress of color
           data.acc = 0;
-          data.response_name = data.ret_other_objects[data.ret_other_objects_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];          
+          data.response_name = data.ret_other_objects[data.ret_other_objects_pos.indexOf(exp_info.online_resp_keys.indexOf(data.response))];          
         
         }; 
       }

@@ -88,7 +88,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
       stimuli: ret_objects,
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.resp_keys,
+      choices: exp_info.online_resp_keys,
       data: { // data to be saved
         screenID: 'retrieval2_dec',
         task: 'declarative',
@@ -113,7 +113,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
         ret_other_objects: exp_trial.ret_other_object[stim],
         ret_other_objects_pos: exp_trial.ret_other_object_pos[stim],
   
-        correct_response: exp_info.resp_keys[exp_trial.ret_binding_objects_pos[stim]]   
+        correct_response: exp_info.online_resp_keys[exp_trial.ret_binding_objects_pos[stim]]   
       },
       on_finish: function (data) { // end of trial
 
@@ -126,7 +126,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
         } else { // response unequal correct response 
           // create variable accuracy == 0 and response in degress of color
           data.acc = 0;      
-          data.response_name = data.ret_other_objects[data.ret_other_objects_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];          
+          data.response_name = data.ret_other_objects[data.ret_other_objects_pos.indexOf(exp_info.online_resp_keys.indexOf(data.response))];          
         
         }; 
         

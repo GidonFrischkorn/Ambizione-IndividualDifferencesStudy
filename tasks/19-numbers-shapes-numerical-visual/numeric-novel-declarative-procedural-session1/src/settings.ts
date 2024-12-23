@@ -78,7 +78,8 @@ export function MakeExpInfo(task_condition) {
       Array.from(Array(90).keys()).map((i) => i + 10),
       90
     ),
-    resp_keys: ["a", "s", "d", "f", "h", "j", "k", "l"], // response keys
+    online_resp_keys: ["a", "s", "d", "f", "h", "j", "k", "l"], // response keys if experiment is run online
+    lab_resp_keys: ['a', 's', 'd', 'alt', 'control', 'j', 'k', 'l'], // response keys if experiment is run in the lab with the response box
     pos: Array.from(Array(8).keys()), // positions of responses (0-7)
 
     // define objects
