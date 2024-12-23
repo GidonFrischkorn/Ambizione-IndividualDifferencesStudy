@@ -22,7 +22,8 @@ export const expInfo = {
     nBLOCKS: 1, // number of blocks
     CONDITIONS: ["odd","even"], // conditions of the experiment
     StimLimits: [10,99], // limits for the stimuli
-    CHOICES: ["d", "j"], // choices for the participants
+    BOX_CHOICES: ["alt", "ctrl"], // choices if experiment in lab 
+    CHOICES: ["d", "j"], // choices for the participants if experiment is online 
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
