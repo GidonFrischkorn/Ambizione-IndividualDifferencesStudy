@@ -17,7 +17,7 @@ import exp from "constants";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, animacy: number, wordlength: number, targetStim: string) {  
+export function createNewTrial(XY: number, isPractice: boolean, box: boolean, animacy: number, wordlength: number, targetStim: string) {  
   let trial_line: any[] = [];
 
   // Fixation Screen 
@@ -32,7 +32,7 @@ export function createNewTrial(XY: number, isPractice: boolean, animacy: number,
   const target_response_screen = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
-    choices: expInfo.DESIGN.CHOICES, 
+    choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES, 
     mapping: {
       animate: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("animate")]], 
       inanimate: expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("inanimate")]],
