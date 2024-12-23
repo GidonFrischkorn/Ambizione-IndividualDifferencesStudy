@@ -20,19 +20,34 @@ import exp from "constants";
 export function createNewTrial(XY: number, isPractice: boolean, box: boolean, animacy: number, wordlength: number, targetStim: string, mapping: string) {  
   let trial_line: any[] = [];
 
-  // Compute the correct response based on mapping
   let correct_response = "";
   if (mapping === "normal") {
       if (animacy === 1) {
-          correct_response = "d"; // Press "D" for animate
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[0]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[0]
+        };
       } else {
-          correct_response = "j"; // Press "J" for inanimate
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[1]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[1]
+          };
       }
   } else if (mapping === "switched") {
       if (animacy === 1) {
-          correct_response = "j"; // Press "J" for animate (switched)
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[1]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[1]
+          };
       } else {
-          correct_response = "d"; // Press "D" for inanimate (switched)
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[0]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[0]
+          };
       }
   }
 
