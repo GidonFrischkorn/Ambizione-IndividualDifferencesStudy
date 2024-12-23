@@ -17,7 +17,7 @@ import exp from "constants";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(XY: number, isPractice: boolean, condition: string, targetStim: string, mapping: string) {  
+export function createNewTrial(XY: number, isPractice: boolean, box:boolean, condition: string, targetStim: string, mapping: string) {  
   let trial_line: any[] = [];
 
   // Compute the correct response based on mapping
@@ -62,7 +62,7 @@ export function createNewTrial(XY: number, isPractice: boolean, condition: strin
   const target_response_screen = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
-    choices: expInfo.DESIGN.CHOICES, 
+    choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES,
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
     data: {

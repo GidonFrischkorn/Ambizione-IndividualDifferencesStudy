@@ -17,13 +17,27 @@ export const instructions_screen = {
     button_label_next: BUTTON_INFO.continueButton[expInfo.LANG],
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],
     allow_backward: true,
-    allow_keys: false,
+    allow_keys: true,
+    key_forward: "ArrowRight",
+    key_backward: "ArrowLeft",
+    /* IF EXPERIMENT IN THE LAB 
+    key_forward: expInfo.DESIGN.BOX_CHOICES[1],
+    key_backward: expInfo.DESIGN.BOX_CHOICES[0],
+    */
     show_clickable_nav: true,
 };
 
 export const fingers_instructions_practice = {
     type: htmlKeyboardResponse,
-    stimulus: `<div style='font-size:40px; line-height: 1.5;'>
+    stimulus: 
+    /* IF EXPERIMENT IN THE LAB - Text muss nocch angepasst werden/Ideen? 
+    `<div style='font-size:40px; line-height: 1.5;'>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die zwei Tasten links und rechts <strong>unten</strong>.<br>
+    Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
+    </div>`,*/
+
+    //IF EXPERIMENT IS ONLINE
+    `<div style='font-size:40px; line-height: 1.5;'>
     Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>J</strong>.<br>
     Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
     </div>`,
@@ -33,7 +47,15 @@ export const fingers_instructions_practice = {
 
 export const fingers_instructions_exp = {
     type: htmlKeyboardResponse,
-    stimulus: `<div style='font-size:40px; line-height: 1.5;'>
+    stimulus: 
+    /* IF EXPERIMENT IN THE LAB - Text muss nocch angepasst werden/Ideen? 
+    `<div style='font-size:40px; line-height: 1.5;'>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die zwei Tasten links und rechts <strong>unten</strong>.<br>
+    Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
+    </div>`,*/
+
+    // IF EXPERIMENT IS ONLINE
+    `<div style='font-size:40px; line-height: 1.5;'>
     Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>J</strong>.<br>
     Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
     </div>`,
