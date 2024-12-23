@@ -24,15 +24,31 @@ export function createNewTrial(XY: number, isPractice: boolean, box:boolean, con
   let correct_response = "";
   if (mapping === "normal") {
       if (condition === "vowel") {
-          correct_response = "d"; // Press "D" for vowels
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[0]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[0]
+        };
       } else {
-          correct_response = "j"; // Press "J" for consonants
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[1]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[1]
+          };
       }
   } else if (mapping === "switched") {
       if (condition === "vowel") {
-          correct_response = "j"; // Press "J" for vowels (switched)
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[1]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[1]
+          };
       } else {
-          correct_response = "d"; // Press "D" for consonants (switched)
+        if (box === true) {
+          correct_response = expInfo.DESIGN.BOX_CHOICES[0]
+        } else {
+          correct_response = expInfo.DESIGN.CHOICES[0]
+          };
       }
   }
 
