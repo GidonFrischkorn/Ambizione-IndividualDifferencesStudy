@@ -20,6 +20,10 @@ export const instructions_screen = {
     allow_keys: true,
     key_forward: "ArrowRight",
     key_backward: "ArrowLeft",
+    /* IF EXPERIMENT IN THE LAB 
+    key_forward: expInfo.DESIGN.BOX_CHOICES[1],
+    key_backward: expInfo.DESIGN.BOX_CHOICES[0],
+    */
     show_clickable_nav: true,
 };
 
