@@ -44,10 +44,10 @@ export const expInfo = {
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 60 * 1000, // break duration in seconds
     STIMULI: 3000, // stimuli duration in milliseconds
-    FIXATION: 200, // fixation duration in milliseconds
+    FIXATION: 500, // fixation duration in milliseconds
     JITTER: 200, // jitter duration in milliseconds
     FEEDBACK: 1000, // feedback duration in milliseconds
-    ITI: 800, // inter-trial interval in milliseconds
+    ITI: 1000, // inter-trial interval in milliseconds
     FINGERS: 5000, // duration of the finger instruction
   },
 
