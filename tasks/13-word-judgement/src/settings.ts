@@ -33,7 +33,7 @@ export const expInfo = {
   
   // settings for each trial
   TIMING: {
-    FIXATION: 800, // duration of the fixation cross
+    FIXATION: 1000, // duration of the fixation cross
     TARGET: 5000, // duration of the target stimulus
     FEEDBACK: 1000, // duration of the feedback
     ITI: 1500, // duration of the inter-trial interval
