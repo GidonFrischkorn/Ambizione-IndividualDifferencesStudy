@@ -45,17 +45,17 @@ export const fingers_instructions_practice = {
 export const fingers_instructions_exp = {
     type: htmlKeyboardResponse,
     stimulus: 
-    /* IF EXPERIMENT IN THE LAB - Text muss nocch angepasst werden/Ideen? 
-    `<div style='font-size:40px; line-height: 1.5;'>
+    // IF EXPERIMENT IN THE LAB - Text muss nocch angepasst werden/Ideen? 
+    `<div style='font-size:35px; line-height: 1.5;'>
     Bitte legen Sie beide <strong>Zeigefinger</strong> auf die zwei <strong>untersten</strong> Tasten links und rechts.<br>
     Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
-    </div>`,*/
+    </div>`,
 
-    // IF EXPERIMENT IS ONLINE
+    /*IF EXPERIMENT IS ONLINE
     `<div style='font-size:40px; line-height: 2em;'>
     Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>Y</strong> und <strong>N</strong>.<br>
     Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.<br>
-    </div>`,
+    </div>`,*/
     choices: "ALL_KEYS",
     trial_duration: expInfo.TIMING.FINGERS,
 };
