@@ -1,9 +1,16 @@
 import instructions from "@jspsych/plugin-instructions"
+import { varSystem } from "../settings";
 
-export function createSingleInstr(exp_info, instr_folder: string, slide: string) {
+export function createSingleInstr(exp_info, instr_folder: string, slide: string, box: boolean) {
 
     var folder = instr_folder;
     var name = slide;
+
+    if (box == true) {
+        var instruction_keys = 'a';
+    } else { // box == false
+        var instruction_keys = 'a';
+    };
 
     const slide_line = {
     type: instructions,
@@ -12,7 +19,7 @@ export function createSingleInstr(exp_info, instr_folder: string, slide: string)
                 class="image"></img>
             </div>`],
     allow_keys: true,
-    key_forward: ' ',
+    key_forward: instruction_keys,
     data: { screenID: `instruction_${slide}` }
     };
 
@@ -25,12 +32,18 @@ export function createSingleInstr(exp_info, instr_folder: string, slide: string)
 }
 
 
-export function createInstr(exp_info, instr_folder: string, start, end) {
+export function createInstr(exp_info, instr_folder: string, start, end, box: boolean) {
 
     var instr_slides:any = [];
     var folder = instr_folder;
     var start_slide = start;
     var end_slide = end + 1;
+
+    if (box == true) {
+        var instruction_keys = exp_info.instruction_keys_box;
+    } else { // box == false
+        var instruction_keys = exp_info.instruction_keys_keyboard;
+    };
 
     for (let slide = start_slide; slide < end_slide; slide++) {
         // last slide
@@ -67,6 +80,10 @@ export function createInstr(exp_info, instr_folder: string, start, end) {
     const slide_line = {
     type: instructions,
     pages: instr_slides,
+    allow_keys: true,
+    allow_backward: true,
+    key_forward: instruction_keys[1],
+    key_backward: instruction_keys[0],
     show_clickable_nav: true,
     button_label_previous: 'Zurück',
     button_label_next: 'Weiter',
