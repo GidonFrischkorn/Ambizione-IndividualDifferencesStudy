@@ -2,9 +2,16 @@
 import psychophysics from "@kurokida/jspsych-psychophysics";
 
 // processing speed task screen 2
-export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
+export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim, box) {
 
     // define variables
+    // define response keys
+    if (box == true) {
+      var resp_keys = exp_info.resp_keys_box;
+    } else { // box == false
+      var resp_keys = exp_info.resp_keys_keyboard;
+    };
+
     // x coordinates of the retrieval color dots
     var ret_dots_x = [-6.6*exp_info.canW/72, 
                       -5.6*exp_info.canW/72, 
@@ -93,7 +100,7 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
       stimuli: ret_dots,
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.resp_keys,
+      choices: resp_keys,
       data: { // data to be saved
         screenID: 'proc_speed2_dec',
         task: 'declarative',
@@ -118,7 +125,7 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
         ret_other_cols_angles: exp_trial.ret_other_cols_angles,
         ret_other_cols_pos: exp_trial.ret_other_col_pos,
         
-        correct_response: exp_info.resp_keys[exp_trial.proc_speed_pos]
+        correct_response: resp_keys[exp_trial.proc_speed_pos]
       },
       on_finish: function (data) {
 
@@ -134,8 +141,8 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
   
           // create variable accuracy == 0 and response in degress of color
           data.acc = 0;
-          data.response_angles = data.ret_other_cols_angles[data.ret_other_cols_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];
-          data.response_name = data.ret_other_cols[data.ret_other_cols_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];          
+          data.response_angles = data.ret_other_cols_angles[data.ret_other_cols_pos.indexOf(resp_keys.indexOf(data.response))];
+          data.response_name = data.ret_other_cols[data.ret_other_cols_pos.indexOf(resp_keys.indexOf(data.response))];          
         
         }; 
       }

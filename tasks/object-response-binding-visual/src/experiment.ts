@@ -11,7 +11,7 @@
 import "../styles/main.scss"; // stylesheets (.scss or .css)
 import preload from '@jspsych/plugin-preload'; // plugins from jspsych
 
-import { MakeExpInfo, varOnline} from "./settings"; // settings
+import { MakeExpInfo, varOnline, varSystem} from "./settings"; // settings
 import { jsPsych } from "./jsp";
 import { createInstr, createSingleInstr } from "./instructions/createInstrStart";
 import { createNewTrial } from "./trials/trialProcess";
@@ -58,8 +58,10 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
  // define whether to run practice and processing speed task (0 = no, 1 = yes)
  var is_practice = 1;
- var is_finger_check = 1;
  var is_proc_speed = 1;
+
+ // define response box usage
+ var response_box = varSystem.RESPONSE_BOX;
  
   // create timeline variables
   let proc_speed_instr_line_task:any[] = [];
@@ -100,7 +102,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
       for (let [trial, proc_speed_trial] of proc_speed_block_trials.entries()) {
 
         // create new trial
-        var {trial_line, trial_body} = createNewTrial(exp_info, proc_speed_trial, is_prac_local, last_setsize_local, "proc_speed_" + task_condition);
+        var {trial_line, trial_body} = createNewTrial(exp_info, proc_speed_trial, is_prac_local, last_setsize_local, "proc_speed_" + task_condition, response_box);
         
         // add trial to processing speed timeline
         proc_speed_line_task = proc_speed_line_task.concat(trial_line);
@@ -148,7 +150,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
         if (trial < 2) { 
 
           // create first 2 trials
-          var {trial_line, trial_body} = createNewTrial(exp_info, prac_trial, is_prac_local, last_setsize, task_condition);
+          var {trial_line, trial_body} = createNewTrial(exp_info, prac_trial, is_prac_local, last_setsize, task_condition, response_box);
           
           // add to practice timeline
           prac_line_task = prac_line_task.concat(trial_line);                
@@ -238,7 +240,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
         } else { // remaining practice trials
 
           // create remaining trials
-          var {trial_line, trial_body} = createNewTrial(exp_info, prac_trial, is_prac_local, last_setsize, task_condition);
+          var {trial_line, trial_body} = createNewTrial(exp_info, prac_trial, is_prac_local, last_setsize, task_condition, response_box);
           
           // add remaining practice trials to practice timeline
           prac_line_all_task = prac_line_all_task.concat(trial_line);
@@ -274,7 +276,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
     // loop through experiment trials
     for (let [trial, exp_trial] of exp_block_trials.entries()) {
-      var {trial_line, trial_body} = createNewTrial(exp_info, exp_trial, is_prac_local_task, last_setsize_local_task, task_condition);
+      var {trial_line, trial_body} = createNewTrial(exp_info, exp_trial, is_prac_local_task, last_setsize_local_task, task_condition, response_box);
       exp_line_task = exp_line_task.concat(trial_line);
 
     };
