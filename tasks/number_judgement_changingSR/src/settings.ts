@@ -2,11 +2,8 @@
  * This file contains the settings for the experiment.
  */
 
-
-
 // Task functions
 import { setCSS } from "./task-fun/setCSS";
-
 
 setCSS();
 
@@ -18,7 +15,7 @@ export const expInfo = {
   USE_RESPONSE_BOX: true, // whether to use a response box
 
   // design of the experiment
-  DESIGN:{
+  DESIGN: {
     nTRIALS: 50, // number of experiment trials for each condition
     nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
@@ -28,7 +25,7 @@ export const expInfo = {
     CHOICES: ["d", "j"], // choices for the participants if experiment is online 
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
-  
+
   // settings for each trial
   TIMING: {
     FIXATION: 500, // duration of the fixation cross
@@ -52,7 +49,7 @@ export const expInfo = {
     FAILED_OTHERS: "failedOthers", // the code for other failed situations (e.g., failed to resize the window)
     // You can specify the codes for different situations here.
   },
-  
+
   /** The key is case-sensitive and position-sensitive.
    * It is recommended to allow both upper and lower case keys.
    * You can use the `convertCase` function to prevent the issue.
@@ -80,5 +77,4 @@ export const varSystem = {
   LOOP: true, // a switch to control whether participants need to read the instruction and practice again
   RUN_TIMER: false, // a switch to control the countdown timer
   STATUS: "success", // the status of the experiment
-
 };

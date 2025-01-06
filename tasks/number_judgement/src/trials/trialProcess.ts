@@ -19,15 +19,17 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
 export function createNewTrial(XY: number, isPractice: boolean, box: boolean, condition: string, targetStim: number) {  
   let trial_line: any[] = [];
 
-  // Fixation Screen 
+  // Fixation Screen
   const fixation_screen = {
     type: htmlKeyboardResponse,
     stimulus: "<div style='font-size:60px;'>+</div>",
     choices: "NO-KEYS",
-    trial_duration: expInfo.TIMING.FIXATION,
-  }
+    trial_duration:
+      expInfo.TIMING.FIXATION +
+      Math.floor(Math.random() * (expInfo.TIMING.JITTER + 1)),
+  };
 
-  // Taget and Response Screen 
+  // Taget and Response Screen
   const target_response_screen = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
@@ -39,29 +41,34 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, co
     trial_duration: expInfo.TIMING.TARGET,
     response_ends_trial: true,
     data: {
-      is_odd: function (data){
+      is_odd: function (data) {
         let response = targetStim;
         return response % 2 != 0;
       },
       trial_number: XY,
-      condition: condition, 
-      practice: function (data) {
+      condition: condition,
+      fix_duration: fixation_screen.trial_duration,
+      procedure: function (data) {
         if (isPractice) {
           return "practice";
         } else {
-          return "experiment"
+          return "experiment";
         }
       },
-      stimulus: targetStim, 
+      stimulus: targetStim,
     },
     on_finish: function (data) {
-      let correct = data.response == (data.is_odd ? this.mapping.odd : this.mapping.even);
-      jsPsych.data.get().addToLast({correct: correct});
-      
+      let correct =
+        data.response == (data.is_odd ? this.mapping.odd : this.mapping.even);
+      let correctKey = data.is_odd ? this.mapping.odd : this.mapping.even;
+      jsPsych.data
+        .get()
+        .addToLast({ correct: correct, correct_key: correctKey });
+
       let stimulus_value = jsPsych.data.get().last(1).values()[0];
       stimulus_value.stimulus = targetStim;
-    }
-  }
+    },
+  };
 
   // Feedback Stimuls for Practice Trials
   const feedback = {
@@ -69,33 +76,41 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, co
     stimulus: function () {
       let lastTrialCorrect = jsPsych.data.get().last(1).values()[0].correct;
       if (lastTrialCorrect) {
-        return "<div style='font-size:60px; color:green;'>Correct :)</div>";
+        return "<div style='font-size:60px; color:green;'>Richtig :)</div>";
       } else {
-        return "<div style='font-size:60px; color:red'>Incorrect :(</div>";
+        return "<div style='font-size:60px; color:red'>Falsch :(</div>";
       }
     },
     trial_duration: expInfo.TIMING.FEEDBACK,
-  } 
+  };
 
-  // Inter Trial Interval Screen 
+  // Inter Trial Interval Screen
   const inter_trial_interval = {
     type: htmlKeyboardResponse,
     stimulus: "",
     choices: "NO-KEYS",
-    trial_duration: expInfo.TIMING.ITI,
-  }
-
+    trial_duration:
+      expInfo.TIMING.ITI +
+      Math.floor(Math.random() * (expInfo.TIMING.JITTER + 1)),
+  };
 
   // Push screens into trial_line
 
   if (isPractice) {
-    trial_line.push(fixation_screen, target_response_screen, feedback, inter_trial_interval); 
+    trial_line.push(
+      fixation_screen,
+      target_response_screen,
+      feedback,
+      inter_trial_interval
+    );
   } else {
-    trial_line.push(fixation_screen, target_response_screen, inter_trial_interval);
-  };
-  
+    trial_line.push(
+      fixation_screen,
+      target_response_screen,
+      inter_trial_interval
+    );
+  }
 
   // return
   return trial_line;
-  
-};
+}

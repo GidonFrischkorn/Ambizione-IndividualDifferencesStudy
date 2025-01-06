@@ -2,21 +2,17 @@
  * This file contains the settings for the experiment.
  */
 
-
-
 // Task functions
 import { setCSS } from "./task-fun/setCSS";
-
-
 setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "Numerical Processing Speed Task", // the title of the experiment
+  TITLE: "Number Judgement Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
   // design of the experiment
-  DESIGN:{
+  DESIGN: {
     nTRIALS: 50, // number of experiment trials for each condition
     nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
@@ -26,16 +22,17 @@ export const expInfo = {
     CHOICES: ["o", "e"], // choices for the participants if experiment online
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
-  
+
   // settings for each trial
   TIMING: {
-    FIXATION: 1000, // duration of the fixation cross
+    FIXATION: 400, // duration of the fixation cross
+    JITTER: 200, // duration of the jitter
     TARGET: 5000, // duration of the target stimulus
-    FEEDBACK: 1500, // duration of the feedback
-    ITI: 1500, // duration of the inter-trial interval
+    FEEDBACK: 1000, // duration of the feedback
+    ITI: 1200, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
-    FINGERS: 5000 // duration of the finger instruction
+    FINGERS: 5000, // duration of the finger instruction
   },
 
   // when using Prolific, you can set customized completion codes for different situations
@@ -48,7 +45,7 @@ export const expInfo = {
     FAILED_OTHERS: "failedOthers", // the code for other failed situations (e.g., failed to resize the window)
     // You can specify the codes for different situations here.
   },
-  
+
   /** The key is case-sensitive and position-sensitive.
    * It is recommended to allow both upper and lower case keys.
    * You can use the `convertCase` function to prevent the issue.
@@ -76,5 +73,4 @@ export const varSystem = {
   LOOP: true, // a switch to control whether participants need to read the instruction and practice again
   RUN_TIMER: false, // a switch to control the countdown timer
   STATUS: "success", // the status of the experiment
-
 };

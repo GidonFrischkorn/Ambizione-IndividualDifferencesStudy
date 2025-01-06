@@ -29,7 +29,6 @@ import { create_trialList } from "./trials/trialStim";
 import { instructions_screen, fingers_instructions_exp, fingers_instructions_practice } from "./instructions/InstrScreen";
 
 
-
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
  *
@@ -66,10 +65,9 @@ export async function run({
     practice_line = practice_line.concat(practice_trial);
   }
 
-  
   /************************************** Experiment **************************************/
   const trial_list = create_trialList();
-  
+
   let exp_line: any[] = [];
   for(let j = 0; j < trial_list.length; j++){
 
@@ -77,10 +75,8 @@ export async function run({
     let exp_trial = createNewTrial(j, false, expInfo.USE_RESPONSE_BOX, trial_list[j].condition, trial_list[j].stimulus, trial_list[j].mapping);
     exp_line = exp_line.concat(exp_trial);
   }
-  
 
   /************************************** Procedure **************************************/
-
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want

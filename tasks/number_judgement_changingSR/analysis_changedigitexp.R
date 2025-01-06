@@ -23,11 +23,11 @@ digit_result <- digit_result %>%
          response_repeat = ifelse(response == lag(response), "repeat", "switch"))
 
 # Calculate the mean and standard deviation of the RTs
-mean_rt <- mean(digit_result$rt_seconds)
-sd_rt <- sd(digit_result$rt_seconds)
+mean_rt <- mean(letter_result$rt_seconds)
+sd_rt <- sd(letter_result$rt_seconds)
 
 # Create a plot of the RTs
-plot_Table <- digit_result[, c("trial_number", "rt_seconds")]
+plot_Table <- letter_result[, c("trial_number", "rt_seconds")]
 
 ggplot(digit_result, aes(y = rt_seconds, fill = correct)) +
   facet_grid(response_repeat ~ mapping_switch) +
