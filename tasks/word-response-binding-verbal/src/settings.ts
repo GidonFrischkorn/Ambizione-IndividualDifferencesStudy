@@ -24,6 +24,7 @@ export const varOnline = {
 export const varSystem = {
     TITLE: "BindingVisualProcedural", // experiment name
     LANG: "de", // the language of the instructions
+    RESPONSE_BOX: false, // a switch to control whether participants use a response box or not (i.e., keyboard)
     TRACK: false, // a switch to track participants' interactions with the browser
     nBLUR: 0, // use to count how many times participants left the browser
     MAX_BLUR: 3, // the maximum number of times participants can leave the browser
@@ -67,7 +68,8 @@ export function MakeExpInfo(task_condition) {
         stim_index_dec: Array.from(Array(332).keys()).map(i => i),
         stim_index_proc: Array.from(Array(332).keys()).map(i => i),
         stim_words: words.map(i => i.Word), 
-        resp_keys:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys
+        resp_keys_keyboard:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys on keyboard
+        resp_keys_box:['a', 's', 'd', 'alt', 'control', 'j', 'k', 'l'], // response keys on repsonse box
         pos: Array.from(Array(8).keys()), // positions of responses
             
         // define names and colors
