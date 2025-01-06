@@ -2,9 +2,16 @@
 import psychophysics from "@kurokida/jspsych-psychophysics";
 
 // processing speed task screen 2
-export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
+export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim, box) {
 
     // define variables
+    // define response keys
+    if (box == true) {
+      var resp_keys = exp_info.resp_keys_box;
+    } else { // box == false
+      var resp_keys = exp_info.resp_keys_keyboard;
+    };
+
     // x coordinates of the retrieval names
     var ret_resp_x = [-7*exp_info.canW/72, 
                       -6*exp_info.canW/72, 
@@ -84,7 +91,7 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
       stimuli: ret_resp,
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.resp_keys,
+      choices: resp_keys,
       data: { // data to be saved
         screenID: 'proc_speed2_dec',
         task: 'declarative',
@@ -101,7 +108,7 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
         ret_other_firsts: exp_trial.ret_other_firsts,
         ret_other_first_pos: exp_trial.ret_other_first_pos,
         
-        correct_response: exp_info.resp_keys[exp_trial.proc_speed_pos]
+        correct_response: resp_keys[exp_trial.proc_speed_pos]
       },
       on_finish: function (data) {
 
@@ -116,7 +123,7 @@ export const screen_proc_speed2_dec = function(exp_info, exp_trial, stim) {
   
           // create variable accuracy == 0 and response
           data.acc = 0;
-          data.response_name = data.ret_other_firsts[data.ret_other_first_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];          
+          data.response_name = data.ret_other_firsts[data.ret_other_first_pos.indexOf(resp_keys.indexOf(data.response))];          
         
         }; 
       }

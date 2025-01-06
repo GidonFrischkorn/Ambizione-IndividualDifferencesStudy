@@ -3,9 +3,16 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
 import { varSystem } from "../../settings";
 
 // screen 2 to display response image, names and word for retrieval
-export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
+export const screen_retrieval2_dec = function(exp_info, exp_trial, stim, box){
     
     // define variables
+    // define response keys
+    if (box == true) {
+      var resp_keys = exp_info.resp_keys_box;
+    } else { // box == false
+      var resp_keys = exp_info.resp_keys_keyboard;
+    };
+
     // x coordinates of the retrieval names
     var ret_resp_x = [-7*exp_info.canW/72, 
                       -6*exp_info.canW/72, 
@@ -85,7 +92,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
       stimuli: ret_resp,
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.resp_keys,
+      choices: resp_keys,
       data: { // data to be saved
         screenID: 'retrieval2_dec',
         task: 'declarative',
@@ -109,7 +116,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
         ret_other_firsts: exp_trial.ret_other_firsts[stim],
         ret_other_first_pos: exp_trial.ret_other_first_pos[stim],
   
-        correct_response: exp_info.resp_keys[exp_trial.ret_binding_first_pos[stim]]        
+        correct_response: resp_keys[exp_trial.ret_binding_first_pos[stim]]        
       },
       on_finish: function (data) { // end of trial
 
@@ -122,7 +129,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
         } else { // response unequal correct response 
           // create variable accuracy == 0 and response 
           data.acc = 0;
-          data.response_name = data.ret_other_firsts[data.ret_other_first_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];          
+          data.response_name = data.ret_other_firsts[data.ret_other_first_pos.indexOf(resp_keys.indexOf(data.response))];          
         
         }; 
         

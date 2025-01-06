@@ -3,9 +3,16 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
 import { varSystem } from "../../settings";
 
 // screen 2 to display response image, color dots and color circle for retrieval
-export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
+export const screen_retrieval_proc = function(exp_info, exp_trial, stim, box){
 
-    // define variables    
+    // define variables 
+    // define response keys
+    if (box == true) {
+      var resp_keys = exp_info.resp_keys_box;
+    } else { // box == false
+      var resp_keys = exp_info.resp_keys_keyboard;
+    };
+
     // stimulus word
     const stim_text = {
       obj_type: 'text',
@@ -24,7 +31,7 @@ export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
       stimuli: [stim_text],
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.resp_keys,
+      choices: resp_keys,
       data: { // data to be saved
         screenID: 'retrieval_proc',
         task: 'procedural',
@@ -42,13 +49,13 @@ export const screen_retrieval_proc = function(exp_info, exp_trial, stim){
         enc_order: exp_trial.retrieval_order[stim],
   
         binding_pos: exp_trial.ret_binding_pos[stim],  
-        correct_response: exp_info.resp_keys[exp_trial.ret_binding_pos[stim]]
+        correct_response: resp_keys[exp_trial.ret_binding_pos[stim]]
       
       },
       on_finish: function (data) {
 
         //save position of response
-        data.response_pos = exp_info.resp_keys.indexOf(data.response);
+        data.response_pos = resp_keys.indexOf(data.response);
 
         // response equals correct response
         if (data.response == data.correct_response) {
