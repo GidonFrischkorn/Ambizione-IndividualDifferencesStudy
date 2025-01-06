@@ -34,7 +34,7 @@ import { screen_feedback_proc } from "./trialScreens/ScreenFeedbackProc";
  * @param {number} is_proc_speed Perform proessing speed trials or not (1 = yes, 0 = no)
  */
 
-function trialStim(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task, box) {
+function trialStim(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task: string, box: boolean) {
   
   // define input variables for current trial
   this.exp_info = exp_info;
