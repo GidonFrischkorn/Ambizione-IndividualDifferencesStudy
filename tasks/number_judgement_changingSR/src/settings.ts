@@ -15,6 +15,8 @@ export const expInfo = {
   TITLE: "Numerical Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
+  USE_RESPONSE_BOX: true, // whether to use a response box
+
   // design of the experiment
   DESIGN:{
     nTRIALS: 50, // number of experiment trials for each condition
@@ -22,17 +24,18 @@ export const expInfo = {
     nBLOCKS: 1, // number of blocks
     CONDITIONS: ["odd","even"], // conditions of the experiment
     StimLimits: [10,99], // limits for the stimuli
-    BOX_CHOICES: ["alt", "ctrl"], // choices if experiment in lab 
+    BOX_CHOICES: ["alt", "control"], // choices if experiment in lab 
     CHOICES: ["d", "j"], // choices for the participants if experiment is online 
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
   // settings for each trial
   TIMING: {
-    FIXATION: 1000, // duration of the fixation cross
+    FIXATION: 500, // duration of the fixation cross
+    JITTER: 200, // duration of the jitter
     TARGET: 5000, // duration of the target stimulus
     FEEDBACK: 1500, // duration of the feedback
-    ITI: 1500, // duration of the inter-trial interval
+    ITI: 800, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
     FINGERS: 5000, // duration of the finger instruction

@@ -8,7 +8,7 @@ library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
 digit_result <- read_json_data(".json") %>% 
-  filter(response %in% c("d", "j"), procedure == "experiment"
+  filter(procedure == "experiment"
          #, correct == "TRUE"
          ) 
 
@@ -18,7 +18,9 @@ digit_result <- digit_result %>%
 
 # Convert rt to seconds and create a new column for the converted RTs
 digit_result <- digit_result %>%
-  mutate(rt_seconds = rt/ 1000)
+  mutate(rt_seconds = rt/ 1000,
+         mapping_switch = ifelse(mapping == lag(mapping), "repeat", "switch"),
+         response_repeat = ifelse(response == lag(response), "repeat", "switch"))
 
 # Calculate the mean and standard deviation of the RTs
 mean_rt <- mean(digit_result$rt_seconds)
@@ -27,11 +29,9 @@ sd_rt <- sd(digit_result$rt_seconds)
 # Create a plot of the RTs
 plot_Table <- digit_result[, c("trial_number", "rt_seconds")]
 
-ggplot(plot_Table, aes(x = trial_number, y = rt_seconds)) +
-  geom_point() + 
-  geom_line() +  
+ggplot(digit_result, aes(y = rt_seconds, fill = correct)) +
+  facet_grid(response_repeat ~ mapping_switch) +
+  geom_boxplot() +
   labs(title = "Reaction Time Over Trials",
-       x = "Trial Number", 
        y = "Reaction Time (seconds)") +
-  ylim(0, 1) +  
   theme_minimal() 
