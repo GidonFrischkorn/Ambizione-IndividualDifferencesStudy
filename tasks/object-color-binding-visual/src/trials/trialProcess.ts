@@ -34,7 +34,7 @@ import { screen_feedback_proc } from "./trialScreens/ScreenFeedbackProc";
  * @param {number} is_proc_speed Perform proessing speed trials or not (1 = yes, 0 = no)
  */
 
-function trialStim(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task) {
+function trialStim(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task, box) {
   
   // define input variables for current trial
   this.exp_info = exp_info;
@@ -42,6 +42,7 @@ function trialStim(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task)
   this.is_practice = is_practice;
   this.task = task;
   this.last_setsize = last_setsize;
+  this.response_box = box;
 }
 
 // memory phase of the object
@@ -189,7 +190,7 @@ trialStim.prototype.retrievalPhase = function () {
   if (this.task == "proc_speed_declarative") { // practice or experimental trials
 
      // display color together with key assignment of colors
-     const proc_speed2_dec_screen = screen_proc_speed2_dec(this.exp_info, this.exp_trial, 0);
+     const proc_speed2_dec_screen = screen_proc_speed2_dec(this.exp_info, this.exp_trial, 0, this.response_box);
      phase_line.push(proc_speed2_dec_screen);
  
      // iti
@@ -205,7 +206,7 @@ trialStim.prototype.retrievalPhase = function () {
   } else if (this.task == "proc_speed_procedural") {
 
     // display color together with key assignment of colors
-    const proc_speed_screen = screen_proc_speed_proc(this.exp_info, this.exp_trial, 0);
+    const proc_speed_screen = screen_proc_speed_proc(this.exp_info, this.exp_trial, 0, this.response_box);
     phase_line.push(proc_speed_screen);
 
     // iti
@@ -236,7 +237,7 @@ trialStim.prototype.retrievalPhase = function () {
       phase_line.push(retrieval_dec_screen1);
 
       // update the retireval screen and display the object together with the color key assignment
-      const retrieval_dec_screen2 = screen_retrieval2_dec(this.exp_info, this.exp_trial, stim);
+      const retrieval_dec_screen2 = screen_retrieval2_dec(this.exp_info, this.exp_trial, stim, this.response_box);
       phase_line.push(retrieval_dec_screen2);
 
       // show feedback for practice trials (correct/incorrect)
@@ -268,7 +269,7 @@ trialStim.prototype.retrievalPhase = function () {
     for(let stim = 0; stim < this.exp_trial.setsize; stim++) {
 
       // show retireval screen and display the object together with the color key assignment
-      const retrieval_proc_screen = screen_retrieval_proc(this.exp_info, this.exp_trial, stim);
+      const retrieval_proc_screen = screen_retrieval_proc(this.exp_info, this.exp_trial, stim, this.response_box);
       phase_line.push(retrieval_proc_screen);
 
       // show feedback for practice trials (correct/incorrect)
@@ -299,13 +300,13 @@ trialStim.prototype.retrievalPhase = function () {
  * @param {number} is_practice Perform practice trials or not (1 = yes, 0 = no)
  * @param {string} task Perform pro edural or declarative task
  */
-export function createNewTrial(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task) {
+export function createNewTrial(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task:string, box:boolean) {
   
   // create array to store screens for trial
   var trial_line: any[] = [];
 
   // create a trial object
-  var trial_body = new trialStim(exp_info, exp_trial, is_practice, last_setsize, task);
+  var trial_body = new trialStim(exp_info, exp_trial, is_practice, last_setsize, task, box);
 
   // add memory phase of trial
   var memory_phase = trial_body.memoryPhase();
