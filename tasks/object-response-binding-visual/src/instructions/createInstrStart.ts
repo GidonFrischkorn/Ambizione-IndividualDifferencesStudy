@@ -8,14 +8,16 @@ export function createSingleInstr(exp_info, instr_folder: string, slide: string,
 
     if (box == true) {
         var instruction_keys = 'a';
+        var keys_folder = 'response_box';
     } else { // box == false
         var instruction_keys = 'a';
+        var keys_folder = 'keyboard';
     };
 
     const slide_line = {
     type: instructions,
     pages: [`<div class="main">
-                <img src="${exp_info.instr_path}${folder}/${name}.PNG" 
+                <img src="${exp_info.instr_path}${folder}/${keys_folder}/${name}.PNG" 
                 class="image"></img>
             </div>`],
     allow_keys: true,
@@ -41,8 +43,10 @@ export function createInstr(exp_info, instr_folder: string, start, end, box: boo
 
     if (box == true) {
         var instruction_keys = exp_info.instruction_keys_box;
+        var keys_folder = 'response_box';
     } else { // box == false
         var instruction_keys = exp_info.instruction_keys_keyboard;
+        var keys_folder = 'keyboard';
     };
 
     for (let slide = start_slide; slide < end_slide; slide++) {
@@ -52,7 +56,7 @@ export function createInstr(exp_info, instr_folder: string, start, end, box: boo
             instr_slides.push(`<div class="main">
                                 <img class="image"  
                                 width: 130%"
-                                src="${exp_info.instr_path}${folder}/Slide${slide}.PNG">
+                                src="${exp_info.instr_path}${folder}/${keys_folder}/Slide${slide}.PNG">
                                 </img>
                             </div>`); 
 
@@ -61,7 +65,7 @@ export function createInstr(exp_info, instr_folder: string, start, end, box: boo
             instr_slides.push(`<div class="main">
                             <img class="image"  
                             width: 130%"
-                            src="${exp_info.instr_path}${folder}/Slide${slide}.PNG">
+                            src="${exp_info.instr_path}${folder}/${keys_folder}/Slide${slide}.PNG">
                             </img>
                         </div>
                         <div class="main">
@@ -70,7 +74,7 @@ export function createInstr(exp_info, instr_folder: string, start, end, box: boo
                             height="1" 
                             border="0"
                             style="display: none"
-                            src="${exp_info.instr_path}${folder}/Slide${slide + 1}.PNG">
+                            src="${exp_info.instr_path}${folder}/${keys_folder}/Slide${slide + 1}.PNG">
                             </img> 
                         </div>`);
                         
