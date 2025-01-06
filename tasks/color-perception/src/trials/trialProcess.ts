@@ -64,7 +64,7 @@ export function createNewTrial(
       condition: difficulty,
       majorityBLUE: nBlueDots > nRedDots,
       fix_duration: fixation_screen.trial_duration,
-      procedure: function () {
+      practice: function () {
         if (isPractice) {
           return "practice";
         } else {
