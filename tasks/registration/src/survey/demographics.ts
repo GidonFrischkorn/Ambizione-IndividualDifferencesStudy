@@ -65,6 +65,54 @@ export const demographics = function (language: string = "DE") {
     throw new Error("Language not supported");
   }
 
+  // Name item
+  const name_item = {
+    type: "multipletext",
+    name: "name",
+    title: "Bitte geben Sie ihren Vor- und Nachnamen an.",
+    isRequired: true,
+    items: [
+      {
+        name: "first_name",
+        title: "Vorname",
+        inputType: "text",
+        isRequired: true,
+      },
+      {
+        name: "last_name",
+        title: "Nachname",
+        inputType: "text",
+        isRequired: true,
+      },
+    ]
+  };
+
+  const contact_item = {
+    type: "multipletext",
+    name: "contact",
+    title: "Bitte geben Sie ihre Kontaktdaten an, damit wir Sie für die Teilnahme an der Studie kontaktieren können.",
+    isRequired: true,
+    items: [
+      {
+        name: "email",
+        title: "E-Mail",
+        inputType: "email",
+        isRequired: true,
+      },
+      {
+        name: "phone",
+        title: "Telefonnummer",
+        inputType: "tel",
+        isRequired: true,
+      },
+    ],
+  };
+
+  // Demographics Item: age, race, and sex, employment, education, income
+  const demographics_item = {
+
+  };
+
   // First name
   const first_name_item = {
     type: "text",
@@ -79,6 +127,7 @@ export const demographics = function (language: string = "DE") {
     name: "last_name",
     title: last_name_question,
     isRequired: true,
+    startWithNewLine: false,
   };
 
   const birthdate_item = {
@@ -98,6 +147,7 @@ export const demographics = function (language: string = "DE") {
     showNoneItem: true,
     showOtherItem: true,
     choices: gender_options,
+    startWithNewLine: false,
   };
 
   // Education drop-down
@@ -112,8 +162,8 @@ export const demographics = function (language: string = "DE") {
   // combine everything into a single survey page
   var demographics_page = {
     elements: [
-      first_name_item,
-      last_name_item,
+      name_item,
+      contact_item,
       birthdate_item,
       gender_item,
       education_item,
