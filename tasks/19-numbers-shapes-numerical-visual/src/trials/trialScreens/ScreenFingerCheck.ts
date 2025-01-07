@@ -61,7 +61,7 @@ export const screen_finger_check = function(exp_info, exp_trial, task) {
       stimuli: ret_dots,
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.online_resp_keys,
+      choices: exp_info.resp_keys,
       data: { // data to be saved
         screenID: 'finger_check',
         task: task,
@@ -73,7 +73,7 @@ export const screen_finger_check = function(exp_info, exp_trial, task) {
 
         ret_order: exp_trial.retrieval_order,
         finger_check_pos: exp_trial.finger_check_pos,
-        correct_response: exp_info.online_resp_keys[exp_trial.finger_check_pos]
+        correct_response: exp_info.resp_keys[exp_trial.finger_check_pos]
       },
       on_finish: function (data) {
 

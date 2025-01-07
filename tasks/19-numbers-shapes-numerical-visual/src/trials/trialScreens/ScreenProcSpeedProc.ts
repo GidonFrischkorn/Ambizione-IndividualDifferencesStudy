@@ -2,9 +2,16 @@
 import psychophysics from "@kurokida/jspsych-psychophysics";
 
 // processing speed task screen 2
-export const screen_proc_speed_proc = function(exp_info, exp_trial, stim) {
+export const screen_proc_speed_proc = function(exp_info, exp_trial, stim, box) {
 
     // define variables
+    // define response keys
+    if (box == true) {
+      var resp_keys = exp_info.resp_keys_box;
+    } else { // box == false
+      var resp_keys = exp_info.resp_keys_keyboard;
+    };
+
     // x coordinates of the retrieval red dots
     var ret_dots_x = [-6.6*exp_info.canW/72, 
                       -5.6*exp_info.canW/72, 
@@ -12,8 +19,8 @@ export const screen_proc_speed_proc = function(exp_info, exp_trial, stim) {
                       -3.6*exp_info.canW/72, 
                       3.6*exp_info.canW/72, 
                       4.6*exp_info.canW/72, 
-                      5.6*exp_info.canH/36, 
-                      6.6*exp_info.canH/36];
+                      5.6*exp_info.canW/72, 
+                      6.6*exp_info.canW/72];
     
     // y coordinates of the retrieval red dots
     var ret_dots_y = [2*exp_info.canH/36, 
@@ -57,7 +64,7 @@ export const screen_proc_speed_proc = function(exp_info, exp_trial, stim) {
       stimuli: [resp_img, resp_col_circle],
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.online_resp_keys,
+      choices: resp_keys,
       data: { // data to be saved
         screenID: 'proc_speed_proc',
         task: 'procedural',
@@ -69,12 +76,12 @@ export const screen_proc_speed_proc = function(exp_info, exp_trial, stim) {
   
         ret_order: exp_trial.retrieval_order,
         proc_speed_pos: exp_trial.proc_speed_pos,        
-        correct_response: exp_info.online_resp_keys[exp_trial.proc_speed_pos]
+        correct_response: resp_keys[exp_trial.proc_speed_pos]
       },
       on_finish: function (data) {
 
         //save position of response
-        data.response_pos = exp_info.online_resp_keys.indexOf(data.response);
+        data.response_pos = resp_keys.indexOf(data.response);
 
         // response equals correct response
         if (data.response === data.correct_response) {
