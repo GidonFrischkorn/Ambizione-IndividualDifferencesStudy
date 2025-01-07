@@ -4,7 +4,6 @@
  * @author Elena Venturi 
  * @version 0.3.1
  *
- *
  * @assets assets/
  */
 
@@ -58,7 +57,7 @@ export async function run({
 
   /************************************** Practice **************************************/
   const prac_list = create_trialList();
-  
+
   let practice_line: any[] = [];
   for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
 
@@ -67,10 +66,9 @@ export async function run({
     practice_line = practice_line.concat(practice_trial);
   }
 
-  
   /************************************** Experiment **************************************/
   const trial_list = create_trialList();
-  
+
   let exp_line: any[] = [];
   for(let j = 0; j < trial_list.length; j++){
 
@@ -78,10 +76,8 @@ export async function run({
     let exp_trial = createNewTrial(j, false, false, trial_list[j].condition, trial_list[j].stimulus, trial_list[j].mapping);
     exp_line = exp_line.concat(exp_trial);
   }
-  
 
   /************************************** Procedure **************************************/
-
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
