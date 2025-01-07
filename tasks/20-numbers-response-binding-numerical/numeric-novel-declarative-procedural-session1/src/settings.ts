@@ -8,13 +8,16 @@ setCSS();
 export const varOnline = {
   RUN_JATOS: false, // true, if you run your experiment in jatos
   RUN_PROLIFIC: false, // true, if you run your experiment in Prolific
-  COMPLETION_CODE: "C4G0SAV6", // for Prolific
-  FAIL_CODE: "C17WAN5T", // for Prolific
-  INTERNET_CODE: "CUX6ZJG1", // for Prolific
-  DRIVE_LINK: "https://drive.switch.ch/index.php/s/NposiPszFpv6Lfg",
+  COMPLETION_CODE: "XXX", // for Prolific
+  FAIL_CODE: "XXX", // for Prolific
+  INTERNET_CODE: "XXX", // for Prolific
+  DRIVE_LINK: "XXX",
 };
 
 export const varSystem = {
+  TITLE: "BindingNumericalProcedural", // experiment name
+  LANG: "de", // the language of the instructions
+  RESPONSE_BOX: false, // a switch to control whether participants use a response box or not (i.e., keyboard)
   TRACK: false, // a switch to track participants' interactions with the browser
   nBLUR: 0, // use to count how many times participants left the browser
   MAX_BLUR: 3, // the maximum number of times participants can leave the browser
@@ -26,18 +29,7 @@ export const varSystem = {
 export function MakeExpInfo(task_condition) {
   // determine task condition
   // declarative or procedural task
-  if (!isNaN(task_condition)) {
-    var exp_task = "procedural";
-  } else {
-    var exp_task = "";
-
-    // show error message if jatos is used
-    if (varOnline.RUN_JATOS) {
-      jsPsych.endExperiment(
-        "Condition not defined. Please contact the experimenter."
-      );
-    }
-  }
+  var exp_task = "procedural";
 
   // objects
   var stimuli = [
@@ -89,7 +81,8 @@ export function MakeExpInfo(task_condition) {
       Array.from(Array(90).keys()).map((i) => i + 10),
       90
     ),
-    resp_keys: ["a", "s", "d", "f", "h", "j", "k", "l"], // response keys
+    resp_keys_keyboard:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys on keyboard
+    resp_keys_box:['a', 's', 'd', 'alt', 'control', 'j', 'k', 'l'], // response keys on repsonse box   
     pos: Array.from(Array(8).keys()), // positions of responses (0-7)
 
     // define objects

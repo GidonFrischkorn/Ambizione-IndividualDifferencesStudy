@@ -1,5 +1,5 @@
 /**
- * @title Numbers Response Binding Task Visual
+ * @title Numbers Response Binding Task Numerical
  * @description Numerical bindings (numbers-responses)
  * @version 0.0.1 
  *
@@ -10,8 +10,7 @@
 
 import "../styles/main.scss"; // stylesheets (.scss or .css)
 import preload from '@jspsych/plugin-preload'; // plugins from jspsych
-import psychophysics from "@kurokida/jspsych-psychophysics"; // import psychophysics plugin
-import { MakeExpInfo, varOnline} from "./settings"; // settings
+import { MakeExpInfo, varOnline, varSystem} from "./settings"; // settings
 import { jsPsych } from "./jsp";
 import { createInstr, createSingleInstr } from "./instructions/createInstrStart";
 import { createNewTrial } from "./trials/trialProcess";
@@ -19,7 +18,7 @@ import { MakeTrial } from "./trials/trialStims";
 import { chunkTrials } from "@coglabuzh/webpsy.js";
 import { calculateMods } from "./task-fun/calculateMods";
 import { createIfNode } from "./task-fun/createIfNode";
-import { endExpPractice, endExpFingerCheck } from "./task-fun/endExperiment";
+import { endExpPractice } from "./task-fun/endExperiment";
 
 import { welcome_screen } from "./instructions/welcome";
 import { browser_screen } from "./instructions/browserCheck";
@@ -54,16 +53,14 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   /************************************** Experiment **************************************/
 
- // define whether to run practice, finger check, and processing speed task (0 = no, 1 = yes)
- var is_practice = 1;
- var is_finger_check = 1;
- var is_proc_speed = 1;
- 
+  // define whether to run practice, finger check, and processing speed task (0 = no, 1 = yes)
+  var is_practice = 1;
+  var is_proc_speed = 1;
+
+  // define response box usage
+  var response_box = varSystem.RESPONSE_BOX;
+    
   // create timeline variables
-  let finger_check_line_speed_task:any[] = [];
-  let finger_check_loop_line_speed_task:any = [];
-  let finger_check_line_task:any[] = [];
-  let finger_check_loop_line_task:any = [];
   let proc_speed_instr_line_task:any[] = [];
   let proc_speed_line_task:any[] = [];
   let prac_instr_line_task:any[] = [];
@@ -73,175 +70,11 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   let exp_line_task:any[] = [];
   let end_instr_line_task:any[] = [];
  
-  
-
-  /************************************** Finger Check Tasks **************************************/
-
-  if (is_finger_check == 1) {
-
-    // define local variables: practice = no
-    let is_prac_local = 0;
-
-    ////////////////////////////////////////// Finger Check Processing Speed //////////////////////////////////////////
-    
-    // create finger check trials
-    var {Trial, number_idx} = MakeTrial(exp_info, is_prac_local, "finger_check"); // no stim_index !!!
-    var finger_check_trials_speed_task = Trial, stim_index_check = number_idx; 
-   
-    // chunk finger check trials into blocks
-    const finger_check_speed_task_chunks = chunkTrials(finger_check_trials_speed_task, exp_info.n_finger_check_blocks);
-
-    // loop through finger check blocks
-    for (var [block, finger_check_block_trials] of finger_check_speed_task_chunks.entries()) {
-
-      // define first setsize for showing setsize instructions for practice trials
-      var last_setsize = 0;
-
-      // loop through finger check trials
-      for (let [trial, finger_check_trial] of finger_check_block_trials.entries()) {
-
-        // create new trial
-        var {trial_line, trial_body} = createNewTrial(exp_info, finger_check_trial, is_prac_local, last_setsize, "finger_check_speed_" + task_condition);
-        
-        // add trial to processing speed timeline
-        finger_check_line_speed_task = finger_check_line_speed_task.concat(trial_line);
-
-      };
-    };
-
-    // counter for finger check loop (repeat 2x)
-    var counter_loop_finger_check_speed_task = 0;
-
-    // create loop timeline for finger check timeline
-    var loop_finger_check_speed_task = {
-      timeline: finger_check_line_speed_task,
-      loop_function: function() {
-
-        // accuracy of finger check trial
-        var finger_check_correct_speed_task = jsPsych.data.get().filter({screenID: 'finger_check', task: task_condition + '_proc_speed'}).last(exp_info.n_finger_check_trials).filter({ acc : 1}).count();
-        
-        // repeat 2x
-        if (counter_loop_finger_check_speed_task < 2) {
-
-          // loop if more than 1 mistake
-          if (finger_check_correct_speed_task < 7) {
-
-            counter_loop_finger_check_speed_task ++;
-            
-            return true; // loop
-
-          } else {
-
-            return false; // stop
-
-          }
-
-        } else { // counter_loop >= 1 then end study and redirect to Prolific 
-          
-          // loop if more than 1 mistake
-          if (finger_check_correct_speed_task < 7) {
-
-            endExpFingerCheck(varOnline.FAIL_CODE);
-
-          } else { // finger_check_correct >= 7
-
-            return false; // stop
-
-          };
-        };
-      }
-    };
-
-    // add finger check loop to finger check timeline
-    finger_check_loop_line_speed_task = finger_check_loop_line_speed_task.concat(loop_finger_check_speed_task);
-    
-    ////////////////////////////////////////// Finger Check Task //////////////////////////////////////////
-    
-    // create finger check trials
-    var {Trial, number_idx} = MakeTrial(exp_info, is_prac_local, "finger_check"); // no stim_index !!!
-    var finger_check_trials = Trial, stim_index_check = number_idx; 
-
-    // chunk finger check trials into blocks
-    const finger_check_chunks = chunkTrials(finger_check_trials, exp_info.n_finger_check_blocks);
-
-    // loop through finger check blocks
-    for (var [block, finger_check_block_trials] of finger_check_chunks.entries()) {
-
-      // define first setsize for showing setsize instructions for practice trials
-      var last_setsize = 0;
-
-      // loop through finger check trials
-      for (let [trial, finger_check_trial] of finger_check_block_trials.entries()) {
-
-        // create new trial
-        var {trial_line, trial_body} = createNewTrial(exp_info, finger_check_trial, is_prac_local, last_setsize, "finger_check_" + task_condition);
-        
-        // add trial to processing speed timeline
-        finger_check_line_task = finger_check_line_task.concat(trial_line);
-
-      };
-    };
-
-    // counter for finger check loop (repeat 2x)
-    var counter_loop_finger_check_task = 0;
-
-    // create loop timeline for finger check timeline
-    var loop_finger_check_task = {
-      timeline: finger_check_line_task,
-      loop_function: function() {
-
-        // accuracy of finger check trial
-        var finger_check_correct_task = jsPsych.data.get().filter({screenID: 'finger_check', task: task_condition}).last(exp_info.n_finger_check_trials).filter({ acc : 1}).count();
-        
-        // repeat 2x
-        if (counter_loop_finger_check_task < 2) {
-
-          // loop if more than 1 mistake
-          if (finger_check_correct_task < 7) {
-
-            counter_loop_finger_check_task ++;
-            
-            return true; // loop
-
-          } else {
-
-            return false; // stop
-
-          }
-
-        } else { // counter_loop >= 1 then end study and redirect to Prolific 
-          
-          // loop if more than 1 mistake
-          if (finger_check_correct_task < 7) {
-
-            endExpFingerCheck(varOnline.FAIL_CODE);
-
-          } else { // finger_check_correct >= 7
-
-            return false; // stop
-
-          };
-        };
-      }
-    };
-
-    // add finger check loop to finger check timeline
-    finger_check_loop_line_task = finger_check_loop_line_task.concat(loop_finger_check_task);
-  };
-
   /************************************** Processing Speed Task **************************************/
 
   if (is_proc_speed == 1) { // processing speed task
 
-    if (task_condition == "declarative") {
-
-      var slides_num_proc_speed = exp_info.n_proc_speed_slides_dec
-
-    } else { // procedural
-
-      var slides_num_proc_speed = exp_info.n_proc_speed_slides_proc
-
-    }
+    var slides_num_proc_speed = exp_info.n_proc_speed_slides_proc;
 
     // create instructions for processing speed task
     proc_speed_instr_line_task.push(createInstr(exp_info, 'Processing_Speed_Instructions_' + task_condition, 1, slides_num_proc_speed))
@@ -265,7 +98,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
       for (let [trial, proc_speed_trial] of proc_speed_block_trials.entries()) {
 
         // create new trial
-        var {trial_line, trial_body} = createNewTrial(exp_info, proc_speed_trial, is_prac_local, last_setsize_local, "proc_speed_" + task_condition);
+        var {trial_line, trial_body} = createNewTrial(exp_info, proc_speed_trial, is_prac_local, last_setsize_local, "proc_speed_" + task_condition, response_box);
         
         // add trial to processing speed timeline
         proc_speed_line_task = proc_speed_line_task.concat(trial_line);
@@ -320,7 +153,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
         if (trial < 2) { 
 
           // create first 2 trials
-          var {trial_line, trial_body} = createNewTrial(exp_info, prac_trial, is_prac_local, last_setsize, task_condition);
+          var {trial_line, trial_body} = createNewTrial(exp_info, prac_trial, is_prac_local, last_setsize, task_condition, response_box);
           
           // add to practice timeline
           prac_line_task = prac_line_task.concat(trial_line);                
@@ -410,7 +243,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
         } else { // remaining practice trials
 
           // create remaining trials
-          var {trial_line, trial_body} = createNewTrial(exp_info, prac_trial, is_prac_local, last_setsize, task_condition);
+          var {trial_line, trial_body} = createNewTrial(exp_info, prac_trial, is_prac_local, last_setsize, task_condition, response_box);
           
           // add remaining practice trials to practice timeline
           prac_line_all_task = prac_line_all_task.concat(trial_line);
@@ -446,7 +279,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
     // loop through experiment trials
     for (let [trial, exp_trial] of exp_block_trials.entries()) {
-      var {trial_line, trial_body} = createNewTrial(exp_info, exp_trial, is_prac_local_task, last_setsize_local_task, task_condition);
+      var {trial_line, trial_body} = createNewTrial(exp_info, exp_trial, is_prac_local_task, last_setsize_local_task, task_condition, response_box);
       exp_line_task = exp_line_task.concat(trial_line);
 
     };
@@ -471,11 +304,9 @@ timeline.push(welcome_screen);
 timeline.push(browser_screen);
 timeline.push(fullMode_screen);
 timeline = timeline.concat(proc_speed_instr_line_task);
-timeline = timeline.concat(finger_check_loop_line_speed_task); 
 timeline = timeline.concat(proc_speed_line_task);
 timeline = timeline.concat(prac_line_all_task); 
 timeline = timeline.concat(exp_instr_line_task);
-timeline = timeline.concat(finger_check_loop_line_task);
 timeline = timeline.concat(exp_line_task);
 timeline = timeline.concat(end_instr_line_task);
 timeline.push(question_serious_participation);

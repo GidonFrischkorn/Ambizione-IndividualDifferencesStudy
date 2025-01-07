@@ -5,10 +5,6 @@ import { screen_cue } from "./trialScreens/ScreenRetrievalCue";
 import { screen_iti } from "./trialScreens/ScreenITI";
 import { screen_isi } from "./trialScreens/ScreenISI";
 
-import { screen_info_finger_check } from "./trialScreens/ScreenInfoFingerCheck";
-import { screen_finger_check } from "./trialScreens/ScreenFingerCheck";
-import { screen_feedback_finger_check } from "./trialScreens/ScreenFeedbackFinger";
-
 import { screen_info_proc_speed } from "./trialScreens/ScreenInfoProcSpeed";
 import { screen_proc_speed1_dec } from "./trialScreens/ScreenProcSpeed1Dec";
 import { screen_proc_speed2_dec } from "./trialScreens/ScreenProcSpeed2Dec";
@@ -38,7 +34,7 @@ import { screen_feedback_proc } from "./trialScreens/ScreenFeedbackProc";
  * @param {number} is_proc_speed Perform proessing speed trials or not (1 = yes, 0 = no)
  */
 
-function trialStim(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task) {
+function trialStim(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task: string, box: boolean) {
   
   // define input variables for current trial
   this.exp_info = exp_info;
@@ -46,6 +42,7 @@ function trialStim(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task)
   this.is_practice = is_practice;
   this.task = task;
   this.last_setsize = last_setsize;
+  this.response_box = box;
 }
 
 // memory phase of the object
@@ -62,17 +59,8 @@ trialStim.prototype.memoryPhase = function () {
   const preload_screen = screen_preload(this.exp_info, this.exp_trial, this.task);
   //phase_line.push(preload_screen);
   
-  // finger check task
-  if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_speed_declarative" || this.task == "finger_check_procedural" || this.task == "finger_check_declarative") {
-    
-    if (this.exp_trial.trial == 0) {
-      
-      // display info for finger check
-      const info_finger_check_screen = screen_info_finger_check(this.exp_info, this.exp_trial);
-      phase_line.push(info_finger_check_screen);
-    };
-
-  } else if (this.task == "proc_speed_declarative") { // practice or experimental trials
+  // processing speed task
+  if (this.task == "proc_speed_declarative") { // practice or experimental trials
     
     // show info after finger check
     if (this.exp_trial.trial == 0) {
@@ -199,44 +187,11 @@ trialStim.prototype.retrievalPhase = function () {
   // create phase_line for retieval phase
   var phase_line: any[] = [];
 
-  // finger check task
-if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_speed_declarative" || this.task == "finger_check_procedural" || this.task == "finger_check_declarative") {
-
-    // define task for finger check trials
-    if (this.task == "finger_check_speed_procedural") {
-
-      var task_finger = 'procedural_proc_speed';
-
-    } else if (this.task == "finger_check_procedural") {
-
-      var task_finger = 'procedural';
-
-    } else if (this.task == "finger_check_speed_declarative") {
-
-      var task_finger = 'declarative_proc_speed';
-
-    } else { //this.task == "finger_check_declarative"
-
-      var task_finger = 'declarative';
-      
-    }
-
-    // display object together with key assignment of objects
-    const finger_check_screen = screen_finger_check(this.exp_info, this.exp_trial, task_finger);
-    phase_line.push(finger_check_screen);
-
-    // display feedback
-    const feedback_finger_check_screen = screen_feedback_finger_check(this.exp_info);
-    phase_line.push(feedback_finger_check_screen);
-
-    // isi
-    const isi_screen = screen_isi(this.exp_info);
-    phase_line.push(isi_screen);
-
-  } else if (this.task == "proc_speed_declarative") { // practice or experimental trials
+  // processing speed task
+  if (this.task == "proc_speed_declarative") { // practice or experimental trials
 
      // display non-object together with key assignment of non-objects
-     const proc_speed2_dec_screen = screen_proc_speed2_dec(this.exp_info, this.exp_trial, 0);
+     const proc_speed2_dec_screen = screen_proc_speed2_dec(this.exp_info, this.exp_trial, 0, this.response_box);
      phase_line.push(proc_speed2_dec_screen);
  
      // iti
@@ -252,7 +207,7 @@ if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_s
   } else if (this.task == "proc_speed_procedural") {
 
     // display number together with key assignment of fingers
-    const proc_speed_screen = screen_proc_speed_proc(this.exp_info, this.exp_trial, 0);
+    const proc_speed_screen = screen_proc_speed_proc(this.exp_info, this.exp_trial, 0, this.response_box);
     phase_line.push(proc_speed_screen);
 
     // iti
@@ -283,7 +238,7 @@ if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_s
       phase_line.push(retrieval_dec_screen1);
 
       // update the retireval screen and display the number together with the non-objects key assignment
-      const retrieval_dec_screen2 = screen_retrieval2_dec(this.exp_info, this.exp_trial, stim);
+      const retrieval_dec_screen2 = screen_retrieval2_dec(this.exp_info, this.exp_trial, stim, this.response_box);
       phase_line.push(retrieval_dec_screen2);
 
       // show feedback for practice trials (correct/incorrect)
@@ -315,7 +270,7 @@ if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_s
     for(let stim = 0; stim < this.exp_trial.setsize; stim++) {
 
       // show retireval screen and display the number together with the key assignment
-      const retrieval_proc_screen = screen_retrieval_proc(this.exp_info, this.exp_trial, stim);
+      const retrieval_proc_screen = screen_retrieval_proc(this.exp_info, this.exp_trial, stim, this.response_box);
       phase_line.push(retrieval_proc_screen);
 
       // show feedback for practice trials (correct/incorrect)
@@ -346,13 +301,13 @@ if (this.task == "finger_check_speed_procedural" || this.task == "finger_check_s
  * @param {number} is_practice Perform practice trials or not (1 = yes, 0 = no)
  * @param {string} task Perform pro edural or declarative task
  */
-export function createNewTrial(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task) {
+export function createNewTrial(exp_info, exp_trial, is_practice = 0, last_setsize = 0, task: string, box: boolean) {
   
   // create array to store screens for trial
   var trial_line: any[] = [];
 
   // create a trial object
-  var trial_body = new trialStim(exp_info, exp_trial, is_practice, last_setsize, task);
+  var trial_body = new trialStim(exp_info, exp_trial, is_practice, last_setsize, task, box);
 
   // add memory phase of trial
   var memory_phase = trial_body.memoryPhase();

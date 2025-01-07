@@ -3,8 +3,14 @@ import psychophysics from "@kurokida/jspsych-psychophysics";
 import { varSystem } from "../../settings";
 
 // screen 2 to display response image, color dots and color circle for retrieval
-export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
+export const screen_retrieval2_dec = function(exp_info, exp_trial, stim, box){
    
+    // define response keys
+    if (box == true) {
+      var resp_keys = exp_info.resp_keys_box;
+    } else { // box == false
+      var resp_keys = exp_info.resp_keys_keyboard;
+    };
 
     // New x coordinates of the retrieval objects
     var ret_dots_x = [(-7.7 * exp_info.canW / 72) - 15, 
@@ -13,8 +19,8 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
                       (-4.2 * exp_info.canW / 72) + 10, 
                       ( 4.2 * exp_info.canW / 72) - 10, 
                       ( 5.37 * exp_info.canW / 72), 
-                      ( 6.53 * exp_info.canH / 36) + 10, 
-                      ( 7.7 * exp_info.canH / 36) + 15];
+                      ( 6.53 * exp_info.canW / 72) + 10, 
+                      ( 7.7 * exp_info.canW / 72) + 15];
 
     // New y coordinates of the retrieval color dots
     var ret_dots_y = [(2.33 * exp_info.canH / 20), 
@@ -88,7 +94,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
       stimuli: ret_objects,
       response_type: 'key',
       trial_duration: exp_info.max_rt,
-      choices: exp_info.resp_keys,
+      choices: resp_keys,
       data: { // data to be saved
         screenID: 'retrieval2_dec',
         task: 'declarative',
@@ -113,7 +119,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
         ret_other_objects: exp_trial.ret_other_object[stim],
         ret_other_objects_pos: exp_trial.ret_other_object_pos[stim],
   
-        correct_response: exp_info.resp_keys[exp_trial.ret_binding_objects_pos[stim]]   
+        correct_response: resp_keys[exp_trial.ret_binding_objects_pos[stim]]   
       },
       on_finish: function (data) { // end of trial
 
@@ -126,7 +132,7 @@ export const screen_retrieval2_dec = function(exp_info, exp_trial, stim){
         } else { // response unequal correct response 
           // create variable accuracy == 0 and response in degress of color
           data.acc = 0;      
-          data.response_name = data.ret_other_objects[data.ret_other_objects_pos.indexOf(exp_info.resp_keys.indexOf(data.response))];          
+          data.response_name = data.ret_other_objects[data.ret_other_objects_pos.indexOf(resp_keys.indexOf(data.response))];          
         
         }; 
         
