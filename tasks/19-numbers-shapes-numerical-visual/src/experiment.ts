@@ -82,8 +82,8 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     var slides_num_proc_speed = exp_info.n_proc_speed_slides_dec;
 
     // create instructions for processing speed task
-    proc_speed_instr_line_task.push(createInstr(exp_info, 'Processing_Speed_Instructions_' + task_condition, 1, slides_num_proc_speed))
-    proc_speed_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'TaskStartProcSpeed_' + task_condition))
+    proc_speed_instr_line_task.push(createInstr(exp_info, 'Processing_Speed_Instructions_' + task_condition, 1, slides_num_proc_speed, response_box))
+    proc_speed_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'TaskStartProcSpeed_' + task_condition, response_box))
 
     // define local variables: practice = no, last setsize = 0
     let is_prac_local = 0;
@@ -116,8 +116,8 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // define slide numbers for declarative and procedural task
   var slides_num_prac = exp_info.n_prac_slides_dec;
 
-  prac_instr_line_task.push(createInstr(exp_info, 'Instructions_' + task_condition, 1, slides_num_prac));
-  prac_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'PracStart_' + task_condition));
+  prac_instr_line_task.push(createInstr(exp_info, 'Instructions_' + task_condition, 1, slides_num_prac, response_box));
+  prac_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'PracStart_' + task_condition, response_box));
 
   // add instruction to practice timeline with setsize 2 for loop
   prac_line_task = prac_line_task.concat(prac_instr_line_task); 
@@ -258,7 +258,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // experiment
   // create experiment instructions
-  exp_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'TaskStart_' + task_condition));
+  exp_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'TaskStart_' + task_condition, response_box));
 
   // define local variables: practice = no and last setsize = 0
   let is_prac_local_task = 0;
@@ -284,14 +284,14 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     // display break instructions
     if (block + 1 != exp_info.n_exp_blocks && calculateMods(block + 1, exp_info.n_blocks_break) == 0) {
 
-      var break_screen = createSingleInstr(exp_info, 'General_Instructions', 'Break_' + task_condition);
+      var break_screen = createSingleInstr(exp_info, 'General_Instructions', 'Break_' + task_condition, response_box);
       exp_line_task.push(break_screen);
 
     };
   };
 
   // create end instructions
-  end_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'End'));
+  end_instr_line_task.push(createSingleInstr(exp_info, 'General_Instructions', 'End', response_box));
 
   /************************************** Procedure **************************************/
 

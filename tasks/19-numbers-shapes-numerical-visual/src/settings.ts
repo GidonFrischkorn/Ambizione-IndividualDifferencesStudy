@@ -79,6 +79,8 @@ export function MakeExpInfo(task_condition) {
       Array.from(Array(90).keys()).map((i) => i + 10),
       90
     ),
+    instruction_keys_keyboard: ['f', 'h'], // instruction keys on keyboard
+    instruction_keys_box: ['alt', 'control'], // instruction keys on response box
     resp_keys_keyboard:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys on keyboard
     resp_keys_box:['a', 's', 'd', 'alt', 'control', 'j', 'k', 'l'], // response keys on repsonse box
     pos: Array.from(Array(8).keys()), // positions of responses (0-7)
