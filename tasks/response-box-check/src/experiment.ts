@@ -1,8 +1,8 @@
 /**
- * @title The name of the task
- * @description A short description of the task
- * @author Chenyu Li and Hannah (Dames) Tschannen
- * @version 0.3.1
+ * @title Response box check
+ * @description Check the functionality of all response keys on the response box
+ * @author Isabel Courage
+ * @version 0.0.1
  *
  *
  * @assets assets/
