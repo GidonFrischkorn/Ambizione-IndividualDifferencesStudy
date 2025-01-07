@@ -1,7 +1,7 @@
 /**
- * @title Number Judgement Task
- * @description Participant has to tell whether the number is odd or even as fast as possible.
- * @author Elena Venturi
+ * @title Letter Processing Task 
+ * @description Participant has to tell whether the letter is a vowel or a consonant as fast as possible. 
+ * @author Elena Venturi 
  * @version 0.3.1
  *
  * @assets assets/
@@ -25,11 +25,10 @@ import { fullMode_screen } from "./instructions/fullScreen";
 import { exp_start_screen, pra_instr_screen } from "./instructions/InstrTrial";
 import { createNewTrial } from "./trials/trialProcess";
 import { create_trialList } from "./trials/trialStim";
-import {
-  instructions_screen,
-  fingers_instructions_exp,
-  fingers_instructions_practice,
-} from "./instructions/InstrScreen";
+import { instructions_screen } from "./instructions/InstrScreen";
+import { fingers_instructions_practice } from "./instructions/InstrScreen";
+import { fingers_instructions_exp } from "./instructions/InstrScreen";
+
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -63,7 +62,7 @@ export async function run({
   for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
 
     // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
-    let practice_trial = createNewTrial(j, true, false, prac_list[j].condition, prac_list[j].stimulus);
+    let practice_trial = createNewTrial(j, true, expInfo.RESPONSE_BOX, prac_list[j].condition, prac_list[j].stimulus, prac_list[j].mapping);
     practice_line = practice_line.concat(practice_trial);
   }
 
@@ -74,7 +73,7 @@ export async function run({
   for(let j = 0; j < trial_list.length; j++){
 
     // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
-    let exp_trial = createNewTrial(j, false, false, trial_list[j].condition, trial_list[j].stimulus);
+    let exp_trial = createNewTrial(j, false, expInfo.RESPONSE_BOX, trial_list[j].condition, trial_list[j].stimulus, trial_list[j].mapping);
     exp_line = exp_line.concat(exp_trial);
   }
 
@@ -84,10 +83,10 @@ export async function run({
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  // timeline.push(consent_screen);
-  // timeline.push(notice_screen);
+  //timeline.push(consent_screen);
+  //timeline.push(notice_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
   timeline.push(fingers_instructions_practice);
