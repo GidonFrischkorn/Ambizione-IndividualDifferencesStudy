@@ -7,32 +7,30 @@ library(dplyr)
 library(smartr)
 library(ggplot2)
 
+json_files <- list.files(path = "/Users/gidonfrischkorn/Downloads",pattern = ".json", full.names = TRUE)
+filename <- json_files[grepl("Letter", json_files)] 
+
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-digit_result <- read_json_data(".json") %>% 
-  filter(response %in% c("d", "j"), procedure == "experiment"
+letter_result <- read_json_data(filename) %>% 
+  filter(procedure == "experiment"
          #, correct == "TRUE"
          ) 
 
-# Exclude columns we don't need 
-digit_result <- digit_result %>% 
-  select(-c(1:9, 11, 12, 16:29))
-
 # Convert rt to seconds and create a new column for the converted RTs
-digit_result <- digit_result %>%
+letter_result <- letter_result %>%
   mutate(rt_seconds = rt/ 1000)
 
 # Calculate the mean and standard deviation of the RTs
-mean_rt <- mean(digit_result$rt_seconds)
-sd_rt <- sd(digit_result$rt_seconds)
+mean_rt <- mean(letter_result$rt_seconds)
+sd_rt <- sd(letter_result$rt_seconds)
 
 # Create a plot of the RTs
-plot_Table <- digit_result[, c("trial_number", "rt_seconds")]
+plot_Table <- letter_result[, c("trial_number", "rt_seconds")]
 
-ggplot(plot_Table, aes(x = trial_number, y = rt_seconds)) +
+ggplot(letter_result, aes(x = trial_number, y = rt_seconds, color = correct)) +
   geom_point() + 
   geom_line() +  
   labs(title = "Reaction Time Over Trials",
        x = "Trial Number", 
        y = "Reaction Time (seconds)") +
-  ylim(0, 1) +  
   theme_minimal() 

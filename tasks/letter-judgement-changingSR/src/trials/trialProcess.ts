@@ -86,8 +86,9 @@ export function createNewTrial(XY: number, isPractice: boolean, box:boolean, con
         const vowel: string[] = ['A', 'E', 'I', 'O', 'U'];
         return vowel.includes(response);
       },
-      trial_number: XY,
-      condition: condition, 
+      trial_number: XY + 1,
+      condition: condition,
+      mapping: mapping, 
       procedure: isPractice ? "practice" : "experiment",
       stimulus: targetStim, 
       correct_response: correct_response,
