@@ -59,7 +59,7 @@ export function MakeExpInfo(task_condition) {
     n_finger_check_blocks: 1, // number of finger check blocks
     n_proc_speed_blocks: 1, // number of processing speed blocks
     n_prac_blocks: 1, // number of practice blocks
-    n_exp_blocks: 16, // number of experimental blocks --> too long?
+    n_exp_blocks: 20, // number of experimental blocks --> too long?
     n_blocks_break: 4, // number of mini blocks before break
     repeat_controls_stims_after: 4, // number of times control stimuli are repeated
 
