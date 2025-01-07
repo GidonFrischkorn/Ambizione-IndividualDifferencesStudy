@@ -64,10 +64,8 @@ export function MakeExpInfo(task_condition) {
     repeat_controls_stims_after: 4, // number of times control stimuli are repeated
 
     // number of slides for isntructions
-    n_proc_speed_slides_dec: 10,
-    n_prac_slides_dec: 12,
-    n_proc_speed_slides_proc: 7,
-    n_prac_slides_proc: 9,
+    n_proc_speed_slides_proc: 6,
+    n_prac_slides_proc: 8,
 
     // set sizes and certain variable values
     setsize: 5, // number of stimulus in experimental trials
