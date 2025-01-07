@@ -20,7 +20,6 @@ import { expInfo, varSystem } from "./settings";
 import { createNewTrial } from "./trials/trialProcess";
 import { generateDesign } from "./trials/blockDesign";
 import { generateTrial } from "./trials/trialStims";
-import { createIfTrial } from "./task-fun/createIfTrial";
 
 // CogLabUZH functions
 import { chunkTrials } from "@coglabuzh/webpsy.js";
