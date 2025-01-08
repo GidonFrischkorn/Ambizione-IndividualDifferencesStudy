@@ -68,7 +68,7 @@ export function MakeExpInfo(task_condition) {
         stim_index_dec: Array.from(Array(332).keys()).map(i => i),
         stim_index_proc: Array.from(Array(332).keys()).map(i => i),
         stim_words: words.map(i => i.Word), 
-        instruction_keys_keyboard: ['f', 'h'], // instruction keys on keyboard
+        instruction_keys_keyboard: ['ArrowLeft', 'ArrowRight'], // instruction keys on keyboard
         instruction_keys_box: ['alt', 'control'], // instruction keys on response box
         resp_keys_keyboard:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys on keyboard
         resp_keys_box:['a', 's', 'd', 'alt', 'control', 'j', 'k', 'l'], // response keys on repsonse box
