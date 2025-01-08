@@ -87,7 +87,7 @@ export function MakeExpInfo(task_condition) {
         stim_count: 274, // number of stimuli
         stim_index_dec: random.sample(Array.from(Array(274).keys()).map(i => i + 1), 252),
         stim_index_proc: random.sample(Array.from(Array(274).keys()).map(i => i + 1), 252), // sample 252 from 274 stimulus indices 
-        instruction_keys_keyboard: ['f', 'h'], // instruction keys on keyboard
+        instruction_keys_keyboard: ['ArrowLeft', 'ArrowRight'], // instruction keys on keyboard
         instruction_keys_box: ['alt', 'control'], // instruction keys on response box
         resp_keys_keyboard:['a', 's', 'd', 'f', 'h', 'j', 'k', 'l'], // response keys on keyboard
         resp_keys_box:['a', 's', 'd', 'alt', 'control', 'j', 'k', 'l'], // response keys on repsonse box
