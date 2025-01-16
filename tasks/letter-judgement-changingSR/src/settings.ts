@@ -18,8 +18,12 @@ export const expInfo = {
     nTRIALS: 50, // number of experiment trials for each condition
     nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
-    CONDITIONS: ["vowel","consonant"], // conditions of the experiment
-    BOX_CHOICES: ["alt", "control"], // choices for the participants if experiment in lab 
+    CONDITIONS: {
+      ANIMACY: ["animate", "inanimate"], 
+      WORDLENGTH: [4, 5, 6, 7, 8]
+    }, // conditions of the experiment
+    ANIMACY_VALUE: [0, 1],
+    BOX_CHOICES: ["alt", "control"], // choices for the participants if experiment in lab with box 
     CHOICES: ["d", "j"], // choices for the participants if experiment online 
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
