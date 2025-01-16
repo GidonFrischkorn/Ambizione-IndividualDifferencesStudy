@@ -86,7 +86,7 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, an
     choices: "NO-KEYS",
     trial_duration:
       expInfo.TIMING.ITI +
-      Math.floor(Math.random() * (expInfo.TIMING.JITTER + 1)),
+      Math.floor(Math.random() * 2 * (expInfo.TIMING.JITTER + 1)),
   };
 
   // Push screens into trial_line

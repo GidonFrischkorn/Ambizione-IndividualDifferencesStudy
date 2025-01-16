@@ -57,37 +57,31 @@ export async function run({
   /************************************** Instruction **************************************/
 
   /************************************** Practice **************************************/
-  let usedWords: any[] = [];
+  let usedWords: string[] = [];
 
   const prac_list = create_trialList();
-
+  console.log(prac_list);
+  
   let practice_line: any[] = [];
   for (let j = 0; j < expInfo.DESIGN.nPRACTICE; j++) {
-    let chosenStimulus = chooseStimuli(
-      words,
-      prac_list[j].word_animacy,
-      prac_list[j].word_length
-    );
-    usedWords.push(chosenStimulus);
-
+    usedWords.push(prac_list[j].stimulus.word);
+    
     // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
-    let practice_trial = createNewTrial(j, true, false, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus);
+    let practice_trial = createNewTrial(j, true, expInfo.RESPONSE_BOX, prac_list[j].word_animacy, prac_list[j].word_length, prac_list[j].stimulus.word);
     practice_line = practice_line.concat(practice_trial);
 
   }
-
+  console.log(usedWords);
   /************************************** Experiment **************************************/
 
   const trial_list = create_trialList(usedWords);
+  console.log(trial_list);
 
   let exp_line: any[] = [];
   for(let j = 0; j < trial_list.length; j++){
-    let chosenStimulus = chooseStimuli(words, trial_list[j].word_animacy, trial_list[j].word_length, usedWords);
-
     // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
-    let exp_trial = createNewTrial(j, false, false, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus);
+    let exp_trial = createNewTrial(j, false, expInfo.RESPONSE_BOX, trial_list[j].word_animacy, trial_list[j].word_length, trial_list[j].stimulus.word);
     exp_line = exp_line.concat(exp_trial);
-
   }
 
   /************************************** Procedure **************************************/
@@ -99,7 +93,7 @@ export async function run({
   //timeline.push(consent_screen);
   //timeline.push(notice_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
   timeline.push(fingers_instructions_practice);

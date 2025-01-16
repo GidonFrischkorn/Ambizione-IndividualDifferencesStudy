@@ -16,6 +16,8 @@ export const expInfo = {
   TITLE: "Word Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
+  RESPONSE_BOX: true, // whether the response box is used in the lab
+
   // design of the experiment
   DESIGN:{
     nTRIALS: 10, // number of experiment trials for each condition
@@ -27,16 +29,17 @@ export const expInfo = {
     }, // conditions of the experiment
     ANIMACY_VALUE: [0, 1],
     CHOICES: ["d", "j"], // choices for the participants
-    BOX_CHOICES: ["alt", "ctrl"], // choices for the participants
+    BOX_CHOICES: ["alt", "control"], // choices for the participants
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
   
   // settings for each trial
   TIMING: {
-    FIXATION: 1000, // duration of the fixation cross
+    FIXATION: 400, // duration of the fixation cross
+    JITTER: 200, // duration of the jitter
     TARGET: 5000, // duration of the target stimulus
     FEEDBACK: 1000, // duration of the feedback
-    ITI: 1500, // duration of the inter-trial interval
+    ITI: 1000, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
     FINGERS: 5000, // duration of the finger instruction

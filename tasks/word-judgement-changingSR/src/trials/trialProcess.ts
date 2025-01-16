@@ -6,8 +6,6 @@ import { expInfo } from "../settings";
 // Third party plugins
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { jsPsych } from "../jsp";
-import psychophysics from "@kurokida/jspsych-psychophysics";
-import exp from "constants";
 
 /**
  * A function used to create a single trial.
@@ -56,7 +54,7 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, an
     type: htmlKeyboardResponse,
     stimulus: "<div style='font-size:60px;'>+</div>",
     choices: "NO-KEYS",
-    trial_duration: expInfo.TIMING.FIXATION,
+    trial_duration: expInfo.TIMING.FIXATION + Math.floor((expInfo.TIMING.JITTER+1) * Math.random()),
   }
 
 // Mapping Screen
@@ -85,6 +83,7 @@ const cue_screen = {
       animacy: animacy,
       wordlength: wordlength, 
       procedure: isPractice ? "practice" : "experiment",
+      fix_duration: expInfo.TIMING.FIXATION,
       stimulus: targetStim,
       mapping: mapping,
       correct_response: correct_response,
@@ -114,7 +113,7 @@ const cue_screen = {
     type: htmlKeyboardResponse,
     stimulus: "",
     choices: "NO-KEYS",
-    trial_duration: expInfo.TIMING.ITI,
+    trial_duration: expInfo.TIMING.ITI+ 2 * Math.floor((expInfo.TIMING.JITTER+1) * Math.random()),
   }
 
 
