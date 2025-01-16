@@ -25,7 +25,7 @@ console.log(vowel);
  */
 
 function create_consonant(): any {
-  let consonant: string[] = ["P", "F", "J", "Q", "V"];
+  let consonant: string[] = ["P", "F", "J", "Q", "H"];
   let random_consonant = Math.floor(Math.random() * consonant.length);
   return consonant[random_consonant];
 }
