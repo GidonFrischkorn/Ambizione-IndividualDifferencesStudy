@@ -161,7 +161,7 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
       data.color_angle = CircleStimulus.color_ang;
       data.color = CircleStimulus.fill_color;
       for(let i = 0; i < memory_stims.length; i++) {
-        data[`color_angle${i}`] = memory_stims[i].angle_col;
+        data[`color_angle_${i}`] = memory_stims[i].angle_col;
         data[`location_angle_${i}`] = memory_stims[i].angle_loc;
       }
     },
@@ -248,7 +248,7 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
       data.confidence = ArcStimulus.spreadAngle;
 
       for(let i = 0; i < memory_stims.length; i++) {
-        data[`color_angle${i}`] = memory_stims[i].angle_col;
+        data[`color_angle_${i}`] = memory_stims[i].angle_col;
         data[`location_angle_${i}`] = memory_stims[i].angle_loc;
       }
     },
