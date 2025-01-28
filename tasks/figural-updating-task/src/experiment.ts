@@ -1,5 +1,5 @@
 /**
- * @title Visual Working Memory Task (Object) Exp 2
+ * @title Keep Track Task (Letters-Colors)
  * @description A short description of the task
  * @version 1.0.6
  *
@@ -59,7 +59,8 @@ export async function run({
       DESIGN.SETSIZE,
       DESIGN.UPDSTEP,
       1,
-      iTrial + 1
+      iTrial + 1,
+      "practice"
     );
     practice_line = practice_line.concat(trialLine);
   }
@@ -76,7 +77,8 @@ export async function run({
       DESIGN.SETSIZE,
       DESIGN.UPDSTEP,
       1,
-      iTrial + 1
+      iTrial + 1,
+      "experiment"
     );
     experiment_line = experiment_line.concat(trialLine);
   }
@@ -86,7 +88,7 @@ export async function run({
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline.push(instr_line);
   timeline = timeline.concat(practice_line);
   timeline = timeline.concat(experiment_line);

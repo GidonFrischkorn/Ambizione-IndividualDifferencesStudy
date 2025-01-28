@@ -25,6 +25,7 @@ import { trial_start_screen } from "../instructions/InstrTrial";
 class createTrialBody {
   blockID: number;
   trialID: number;
+  trial_type: string;
   setsize: number;
   updStep: number;
   canW: number;
@@ -39,12 +40,13 @@ class createTrialBody {
   responseList: string[];
   correctResp: object;
 
-  constructor(setsize, updStep, blockID, trialID) {
+  constructor(setsize, updStep, blockID, trialID, trial_type) {
     // trial information
     this.blockID = blockID;
     this.trialID = trialID;
     this.setsize = setsize;
     this.updStep = updStep;
+    this.trial_type = trial_type;
 
     // center of the canvas
     this.canW = varSystem.CANVAS_WIDTH;
@@ -169,6 +171,7 @@ createTrialBody.prototype.displayEncodingPhase = function () {
           screenID: "encoding",
           blockID: this.blockID,
           trialID: this.trialID,
+          trial_type: this.trial_type,
           stepID: index,
           setsize: this.setsize,
           color: color,
@@ -189,7 +192,6 @@ createTrialBody.prototype.displayEncodingPhase = function () {
 createTrialBody.prototype.displayUpdatingPhase = function () {
 
     let updating_line:any[] = [];
-
 
     Object.keys(this.updatingResp).forEach((color, index) => {
       // the object
@@ -218,6 +220,7 @@ createTrialBody.prototype.displayUpdatingPhase = function () {
           screenID: "updating",
           blockID: this.blockID,
           trialID: this.trialID,
+          trial_type: this.trial_type,
           stepID: index,
           setsize: this.setsize,
           color: color,
@@ -250,7 +253,7 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
   // create the button html for the current trial
   let buttonHtmlIndex = `${this.blockID}${this.trialID}`;
   const colorButtonHtml = createButtonMatrix(
-    3, 4, // number of rows and columns
+    expInfo.RETRIEVAL_MATRIX.n_rows, expInfo.RETRIEVAL_MATRIX.n_columns, // number of rows and columns
     this.canW * 0.4,
     this.canH * 0.5, // size of the whole matrix
     [this.canW * 0.75, this.canH * 0.5], // center position of the matrix
@@ -285,6 +288,7 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
         screenID: "retrieval",
         blockID: this.blockID,
         trialID: this.trialID,
+        trial_type: this.trial_type,
         setsize: this.setsize,
         color: color,
         initial_item: this.initialResp[color].letter,
@@ -319,7 +323,7 @@ createTrialBody.prototype.displayDebriefingPhase = function() {
     let debriefingScreen:object;
 
     debriefingScreen = {
-      type: htmlKeyboardResponse,
+      type: htmlKeyboardResponse, 
       trial_duration: TIMING.DEBRIEF,
       stimulus: function () {
         let accuracy = jsPsych.data
@@ -360,9 +364,10 @@ export function createNewTrial(
   setsize: number,
   updStep: number,
   blockID: number,
-  trialID: number
+  trialID: number,
+  trial_type: string,
 ) {
-  let trialBody = new createTrialBody(setsize, updStep, blockID, trialID);
+  let trialBody = new createTrialBody(setsize, updStep, blockID, trialID, trial_type);
 
   let trialLine: any[] = [];
 

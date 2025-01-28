@@ -3,19 +3,24 @@ import { imageObj } from "./task-fun/imageObject";
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "color_udating_task", // the title of the experiment
-  RESEARCHER: "", // researcher's name
-  EMAIL: "", // researcher's email
+  TITLE: "keep_track_task", // the title of the experiment
+  RESEARCHER: "GF", // researcher's name
+  EMAIL: "gidon.frischkorn@psychologie.uzh.ch", // researcher's email
   DURATION: 15, // duration of the experiment in minutes
   LANG: "de", // the language of the experiment
+
+  RETRIEVAL_MATRIX: {
+    n_columns: 4,
+    n_rows: 3,
+  },
 
   // experiment design
   DESIGN: {
     nPRACTICE: 3, // number of memory trials in the retro-cue condition
-    nTRIALS: 10, // number of experiment trials for each condition
+    nTRIALS: 3, //10, // number of experiment trials for each condition
     SETSIZE: 4, // set size
     UPDSTEP: 2, // updating steps
-    nNPL: 6, // number of not-presented lures
+    nNPL: (3 * 4) - 4 - 2, // number of not-presented lures
   },
 
   OBJECTS: {
@@ -30,21 +35,21 @@ export const expInfo = {
     BG_NAME: "white",
     BACKGROUND: "#FFFFFF",
     POOL: [
-      "#2e8a3c",
-      "#e9ae0c",
-      "#e35431",
-      "#c81919",
-      "#299ac7",
-      "#4d3bb5",
-      "#b234a1",
+      "#2e8b57",
+      "#ff0000",
+      "#ffd700",
+      "#c71585",
+      "#00ff00",
+      "#0000ff",
+      "#1e90ff",
     ],
   },
 
   // settings for each trial
   TIMING: {
-    ENCODING: 1000, // presentation time of each stimulus in milliseconds
+    ENCODING: 1500, // presentation time of each stimulus in milliseconds
     UPDATING: 1500, // updating time in milliseconds
-    ISI: 500, // inter-stimulus interval in milliseconds
+    ISI: 1000, // inter-stimulus interval in milliseconds
     IPI: 1000, // inter-phase interval in milliseconds
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds

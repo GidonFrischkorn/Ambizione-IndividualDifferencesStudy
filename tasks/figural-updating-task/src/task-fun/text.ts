@@ -99,9 +99,9 @@ export const SCREEN_INFO = {
   feedback: function (accuracy: number, nTest: number, lang: string) {
     switch (lang) {
       case "en":
-        return `<div class='fb-text'>You correctly recalled ${accuracy} out of ${nTest} objects.</div>`;
+        return `<div class='fb-text'>You correctly recalled ${accuracy} out of ${nTest} letters.</div>`;
       case "de":
-        return `<div class='fb-text'>Sie haben ${accuracy}/${nTest} Objekte korrekt erinnert.</div>`;
+        return `<div class='fb-text'>Sie haben ${accuracy}/${nTest} Buchstaben korrekt erinnert.</div>`;
       case "cn":
         return `<div class='fb-text'>您正确回忆了${accuracy}/${nTest}个物体。</div>`;
     }
