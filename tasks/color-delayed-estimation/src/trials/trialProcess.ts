@@ -45,7 +45,7 @@ export function createNewTrial(
   };
 
   // Encoding Screen
-  var memory_stims = generateStims(setsize, "circle", 25, "circle", 100);
+  var memory_stims = generateStims(setsize, expInfo.COLOR_PATCHES.SHAPE, expInfo.COLOR_PATCHES.SIZE, expInfo.COLOR_PATCHES.LOCATION, expInfo.COLOR_PATCHES.RADIUS);
   //console.log(memory_stims);
 
   const encoding_screen = {
@@ -155,10 +155,15 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
       }
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
+      data.trial_type = isPractice ? "practice" : "experiment";
       data.offset_colorWheel = ColorWheelStimulus.offset;
       data.selected_angle = CircleStimulus.selected_ang;
       data.color_angle = CircleStimulus.color_ang;
       data.color = CircleStimulus.fill_color;
+      for(let i = 0; i < memory_stims.length; i++) {
+        data[`color_angle${i}`] = memory_stims[i].angle_col;
+        data[`location_angle_${i}`] = memory_stims[i].angle_loc;
+      }
     },
   };
 
@@ -235,11 +240,17 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
       }
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
+      data.trial_type = isPractice ? "practice" : "experiment";
       data.offset_colorWheel = ColorWheelStimulus.offset;
-      data.selected_angle = CircleStimulus.selected_ang;
+      data.selected_angle = ArcStimulus.startAngle;
       data.color_angle = CircleStimulus.color_ang;
       data.color = CircleStimulus.fill_color;
       data.confidence = ArcStimulus.spreadAngle;
+
+      for(let i = 0; i < memory_stims.length; i++) {
+        data[`color_angle${i}`] = memory_stims[i].angle_col;
+        data[`location_angle_${i}`] = memory_stims[i].angle_loc;
+      }
     },
   };
 

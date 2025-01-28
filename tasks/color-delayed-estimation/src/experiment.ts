@@ -26,7 +26,6 @@ import { pra_instr_screen, exp_start_screen } from "./instructions/InstrTrial";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { instructions_screen, break_screen } from "./instructions/InstrStart";
 import { create_trialList } from "./trials/trialStim";
-import exp from "constants";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -62,7 +61,7 @@ export async function run({
 
   for (let setSize of setSizes) {
     // Create 3 trials for each set size
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < expInfo.DESIGN.nPRACTICE; i++) {
       let prac_trial = createNewTrial(setSize, true, [0]);
       prac_line = prac_line.concat(prac_trial);
     }
@@ -71,14 +70,15 @@ export async function run({
   /************************************** Experiment **************************************/
   
   const trial_list = create_trialList();
+  console.log(trial_list);
   let exp_line: any[] = [];
   
-  for (let setSize of setSizes) {
-    for (let i = 0; i < 50; i++) {
-      let exp_trial = createNewTrial(trial_list[i].setsize, false, [0]);
-      exp_line = exp_line.concat(exp_trial);
-    }
-  }
+  
+  for (let i = 0; i < trial_list.length; i++) {
+    let exp_trial = createNewTrial(trial_list[i].setsize, false, [0]);
+    exp_line = exp_line.concat(exp_trial);
+}
+  
 
   /************************************** Procedure **************************************/
 
@@ -89,7 +89,7 @@ export async function run({
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
   timeline = timeline.concat(prac_line);

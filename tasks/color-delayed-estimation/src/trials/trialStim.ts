@@ -28,7 +28,7 @@ export const generateStims = function (
     circle_locations = random.sample(generateArray.number(0, 360, 1), set_size);
     var location_diffs = createDifference(circle_locations);
 
-    if (location_diffs.every((diff: number) => diff > 25)) {
+    if (location_diffs.every((diff: number) => diff > expInfo.COLOR_PATCHES.MIN_DIST)) {
       array_fail = false;
     } else {
       array_fail = true;
@@ -262,12 +262,22 @@ export function create_trialList() {
   
 
   block_conditions.forEach((trial, i) => {
-    if (trial.setsize == 3) {
+    if (trial.setsize == 1) {
+      trial.size = 1;
+    } else if (trial.setsize == 2) {
+      trial.size = 2;
+    } else if (trial.setsize == 3) {
       trial.size = 3;
     } else if (trial.setsize == 4) {
       trial.size = 4;
     } else if (trial.setsize == 5) {
       trial.size = 5;
+    } else if (trial.setsize == 6) {
+      trial.size = 6;
+    } else if (trial.setsize == 7) {
+      trial.size = 7;
+    } else if (trial.setsize == 8) {
+      trial.size = 8;
     }
 
     trial.stimulus = generateStims(
