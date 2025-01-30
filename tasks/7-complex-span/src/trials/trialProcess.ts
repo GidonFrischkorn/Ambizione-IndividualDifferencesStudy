@@ -379,7 +379,7 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
 
     let cueText = {
       obj_type: "text",
-      content: `Paar ${positionIndex}`,
+      content: `Zahl ${positionIndex}`,
       font: `bold ${this.canH * 0.05}px Arial`,
       text_color: "#000000",
       startX: this.center[0] * 0.6,

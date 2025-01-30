@@ -7,8 +7,8 @@ import { random } from "@coglabuzh/webpsy.js";
 export const expInfo = {
   // settings for the experiment
   TITLE: "complex_span", // the title of the experiment
-  RESEARCHER: " ", // researcher's name
-  EMAIL: " ", // researcher's email
+  RESEARCHER: "Gidon Frischkorn", // researcher's name
+  EMAIL: "gidon.frischkorn@psychologie.uzh.ch", // researcher's email
   DURATION: 20, // duration of the experiment in minutes
   LANG: "de", // the language of the experiment
 
@@ -17,7 +17,7 @@ export const expInfo = {
     nPRACTICE_RETRO: 3, // number of memory trials in the retro-cue condition
     nJUDGE: 3, // number of judgement trials
     nDUAL: 3, // number of dual-task trials
-    nTRIALS: 35, // number of experiment trials for each condition
+    nTRIALS: 3, // number of experiment trials for each condition
     SETSIZE: 3, // set size
     QUESTION: "question", // questions
   },
@@ -52,11 +52,11 @@ export const expInfo = {
   TIMING: {
     STIMULUS: 2000, // presentation time of each stimulus in milliseconds
     PRECUE: 700, // time for the precue in milliseconds
-    RETROCUE: 1500, // time for the retrocue in milliseconds
+    RETROCUE: 1000, // time for the retrocue in milliseconds
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
     RETRIEVAL: 10 * 1000, // time for retrieval
-    DEBRIEF: 2000, // time for feedback
+    DEBRIEF: 1500, // time for feedback
   },
 
   SIZE: {
