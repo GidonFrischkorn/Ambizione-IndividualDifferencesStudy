@@ -15,12 +15,7 @@ import { jsPsych } from "../jsp";
  *
  * @returns An array containing all the slides of a trial.
  */
-export function createNewTrial(
-  XY: number,
-  isPractice: boolean,
-  condition: string,
-  targetStim: string
-) {
+export function createNewTrial(XY: number, isPractice: boolean, box: boolean, condition: string, targetStim: string) {  
   let trial_line: any[] = [];
 
   // Fixation Screen
@@ -37,7 +32,7 @@ export function createNewTrial(
   const target_response_screen = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
-    choices: expInfo.DESIGN.CHOICES,
+    choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES, 
     mapping: {
       vowel:
         expInfo.DESIGN.CHOICES[
