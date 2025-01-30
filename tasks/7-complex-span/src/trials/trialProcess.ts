@@ -101,7 +101,7 @@ class createTrialBody {
         let unusedNumbers = NUMBERS.POOL.filter(num => !usedNumbers.includes(num));
 
         // random select six numbers that were not presented as others distractors 
-        let nNPL = 6;
+        let nNPL = expInfo.DESIGN.COLS_ResponseMat*expInfo.DESIGN.ROWS_ResponseMat - DESIGN.SETSIZE*2;
         let additionalNumbers = random.sample(unusedNumbers, nNPL, false);
 
         this.responseList = usedNumbers.concat(additionalNumbers);
@@ -362,7 +362,7 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
   // create the button html for the current trial
   let buttonHtmlIndex = `${this.condition}${this.blockID}${this.trialID}`;
   const colorButtonHtml = createNumberButtonMatrix(
-    3, 4, // number of rows and columns
+    expInfo.DESIGN.ROWS_ResponseMat, expInfo.DESIGN.COLS_ResponseMat, // number of rows and columns
     this.canW * 0.4,
     this.canH * 0.5, // size of the whole matrix
     [this.canW * 0.75, this.canH * 0.5], // center position of the matrix

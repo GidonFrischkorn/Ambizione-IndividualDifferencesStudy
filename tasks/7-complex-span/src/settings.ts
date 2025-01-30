@@ -20,6 +20,8 @@ export const expInfo = {
     nTRIALS: 3, // number of experiment trials for each condition
     SETSIZE: 3, // set size
     QUESTION: "question", // questions
+    ROWS_ResponseMat: 3, // number of rows in the response matrix
+    COLS_ResponseMat: 4, // number of columns in the response matrix
   },
 
   OBJECTS: {
