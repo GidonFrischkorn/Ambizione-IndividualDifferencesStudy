@@ -61,7 +61,9 @@ export async function run({
   
   let practice_line: any[] = [];
   for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
-    let practice_trial = createNewTrial(j, true, prac_list[j].condition, prac_list[j].stimulus);
+
+    // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
+    let practice_trial = createNewTrial(j, true, false, prac_list[j].condition, prac_list[j].stimulus);
     practice_line = practice_line.concat(practice_trial);
   }
 
@@ -71,7 +73,9 @@ export async function run({
   
   let exp_line: any[] = [];
   for(let j = 0; j < trial_list.length; j++){
-    let exp_trial = createNewTrial(j, false, trial_list[j].condition, trial_list[j].stimulus);
+
+    // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
+    let exp_trial = createNewTrial(j, false, false, trial_list[j].condition, trial_list[j].stimulus);
     exp_line = exp_line.concat(exp_trial);
   }
   
@@ -83,8 +87,8 @@ export async function run({
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
+  //timeline.push(consent_screen);
+  //timeline.push(notice_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
