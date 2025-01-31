@@ -9,7 +9,7 @@ setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "Letter Processing Speed Task", // the title of the experiment
+  TITLE: "Registration", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
   // design of the experiment
