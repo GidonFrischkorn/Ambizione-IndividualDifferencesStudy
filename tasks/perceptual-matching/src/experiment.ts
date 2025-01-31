@@ -57,25 +57,33 @@ export async function run({
   /************************************** Instruction **************************************/
   // This still need to be implemebted
 
+  let block_line: any[] = [];
+  // Create two blocks one for color and one for orientation matching
+  for (let j = 0; j < expInfo.DESIGN.CONDITIONS.Feature.length; j++) {
+    /************************************** Practice **************************************/
+    let prac_line: any[] = [];
 
-  /************************************** Practice **************************************/
-  let prac_line: any[] = [];
+    // Here we should create 9 practice trials with 3 from each set size
+    for (let i = 0; i < expInfo.DESIGN.nPRACTICE; i++) {
+      let trial = createNewTrial(expInfo.DESIGN.CONDITIONS.Feature[j], true, false);
+      prac_line = prac_line.concat(trial);
+    }
 
-  // Here we should create 9 practice trials with 3 from each set size
-  for (let i = 0; i < expInfo.DESIGN.nPRACTICE; i++) {
-    let trial = createNewTrial("orientation", true, false);
-    prac_line = prac_line.concat(trial);
+    /************************************** Experiment **************************************/
+
+    // Here we need to create the trial_list with 50 trials from each setsize 
+
+    let exp_line: any[] = [];
+    for (let k = 0; k < expInfo.DESIGN.nTRIALS; k++) {
+      let trial = createNewTrial(expInfo.DESIGN.CONDITIONS.Feature[j], true, false);
+      exp_line = exp_line.concat(trial);
+    }
+
+    block_line = block_line.concat(prac_line);
+    block_line = block_line.concat(exp_line);
   }
 
-  /************************************** Experiment **************************************/
-
-  // Here we need to create the trial_list with 50 trials from each setsize 
-
-  let exp_line: any[] = [];
-  for (let i = 0; i < expInfo.DESIGN.nTRIALS; i++) {
-    let trial = createNewTrial("color", true, false);
-    exp_line = exp_line.concat(trial);
-  }
+  
 
 
   /************************************** Procedure **************************************/
@@ -91,8 +99,7 @@ export async function run({
   // timeline.push(instructions_screen);
   // timeline.push(pra_instr_screen);
   //timeline.push(example_trial);
-  timeline = timeline.concat(prac_line);
-  timeline = timeline.concat(exp_line);
+  timeline = timeline.concat(block_line);
   // timeline.push(exp_start_screen);
   // timeline.push(fingers_instructions_exp);
   // timeline = timeline.concat(exp_line);

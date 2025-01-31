@@ -15,20 +15,20 @@ export const expInfo = {
 
   STIMULI: {
     SIZE: 140,
-    LINE_WIDTH: 10,
+    LINE_WIDTH: 5,
     OFFSET: 80,
     sf: [0.02, 0.1]
   },
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 50, // number of experiment trials for each condition
-    nPRACTICE: 10, // number of practice trials for each condition
+    nTRIALS: 5, // number of experiment trials for each condition
+    nPRACTICE: 5, // number of practice trials for each condition
     use_ArcResponse: true, // use the arc response
     BreakAt: 0.5, // the ratio of the trials to take a break
     nBLOCKS: 1, // number of blocks
     CONDITIONS: {
-      SETSIZE: [3,4,5],
+      Feature: ["color", "orientation"],
     }, // conditions of the experiment
     nItemsTested: 1, // number of items tested in the experiment
     backgroundCOLOR: "#FFFFFF", // white background
