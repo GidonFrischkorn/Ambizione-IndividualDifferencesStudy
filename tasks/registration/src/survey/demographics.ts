@@ -1,5 +1,5 @@
-export const demographics = function (language: string = "DE") {
-  if (language == "DE") {
+export const demographics = function (language: string = "de") {
+  if (language == "de") {
     var instruction =
       "<h1>Demografische Angaben</h1>" +
       "<p>Bitte beantworten Sie die folgenden Fragen zu Ihrer Person.</p>";
@@ -30,7 +30,7 @@ export const demographics = function (language: string = "DE") {
       "Fach- oder Pädag. Hochschule",
       "Universität / ETH",
     ];
-  } else if (language == "EN") {
+  } else if (language == "en") {
     var instruction =
       "<h1>Demographic Information</h1>" +
       "<p>Please answer the following questions about yourself.</p>";

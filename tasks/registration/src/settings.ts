@@ -10,20 +10,21 @@ setCSS();
 export const expInfo = {
   // settings for the experiment
   TITLE: "Registration", // the title of the experiment
-  LANG: "DE", // the default language of the experiment
+  LANG: "de", // the default language of the experiment: en, de, cn
 
   // design of the experiment
   DESIGN: {
     nSCALE_REV: 6, // the total number of choice options for scale for reverse coding
     ADD_BMW3: true, // a switch to add the BMW-3 questionnaire
     ADD_BFI2: true, // a switch to add the BFI-2 questionnaire
-    BFI2_type: "short",
+    BFI2_type: "short", // full, short, extra_short
     ADD_NFC: true, // a switch to add the NFC questionnaire
-    ADD_ISI: false, // a switch to add the ISI questionnaire
+    ADD_ISI: true, // a switch to add the ISI questionnaire
   },
 
   // settings for each trial
   TIMING: {
+    BREAK: 30, // break duration in seconds
   },
 
   // when using Prolific, you can set customized completion codes for different situations

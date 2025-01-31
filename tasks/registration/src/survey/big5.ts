@@ -1,10 +1,10 @@
 // Define survey function for BFI-2 questionnaire
 export const bfi2 = function (
-  language: string = "DE",
+  language: string = "de",
   version: string = "full",
   single_page: boolean = false
 ) {
-  if (language == "DE") {
+  if (language == "de") {
     var likert_scale = [
       "stimme überhaupt nicht zu",
       "stimme eher nicht zu",
@@ -88,7 +88,7 @@ export const bfi2 = function (
     ];
 
     var label_button = "Weiter";
-  } else if (language == "EN") {
+  } else if (language == "en") {
     var likert_scale = [
       "disagree strongly",
       "Disagree a little",

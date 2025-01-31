@@ -1,16 +1,21 @@
 export function nfc_scores(responses: Object, expInfo: any) {
     
-    // BFI-2
+    // NFC
     const nfc_resp = Object(Object.entries(responses).filter(([key, value]) => key === "nfc-matrix")[0][1])
-
-    // const nfc_resp = Object(Object.entries(search_object).filter(([key, value]) => key === "nfc-matrix")[0][1])
-    const nfc = Object.entries(nfc_resp).filter(([key, value]) => !key.endsWith("r"))
-    const nfc_r = Object.entries(nfc_resp).filter(([key, value]) => key.endsWith("r"))
-
     let nfc_sum = 0;
-    nfc.map(([key, value]) => value).forEach(num => nfc_sum += num);
-    nfc_r.map(([key, value]) => value).forEach(num => nfc_sum += (expInfo.DESIGN.nSCALE_REV - num));
-    const nfc_scale = nfc_sum;
 
+    nfc_resp.forEach(([key, value]) => {
+        const num_value = Number(value); 
+        if (key.endsWith("r")) {
+            // Reverse-scored items: subtract from the scale
+            nfc_sum += (expInfo.DESIGN.nSCALE_REV - num_value);
+        } else {
+            // Regular items: add to the scale
+            nfc_sum += num_value;
+        }
+    });
+    
+    const nfc_scale = nfc_sum;
+    
     return nfc_scale;
 }

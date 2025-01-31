@@ -1,6 +1,6 @@
 // Define survey function for BMW-3 questionnaire
 export const isi_questionnaire = function (language: string) {
-  if (language == "DE") {
+  if (language == "de") {
     var scale_anchors = [
       "sehr niedrige Intelligenz",
       "niedrige Intelligenz",

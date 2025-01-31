@@ -5,7 +5,7 @@ import { jsPsych } from "../jsp";
 
 // Define survey function for BMW-3 questionnaire
 export const bmw3 = function (language: string) {
-  if (language == "DE") {
+  if (language == "de") {
     var likert_scale = [
       "trifft gar nicht zu",
       "trifft eher nicht zu",
@@ -36,7 +36,7 @@ export const bmw3 = function (language: string) {
     ];
 
     var label_button = "Weiter";
-  } else if (language == "EN") {
+  } else if (language == "en") {
     var likert_scale = [
       "fully disagree",
       "somewhat disagree",

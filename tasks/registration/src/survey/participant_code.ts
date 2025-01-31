@@ -1,5 +1,5 @@
-export const participant_code = function (language: string = "DE") {
-    if (language == "DE") {
+export const participant_code = function (language: string = "de") {
+    if (language == "de") {
         var prompts = [
             "dem letzten Buchstaben ihres eigenen Vornamens",
             "dem letzten Buchstaben ihres eigenen Nachnamens",

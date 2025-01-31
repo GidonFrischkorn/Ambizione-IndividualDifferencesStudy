@@ -4,7 +4,7 @@ import "@jspsych/plugin-survey/css/survey.css";
 
 // Define survey function for BMW-3 questionnaire
 export const nfc = function (language: string) {
-  if (language == "DE") {
+  if (language == "de") {
     var likert_scale = [
       "stimmt gar nicht",
       "stimmt kaum",
