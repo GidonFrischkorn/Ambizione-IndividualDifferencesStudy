@@ -1,10 +1,18 @@
-export function bfi2_scores(responses: Object, expInfo: any) {
+export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
 
     // BFI-2
-    let bfi2_resp:any = []
-    const bfi2_resp_length = Object.keys(responses).filter(key => key.startsWith("bfi2-matrix")).length;
-    const bfi2_resp_all = Object(Object.keys(responses).filter(key => key.startsWith("bfi2-matrix")));
-    console.log(bfi2_resp_all)
+    var bfi2_resp = {};
+    if (expInfo.DESIGN.BFI2_type == "extra-short") {
+        bfi2_resp = { ...responses["bfi2-matrix-0"], ...responses["bfi2-matrix-1"]};
+    } else if (expInfo.DESIGN.BFI2_type == "short") {
+        bfi2_resp = { ...responses["bfi2-matrix-0"], ...responses["bfi2-matrix-1"], ...responses["bfi2-matrix-2"] };
+    } else if (expInfo.DESIGN.BFI2_type == "full") {
+        bfi2_resp = { ...responses["bfi2-matrix-0"], ...responses["bfi2-matrix-1"], ...responses["bfi2-matrix-2"],
+                    ...responses["bfi2-matrix-3"], ...responses["bfi2-matrix-4"], ...responses["bfi2-matrix-5"] };
+    } else {
+        throw new Error("BFI-2 type not supported");
+    };
+    console.log(bfi2_resp);
 
     // for (let i; i < bfi2_resp_length; i++) {
     //     let x = bfi2_resp_all.filter(([key, value]) => key === "bfi2-matrix-${i}");

@@ -10,13 +10,14 @@ setCSS();
 export const expInfo = {
   // settings for the experiment
   TITLE: "Registration", // the title of the experiment
-  LANG: "de", // the default language of the experiment
+  LANG: "DE", // the default language of the experiment
 
   // design of the experiment
   DESIGN: {
     nSCALE_REV: 6, // the total number of choice options for scale for reverse coding
     ADD_BMW3: true, // a switch to add the BMW-3 questionnaire
     ADD_BFI2: true, // a switch to add the BFI-2 questionnaire
+    BFI2_type: "short",
     ADD_NFC: true, // a switch to add the NFC questionnaire
     ADD_ISI: false, // a switch to add the ISI questionnaire
   },

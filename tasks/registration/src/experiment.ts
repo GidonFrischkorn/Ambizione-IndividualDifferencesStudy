@@ -58,23 +58,22 @@ export async function run({
   };
 
   /************************************** Information: Ambizione Study **************************************/
-  const id_page = participant_code("DE");
-  console.log(id_page);
+  const id_page = participant_code(expInfo.LANG);
 
   /************************************** Demographic Data **************************************/
-  const demographic_page = demographics("DE");
+  const demographic_page = demographics(expInfo.LANG);
 
   /************************************** BMW-3 **************************************/
-  const bmw3_page = bmw3("DE");
+  const bmw3_page = bmw3(expInfo.LANG);
 
   /************************************** Big-5 **************************************/
-  const bfi2_line = bfi2("DE", "short", true);
+  const bfi2_line = bfi2(expInfo.LANG, expInfo.DESIGN.BFI2_type, true);
 
   /************************************** NFC **************************************/
-  const nfc_page = nfc("DE");
+  const nfc_page = nfc(expInfo.LANG);
 
   /************************************** ISI **************************************/
-  const isi_page = isi_questionnaire("DE");
+  const isi_page = isi_questionnaire(expInfo.LANG);
 
 
   // Combine all survey pages
@@ -110,8 +109,7 @@ export async function run({
     on_finish: function (data) {
       // Get responses from questionnaires
       const search_object = jsPsych.data.get().values()[1].response
-
-
+      console.log(search_object)
 
       // BMW-3 scale scores
       if (expInfo.DESIGN.ADD_BMW3) {

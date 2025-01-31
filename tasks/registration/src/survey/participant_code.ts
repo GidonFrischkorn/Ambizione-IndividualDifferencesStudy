@@ -53,6 +53,7 @@ export const participant_code = function (language: string = "DE") {
                 rowCount: 1,
                 maxRowCount: 1,
                 rowTitleWidth: "50%",
+                isRequired: true,
             }
         ],
         showQuestionNumbers: "off",
