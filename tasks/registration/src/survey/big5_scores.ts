@@ -1,5 +1,4 @@
 export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
-
     // BFI-2
     var bfi2_resp = {};
     if (expInfo.DESIGN.BFI2_type == "extra-short") {

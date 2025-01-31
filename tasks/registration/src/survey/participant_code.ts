@@ -61,3 +61,12 @@ export const participant_code = function (language: string = "DE") {
 
     return id_page;
 };
+
+
+export const extract_code = function (responses: { [key: string]: any }) {
+    // Extract the participant code from the survey responses
+    const code_responses = responses["participant-code"]
+
+    var participant_code = code_responses.letter_firstname + code_responses.letter_lastname + code_responses.letter_mother + code_responses.letter_father + code_responses.digit_birthdate + code_responses.digit_birthyear;
+    return participant_code;
+}

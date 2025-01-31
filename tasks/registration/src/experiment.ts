@@ -23,7 +23,7 @@ import { expInfo } from "./settings";
 // screens
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen } from "./instructions/consent";
-import { participant_code } from "./survey/participant_code";
+import { participant_code, extract_code } from "./survey/participant_code";
 import { demographics } from "./survey/demographics";
 import { bmw3 } from "./survey/bmw3";
 import { bfi2 } from "./survey/big5";
@@ -110,6 +110,9 @@ export async function run({
       // Get responses from questionnaires
       const search_object = jsPsych.data.get().values()[1].response
       console.log(search_object)
+
+      // Extract the participant code from the survey responses
+      data.participant_id = extract_code(search_object);
 
       // BMW-3 scale scores
       if (expInfo.DESIGN.ADD_BMW3) {
