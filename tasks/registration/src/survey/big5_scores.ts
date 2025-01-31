@@ -1,7 +1,18 @@
-export function bif2_scores(responses: Object, expInfo: any) {
+export function bfi2_scores(responses: Object, expInfo: any) {
 
     // BFI-2
-    const bfi2_resp = Object(Object.entries(responses).filter(([key, value]) => key === "bfi2-matrix")[0][1])
+    let bfi2_resp:any = []
+    const bfi2_resp_length = Object.keys(responses).filter(key => key.startsWith("bfi2-matrix")).length;
+    const bfi2_resp_all = Object(Object.keys(responses).filter(key => key.startsWith("bfi2-matrix")));
+    console.log(bfi2_resp_all)
+
+    // for (let i; i < bfi2_resp_length; i++) {
+    //     let x = bfi2_resp_all.filter(([key, value]) => key === "bfi2-matrix-${i}");
+    //     bfi2_resp.push(x)
+    //     console.log(x)
+    // };
+    
+    // console.log(bfi2_resp)
 
     // BFI-2: extraversion
     const bfi2_e_all = Object.entries(bfi2_resp).filter(([key, value]) => key.startsWith("BFI-E"))

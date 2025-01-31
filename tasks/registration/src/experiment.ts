@@ -30,7 +30,7 @@ import { nfc } from "./survey/nfc";
 import { isi_questionnaire } from "./survey/isi";
 import { mini_q } from "./survey/mini-q.ts";
 import { bmw3_scores } from "./survey/bmw3_scores.ts";
-import { bif2_scores } from "./survey/big5_scores.ts";
+import { bfi2_scores } from "./survey/big5_scores.ts";
 import { nfc_scores } from "./survey/nfc_scores.ts";
 
 /**
@@ -107,7 +107,7 @@ export async function run({
       
       // BFI-2 scale scores
       if (expInfo.DESIGN.ADD_BFI2) {
-        const bif2_scale_scores = bif2_scores(search_object, expInfo);
+        const bif2_scale_scores = bfi2_scores(search_object, expInfo);
         data.bif2_e_score = bif2_scale_scores[0];
         data.bif2_v_score = bif2_scale_scores[1];
         data.bif2_g_score = bif2_scale_scores[2];
@@ -121,7 +121,6 @@ export async function run({
         data.nfc_score = nfc_scale_scores;
       };
       
-      console.log(data.nfc_score)
     }
   };
 
@@ -137,5 +136,5 @@ export async function run({
 
   // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
-  // return jsPsych;
+  return jsPsych;
 }
