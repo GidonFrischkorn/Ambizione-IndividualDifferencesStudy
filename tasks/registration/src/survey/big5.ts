@@ -320,7 +320,7 @@ export const bfi2 = function (
 
       var bfi2_element = {
         type: "matrix",
-        name: "bfi2-matrix",
+        name: "bfi2-matrix",    
         title: element_title,
         description: element_description,
         alternateRows: true,
@@ -335,7 +335,8 @@ export const bfi2 = function (
     }
 
     bfi2_line = [{
-      elements: element_array,
+      elements: element_array,  
+      
     }];
   } else {
     var item_per_page = 10;
