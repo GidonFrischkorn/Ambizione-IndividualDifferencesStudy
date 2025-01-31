@@ -315,12 +315,14 @@ export const bfi2 = function (
 
     var element_array: any[] = [];
     for (let i = 0; i < num_elements; i++) {
-      var element_title = i == 0 ? title : "";
+      var element_title = title;
       var element_description = i == 0 ? instruction : "";
+
+      var matrix_title = "bfi2-matrix-" + i;
 
       var bfi2_element = {
         type: "matrix",
-        name: "bfi2-matrix",    
+        name: matrix_title,    
         title: element_title,
         description: element_description,
         alternateRows: true,
@@ -339,7 +341,7 @@ export const bfi2 = function (
       
     }];
   } else {
-    var item_per_page = 10;
+    var item_per_page = 60;
     var num_pages = Math.ceil(final_items.length / item_per_page);
 
     for(let i = 0; i < num_pages; i++) {

@@ -80,8 +80,8 @@ export async function run({
   var survey_pages: any[] = [];
   // survey_pages.push(demographic_page);
   // survey_pages.push(isi_page);
-  // survey_pages.push(bmw3_page);
-  // survey_pages = survey_pages.concat(bfi2_line);
+  //survey_pages.push(bmw3_page);
+  survey_pages = survey_pages.concat(bfi2_line);
   survey_pages.push(nfc_page);
 
   const registration_survey = {
