@@ -17,7 +17,7 @@ export const generateStims = function (
   var stim_array: any[] = [];
 
   // Sample array of colors with length set size
-  const color_angles: number[] = generateArray.number(0, 360, 1);
+  const color_angles: number[] = generateArray.number(0, 359, 1);
   var trial_colors = random.sample(color_angles, set_size);
   // console.log(trial_colors);
 
@@ -25,7 +25,7 @@ export const generateStims = function (
   let array_fail: boolean = true;
   var circle_locations: number[] = [];
   while (array_fail) {
-    circle_locations = random.sample(generateArray.number(0, 360, 1), set_size);
+    circle_locations = random.sample(generateArray.number(0, 359, 1), set_size);
     var location_diffs = createDifference(circle_locations);
 
     if (location_diffs.every((diff: number) => diff > expInfo.COLOR_PATCHES.MIN_DIST)) {
@@ -259,36 +259,6 @@ export function create_trialList() {
     expInfo.DESIGN.nTRIALS,
     false
   );
-  
-
-  block_conditions.forEach((trial, i) => {
-    if (trial.setsize == 1) {
-      trial.size = 1;
-    } else if (trial.setsize == 2) {
-      trial.size = 2;
-    } else if (trial.setsize == 3) {
-      trial.size = 3;
-    } else if (trial.setsize == 4) {
-      trial.size = 4;
-    } else if (trial.setsize == 5) {
-      trial.size = 5;
-    } else if (trial.setsize == 6) {
-      trial.size = 6;
-    } else if (trial.setsize == 7) {
-      trial.size = 7;
-    } else if (trial.setsize == 8) {
-      trial.size = 8;
-    }
-
-    trial.stimulus = generateStims(
-      trial.size,
-      trial.location,
-      trial.patch_size,
-      trial.patch_type,
-      trial.location_size
-    );
-    trial.trial_number = i + 1;
-  });
 
   return block_conditions;
 }

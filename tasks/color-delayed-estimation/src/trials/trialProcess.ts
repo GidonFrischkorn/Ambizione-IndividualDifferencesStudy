@@ -71,13 +71,13 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
   const offset = Math.floor(Math.random() * 360); // Random offset between 0 and 359
 
   // get correct response 
-  const correct_angle = memory_stims[retrieval_order[0]].angle_col;
+  const correct_angle = memory_stims[retrieval_order[retPos]].angle_col;
 
   // set placeholder objects
   const placeholders = generatePlaceholders(memory_stims);
 
   // create retrieval cue object
-  const retrieval_cue = generateRetrievalCue(retrieval_order[0], memory_stims);
+  const retrieval_cue = generateRetrievalCue(retrieval_order[retPos], memory_stims);
 
   // combine all stimuli into one array
   var all_stimuli: any[] = [];
