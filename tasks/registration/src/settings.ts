@@ -24,7 +24,6 @@ export const expInfo = {
 
   // settings for each trial
   TIMING: {
-    
   },
 
   // when using Prolific, you can set customized completion codes for different situations

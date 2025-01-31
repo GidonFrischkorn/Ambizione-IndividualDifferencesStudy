@@ -1,5 +1,7 @@
 // Import plugin
 import surveyLikert from "@jspsych/plugin-survey-likert";
+import { on } from "events";
+import { jsPsych } from "../jsp";
 
 // Define survey function for BMW-3 questionnaire
 export const bmw3 = function (language: string) {
@@ -111,7 +113,7 @@ export const bmw3 = function (language: string) {
     elements: [
       {
         type: "matrix",
-        name: "nfc-matrix",
+        name: "bmw3-matrix",
         title: title,
         description: instruction,
         alternateRows: true,

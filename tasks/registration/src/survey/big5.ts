@@ -320,7 +320,7 @@ export const bfi2 = function (
 
       var bfi2_element = {
         type: "matrix",
-        name: "",
+        name: "bfi2-matrix",
         title: element_title,
         description: element_description,
         alternateRows: true,
