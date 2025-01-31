@@ -15,7 +15,8 @@ export function nfc_scores(responses: Object, expInfo: any) {
         }
     });
     
-    const nfc_scale = nfc_sum;
+    const nfc_sum_score = nfc_sum;
+    const nfc_mean_score = nfc_sum/nfc_resp.length;
     
-    return nfc_scale;
+    return [nfc_sum_score, nfc_mean_score];
 }

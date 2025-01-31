@@ -115,10 +115,16 @@ export async function run({
 
       // BMW-3 scale scores
       if (expInfo.DESIGN.ADD_BMW3) {
+
         const bmw3_scale_scores = bmw3_scores(search_object, expInfo);
-        data.bmw3_i_score = bmw3_scale_scores[0];
-        data.bmw3_ui_score = bmw3_scale_scores[1];
-        data.bmw3_ma_score = bmw3_scale_scores[2];
+
+        data.bmw3_i_sum = bmw3_scale_scores[0][0];
+        data.bmw3_ui_sum = bmw3_scale_scores[0][1];
+        data.bmw3_ma_sum = bmw3_scale_scores[0][2];
+
+        data.bmw3_i_mean = bmw3_scale_scores[1][0];
+        data.bmw3_ui_mean = bmw3_scale_scores[1][1];
+        data.bmw3_ma_mean = bmw3_scale_scores[1][2];
       };
       
       // BFI-2 scale scores
@@ -127,40 +133,69 @@ export async function run({
         const bif2_scale_scores = bfi2_scores(search_object, expInfo);
 
         if (expInfo.DESIGN.BFI2_type === "extra-short") {
-          data.bif2_extraversion_score = bif2_scale_scores[0];
-          data.bif2_agreeableness_score = bif2_scale_scores[1];
-          data.bif2_conscientiousness_score = bif2_scale_scores[2];
-          data.bif2_emotional_stability_score = bif2_scale_scores[3];
-          data.bif2_openness_score = bif2_scale_scores[4];
-        } else {
-          data.bif2_extraversion_score = bif2_scale_scores[0][0];
-          data.bif2_agreeableness_score = bif2_scale_scores[0][1];
-          data.bif2_conscientiousness_score = bif2_scale_scores[0][2];
-          data.bif2_emotional_stability_score = bif2_scale_scores[0][3];
-          data.bif2_openness_score = bif2_scale_scores[0][4];
+          data.bif2_extraversion_sum = bif2_scale_scores[0][0];
+          data.bif2_agreeableness_sum = bif2_scale_scores[0][1];
+          data.bif2_conscientiousness_sum = bif2_scale_scores[0][2];
+          data.bif2_emotional_stability_sum = bif2_scale_scores[0][3];
+          data.bif2_openness_sum = bif2_scale_scores[0][4];
 
-          data.bif2_sociability_score = bif2_scale_scores[1][0];
-          data.bif2_assertiveness_score = bif2_scale_scores[1][1];
-          data.bif2_energy_level_score = bif2_scale_scores[1][2];
-          data.bif2_compassion_score = bif2_scale_scores[1][3];
-          data.bif2_respectfulness_score = bif2_scale_scores[1][4];
-          data.bif2_trust_score = bif2_scale_scores[1][5];
-          data.bif2_organization_score = bif2_scale_scores[1][6];
-          data.bif2_productiveness_score = bif2_scale_scores[1][7];
-          data.bif2_responsibility_score = bif2_scale_scores[1][8];
-          data.bif2_anxiety_score = bif2_scale_scores[1][9];
-          data.bif2_depression_score = bif2_scale_scores[1][10];
-          data.bif2_emotional_volatility_score = bif2_scale_scores[1][11];
-          data.bif2_intellectual_curiosity_score = bif2_scale_scores[1][12];
-          data.bif2_aesthetic_sensitivity_score = bif2_scale_scores[1][13];
-          data.bif2_creative_imagination_score = bif2_scale_scores[1][14];
+          data.bif2_extraversion_mean = bif2_scale_scores[1][0];
+          data.bif2_agreeableness_mean = bif2_scale_scores[1][1];
+          data.bif2_conscientiousness_mean = bif2_scale_scores[1][2];
+          data.bif2_emotional_stability_mean = bif2_scale_scores[1][3];
+          data.bif2_openness_mean = bif2_scale_scores[1][4];
+        } else {
+          data.bif2_extraversion_sum = bif2_scale_scores[0][0];
+          data.bif2_agreeableness_sum = bif2_scale_scores[0][1];
+          data.bif2_conscientiousness_sum = bif2_scale_scores[0][2];
+          data.bif2_emotional_stability_sum = bif2_scale_scores[0][3];
+          data.bif2_openness_sum = bif2_scale_scores[0][4];
+
+          data.bif2_sociability_sum = bif2_scale_scores[1][0];
+          data.bif2_assertiveness_sum = bif2_scale_scores[1][1];
+          data.bif2_energy_level_sum = bif2_scale_scores[1][2];
+          data.bif2_compassion_sum = bif2_scale_scores[1][3];
+          data.bif2_respectfulness_sum = bif2_scale_scores[1][4];
+          data.bif2_trust_sum = bif2_scale_scores[1][5];
+          data.bif2_organization_sum = bif2_scale_scores[1][6];
+          data.bif2_productiveness_sum = bif2_scale_scores[1][7];
+          data.bif2_responsibility_sum = bif2_scale_scores[1][8];
+          data.bif2_anxiety_sum = bif2_scale_scores[1][9];
+          data.bif2_depression_sum = bif2_scale_scores[1][10];
+          data.bif2_emotional_volatility_sum = bif2_scale_scores[1][11];
+          data.bif2_intellectual_curiosity_sum = bif2_scale_scores[1][12];
+          data.bif2_aesthetic_sensitivity_sum = bif2_scale_scores[1][13];
+          data.bif2_creative_imagination_sum = bif2_scale_scores[1][14];
+
+          data.bif2_extraversion_mean = bif2_scale_scores[2][0];
+          data.bif2_agreeableness_mean = bif2_scale_scores[2][1];
+          data.bif2_conscientiousness_mean = bif2_scale_scores[2][2];
+          data.bif2_emotional_stability_mean = bif2_scale_scores[2][3];
+          data.bif2_openness_mean = bif2_scale_scores[2][4];
+
+          data.bif2_sociability_mean = bif2_scale_scores[3][0];
+          data.bif2_assertiveness_mean = bif2_scale_scores[3][1];
+          data.bif2_energy_level_mean = bif2_scale_scores[3][2];
+          data.bif2_compassion_mean = bif2_scale_scores[3][3];
+          data.bif2_respectfulness_mean = bif2_scale_scores[3][4];
+          data.bif2_trust_mean = bif2_scale_scores[3][5];
+          data.bif2_organization_mean = bif2_scale_scores[3][6];
+          data.bif2_productiveness_mean = bif2_scale_scores[3][7];
+          data.bif2_responsibility_mean = bif2_scale_scores[3][8];
+          data.bif2_anxiety_mean = bif2_scale_scores[3][9];
+          data.bif2_depression_mean = bif2_scale_scores[3][10];
+          data.bif2_emotional_volatility_mean = bif2_scale_scores[3][11];
+          data.bif2_intellectual_curiosity_mean = bif2_scale_scores[3][12];
+          data.bif2_aesthetic_sensitivity_mean = bif2_scale_scores[3][13];
+          data.bif2_creative_imagination_mean = bif2_scale_scores[3][14];
         };
       };
 
       // NFC scale scores
       if (expInfo.DESIGN.ADD_NFC) {
         const nfc_scale_scores = nfc_scores(search_object, expInfo);
-        data.nfc_score = nfc_scale_scores;
+        data.nfc_sum = nfc_scale_scores[0];
+        data.nfc_mean = nfc_scale_scores[1];
       };
       
     }

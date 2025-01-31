@@ -117,7 +117,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         }
     });
 
-    const bfi2_extraversion_scale = bfi2_extraversion_sum;
+    const bfi2_extraversion_sum_score = bfi2_extraversion_sum;
+    const bfi2_extraversion_mean_score = bfi2_extraversion_sum/bfi2_extraversion_all.length;
     
     // BFI-2: agreeableness
     const bfi2_agreeableness_all = Object.entries(bfi2_resp).filter(([key, value]) => key.startsWith("BFI-V"));
@@ -134,7 +135,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         }
     });
     
-    const bfi2_agreeableness_scale = bfi2_agreeableness_sum;
+    const bfi2_agreeableness_sum_score = bfi2_agreeableness_sum;
+    const bfi2_agreeableness_mean_score = bfi2_agreeableness_sum/bfi2_agreeableness_all.length;
 
     // BFI-2: conscientiousness
     const bfi2_conscientiousness_all = Object.entries(bfi2_resp).filter(([key, value]) => key.startsWith("BFI-G"));
@@ -151,7 +153,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         }
     });
     
-    const bfi2_conscientiousness_scale = bfi2_conscientiousness_sum;
+    const bfi2_conscientiousness_sum_score = bfi2_conscientiousness_sum;
+    const bfi2_conscientiousness_mean_score = bfi2_conscientiousness_sum/bfi2_conscientiousness_all.length;
 
     // BFI-2: emotional stability
     const bfi2_emotional_stability_all = Object.entries(bfi2_resp).filter(([key, value]) => key.startsWith("BFI-NE"));
@@ -168,7 +171,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         }
     });
 
-    const bfi2_emotional_stability_scale = bfi2_emotional_stability_sum;
+    const bfi2_emotional_stability_sum_score = bfi2_emotional_stability_sum;
+    const bfi2_emotional_stability_mean_score = bfi2_emotional_stability_sum/bfi2_emotional_stability_all.length;
 
     // BFI-2: openness
     const bfi2_openness_all = Object.entries(bfi2_resp).filter(([key, value]) => key.startsWith("BFI-O"));
@@ -185,7 +189,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         }
     });
 
-    const bfi2_openness_scale = bfi2_openness_sum;
+    const bfi2_openness_sum_score = bfi2_openness_sum;
+    const bfi2_openness_mean_score = bfi2_openness_sum/bfi2_openness_all.length;
 
     if (expInfo.DESIGN.BFI2_type !== "extra-short") {
         // sociability
@@ -203,7 +208,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_sociability_scale = bfi2_sociability_sum;
+        const bfi2_sociability_sum_score = bfi2_sociability_sum;
+        const bfi2_sociability_mean_score = bfi2_sociability_sum/bfi2_sociability_all.length;
 
         // assertiveness
         const bfi2_assertiveness_all = item_assignments.assertiveness.map(index => item_labels[index]);
@@ -220,7 +226,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_assertiveness_scale = bfi2_assertiveness_sum;
+        const bfi2_assertiveness_sum_score = bfi2_assertiveness_sum;
+        const bfi2_assertiveness_mean_score = bfi2_assertiveness_sum/bfi2_assertiveness_all.length;
 
         // energy_level
         const bfi2_energy_level_all = item_assignments.energy_level.map(index => item_labels[index]);
@@ -237,7 +244,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
 
-        const bfi2_energy_level_scale = bfi2_energy_level_sum;
+        const bfi2_energy_level_sum_score = bfi2_energy_level_sum;
+        const bfi2_energy_level_mean_score = bfi2_energy_level_sum/bfi2_energy_level_all.length;
         
         // compassion
         const bfi2_compassion_all = item_assignments.compassion.map(index => item_labels[index]);
@@ -254,7 +262,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_compassion_scale = bfi2_compassion_sum;
+        const bfi2_compassion_sum_score = bfi2_compassion_sum;
+        const bfi2_compassion_mean_score = bfi2_compassion_sum/bfi2_compassion_all.length;
 
         // respectfulness
         const bfi2_respectfulness_all = item_assignments.respectfulness.map(index => item_labels[index]);
@@ -271,7 +280,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_respectfulness_scale = bfi2_respectfulness_sum;
+        const bfi2_respectfulness_sum_score = bfi2_respectfulness_sum;
+        const bfi2_respectfulness_mean_score = bfi2_respectfulness_sum/bfi2_respectfulness_all.length;
 
         // trust
         const bfi2_trust_all = item_assignments.trust.map(index => item_labels[index]);
@@ -288,7 +298,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_trust_scale = bfi2_trust_sum;
+        const bfi2_trust_sum_score = bfi2_trust_sum;
+        const bfi2_trust_mean_score = bfi2_trust_sum/bfi2_trust_all.length;
 
         // organization
         const bfi2_organization_all = item_assignments.organization.map(index => item_labels[index]);
@@ -305,7 +316,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_organization_scale = bfi2_organization_sum;
+        const bfi2_organization_sum_score = bfi2_organization_sum;
+        const bfi2_organization_mean_score = bfi2_organization_sum/bfi2_organization_all.length;
 
         // productiveness
         const bfi2_productiveness_all = item_assignments.productiveness.map(index => item_labels[index]);
@@ -322,7 +334,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_productiveness_scale = bfi2_productiveness_sum;
+        const bfi2_productiveness_sum_score = bfi2_productiveness_sum;
+        const bfi2_productiveness_mean_score = bfi2_productiveness_sum/bfi2_productiveness_all.length;
 
         //responsibility
         const bfi2_responsibility_all = item_assignments.responsibility.map(index => item_labels[index]);
@@ -339,7 +352,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_responsibility_scale = bfi2_responsibility_sum;
+        const bfi2_responsibility_sum_score = bfi2_responsibility_sum;
+        const bfi2_responsibility_mean_score = bfi2_responsibility_sum/bfi2_responsibility_all.length;
 
         // anxiety
         const bfi2_anxiety_all = item_assignments.anxiety.map(index => item_labels[index]);
@@ -356,7 +370,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_anxiety_scale = bfi2_anxiety_sum;
+        const bfi2_anxiety_sum_score = bfi2_anxiety_sum;
+        const bfi2_anxiety_mean_score = bfi2_anxiety_sum/bfi2_anxiety_all.length;
 
         // depression
         const bfi2_depression_all = item_assignments.depression.map(index => item_labels[index]);
@@ -373,7 +388,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_depression_scale = bfi2_depression_sum;
+        const bfi2_depression_sum_score = bfi2_depression_sum;
+        const bfi2_depression_mean_score = bfi2_depression_sum/bfi2_depression_all.length;
 
         // emotional_volatility
         const bfi2_emotional_volatility_all = item_assignments.emotional_volatility.map(index => item_labels[index]);
@@ -390,7 +406,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_emotional_volatility_scale = bfi2_emotional_volatility_sum;
+        const bfi2_emotional_volatility_sum_score = bfi2_emotional_volatility_sum;
+        const bfi2_emotional_volatility_mean_score = bfi2_emotional_volatility_sum/bfi2_emotional_volatility_all.length;
 
         // intellectual_curiosity
         const bfi2_intellectual_curiosity_all = item_assignments.intellectual_curiosity.map(index => item_labels[index]);
@@ -407,7 +424,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_intellectual_curiosity_scale = bfi2_intellectual_curiosity_sum;
+        const bfi2_intellectual_curiosity_sum_score = bfi2_intellectual_curiosity_sum;
+        const bfi2_intellectual_curiosity_mean_score = bfi2_intellectual_curiosity_sum/bfi2_intellectual_curiosity_all.length;
 
         // aesthetic_sensitivity
         const bfi2_aesthetic_sensitivity_all = item_assignments.aesthetic_sensitivity.map(index => item_labels[index]);
@@ -424,7 +442,8 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_aesthetic_sensitivity_scale = bfi2_aesthetic_sensitivity_sum;
+        const bfi2_aesthetic_sensitivity_sum_score = bfi2_aesthetic_sensitivity_sum;
+        const bfi2_aesthetic_sensitivity_mean_score = bfi2_aesthetic_sensitivity_sum/bfi2_aesthetic_sensitivity_all.length;
 
         // creative_imagination
         const bfi2_creative_imagination_all = item_assignments.creative_imagination.map(index => item_labels[index]);
@@ -441,19 +460,28 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
             }
         });
         
-        const bfi2_creative_imagination_scale = bfi2_creative_imagination_sum;
+        const bfi2_creative_imagination_sum_score = bfi2_creative_imagination_sum;
+        const bfi2_creative_imagination_mean_score = bfi2_creative_imagination_sum/bfi2_creative_imagination_all.length;
 
-        return  [[bfi2_extraversion_scale, bfi2_agreeableness_scale, bfi2_conscientiousness_scale, 
-            bfi2_emotional_stability_scale, bfi2_openness_scale],
-            [bfi2_sociability_scale, bfi2_assertiveness_scale, bfi2_energy_level_scale, bfi2_compassion_scale,
-            bfi2_respectfulness_scale, bfi2_trust_scale, bfi2_organization_scale, bfi2_productiveness_scale,
-            bfi2_responsibility_scale, bfi2_anxiety_scale, bfi2_depression_scale, bfi2_emotional_volatility_scale,
-            bfi2_intellectual_curiosity_scale, bfi2_aesthetic_sensitivity_scale, bfi2_creative_imagination_scale]];
+        return  [[bfi2_extraversion_sum_score, bfi2_agreeableness_sum_score, bfi2_conscientiousness_sum_score, 
+            bfi2_emotional_stability_sum_score, bfi2_openness_sum_score],
+            [bfi2_sociability_sum_score, bfi2_assertiveness_sum_score, bfi2_energy_level_sum_score, bfi2_compassion_sum_score,
+            bfi2_respectfulness_sum_score, bfi2_trust_sum_score, bfi2_organization_sum_score, bfi2_productiveness_sum_score,
+            bfi2_responsibility_sum_score, bfi2_anxiety_sum_score, bfi2_depression_sum_score, bfi2_emotional_volatility_sum_score,
+            bfi2_intellectual_curiosity_sum_score, bfi2_aesthetic_sensitivity_sum_score, bfi2_creative_imagination_sum_score],
+            [bfi2_extraversion_mean_score, bfi2_agreeableness_mean_score, bfi2_conscientiousness_mean_score, 
+            bfi2_emotional_stability_mean_score, bfi2_openness_mean_score],
+            [bfi2_sociability_mean_score, bfi2_assertiveness_mean_score, bfi2_energy_level_mean_score, bfi2_compassion_mean_score,
+            bfi2_respectfulness_mean_score, bfi2_trust_mean_score, bfi2_organization_mean_score, bfi2_productiveness_mean_score,
+            bfi2_responsibility_mean_score, bfi2_anxiety_mean_score, bfi2_depression_mean_score, bfi2_emotional_volatility_mean_score,
+            bfi2_intellectual_curiosity_mean_score, bfi2_aesthetic_sensitivity_mean_score, bfi2_creative_imagination_mean_score]];
 
     } else {
 
-        return [bfi2_extraversion_scale, bfi2_agreeableness_scale, bfi2_conscientiousness_scale, 
-            bfi2_emotional_stability_scale, bfi2_openness_scale];
+        return [[bfi2_extraversion_sum_score, bfi2_agreeableness_sum_score, bfi2_conscientiousness_sum_score, 
+            bfi2_emotional_stability_sum_score, bfi2_openness_sum_score],
+            [bfi2_extraversion_mean_score, bfi2_agreeableness_mean_score, bfi2_conscientiousness_mean_score, 
+                bfi2_emotional_stability_mean_score, bfi2_openness_mean_score]];
         
     };
     
