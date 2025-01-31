@@ -345,11 +345,13 @@ export const bfi2 = function (
     var num_pages = Math.ceil(final_items.length / item_per_page);
 
     for(let i = 0; i < num_pages; i++) {
+      var matrix_title = "bfi2-matrix-" + i;
+
       var bfi2_page = {
         elements: [
           {
             type: "matrix",
-            name: "bfi2-matrix",
+            name: matrix_title,
             title: title,
             description: instruction,
             alternateRows: true,
