@@ -14,12 +14,7 @@ export const expInfo = {
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 50, // number of experiment trials for each condition
-    nPRACTICE: 10, // number of practice trials for each condition
-    nBLOCKS: 1, // number of blocks
-    CONDITIONS: ["vowel", "consonant"], // conditions of the experiment
-    CHOICES: ["d", "k"], // choices for the participants
-    MAPPING: [0, 1], // mapping of the conditions to the choices
+    nSCALE_REV: 6, // the total number of choice options for scale for reverse coding
   },
 
   // settings for each trial

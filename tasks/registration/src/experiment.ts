@@ -126,7 +126,7 @@ export async function run({
      
       let bfi2_e_sum = 0;
       bfi2_e.map(([key, value]) => value).forEach(num => bfi2_e_sum += num);
-      bfi2_e_r.map(([key, value]) => value).forEach(num => bfi2_e_sum += (6 - num));
+      bfi2_e_r.map(([key, value]) => value).forEach(num => bfi2_e_sum += (expInfo.DESIGN.nSCALE_REV - num));
       data.bfi2_e_scale = bfi2_e_sum;
 
       // BMW-3: agreeableness
@@ -136,7 +136,7 @@ export async function run({
      
       let bfi2_v_sum = 0;
       bfi2_v.map(([key, value]) => value).forEach(num => bfi2_v_sum += num);
-      bfi2_v_r.map(([key, value]) => value).forEach(num => bfi2_v_sum += (6 - num));
+      bfi2_v_r.map(([key, value]) => value).forEach(num => bfi2_v_sum += (expInfo.DESIGN.nSCALE_REV - num));
       data.bfi2_v_scale = bfi2_v_sum;
 
       // BMW-3: conscientiousness
@@ -146,7 +146,7 @@ export async function run({
      
       let bfi2_g_sum = 0;
       bfi2_g.map(([key, value]) => value).forEach(num => bfi2_g_sum += num);
-      bfi2_g_r.map(([key, value]) => value).forEach(num => bfi2_g_sum += (6 - num));
+      bfi2_g_r.map(([key, value]) => value).forEach(num => bfi2_g_sum += (expInfo.DESIGN.nSCALE_REV - num));
       data.bfi2_g_scale = bfi2_g_sum;
 
       // BMW-3: emotional stability
@@ -156,7 +156,7 @@ export async function run({
      
       let bfi2_ne_sum = 0;
       bfi2_ne.map(([key, value]) => value).forEach(num => bfi2_ne_sum += num);
-      bfi2_ne_r.map(([key, value]) => value).forEach(num => bfi2_ne_sum += (6 - num));
+      bfi2_ne_r.map(([key, value]) => value).forEach(num => bfi2_ne_sum += (expInfo.DESIGN.nSCALE_REV - num));
       data.bfi2_ne_scale = bfi2_ne_sum;
 
       // BMW-3: openness
@@ -166,7 +166,7 @@ export async function run({
      
       let bfi2_o_sum = 0;
       bfi2_o.map(([key, value]) => value).forEach(num => bfi2_o_sum += num);
-      bfi2_o_r.map(([key, value]) => value).forEach(num => bfi2_o_sum += (6 - num));
+      bfi2_o_r.map(([key, value]) => value).forEach(num => bfi2_o_sum += (expInfo.DESIGN.nSCALE_REV - num));
       data.bfi2_o_scale = bfi2_o_sum;
 
       console.log(data.bfi2_e_scale)
@@ -178,7 +178,7 @@ export async function run({
 
       // let nfc_sum = 0;
       // nfc.map(([key, value]) => value).forEach(num => nfc_sum += num);
-      // nfc_r.map(([key, value]) => value).forEach(num => nfc_sum += (6 - num));
+      // nfc_r.map(([key, value]) => value).forEach(num => nfc_sum += (expInfo.DESIGN.nSCALE_REV - num));
       // data.nfc_scale = nfc_sum;
  
     }
