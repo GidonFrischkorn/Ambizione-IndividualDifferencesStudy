@@ -24,14 +24,7 @@ export const expInfo = {
 
   // settings for each trial
   TIMING: {
-    FIXATION: 400, // duration of the fixation cross
-    JITTER: 200, // duration of the jitter
-    TARGET: 5000, // duration of the target stimulus
-    FEEDBACK: 1000, // duration of the feedback
-    ITI: 1200, // duration of the inter-trial interval
-    START: 10 * 1000, // time for the countdown before a new trial starts
-    BREAK: 30, // break duration in seconds
-    FINGERS: 5000, // duration of the finger instruction
+    
   },
 
   // when using Prolific, you can set customized completion codes for different situations
