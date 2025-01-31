@@ -1,7 +1,7 @@
 export function bif2_scores(responses: Object, expInfo: any) {
 
     // BFI-2
-    const bfi2_resp = Object(Object.entries(responses).filter(([key, value]) => key === "bfi2-matrix")[0][1])
+    const bfi2_resp = Object(Object.entries(responses).filter(([key, value]) => key.startsWith("bfi2-matrix")));
 
     // BFI-2: extraversion
     const bfi2_e_all = Object.entries(bfi2_resp).filter(([key, value]) => key.startsWith("BFI-E"))
@@ -9,8 +9,8 @@ export function bif2_scores(responses: Object, expInfo: any) {
     const bfi2_e_r = bfi2_e_all.filter(([key, value]) => key.endsWith("R"));
    
     let bfi2_e_sum = 0;
-    bfi2_e.map(([key, value]) => value).forEach(num => bfi2_e_sum += num);
-    bfi2_e_r.map(([key, value]) => value).forEach(num => bfi2_e_sum += (expInfo.DESIGN.nSCALE_REV - num));
+    bfi2_e.map(([key, value]) => value as number).forEach(num => bfi2_e_sum += num);
+    bfi2_e_r.map(([key, value]) => value as number).forEach(num => bfi2_e_sum += (expInfo.DESIGN.nSCALE_REV - num));
     const bfi2_e_scale = bfi2_e_sum;
     
     // BFI-2: agreeableness
@@ -19,8 +19,8 @@ export function bif2_scores(responses: Object, expInfo: any) {
     const bfi2_v_r = bfi2_v_all.filter(([key, value]) => key.endsWith("R"));
    
     let bfi2_v_sum = 0;
-    bfi2_v.map(([key, value]) => value).forEach(num => bfi2_v_sum += num);
-    bfi2_v_r.map(([key, value]) => value).forEach(num => bfi2_v_sum += (expInfo.DESIGN.nSCALE_REV - num));
+    bfi2_v.map(([key, value]) => value as number).forEach(num => bfi2_v_sum += num);
+    bfi2_v_r.map(([key, value]) => value as number).forEach(num => bfi2_v_sum += (expInfo.DESIGN.nSCALE_REV - num));
     const bfi2_v_scale = bfi2_v_sum;
 
     // BFI-2: conscientiousness
@@ -29,8 +29,8 @@ export function bif2_scores(responses: Object, expInfo: any) {
     const bfi2_g_r = bfi2_g_all.filter(([key, value]) => key.endsWith("R"));
    
     let bfi2_g_sum = 0;
-    bfi2_g.map(([key, value]) => value).forEach(num => bfi2_g_sum += num);
-    bfi2_g_r.map(([key, value]) => value).forEach(num => bfi2_g_sum += (expInfo.DESIGN.nSCALE_REV - num));
+    bfi2_g.map(([key, value]) => value as number).forEach(num => bfi2_g_sum += num);
+    bfi2_g_r.map(([key, value]) => value as number).forEach(num => bfi2_g_sum += (expInfo.DESIGN.nSCALE_REV - num));
     const bfi2_g_scale = bfi2_g_sum;
 
     // BFI-2: emotional stability
@@ -39,8 +39,8 @@ export function bif2_scores(responses: Object, expInfo: any) {
     const bfi2_ne_r = bfi2_ne_all.filter(([key, value]) => key.endsWith("R"));
    
     let bfi2_ne_sum = 0;
-    bfi2_ne.map(([key, value]) => value).forEach(num => bfi2_ne_sum += num);
-    bfi2_ne_r.map(([key, value]) => value).forEach(num => bfi2_ne_sum += (expInfo.DESIGN.nSCALE_REV - num));
+    bfi2_ne.map(([key, value]) => value as number).forEach(num => bfi2_ne_sum += num);
+    bfi2_ne_r.map(([key, value]) => value as number).forEach(num => bfi2_ne_sum += (expInfo.DESIGN.nSCALE_REV - num));
     const bfi2_ne_scale = bfi2_ne_sum;
 
     // BFI-2: openness
@@ -49,8 +49,8 @@ export function bif2_scores(responses: Object, expInfo: any) {
     const bfi2_o_r = bfi2_o_all.filter(([key, value]) => key.endsWith("R"));
    
     let bfi2_o_sum = 0;
-    bfi2_o.map(([key, value]) => value).forEach(num => bfi2_o_sum += num);
-    bfi2_o_r.map(([key, value]) => value).forEach(num => bfi2_o_sum += (expInfo.DESIGN.nSCALE_REV - num));
+    bfi2_o.map(([key, value]) => value as number).forEach(num => bfi2_o_sum += num);
+    bfi2_o_r.map(([key, value]) => value as number).forEach(num => bfi2_o_sum += (expInfo.DESIGN.nSCALE_REV - num));
     const bfi2_o_scale = bfi2_o_sum;
 
     return  [bfi2_e_scale, bfi2_v_scale, bfi2_g_scale, bfi2_ne_scale, bfi2_o_scale];

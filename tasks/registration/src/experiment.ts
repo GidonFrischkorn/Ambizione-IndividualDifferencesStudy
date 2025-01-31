@@ -23,6 +23,7 @@ import { expInfo } from "./settings";
 // screens
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen } from "./instructions/consent";
+import { participant_code } from "./survey/participant_code";
 import { demographics } from "./survey/demographics";
 import { bmw3 } from "./survey/bmw3";
 import { bfi2 } from "./survey/big5";
@@ -57,8 +58,8 @@ export async function run({
   };
 
   /************************************** Information: Ambizione Study **************************************/
-
-
+  const id_page = participant_code("DE");
+  console.log(id_page);
 
   /************************************** Demographic Data **************************************/
   const demographic_page = demographics("DE");
@@ -78,11 +79,25 @@ export async function run({
 
   // Combine all survey pages
   var survey_pages: any[] = [];
-  // survey_pages.push(demographic_page);
-  // survey_pages.push(isi_page);
-  //survey_pages.push(bmw3_page);
-  survey_pages = survey_pages.concat(bfi2_line);
-  survey_pages.push(nfc_page);
+  survey_pages.push(id_page);
+  survey_pages.push(demographic_page);
+
+  // add the questionnaires dependent on settings
+  if (expInfo.DESIGN.ADD_BMW3) {
+    survey_pages.push(bmw3_page);
+  }
+
+  if (expInfo.DESIGN.ADD_BFI2) {
+    survey_pages = survey_pages.concat(bfi2_line);
+  }
+
+  if (expInfo.DESIGN.ADD_NFC) {
+    survey_pages.push(nfc_page);
+  }
+
+  if (expInfo.DESIGN.ADD_ISI) {
+    survey_pages.push(isi_page);
+  }
 
   const registration_survey = {
     type: survey,
@@ -93,9 +108,10 @@ export async function run({
       pages: survey_pages,
     },
     on_finish: function (data) {
-
       // Get responses from questionnaires
       const search_object = jsPsych.data.get().values()[1].response
+
+
 
       // BMW-3 scale scores
       if (expInfo.DESIGN.ADD_BMW3) {
