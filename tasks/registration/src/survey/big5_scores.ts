@@ -194,7 +194,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
 
     if (expInfo.DESIGN.BFI2_type !== "extra-short") {
         // sociability
-        const bfi2_sociability_all = item_assignments.sociability.map(index => item_labels[index]);
+        const bfi2_sociability_all = item_assignments.sociability.map(index => item_labels[index - 1]);
         let bfi2_sociability_sum = 0;
 
         bfi2_sociability_all.forEach(([key, value]) => {
@@ -212,7 +212,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_sociability_mean_score = bfi2_sociability_sum/bfi2_sociability_all.length;
 
         // assertiveness
-        const bfi2_assertiveness_all = item_assignments.assertiveness.map(index => item_labels[index]);
+        const bfi2_assertiveness_all = item_assignments.assertiveness.map(index => item_labels[index - 1]);
         let bfi2_assertiveness_sum = 0;
 
         bfi2_assertiveness_all.forEach(([key, value]) => {
@@ -230,7 +230,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_assertiveness_mean_score = bfi2_assertiveness_sum/bfi2_assertiveness_all.length;
 
         // energy_level
-        const bfi2_energy_level_all = item_assignments.energy_level.map(index => item_labels[index]);
+        const bfi2_energy_level_all = item_assignments.energy_level.map(index => item_labels[index - 1]);
         let bfi2_energy_level_sum = 0;
 
         bfi2_energy_level_all.forEach(([key, value]) => {
@@ -248,7 +248,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_energy_level_mean_score = bfi2_energy_level_sum/bfi2_energy_level_all.length;
         
         // compassion
-        const bfi2_compassion_all = item_assignments.compassion.map(index => item_labels[index]);
+        const bfi2_compassion_all = item_assignments.compassion.map(index => item_labels[index - 1]);
         let bfi2_compassion_sum = 0;
 
         bfi2_compassion_all.forEach(([key, value]) => {
@@ -266,7 +266,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_compassion_mean_score = bfi2_compassion_sum/bfi2_compassion_all.length;
 
         // respectfulness
-        const bfi2_respectfulness_all = item_assignments.respectfulness.map(index => item_labels[index]);
+        const bfi2_respectfulness_all = item_assignments.respectfulness.map(index => item_labels[index - 1]);
         let bfi2_respectfulness_sum = 0;
 
         bfi2_respectfulness_all.forEach(([key, value]) => {
@@ -284,7 +284,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_respectfulness_mean_score = bfi2_respectfulness_sum/bfi2_respectfulness_all.length;
 
         // trust
-        const bfi2_trust_all = item_assignments.trust.map(index => item_labels[index]);
+        const bfi2_trust_all = item_assignments.trust.map(index => item_labels[index - 1]);
         let bfi2_trust_sum = 0;
 
         bfi2_trust_all.forEach(([key, value]) => {
@@ -302,7 +302,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_trust_mean_score = bfi2_trust_sum/bfi2_trust_all.length;
 
         // organization
-        const bfi2_organization_all = item_assignments.organization.map(index => item_labels[index]);
+        const bfi2_organization_all = item_assignments.organization.map(index => item_labels[index - 1]);
         let bfi2_organization_sum = 0;
 
         bfi2_organization_all.forEach(([key, value]) => {
@@ -320,7 +320,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_organization_mean_score = bfi2_organization_sum/bfi2_organization_all.length;
 
         // productiveness
-        const bfi2_productiveness_all = item_assignments.productiveness.map(index => item_labels[index]);
+        const bfi2_productiveness_all = item_assignments.productiveness.map(index => item_labels[index - 1]);
         let bfi2_productiveness_sum = 0;
 
         bfi2_productiveness_all.forEach(([key, value]) => {
@@ -338,7 +338,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_productiveness_mean_score = bfi2_productiveness_sum/bfi2_productiveness_all.length;
 
         //responsibility
-        const bfi2_responsibility_all = item_assignments.responsibility.map(index => item_labels[index]);
+        const bfi2_responsibility_all = item_assignments.responsibility.map(index => item_labels[index - 1]);
         let bfi2_responsibility_sum = 0;
 
         bfi2_responsibility_all.forEach(([key, value]) => {
@@ -356,7 +356,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_responsibility_mean_score = bfi2_responsibility_sum/bfi2_responsibility_all.length;
 
         // anxiety
-        const bfi2_anxiety_all = item_assignments.anxiety.map(index => item_labels[index]);
+        const bfi2_anxiety_all = item_assignments.anxiety.map(index => item_labels[index - 1]);
         let bfi2_anxiety_sum = 0;
 
         bfi2_anxiety_all.forEach(([key, value]) => {
@@ -374,7 +374,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_anxiety_mean_score = bfi2_anxiety_sum/bfi2_anxiety_all.length;
 
         // depression
-        const bfi2_depression_all = item_assignments.depression.map(index => item_labels[index]);
+        const bfi2_depression_all = item_assignments.depression.map(index => item_labels[index - 1]);
         let bfi2_depression_sum = 0;
 
         bfi2_depression_all.forEach(([key, value]) => {
@@ -392,7 +392,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_depression_mean_score = bfi2_depression_sum/bfi2_depression_all.length;
 
         // emotional_volatility
-        const bfi2_emotional_volatility_all = item_assignments.emotional_volatility.map(index => item_labels[index]);
+        const bfi2_emotional_volatility_all = item_assignments.emotional_volatility.map(index => item_labels[index - 1]);
         let bfi2_emotional_volatility_sum = 0;
 
         bfi2_emotional_volatility_all.forEach(([key, value]) => {
@@ -410,7 +410,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_emotional_volatility_mean_score = bfi2_emotional_volatility_sum/bfi2_emotional_volatility_all.length;
 
         // intellectual_curiosity
-        const bfi2_intellectual_curiosity_all = item_assignments.intellectual_curiosity.map(index => item_labels[index]);
+        const bfi2_intellectual_curiosity_all = item_assignments.intellectual_curiosity.map(index => item_labels[index - 1]);
         let bfi2_intellectual_curiosity_sum = 0;
 
         bfi2_intellectual_curiosity_all.forEach(([key, value]) => {
@@ -428,7 +428,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_intellectual_curiosity_mean_score = bfi2_intellectual_curiosity_sum/bfi2_intellectual_curiosity_all.length;
 
         // aesthetic_sensitivity
-        const bfi2_aesthetic_sensitivity_all = item_assignments.aesthetic_sensitivity.map(index => item_labels[index]);
+        const bfi2_aesthetic_sensitivity_all = item_assignments.aesthetic_sensitivity.map(index => item_labels[index - 1]);
         let bfi2_aesthetic_sensitivity_sum = 0;
 
         bfi2_aesthetic_sensitivity_all.forEach(([key, value]) => {
@@ -446,8 +446,9 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         const bfi2_aesthetic_sensitivity_mean_score = bfi2_aesthetic_sensitivity_sum/bfi2_aesthetic_sensitivity_all.length;
 
         // creative_imagination
-        const bfi2_creative_imagination_all = item_assignments.creative_imagination.map(index => item_labels[index]);
+        const bfi2_creative_imagination_all = item_assignments.creative_imagination.map(index => item_labels[index - 1]);
         let bfi2_creative_imagination_sum = 0;
+        console.log(bfi2_creative_imagination_all);
 
         bfi2_creative_imagination_all.forEach(([key, value]) => {
             const num_value = Number(value); 
@@ -465,12 +466,15 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
 
         return  [[bfi2_extraversion_sum_score, bfi2_agreeableness_sum_score, bfi2_conscientiousness_sum_score, 
             bfi2_emotional_stability_sum_score, bfi2_openness_sum_score],
+
             [bfi2_sociability_sum_score, bfi2_assertiveness_sum_score, bfi2_energy_level_sum_score, bfi2_compassion_sum_score,
             bfi2_respectfulness_sum_score, bfi2_trust_sum_score, bfi2_organization_sum_score, bfi2_productiveness_sum_score,
             bfi2_responsibility_sum_score, bfi2_anxiety_sum_score, bfi2_depression_sum_score, bfi2_emotional_volatility_sum_score,
             bfi2_intellectual_curiosity_sum_score, bfi2_aesthetic_sensitivity_sum_score, bfi2_creative_imagination_sum_score],
+
             [bfi2_extraversion_mean_score, bfi2_agreeableness_mean_score, bfi2_conscientiousness_mean_score, 
             bfi2_emotional_stability_mean_score, bfi2_openness_mean_score],
+
             [bfi2_sociability_mean_score, bfi2_assertiveness_mean_score, bfi2_energy_level_mean_score, bfi2_compassion_mean_score,
             bfi2_respectfulness_mean_score, bfi2_trust_mean_score, bfi2_organization_mean_score, bfi2_productiveness_mean_score,
             bfi2_responsibility_mean_score, bfi2_anxiety_mean_score, bfi2_depression_mean_score, bfi2_emotional_volatility_mean_score,
@@ -480,6 +484,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
 
         return [[bfi2_extraversion_sum_score, bfi2_agreeableness_sum_score, bfi2_conscientiousness_sum_score, 
             bfi2_emotional_stability_sum_score, bfi2_openness_sum_score],
+
             [bfi2_extraversion_mean_score, bfi2_agreeableness_mean_score, bfi2_conscientiousness_mean_score, 
                 bfi2_emotional_stability_mean_score, bfi2_openness_mean_score]];
         

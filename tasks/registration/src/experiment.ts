@@ -107,9 +107,9 @@ export async function run({
     },
     on_finish: function (data) {
       // Get responses from questionnaires
-      const search_object = jsPsych.data.get().values()[1].response
-      console.log(search_object)
-
+      // if the welcome screen is not included: const search_object = jsPsych.data.get().values()[1].response
+      const search_object = jsPsych.data.get().values()[2].response
+      
       // Extract the participant code from the survey responses
       data.participant_id = extract_code(search_object);
 
@@ -131,6 +131,8 @@ export async function run({
       if (expInfo.DESIGN.ADD_BFI2) {
 
         const bif2_scale_scores = bfi2_scores(search_object, expInfo);
+        console.log(bif2_scale_scores);
+        console.log(jsPsych.data.get());
 
         if (expInfo.DESIGN.BFI2_type === "extra-short") {
           data.bif2_extraversion_sum = bif2_scale_scores[0][0];

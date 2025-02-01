@@ -293,7 +293,7 @@ export const bfi2 = function (
     emotional_volatility: [14, 29, 44, 59],
     intellectual_curiosity: [5, 20, 35, 50],
     aesthetic_sensitivity: [10, 25, 40, 55],
-    creative_imaginiation: [15, 30, 45, 60],
+    creative_imagination: [15, 30, 45, 60],
   };
 
   // create array of response colums

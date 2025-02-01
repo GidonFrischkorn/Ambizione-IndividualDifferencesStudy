@@ -46,7 +46,7 @@ export const participant_code = function (language: string = "de") {
                 transposeData: true,
                 rows: [{
                     text: "Bitte geben Sie die folgenden Informationen ein",
-                    name: "participant-cod"
+                    name: "participant-code"
                 }],
                 columns: id_items,
                 confirmDelete: true,
