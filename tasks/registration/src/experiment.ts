@@ -131,9 +131,7 @@ export async function run({
       if (expInfo.DESIGN.ADD_BFI2) {
 
         const bif2_scale_scores = bfi2_scores(search_object, expInfo);
-        console.log(bif2_scale_scores);
-        console.log(jsPsych.data.get());
-
+       
         if (expInfo.DESIGN.BFI2_type === "extra-short") {
           data.bif2_extraversion_sum = bif2_scale_scores[0][0];
           data.bif2_agreeableness_sum = bif2_scale_scores[0][1];

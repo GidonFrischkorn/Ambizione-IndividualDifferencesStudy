@@ -448,8 +448,7 @@ export function bfi2_scores(responses: { [key: string]: any }, expInfo: any) {
         // creative_imagination
         const bfi2_creative_imagination_all = item_assignments.creative_imagination.map(index => item_labels[index - 1]);
         let bfi2_creative_imagination_sum = 0;
-        console.log(bfi2_creative_imagination_all);
-
+        
         bfi2_creative_imagination_all.forEach(([key, value]) => {
             const num_value = Number(value); 
             if (key.endsWith("R")) {
