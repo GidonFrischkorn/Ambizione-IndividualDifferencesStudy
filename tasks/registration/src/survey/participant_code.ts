@@ -29,6 +29,7 @@ export const participant_code = function (language: string = "de") {
             title: prompts[i],
             cellType: "text",
             inputType: "text",
+            isRequired: true,
         };
 
         id_items.push(single_item);
