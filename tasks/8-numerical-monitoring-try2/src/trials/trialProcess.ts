@@ -7,69 +7,61 @@ import { expInfo } from "../settings";
 import psychophysics from "@kurokida/jspsych-psychophysics";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { jsPsych } from "../jsp";
-
+import { numbers } from "../../assets/stimuli"
 
 /**
- * A function used to create a single trial.
- * @param XY The number of items in a trial.
- *
- * @returns An array containing all the slides of a trial.
+ * Function to create a single trial with a 3x3 grid.
+ * @param {number} trialIndex - Index of the trial.
+ * @param {boolean} isPractice - Indicates whether it's a practice trial.
+ * @returns {Object[]} - The trial timeline.
  */
-export function createNewTrial(XY: number, isPractice: boolean, isMatch: boolean, targetStim) {
+export function createNewTrial(trialIndex, isPractice) {
   var trial_line: any[] = [];
-  console.log("Target Stim: ", targetStim[0]);
+  const trialData = numbers[trialIndex];
+  let targetStim = Object.keys(trialData)
+    .filter(key => key.startsWith("stimulusValue"))
+    .map(key => trialData[key]);
+
+  let correctResponse = trialData.correctResponse === "present" ? " " : null;
 
   const grid_screen = {
     type: htmlKeyboardResponse,
-    stimulus: `
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; text-align: center; font-size: 24px; width: 150px;">
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[0]}</div>
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[1]}</div>
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[2]}</div>
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[3]}</div>
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[4]}</div>
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[5]}</div>
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[6]}</div>
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[7]}</div>
-      <div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${targetStim[8]}</div>
-  </div>
-    `,
-    choices: expInfo.DESIGN.CHOICES,
+    stimulus: () => {
+      return `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; text-align: center; font-size: 24px; width: 150px;">
+        ${targetStim.map(num => `<div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${num}</div>`).join('')}
+      </div>`;
+    },
+    choices: [" "], // Only the spacebar is valid
     trial_duration: expInfo.TIMING.GRID,
     data: {
-      trial_number: XY, 
-      //itsAmatch: isMatch, 
+      trial_number: trialIndex,
+      correct_response: correctResponse,
       practice: isPractice ? "practice" : "experiment",
     },
     on_finish: function (data) {
-      let correct = data.response == (data.itsAmatch ? this.choices : null); 
-      let correctKey = data.itsAmatch ? this.choices : null;
-      jsPsych.data.get().addToLast({
-        correct: correct,
-        correct_key: correctKey
-      });
+      data.response_given = data.response === " "; // Check if the spacebar was pressed
+      data.correct = data.response_given ? data.response === correctResponse : null;
+      jsPsych.data.get().addToLast({ correct: data.correct, response_given: data.response_given });
     }
   };
-  
 
   const feedback = {
     type: htmlKeyboardResponse,
     stimulus: function () {
-      let lastTrialCorrect = jsPsych.data.get().last(1).values()[0].correct;
-      if (lastTrialCorrect) {
-        return "<div style='font-size:60px; color:green;'>Richtig :)</div>";
-      } else {
-        return "<div style='font-size:60px; color:red'>Falsch :(</div>";
-      }
+      let lastTrial = jsPsych.data.get().last(1).values()[0];
+      if (lastTrial.response_given) {
+        return lastTrial.correct ? "<div style='font-size:60px; color:green;'>Richtig :)</div>" : "<div style='font-size:60px; color:red'>Falsch :(</div>";
+      } else null 
     },
     trial_duration: expInfo.TIMING.FEEDBACK,
-  } 
+    choices: "NO_KEYS", // Ensures no key press is needed
+  };
 
   if (isPractice) {
-    trial_line.push(grid_screen, feedback);
+      trial_line.push(grid_screen, feedback);
   } else {
     trial_line.push(grid_screen);
-  };
+  }
 
   console.log(trial_line);
 

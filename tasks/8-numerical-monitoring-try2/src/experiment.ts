@@ -21,10 +21,11 @@ import { jsPsych } from "./jsp";
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
-import { generateStims, createTrialList } from "./trials/trialStim";
+import { exp_start_screen, pra_instr_screen } from "./instructions/InstrTrial";
 import { createNewTrial } from "./trials/trialProcess";
 import { expInfo } from "./settings";
 import { practice_break_screen, break_screen } from "./instructions/InstrStart";
+import { numbers } from "../assets/stimuli";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -53,45 +54,20 @@ export async function run({
 
 
   /************************************** Practice **************************************/
-  let prac_list = createTrialList();
-  console.log("Prac List: ", prac_list)
   let practice_line: any[] = [];
-  //let gridNumbers = generateStims(false);
 
-for (let i = 0; i < expInfo.DESIGN.nPRACTICE * expInfo.DESIGN.practiceBLOCKS; i++) {
-  var practice_trial = createNewTrial(i, true, prac_list[i].condition, prac_list[i].numbers);
-  practice_line = practice_line.concat(practice_trial);
-  
-  if ((i + 1) % 10 === 0 && (i + 1) <= 19) {
-    practice_line.push(practice_break_screen);
+  for (let i = 0; i < expInfo.DESIGN.nPRACTICE; i++) {
+    practice_line.push(...createNewTrial(i, true)); 
   }
-}
-console.log("Practice Line: ", practice_line)
 
 
   /************************************** Experiment **************************************/
-  let exp_list = createTrialList();
-  console.log("Exp List: ", exp_list)
   let expLine: any[] = [];
-  //let gridNumbersExp = generateStims(false);
-  
-  for (let j = 0; j < expInfo.DESIGN.nTRIALS * expInfo.DESIGN.nBLOCKS; j++) {
-
-    console.log("cond: ", exp_list[j].condition)
-    console.log("numb: ", exp_list[j].numbers)
-    console.log("trial: ", expInfo.DESIGN.nTRIALS)
-    
-    var exp_trial = createNewTrial(j, false, exp_list[j].condition, exp_list[j].numbers);
-      console.log("trial: ", exp_trial)
-    expLine = expLine.concat(exp_trial);
-    console.log(expLine)
-
-    if ((j + 1) % 50 === 0 && (j + 1) <= 199) {
-      expLine.push(break_screen);
-    }
+  const practice_trials = expInfo.DESIGN.nPRACTICE;
+  for (let i = practice_trials; i < numbers.length; i++) {
+    expLine.push(...createNewTrial(i, false)); // false indicates main experiment
   }
   
-  console.log("Experiment Line: ", expLine)
 
   /************************************** Procedure **************************************/
 
@@ -103,7 +79,8 @@ console.log("Practice Line: ", practice_line)
   //timeline.push(consent_screen);
   //timeline.push(notice_screen);
   //timeline.push(browser_screen);
-  //timeline = timeline.concat(practice_line);
+  timeline = timeline.concat(practice_line);
+  timeline.push(exp_start_screen);
   timeline = timeline.concat(expLine);
 
   await jsPsych.run(timeline);
