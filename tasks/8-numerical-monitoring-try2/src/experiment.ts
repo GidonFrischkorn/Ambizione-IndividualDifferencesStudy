@@ -22,6 +22,7 @@ import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
 import { exp_start_screen, pra_instr_screen } from "./instructions/InstrTrial";
+import { instructions_screen } from "./instructions/InstrStart";
 import { createNewTrial } from "./trials/trialProcess";
 import { expInfo } from "./settings";
 import { practice_break_screen, break_screen } from "./instructions/InstrStart";
@@ -79,6 +80,8 @@ export async function run({
   //timeline.push(consent_screen);
   //timeline.push(notice_screen);
   //timeline.push(browser_screen);
+  timeline.push(instructions_screen);
+  timeline.push(pra_instr_screen);
   timeline = timeline.concat(practice_line);
   timeline.push(exp_start_screen);
   timeline = timeline.concat(expLine);

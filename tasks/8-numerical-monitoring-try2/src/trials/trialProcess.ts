@@ -18,20 +18,21 @@ import { numbers } from "../../assets/stimuli"
 export function createNewTrial(trialIndex, isPractice) {
   var trial_line: any[] = [];
   const trialData = numbers[trialIndex];
+
   let targetStim = Object.keys(trialData)
     .filter(key => key.startsWith("stimulusValue"))
     .map(key => trialData[key]);
 
-  let correctResponse = trialData.correctResponse === "present" ? " " : null;
+  let correctResponse = trialData.match === "present" ? " " : null;
 
   const grid_screen = {
     type: htmlKeyboardResponse,
     stimulus: () => {
-      return `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; text-align: center; font-size: 24px; width: 150px;">
-        ${targetStim.map(num => `<div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 20px; border: 0.5px solid black;">${num}</div>`).join('')}
+      return `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; text-align: center; font-size: 36px; width: 500px; height: 500px">
+        ${targetStim.map(num => `<div style="background-color: ${expInfo.DESIGN.backgroundCOLOR}; padding: 30px; border: 0.5px solid black;display: flex; align-items: center; justify-content: center;">${num}</div>`).join('')}
       </div>`;
     },
-    choices: [" "], // Only the spacebar is valid
+    choices: [" "], // Only the spacebar is a valid response
     trial_duration: expInfo.TIMING.GRID,
     data: {
       trial_number: trialIndex,
@@ -39,29 +40,46 @@ export function createNewTrial(trialIndex, isPractice) {
       practice: isPractice ? "practice" : "experiment",
     },
     on_finish: function (data) {
-      data.response_given = data.response === " "; // Check if the spacebar was pressed
-      data.correct = data.response_given ? data.response === correctResponse : null;
-      jsPsych.data.get().addToLast({ correct: data.correct, response_given: data.response_given });
+      data.response_given = data.response === " "; // Check if spacebar was pressed
+
+      if (trialData.match === "present") {
+        // If match is "present", pressing space is correct
+        data.correct = data.response_given;
+      } else {
+        // If match is "absent", NOT pressing space is correct
+        data.correct = !data.response_given;
+      }
+
+      // Store response data
+      jsPsych.data.get().addToLast({ correct: data.correct, response_given: data.response_given }); // can't access data.response_given 
     }
   };
 
+  // Check if feedback should be displayed
+  const last_trial = jsPsych.data.get().last(1).values()[0];
+  //const feedback_needed = isPractice && last_trial.response_given;
+
+  // Feedback screen (only in practice trials when a response was given)
   const feedback = {
     type: htmlKeyboardResponse,
     stimulus: function () {
-      let lastTrial = jsPsych.data.get().last(1).values()[0];
-      if (lastTrial.response_given) {
-        return lastTrial.correct ? "<div style='font-size:60px; color:green;'>Richtig :)</div>" : "<div style='font-size:60px; color:red'>Falsch :(</div>";
-      } else null 
+      return last_trial.correct
+        ? "<p style='font-size: 36px; color: green;'>Richtig :)</p>"
+        : "<p style='font-size: 36px; color: red;'>Falsch :(</p>";
     },
-    trial_duration: expInfo.TIMING.FEEDBACK,
-    choices: "NO_KEYS", // Ensures no key press is needed
+    choices: "NO_KEYS", // No response required
+    trial_duration: expInfo.TIMING.FEEDBACK, // Show feedback for 1 second
   };
 
   if (isPractice) {
+    if(last_trial.response_given) {
       trial_line.push(grid_screen, feedback);
   } else {
     trial_line.push(grid_screen);
   }
+  } else {
+      trial_line.push(grid_screen);
+    }
 
   console.log(trial_line);
 

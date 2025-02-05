@@ -38,7 +38,7 @@ export const expInfo = {
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
     GRID: 1500, // time for the grid to be displayed before another change is made
-    FEEDBACK: 1500, // time for the feedback to be displayed
+    FEEDBACK: 500, // time for the feedback to be displayed
   },
 
   // when using Prolific, you can set customized completion codes for different situations
