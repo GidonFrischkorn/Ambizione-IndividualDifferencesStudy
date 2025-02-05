@@ -11,6 +11,8 @@ export const expInfo = {
   TITLE: "Number Judgement Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
+  USE_ResponseBox: true, // whether the experiment uses a response box
+  
   // design of the experiment
   DESIGN: {
     nTRIALS: 50, // number of experiment trials for each condition
@@ -18,7 +20,7 @@ export const expInfo = {
     nBLOCKS: 1, // number of blocks
     CONDITIONS: ["odd","even"], // conditions of the experiment
     StimLimits: [10,99], // limits for the stimuli
-    BOX_CHOICES: ["alt", "ctrl"], // choices for the participants if experiment in lab with box
+    BOX_CHOICES: ["alt", "control"], // choices for the participants if experiment in lab with box
     CHOICES: ["o", "e"], // choices for the participants if experiment online
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
