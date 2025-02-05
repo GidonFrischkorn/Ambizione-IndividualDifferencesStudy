@@ -1,7 +1,7 @@
 /**
- * @title The name of the task
- * @description A short description of the task
- * @author Chenyu Li and Hannah (Dames) Tschannen
+ * @title Numerical Monitoring Task 
+ * @description 
+
  * @version 0.3.1
  *
  *
