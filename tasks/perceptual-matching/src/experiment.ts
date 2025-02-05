@@ -95,9 +95,9 @@ export async function run({
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   // timeline.push(instructions_screen);
-  // timeline.push(pra_instr_screen);
+  timeline.push(pra_instr_screen);
   //timeline.push(example_trial);
   timeline = timeline.concat(block_line);
   // timeline.push(exp_start_screen);
