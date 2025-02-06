@@ -2,7 +2,7 @@
  * @title Digit Processing Task 
  * @description Participant has to tell whether the number is odd or even as fast as possible. 
  * @author Elena Venturi 
- * @version 0.3.1
+ * @version number_judgement_SR_pretest
  *
  *
  * @assets assets/
