@@ -73,7 +73,7 @@ export const expInfo = {
   },
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
   RUN_PROLIFIC: false, // a switch to run the experiment on Prolific
 };
 
