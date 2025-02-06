@@ -100,5 +100,5 @@ export async function run({
 
   // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
-  // return jsPsych;
+  return jsPsych;
 }
