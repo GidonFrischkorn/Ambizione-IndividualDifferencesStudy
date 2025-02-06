@@ -50,7 +50,7 @@ export const jsPsych = initJsPsych({
         endScreen = END_INFO.failedResize[expInfo.LANG];
         endInfo = "FAILED_RESIZE";
         endStatus = false;
-        redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.FAILED_OTHERS}`;
+        redirectLink = `https://XXX`;
         break;
       // when the participants run the experiment online and pass the attention check
       case "success":
@@ -58,10 +58,10 @@ export const jsPsych = initJsPsych({
         endStatus = true;
         if (RUN_JATOS && navigator.onLine === true) {
           endScreen = END_INFO.completedOnline[expInfo.LANG];
-          redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.SUCCESS}`;
+          redirectLink = `https://XXX`;
         } else {
           endScreen = END_INFO.completedOffline[expInfo.LANG];
-          redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.OFFLINE}`;
+          redirectLink = `https://XXX`;
         }
         break;
       // when the participants fail the attention check reagardless of the internet status
@@ -69,7 +69,7 @@ export const jsPsych = initJsPsych({
         endScreen = END_INFO.failed[expInfo.LANG];
         endInfo = "FAILED_ATTENTION_CHECK";
         endStatus = false;
-        redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.FAILED_ATTENTION}`;
+        redirectLink = `https://XXX`;
         break;
     }
 
@@ -91,7 +91,7 @@ export const jsPsych = initJsPsych({
         // get the participant ID
         const participant_id = jsPsych.data
           .getLastTrialData()
-          .values()[0].participant;
+          .values()[0].participant_id;
         // set the file name
         var file_name = expInfo.TITLE + "_" + participant_id + ".json";
         // download the data as a json file
