@@ -7,12 +7,12 @@ import { expInfo } from "../settings";
 export const instructions_screen = {
     type: instructions,
     pages: [
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instr0.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instr1.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instr2.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instr3.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instr4.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instr5.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instr0.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instr1.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instr2.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instr3.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instr4.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instr5.jpg"></img>',
     ],
     button_label_next: BUTTON_INFO.continueButton[expInfo.LANG],
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],
