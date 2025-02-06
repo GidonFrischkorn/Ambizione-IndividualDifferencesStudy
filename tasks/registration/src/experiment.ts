@@ -111,7 +111,8 @@ export async function run({
       const search_object = jsPsych.data.get().values()[2].response
       
       // Extract the participant code from the survey responses
-      data.participant_id = extract_code(search_object);
+      let participant_id = extract_code(search_object);
+      jsPsych.data.addProperties({participant_id: participant_id});
 
       // BMW-3 scale scores
       if (expInfo.DESIGN.ADD_BMW3) {
