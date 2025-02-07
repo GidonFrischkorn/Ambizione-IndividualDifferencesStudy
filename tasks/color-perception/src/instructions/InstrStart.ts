@@ -19,8 +19,8 @@ export const instructions_screen = {
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],
     allow_backward: true,
     allow_keys: true,
-    key_forward: expInfo.USE_RESPONSEBOX ? "alt" : "ArrowRight",
-    key_backward: expInfo.USE_RESPONSEBOX ? "control" : "ArrowLeft",
+    key_forward: expInfo.USE_RESPONSEBOX ? "control" : "ArrowRight",
+    key_backward: expInfo.USE_RESPONSEBOX ? "alt" : "ArrowLeft",
     /* IF EXPERIMENT IN THE LAB 
     key_forward: expInfo.DESIGN.BOX_CHOICES[1],
     key_backward: expInfo.DESIGN.BOX_CHOICES[0],
