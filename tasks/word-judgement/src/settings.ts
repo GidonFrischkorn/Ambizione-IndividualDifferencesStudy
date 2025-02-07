@@ -12,7 +12,7 @@ export const expInfo = {
   TITLE: "Word Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
-  RESPONSE_BOX: true, // whether the response box is used in the lab
+  USE_RESPONSEBOX: false, // whether the response box is used in the lab
 
   // design of the experiment
   DESIGN: {
