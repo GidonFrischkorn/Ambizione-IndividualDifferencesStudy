@@ -2,7 +2,7 @@
  * @title Color Delayed Estimation Task
  * @description In this task participants see a cloud of color (red or blue) dots and should decide if there are more red or blue dots.
  * @author Elena Venturi
- * @version 0.3.1
+ * @version color_DE_pretest
  *
  * @assets assets/
  */
