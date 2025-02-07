@@ -12,7 +12,7 @@ export const expInfo = {
   TITLE: "Numerical Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
-  USE_RESPONSE_BOX: true, // whether to use a response box
+  USE_RESPONSEBOX: false, // whether to use a response box
 
   // design of the experiment
   DESIGN: {
