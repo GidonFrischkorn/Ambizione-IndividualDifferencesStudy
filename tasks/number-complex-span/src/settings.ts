@@ -17,7 +17,7 @@ export const expInfo = {
     nPRACTICE_RETRO: 3, // number of memory trials in the retro-cue condition
     nJUDGE: 3, // number of judgement trials
     nDUAL: 3, // number of dual-task trials
-    nTRIALS: Math.ceil(50/3), // number of experiment trials for each condition
+    nTRIALS: 15, // number of experiment trials for each condition
     SETSIZE: 3, // set size
     QUESTION: "question", // questions
     ROWS_ResponseMat: 3, // number of rows in the response matrix
