@@ -62,7 +62,7 @@ export async function run({
   for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
 
     // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
-    let practice_trial = createNewTrial(j, true, expInfo.RESPONSE_BOX, prac_list[j].condition, prac_list[j].stimulus, prac_list[j].mapping);
+    let practice_trial = createNewTrial(j, true, expInfo.USE_RESPONSEBOX, prac_list[j].condition, prac_list[j].stimulus, prac_list[j].mapping);
     practice_line = practice_line.concat(practice_trial);
   }
 
@@ -73,7 +73,7 @@ export async function run({
   for(let j = 0; j < trial_list.length; j++){
 
     // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
-    let exp_trial = createNewTrial(j, false, expInfo.RESPONSE_BOX, trial_list[j].condition, trial_list[j].stimulus, trial_list[j].mapping);
+    let exp_trial = createNewTrial(j, false, expInfo.USE_RESPONSEBOX, trial_list[j].condition, trial_list[j].stimulus, trial_list[j].mapping);
     exp_line = exp_line.concat(exp_trial);
   }
 
