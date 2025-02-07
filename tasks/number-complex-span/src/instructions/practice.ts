@@ -11,7 +11,7 @@ import { BUTTON_INFO, SCREEN_INFO } from "../task-fun/text";
 const instr_start_screen = {
   type: htmlButtonResponse,
   stimulus: `<div class="image">
-      <img src=assets/images/instruction-${expInfo.LANG}/instr0.jpeg width=${Math.min(
+      <img src=./assets/images/instruction-${expInfo.LANG}/instr0.jpeg width=${Math.min(
         1920,
         varSystem.CANVAS_WIDTH
       )}></img>
@@ -25,7 +25,7 @@ const instr_start_screen = {
 const instr_memory_task_screen = {
   type: htmlButtonResponse,
   stimulus: `<div class="image">
-      <img src=assets/images/instruction-${expInfo.LANG}/instr1.jpeg width=${Math.min(
+      <img src=./assets/images/instruction-${expInfo.LANG}/instr1.jpeg width=${Math.min(
         1920,
         varSystem.CANVAS_WIDTH
       )}></img>
@@ -103,7 +103,7 @@ export const practice_memory_task_line = [instr_start_screen].concat(
 const instr_judgement_task_screen = {
   type: htmlButtonResponse,
   stimulus: `<div class="image">
-      <img src=assets/images/instruction-${expInfo.LANG}/instr2.jpeg width=${Math.min(
+      <img src=./assets/images/instruction-${expInfo.LANG}/instr2.jpeg width=${Math.min(
         1920,
         varSystem.CANVAS_WIDTH
       )}></img>
@@ -186,7 +186,7 @@ export const practice_judgement_task_line = {
 const instr_dual_tasks_screen = {
   type: htmlButtonResponse,
   stimulus: `<div class="image">
-      <img src=assets/images/instruction-${expInfo.LANG}/instr3.jpeg width=${Math.min(1920, varSystem.CANVAS_WIDTH)}></img>
+      <img src=./assets/images/instruction-${expInfo.LANG}/instr3.jpeg width=${Math.min(1920, varSystem.CANVAS_WIDTH)}></img>
       </div>`,
   choices: function() { 
     return BUTTON_INFO.continueButton[expInfo.LANG];

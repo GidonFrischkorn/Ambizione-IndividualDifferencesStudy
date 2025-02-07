@@ -14,19 +14,19 @@ export const instr_line = {
   type: instructions,
   pages: function () {
     const instr0 = `<div class="main">
-    <img src="assets/images/instruction-${expInfo.LANG}/instr0.jpeg" class="image"></img>
+    <img src="./assets/images/instruction-${expInfo.LANG}/instr0.jpeg" class="image"></img>
     </div>`;
 
     const instr1 = `<div class="main">
-    <img src="assets/images/instruction-${expInfo.LANG}/instr1.jpeg" class="image"></img>
+    <img src="./assets/images/instruction-${expInfo.LANG}/instr1.jpeg" class="image"></img>
     </div>`;
 
     const instr2 = `<div class="main">
-    <img src="assets/images/instruction-${expInfo.LANG}/instr2.jpeg" class="image"></img>
+    <img src="./assets/images/instruction-${expInfo.LANG}/instr2.jpeg" class="image"></img>
     </div>`;
 
     const instr3 = `<div class="main">
-    <img src="assets/images/instruction-${expInfo.LANG}/instr3.jpeg" class="image"></img>
+    <img src="./assets/images/instruction-${expInfo.LANG}/instr3.jpeg" class="image"></img>
     </div>`;
 
     return [instr0, instr1, instr2, instr3];

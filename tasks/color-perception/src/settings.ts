@@ -12,7 +12,7 @@ export const expInfo = {
   TITLE: "Color Perception Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
-  USE_RESPONSEBOX: true, // a switch to use the response box
+  USE_RESPONSEBOX: false, // a switch to use the response box
 
   // design of the experiment
   DESIGN: {
@@ -77,7 +77,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

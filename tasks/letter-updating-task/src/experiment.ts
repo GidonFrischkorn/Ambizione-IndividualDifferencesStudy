@@ -1,7 +1,7 @@
 /**
  * @title Keep Track Task (Letters-Colors)
  * @description A short description of the task
- * @version 1.0.6
+ * @version keep_track_task_pretest
  *
  * @assets assets/
  */
@@ -100,5 +100,5 @@ export async function run({
 
   // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
-  // return jsPsych;
+  return jsPsych;
 }
