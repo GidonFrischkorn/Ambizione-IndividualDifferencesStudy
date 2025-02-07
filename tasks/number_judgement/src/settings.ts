@@ -11,7 +11,7 @@ export const expInfo = {
   TITLE: "Number Judgement Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
-  USE_ResponseBox: true, // whether the experiment uses a response box
+  USE_RESPONSEBOX: false, // whether the experiment uses a response box
   
   // design of the experiment
   DESIGN: {
