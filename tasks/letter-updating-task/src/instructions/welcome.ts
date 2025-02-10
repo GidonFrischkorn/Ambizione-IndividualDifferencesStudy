@@ -22,7 +22,7 @@ var check_ID = function () {
 
 export const welcome_screen = {
   type: externalHtml,
-  url: `../assets/external-html/welcome-${expInfo.LANG}.html`,
+  url: `./assets/external-html/welcome-${expInfo.LANG}.html`,
   cont_btn: "welcomeButton",
   check_fn: check_ID,
   data: { screen_id: "welcome" },
