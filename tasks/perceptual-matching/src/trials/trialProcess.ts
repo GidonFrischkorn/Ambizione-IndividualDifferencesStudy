@@ -118,6 +118,7 @@ export function createNewTrial(
       const stim_array = jsPsych.getCurrentTrial().stim_array;
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
+      data.procedure = isPractice ? "practice" : "experiment";
       data.wheel_offset = stim_array[stim_array.length - 1].offset;
       data.selected_angle = stim_array[0].current_angle;
       data.color = stim_array[0].fill_color;
@@ -193,6 +194,7 @@ export function createNewTrial(
       const ArcStimulus = stimuli_array[stimuli_array.length-1];
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
+      data.procedure = isPractice ? "practice" : "experiment";
       data.offset_colorWheel = ColorWheelStimulus.offset;
       data.selected_angle = TargetStimulus.selected_ang;
       data.color_angle = TargetStimulus.color_ang;
@@ -266,7 +268,11 @@ export function createNewTrial(
   trial_line.push(fixation_screen);
   trial_line.push(matching_screen);
   trial_line.push(arc_response_screen);
-  trial_line.push(feedback_screen);
+
+  if (isPractice) {
+    trial_line.push(feedback_screen);
+  }
+  
   trial_line.push(inter_trial_interval);
 
   // return

@@ -7,8 +7,8 @@ library(smartr)
 library(ggplot2)
 
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-color_result <- read_json_data("Color Perception Task_undefined.json") %>% 
-  filter(response %in% c("d", "k"), practice == "experiment") 
+perceptualmatching_result <- read_json_data("Color Perception Task_undefined (2).json") #%>% 
+  #filter(response %in% c("d", "k"), practice == "experiment") 
 
 ggplot(data = color_result,
        aes(y = rt, x = condition, fill = correct)) +

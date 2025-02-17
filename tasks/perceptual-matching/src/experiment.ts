@@ -25,9 +25,8 @@ import { expInfo } from "./settings";
 import { pra_instr_screen, exp_start_screen } from "./instructions/InstrTrial";
 import { fullMode_screen } from "./instructions/fullScreen";
 import {
-  instructions_screen,
-  fingers_instructions_practice,
-  fingers_instructions_exp,
+  instructions_color_screen,
+  instructions_orientation_screen,
   break_screen,
 } from "./instructions/InstrStart";
 
@@ -63,7 +62,7 @@ export async function run({
     /************************************** Practice **************************************/
     let prac_line: any[] = [];
 
-    // Here we should create 9 practice trials with 3 from each set size
+    // Here we should create 9 practice trials for each feature 
     for (let i = 0; i < expInfo.DESIGN.nPRACTICE; i++) {
       let trial = createNewTrial(expInfo.DESIGN.CONDITIONS.Feature[j], true, false);
       prac_line = prac_line.concat(trial);
@@ -71,16 +70,21 @@ export async function run({
 
     /************************************** Experiment **************************************/
 
-    // Here we need to create the trial_list with 50 trials from each setsize 
-
+    // Here we need to create the trial_list with 50 trials for each feature 
     let exp_line: any[] = [];
     for (let k = 0; k < expInfo.DESIGN.nTRIALS; k++) {
-      let trial = createNewTrial(expInfo.DESIGN.CONDITIONS.Feature[j], true, false);
+      let trial = createNewTrial(expInfo.DESIGN.CONDITIONS.Feature[j], false, false);
       exp_line = exp_line.concat(trial);
     }
 
     block_line = block_line.concat(prac_line);
+    block_line.push(exp_start_screen);
     block_line = block_line.concat(exp_line);
+
+    // Add a break screen + instructions for the second block 
+    if (j === 0) { // After the first block
+      block_line.push(instructions_orientation_screen);
+    }
   }
 
   
@@ -96,9 +100,8 @@ export async function run({
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
-  // timeline.push(instructions_screen);
+  timeline.push(instructions_color_screen);
   timeline.push(pra_instr_screen);
-  //timeline.push(example_trial);
   timeline = timeline.concat(block_line);
   // timeline.push(exp_start_screen);
   // timeline.push(fingers_instructions_exp);
