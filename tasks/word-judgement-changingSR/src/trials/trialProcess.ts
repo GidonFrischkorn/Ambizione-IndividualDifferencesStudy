@@ -6,6 +6,7 @@ import { expInfo } from "../settings";
 // Third party plugins
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { jsPsych } from "../jsp";
+import psychophysics from "@kurokida/jspsych-psychophysics";
 
 /**
  * A function used to create a single trial.
@@ -57,19 +58,70 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, an
     trial_duration: expInfo.TIMING.FIXATION + Math.floor((expInfo.TIMING.JITTER+1) * Math.random()),
   }
 
-// Mapping Screen
-const cue_screen = {
-  type: htmlKeyboardResponse,
-  stimulus: function() {
+// // Mapping Screen
+// const cue_screen = {
+//   type: htmlKeyboardResponse,
+//   stimulus: function() {
+//       if (mapping === "normal") {
+//           return "<div style='font-size:60px;'>B&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;U</div>";
+//       } else if (mapping === "switched") {
+//           return "<div style='font-size:60px;'>U&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;B</div>";
+//       }
+//   },
+//   choices: "NO-KEYS",
+//   trial_duration: expInfo.TIMING.CUE, // Show for a fixed time
+// }
+
+  // Right cue image
+  const fixation_cue = {
+    obj_type: 'text',
+    content: '+', 
+    fontSize: '60px',
+    startX: expInfo.LAYOUT.CENTER[0],
+    startY: expInfo.LAYOUT.CENTER[1]
+  };
+  
+  // Left Cue Image
+  const left_cue = {
+    obj_type: 'image',
+    file: function () {
       if (mapping === "normal") {
-          return "<div style='font-size:60px;'>B&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;U</div>";
+        return 'assets/images/animate_cue.png';
       } else if (mapping === "switched") {
-          return "<div style='font-size:60px;'>U&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;B</div>";
-      }
-  },
-  choices: "NO-KEYS",
-  trial_duration: expInfo.TIMING.CUE, // Show for a fixed time
-}
+        return 'assets/images/inanimate_cue.png';
+      };
+    }, 
+    image_height: 100,
+    startX: expInfo.LAYOUT.LEFT,
+    startY: expInfo.LAYOUT.CENTER[1]
+  };
+
+  // Right Cue Image
+  const right_cue = {
+    obj_type: 'image',
+    file: function () {
+      if (mapping === "normal") {
+        return `assets/images/inanimate_cue.png`;
+      } else if (mapping === "switched") {
+        return `assets/images/animate_cue.png`;
+      };
+    }, 
+    image_height: 100,
+    startX: expInfo.LAYOUT.RIGHT,
+    startY: expInfo.LAYOUT.CENTER[1]
+  };
+  
+  // Cue Screen
+  const cue_screen = {
+    type: psychophysics,
+    background_color: 'white',
+    canvas_width: expInfo.LAYOUT.CAN_W,
+    canvas_height: expInfo.LAYOUT.CAN_H,
+    stimuli: [left_cue, fixation_cue, right_cue],
+    response_type: 'key',
+    choices: 'NO_KEYS',
+    trial_duration: expInfo.TIMING.CUE, // Show for a fixed time
+  };
 
    // Target and Response Screen 
    const target_response_screen = {
