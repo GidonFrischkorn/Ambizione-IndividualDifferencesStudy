@@ -37,8 +37,8 @@ export const expInfo = {
     CUE: 1000, // duration of the cue
   },
 
+   // layout of the experiment display
   LAYOUT: {
-     // canvas locations and font sizes
      CAN_W: Math.min(screen.width, screen.height/9*16)*0.9, // width of the canvas
      CAN_H: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.5, // height of the canvas
      CENTER: [(Math.min(screen.width, screen.height/9*16)*0.9) / 2, 
