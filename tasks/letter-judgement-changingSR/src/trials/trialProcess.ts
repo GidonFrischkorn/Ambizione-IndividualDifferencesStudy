@@ -60,18 +60,69 @@ export function createNewTrial(XY: number, isPractice: boolean, box:boolean, con
   }
 
   // Cue Screen
+  // const cue_screen = {
+  //   type: htmlKeyboardResponse,
+  //   stimulus: function() {
+  //       if (mapping === "normal") {
+  //           return "<div style='font-size:60px;'>V&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;K</div>";
+  //       } else if (mapping === "switched") {
+  //           return "<div style='font-size:60px;'>K&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;V</div>";
+  //       }
+  //   },
+  //   choices: "NO-KEYS",
+  //   trial_duration: expInfo.TIMING.CUE, // Show for a fixed time
+  // }
+
+  // Right cue image
+  const fixation_cue = {
+    obj_type: 'text',
+    content: '+', 
+    fontSize: '60px',
+    startX: expInfo.LAYOUT.CENTER[0],
+    startY: expInfo.LAYOUT.CENTER[1]
+  };
+  
+  // Left Cue Image
+  const left_cue = {
+    obj_type: 'image',
+    file: function () {
+      if (mapping === "normal") {
+        return 'assets/images/vowel_cue.png';
+      } else if (mapping === "switched") {
+        return 'assets/images/consonant_cue.png';
+      };
+    }, 
+    image_height: 100,
+    startX: expInfo.LAYOUT.LEFT,
+    startY: expInfo.LAYOUT.CENTER[1]
+  };
+
+  // Right Cue Image
+  const right_cue = {
+    obj_type: 'image',
+    file: function () {
+      if (mapping === "normal") {
+        return `assets/images/consonant_cue.png`;
+      } else if (mapping === "switched") {
+        return `assets/images/vowel_cue.png`;
+      };
+    }, 
+    image_height: 100,
+    startX: expInfo.LAYOUT.RIGHT,
+    startY: expInfo.LAYOUT.CENTER[1]
+  };
+  
+  // Cue Screen
   const cue_screen = {
-    type: htmlKeyboardResponse,
-    stimulus: function() {
-        if (mapping === "normal") {
-            return "<div style='font-size:60px;'>V&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;K</div>";
-        } else if (mapping === "switched") {
-            return "<div style='font-size:60px;'>K&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;V</div>";
-        }
-    },
-    choices: "NO-KEYS",
+    type: psychophysics,
+    background_color: 'white',
+    canvas_width: expInfo.LAYOUT.CAN_W,
+    canvas_height: expInfo.LAYOUT.CAN_H,
+    stimuli: [left_cue, fixation_cue, right_cue],
+    response_type: 'key',
+    choices: 'NO_KEYS',
     trial_duration: expInfo.TIMING.CUE, // Show for a fixed time
-  }
+  };
 
   // Target and Response Screen 
   const target_response_screen = {
