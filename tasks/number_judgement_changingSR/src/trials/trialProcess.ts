@@ -61,20 +61,6 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, co
     trial_duration: expInfo.TIMING.FIXATION + Math.floor(Math.random() * expInfo.TIMING.JITTER),
   }
 
-  // // Mapping Screen
-  // const cue_screen = {
-  //   type: htmlKeyboardResponse,
-  //   stimulus: function() {
-  //       if (mapping === "normal") {
-  //           return "<div style='font-size:60px;'>G&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;U</div>";
-  //       } else if (mapping === "switched") {
-  //           return "<div style='font-size:60px;'>U&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;G</div>";
-  //       }
-  //   },
-  //   choices: "NO-KEYS",
-  //   trial_duration: expInfo.TIMING.CUE,
-  // }
-
   // Right cue image
   const fixation_cue = {
     obj_type: 'text',
