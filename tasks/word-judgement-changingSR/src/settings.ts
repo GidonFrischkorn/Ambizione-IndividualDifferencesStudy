@@ -46,6 +46,19 @@ export const expInfo = {
     CUE: 1000, // duration of the cue screen
   },
 
+  // layout of the experiment display
+  LAYOUT: {
+    CAN_W: Math.min(screen.width, screen.height/9*16)*0.9, // width of the canvas
+    CAN_H: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.5, // height of the canvas
+    CENTER: [(Math.min(screen.width, screen.height/9*16)*0.9) / 2, 
+            ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) / 2], // center of canvas 
+    LEFT: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.4, // left position of canvas
+    RIGHT: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.6, // right position of canvas
+    TOP: ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) * 0.3, // top position of canvas
+    BOTTOM: ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) * 0.7, // bottom position of canvas
+    
+  },
+
   // when using Prolific, you can set customized completion codes for different situations
   // e.g., when participants complete the experiment, or when they fail the attention check
   // you can set them here and use them in the end of the experiment (jsp.ts)
