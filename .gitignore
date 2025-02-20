@@ -3,6 +3,9 @@
 **/.jspsych-builder
 **/packaged/
 
+# ignore all package-lock.json files
+**/package-lock
+
 # file-types to ignore
 **.jzip
 **.DS_Store
@@ -22,5 +25,3 @@ __pycache__/
 
 # PowerPoint temporary
 ~$**.ppt*
-
-

@@ -12,13 +12,15 @@ export const expInfo = {
   TITLE: "Landolt Gap Processing Task",
   LANG: "de", // the default language of the experiment
 
+  USE_RESPONSEBOX: false, // a switch to use the response box
+
   // design of the experiment
   DESIGN: {
     nTRIALS: 25, // number of experiment trials per condition
     nPRACTICE: 10, // number of practice trials
     BreaksAt: 0.5, // the proportion of trials after which a break is given
     nBLOCKS: 1, // number of blocks in the experiment
-    BOX_CHOICES: ["alt", "ctrl"], // the choices for the experiment if in the lab with the box
+    BOX_CHOICES: ["alt", "control"], // the choices for the experiment if in the lab with the box
     CHOICES: ["d", "k"], // the choices for the task if experiment online
     MAPPING: [0, 1], // the mapping of the choices
     CONDITIONS: {
@@ -82,7 +84,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

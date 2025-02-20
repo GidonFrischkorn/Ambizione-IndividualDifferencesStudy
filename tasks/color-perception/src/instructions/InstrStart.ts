@@ -6,17 +6,21 @@ import { expInfo } from "../settings";
 
 export const instructions_screen = {
     type: instructions,
-    pages: [
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructionsBOX_1.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructionsBOX_2.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructionsBOX_3.jpg"></img>'
+    pages: expInfo.USE_RESPONSEBOX ? [
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructionsBOX_1.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructionsBOX_2.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructionsBOX_3.jpg"></img>'
+    ] : [
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_1.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_2.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_3.jpg"></img>'
     ],
     button_label_next: BUTTON_INFO.continueButton[expInfo.LANG],
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],
     allow_backward: true,
     allow_keys: true,
-    key_forward: "ArrowRight",
-    key_backward: "ArrowLeft",
+    key_forward: expInfo.USE_RESPONSEBOX ? "control" : "ArrowRight",
+    key_backward: expInfo.USE_RESPONSEBOX ? "alt" : "ArrowLeft",
     /* IF EXPERIMENT IN THE LAB 
     key_forward: expInfo.DESIGN.BOX_CHOICES[1],
     key_backward: expInfo.DESIGN.BOX_CHOICES[0],

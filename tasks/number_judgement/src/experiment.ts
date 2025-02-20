@@ -2,7 +2,7 @@
  * @title Number Judgement Task
  * @description Participant has to tell whether the number is odd or even as fast as possible.
  * @author Elena Venturi
- * @version 0.3.1
+ * @version number_judgement_pretest
  *
  * @assets assets/
  */
@@ -60,13 +60,10 @@ export async function run({
   const prac_list = create_trialList();
 
   let practice_line: any[] = [];
-  for (let j = 0; j < expInfo.DESIGN.nPRACTICE; j++) {
-    let practice_trial = createNewTrial(
-      j,
-      true,
-      prac_list[j].condition,
-      prac_list[j].stimulus
-    );
+  for(let j = 0; j < expInfo.DESIGN.nPRACTICE; j++){
+
+    // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
+    let practice_trial = createNewTrial(j, true, expInfo.USE_RESPONSEBOX, prac_list[j].condition, prac_list[j].stimulus);
     practice_line = practice_line.concat(practice_trial);
   }
 
@@ -74,13 +71,10 @@ export async function run({
   const trial_list = create_trialList();
 
   let exp_line: any[] = [];
-  for (let j = 0; j < trial_list.length; j++) {
-    let exp_trial = createNewTrial(
-      j,
-      false,
-      trial_list[j].condition,
-      trial_list[j].stimulus
-    );
+  for(let j = 0; j < trial_list.length; j++){
+
+    // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
+    let exp_trial = createNewTrial(j, false, expInfo.USE_RESPONSEBOX, trial_list[j].condition, trial_list[j].stimulus);
     exp_line = exp_line.concat(exp_trial);
   }
 
@@ -93,7 +87,7 @@ export async function run({
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
   timeline.push(fingers_instructions_practice);
@@ -106,5 +100,5 @@ export async function run({
 
   // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
-  // return jsPsych;
+  return jsPsych;
 }
