@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@coglabuzh/webpsy.js": "^1.1.0",
+    "@jspsych/plugin-image-button-response": "^2.0.0",
     "@jspsych/plugin-browser-check": "^2.0.0",
     "@jspsych/plugin-external-html": "^2.0.0",
     "@jspsych/plugin-fullscreen": "^2.0.0",

@@ -32,6 +32,7 @@ import { mini_q } from "./survey/mini-q.ts";
 import { bmw3_scores } from "./survey/bmw3_scores.ts";
 import { bfi2_scores } from "./survey/big5_scores.ts";
 import { nfc_scores } from "./survey/nfc_scores.ts";
+import { ishihara_test } from "./task-fun/ishihara.ts";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -56,16 +57,16 @@ export async function run({
     // video: assetPaths.video,
   };
 
-  /************************************** Information: Ambizione Study **************************************/
+  /************************** Information: Ambizione Study *************************/
   const id_page = participant_code(expInfo.LANG);
 
-  /************************************** Demographic Data **************************************/
+  /************************************** Demographic Data *************************/
   const demographic_page = demographics(expInfo.LANG);
 
-  /************************************** BMW-3 **************************************/
+  /************************************** BMW-3 ************************************/
   const bmw3_page = bmw3(expInfo.LANG);
 
-  /************************************** Big-5 **************************************/
+  /************************************** Big-5 ************************************/
   const bfi2_line = bfi2(expInfo.LANG, expInfo.DESIGN.BFI2_type, true);
 
   /************************************** NFC **************************************/
@@ -73,6 +74,9 @@ export async function run({
 
   /************************************** ISI **************************************/
   const isi_page = isi_questionnaire(expInfo.LANG);
+
+  /********************* ISHIHARA TEST  ********************************************/
+  const ishihara_page = ishihara_test(expInfo.LANG);
 
 
   // Combine all survey pages
@@ -206,7 +210,8 @@ export async function run({
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  //timeline.push(mini_q);
+  timeline = timeline.concat(ishihara_page);
+  //timeline.push(ishihara_page);
   timeline.push(registration_survey);
 
   await jsPsych.run(timeline);
