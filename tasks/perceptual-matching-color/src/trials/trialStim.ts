@@ -152,6 +152,7 @@ export const createGreyWheel = function(startX, startY, radius, width, offset) {
   };
 };
 
+
 export const createArcResponse = function(startX, startY, centerAngle, spreadAngle, radius, widthResp, widthArc, offset) {
   return {
     category: 'ArcResponse', // Custom category to identify this stimulus

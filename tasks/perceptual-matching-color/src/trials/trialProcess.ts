@@ -49,12 +49,8 @@ export function createNewTrial(
   const matching_stimuli = generateStims(feature, trial_type);
 
   // get correct response 
-  var correct_angle_no_offset: number = 0;
-  if(feature == "color") {
-    correct_angle_no_offset = matching_stimuli[0].correct_angle;
-  } else if(feature == "orientation") {
-    correct_angle_no_offset = matching_stimuli[0].angle;
-  }
+  var correct_response: number = matching_stimuli[0].correct_angle;
+  
 
   const matching_screen = {
     type: psychophysics,
@@ -208,7 +204,7 @@ export function createNewTrial(
   // Feedback Screen
   const feedback_screen = {
     type: psychophysics,
-    correct_angle: correct_angle_no_offset,
+    correct_angle: correct_response,
     stimuli: function() {
       const startAngle = jsPsych.data.get().last(2).values()[0].selected_angle;
       const offset = jsPsych.data.get().last(2).values()[0].wheel_offset;
@@ -224,15 +220,15 @@ export function createNewTrial(
         feedback_all_stimuli[feedback_all_stimuli.length - 1].fill_color = CIElab.angle_to_rgb(colorAngle);
         feedback_all_stimuli[feedback_all_stimuli.length - 1].line_color = CIElab.angle_to_rgb(colorAngle);
         feedbackInd = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
-          expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset - offset);
+          expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_response - offset);
       } else if(feature === "orientation") {
         wheelStim_fb = createGreyWheel(window.screen.width/2, window.screen.height/2, 
           expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
           feedback_all_stimuli[0].angle = startAngle;
           var feedbackInd1 = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
-            expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset);
+            expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_response);
           var feedbackInd2 = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
-              expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset + 180);
+              expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_response + 180);
           feedbackInd = [feedbackInd1, feedbackInd2];
       }
 

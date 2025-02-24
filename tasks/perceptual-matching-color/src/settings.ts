@@ -14,6 +14,8 @@ export const expInfo = {
   LANG: "de", // the default language of the experiment
 
   STIMULI: {
+    MIN_GRAY: 15,
+    MAX_GRAY: 85,
     SIZE: 80,
     LINE_WIDTH: 5,
     OFFSET: 80,
@@ -28,7 +30,7 @@ export const expInfo = {
     BreakAt: 0.5, // the ratio of the trials to take a break
     nBLOCKS: 1, // number of blocks
     CONDITIONS: {
-      feature: ["color"],
+      feature: ["luminance"],
       trial_type: ["side_by_side", "concentric"],
     }, // conditions of the experiment
     nItemsTested: 1, // number of items tested in the experiment
