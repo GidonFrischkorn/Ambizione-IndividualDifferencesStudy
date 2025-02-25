@@ -102,7 +102,7 @@ export async function run({
   timeline.push(welcome_screen);
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
-  timeline.push(browser_screen);
+  // timeline.push(browser_screen);
   // timeline.push(fullMode_screen);
   timeline.push(instructions_color_screen);
   timeline.push(pra_instr_screen);

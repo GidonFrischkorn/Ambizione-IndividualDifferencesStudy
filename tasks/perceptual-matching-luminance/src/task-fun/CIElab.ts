@@ -92,3 +92,10 @@ const componentToHex = function (c: number) {
 const RGBtoHEX = function(R: number, G: number, B: number) {
     return "#" + componentToHex(R) + componentToHex(G) + componentToHex(B);
 };
+
+
+// function to create grayscale colors 
+export const grayscale = (l: number) => {
+    l = Math.round(l/100*255);
+    return "rgb(" + l + "," + l + "," + l + ")";
+}

@@ -30,7 +30,7 @@ export const expInfo = {
     BreakAt: 0.5, // the ratio of the trials to take a break
     nBLOCKS: 1, // number of blocks
     CONDITIONS: {
-      feature: ["luminance"],
+      feature: ["color"],
       trial_type: ["side_by_side", "concentric"],
     }, // conditions of the experiment
     nItemsTested: 1, // number of items tested in the experiment

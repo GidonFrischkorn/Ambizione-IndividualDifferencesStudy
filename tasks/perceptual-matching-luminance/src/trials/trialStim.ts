@@ -1,7 +1,7 @@
 // Purpose: Generates a stimulus array based on the specified condition.
 
 import { expInfo } from "../settings";
-import { CIElab } from "../task-fun/CIElab";
+import { CIElab, grayscale } from "../task-fun/CIElab";
 import { random, generateArray } from "@coglabuzh/webpsy.js";
 import { createDifference } from "../task-fun/helpers";
 
@@ -14,8 +14,8 @@ export const generateStims = function (
   var stim_array: any[] = [];
 
   // Randomly generate the target angle and the start angle for the test stimulus
-  var target_angle = Math.floor(Math.random() * 360);
-  var start_angle_test = Math.floor(Math.random() * 360);
+  var target_gray = expInfo.STIMULI.MIN_GRAY + Math.floor(Math.random() * (expInfo.STIMULI.MAX_GRAY - expInfo.STIMULI.MIN_GRAY));
+  var start_gray_test = expInfo.STIMULI.MIN_GRAY + Math.floor(Math.random() * (expInfo.STIMULI.MAX_GRAY - expInfo.STIMULI.MIN_GRAY));
 
   // Pre-allocate variables required to define the stimuli
   var rand_sf: number = expInfo.STIMULI.sf[0]
@@ -29,9 +29,9 @@ export const generateStims = function (
       startX: window.screen.width/2 - expInfo.STIMULI.OFFSET,
       startY: window.screen.height/2,
       radius: expInfo.STIMULI.SIZE/2,
-      correct_angle: target_angle,
-      line_color: CIElab.angle_to_rgb(target_angle),
-      fill_color: CIElab.angle_to_rgb(target_angle),
+      correct_gray: target_gray,
+      line_color: grayscale(target_gray),
+      fill_color: grayscale(target_gray),
     }
   
     test_stim = {
@@ -39,9 +39,10 @@ export const generateStims = function (
       startX: window.screen.width/2 + expInfo.STIMULI.OFFSET,
       startY: window.screen.height/2,
       radius: expInfo.STIMULI.SIZE/2,
-      current_angle: start_angle_test,
-      line_color: "rgb(100,100,100)", // CIElab.angle_to_rgb(start_angle_test),
-      fill_color: "rgb(100,100,100)" // CIElab.angle_to_rgb(start_angle_test),
+      current_gray: start_gray_test,
+      response: NaN,
+      line_color: grayscale(start_gray_test),
+      fill_color: grayscale(start_gray_test)
     }
     
     stim_array.push(target_stim);
@@ -52,9 +53,9 @@ export const generateStims = function (
       startX: window.screen.width/2,
       startY: window.screen.height/2,
       radius: expInfo.STIMULI.SIZE,
-      correct_angle: target_angle,
-      line_color: CIElab.angle_to_rgb(target_angle),
-      fill_color: CIElab.angle_to_rgb(target_angle),
+      correct_gray: target_gray,
+      line_color: grayscale(target_gray),
+      fill_color: grayscale(target_gray),
     }
 
     gray_patch = {
@@ -62,7 +63,6 @@ export const generateStims = function (
       startX: window.screen.width/2,
       startY: window.screen.height/2,
       radius: expInfo.STIMULI.SIZE * 3/4,
-      correct_angle: target_angle,
       line_color: "rgb(255, 253, 253)",
       fill_color: "rgb(255, 255, 255)",
     }
@@ -72,9 +72,10 @@ export const generateStims = function (
       startX: window.screen.width/2,
       startY: window.screen.height/2,
       radius: expInfo.STIMULI.SIZE * 1/2,
-      current_angle: start_angle_test,
-      line_color: "rgb(100,100,100)" ,//CIElab.angle_to_rgb(start_angle_test),
-      fill_color: "rgb(100,100,100)"  // CIElab.angle_to_rgb(start_angle_test),
+      current_gray: start_gray_test,
+      response: NaN,
+      line_color: grayscale(start_gray_test),
+      fill_color: grayscale(start_gray_test)
     }
     
     // Push stimuli to stim_array
@@ -242,4 +243,21 @@ export const createFeedbackIndicator = function(startX: number, startY: number, 
     }
   };
 };
+
+export const create_response_line = (centerX: number, centerY: number, length: number, height: number) => {
+  return {
+    category: 'response_line',
+    obj_type: 'manual',
+    startX: centerX,
+    startY: centerY,
+    length: length,
+    height: height,
+    drawFunc: function(stimulus, canvas, context) {
+      context.beginPath();
+      context.moveTo(this.startX, this.startY);
+      context.lineTo(this.startX + this.length, this.startY + this.height);
+      context.stroke();
+    }
+  }
+}
 

@@ -7,8 +7,8 @@ import { jsPsych } from "../jsp";
 // Third party plugins
 import psychophysics from "@kurokida/jspsych-psychophysics";
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
-import { generateStims, createColorWheel, createGreyWheel, createArcResponse, createFeedbackIndicator } from "./trialStim";
-import { CIElab } from "../task-fun/CIElab";
+import { generateStims, createColorWheel, createGreyWheel, createArcResponse, createFeedbackIndicator, create_response_line } from "./trialStim";
+import { CIElab, grayscale } from "../task-fun/CIElab";
 import { circle_functions } from "../task-fun/circleFun";
 /**
  * A function used to create a single trial.
@@ -49,115 +49,103 @@ export function createNewTrial(
   const matching_stimuli = generateStims(feature, trial_type);
 
   // get correct response 
-  var correct_angle_no_offset: number = 0;
-  if(feature == "color") {
-    correct_angle_no_offset = matching_stimuli[0].correct_angle;
-  } else if(feature == "orientation") {
-    correct_angle_no_offset = matching_stimuli[0].angle;
+  var correct_response: number = matching_stimuli[matching_stimuli.length - 1].correct_gray;
+
+  var response_scale: any
+  response_scale = {
+    obj_type: "line",
+    startX: window.screen.width/2,
+    startY: window.screen.height/2 + 2*expInfo.STIMULI.OFFSET,
+    line_length: 2*expInfo.COLORWHEEL.radius,
+    line_width: expInfo.COLORWHEEL.size,
+    line_color: grayscale(0),
+    fill_color: grayscale(0),
+    angle: 0
   }
 
+  var stim_array = JSON.parse(JSON.stringify(matching_stimuli));
+  stim_array.push(response_scale);
+
+  // Matching Screen
   const matching_screen = {
     type: psychophysics,
-    stimuli: function() {
-      var stim_array = JSON.parse(JSON.stringify(matching_stimuli));
-
-      const offset = Math.floor(Math.random() * 360);
-
-      var wheelStim: any;
-      if(feature === "color") {
-        wheelStim = createColorWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, true);
-      } else if(feature === "orientation") {
-        wheelStim = createGreyWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset)
-      }
-      stim_array.push(wheelStim);
-      console.log(stim_array);
-      return stim_array;
-    },
+    stimuli: stim_array,
     background_color: expInfo.DESIGN.backgroundCOLOR,
-    response_type: "mouse", // This is important, as it provides a psychophysics-internal way of ending the trial when a mouse click is detected. 
-    mouse_move_func: function(event) { // This function is the most important part of the trial. We use an event listener that is integrated into the psychophysics plugin, minimizing any conflict with external event listeners. We use it to constantly redraw the color of the item every time the mouse moves.
+    response_type: "mouse",
+    mouse_move_func: function(event) {
       const currentTrial = jsPsych.getCurrentTrial(); // We need to get the current trial to access the stimuli we defined earlier
       const stim_array = currentTrial.stim_array; // Get the stimuli array from the current trial
 
-      const offset = stim_array[stim_array.length - 1].offset; // Get the offset from the color wheel
+      const StimuliCenterX = window.screen.width/2; // Same thing here
+      const dx = event.offsetX - (StimuliCenterX - expInfo.COLORWHEEL.radius); // Same thing here
 
-      const StimuliCenterX = window.screen.width/2; // Get the center of the circle, this would be relevant if the stimuli are not centered on the screen, we need 
-      const StimuliCenterY = window.screen.height/2; // Same thing here
+      var selected_gray = expInfo.STIMULI.MIN_GRAY + (dx/(2*expInfo.COLORWHEEL.radius)) * (expInfo.STIMULI.MAX_GRAY - expInfo.STIMULI.MIN_GRAY); // Calculate the angle in radians
+      selected_gray = Math.round(selected_gray); // Round the angle to the nearest integer
 
-      const dx = event.offsetX - StimuliCenterX; // Calculate the difference between the mouse position and the center of the circle
-      const dy = event.offsetY - StimuliCenterY; // Same thing here
-
-      const angleRadians = Math.atan2(dy, dx); // Calculate the angle in radians
-
-      let angleDegrees = circle_functions.rad2deg(angleRadians); // Convert the angle to degrees
-      if (angleDegrees < 0) { // Ensure the angle is between 0 and 360 degrees
-        angleDegrees += 360;
-      }
-
-      stim_array[stim_array.length - 2].current_angle = angleDegrees; // Change the angle of the circle
-
-      // Apply the offset and ensure it stays within 0–360 degrees
-      var offset_angleDegrees = (angleDegrees + offset) % 360;
-
-      // Calculate the ever-changing color during the trial
-      if (feature === "color") {
-        const color = CIElab.angle_to_rgb(offset_angleDegrees);
-        stim_array[stim_array.length - 2].fill_color = color; // Change the color of the circle
-        stim_array[stim_array.length - 2].line_color = color; 
-        stim_array[stim_array.length - 2].color_ang = offset_angleDegrees; // Save the angle of the selected color
-      } else if (feature === "orientation") {
-        stim_array[0].angle = angleDegrees;
-      } else if (feature === "shape") {
-        stim_array[0].file = "../assets/VCSshapes/VCS_" + offset_angleDegrees.toString() + ".jpg"
-      }
-      
+      stim_array[stim_array.length - 2].fill_color = grayscale(selected_gray);
+      stim_array[stim_array.length - 2].line_color = grayscale(selected_gray);
+      stim_array[stim_array.length - 2].current_gray = selected_gray;
+      stim_array[stim_array.length - 2].response = dx + (StimuliCenterX - expInfo.COLORWHEEL.radius);
     },
     on_finish: function (data) {
       // To store the final circle stimuli and the selected color, we once again access the stimuli array from the current trial
-      const stim_array = jsPsych.getCurrentTrial().stim_array;
+      const stimuli_array = jsPsych.getCurrentTrial().stim_array 
+
+      // Find the Target & Response Stimuli
+      const TargetStimulus = stimuli_array[stimuli_array.length-3];
+      const ResponseStimulus = stimuli_array[stimuli_array.length-2];
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
       data.procedure = isPractice ? "practice" : "experiment";
-      data.wheel_offset = stim_array[stim_array.length - 1].offset;
-      data.selected_angle = stim_array[stim_array.length - 2].current_angle;
-      data.color = stim_array[stim_array.length - 2].fill_color;
-    },
+      data.selected_gray = ResponseStimulus.current_gray;
+      data.correct_gray = TargetStimulus.correct_gray;
+      data.responseX = ResponseStimulus.response;
+    }
   };
-
-  // Arc Confidence Screen
+  
+  // Confidence Screen
   // create arc response screen
-  const arc_response_screen = {
+  const confidence_response_screen = {
     type: psychophysics,
     stimuli: function() {
-      const startAngle = jsPsych.data.get().last(1).values()[0].selected_angle;
-      const offset = jsPsych.data.get().last(1).values()[0].wheel_offset;
-      const spreadAngle = 1;
-      const colorAngle = startAngle + offset;
-
       // Asjust the angle of the test stimulus to the selected angle
-      var arc_all_stimuli = JSON.parse(JSON.stringify(matching_stimuli));
-      
+      var confidence_stimuli = JSON.parse(JSON.stringify(stim_array));
 
-      var wheelStim: any;
-      if(feature === "color") {
-        wheelStim = createColorWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, true);
-        arc_all_stimuli[arc_all_stimuli.length - 1].fill_color = CIElab.angle_to_rgb(colorAngle);
-        arc_all_stimuli[arc_all_stimuli.length - 1].line_color = CIElab.angle_to_rgb(colorAngle);
-      } else if(feature === "orientation") {
-        wheelStim = createGreyWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
-        arc_all_stimuli[0].angle = startAngle;
+      const start_gray = jsPsych.data.get().last(1).values()[0].selected_gray;
+      var selected_X = jsPsych.data.get().last(1).values()[0].responseX;
+      const spreadAngle = 1;
+
+      confidence_stimuli[confidence_stimuli.length - 2].fill_color = grayscale(start_gray);
+      confidence_stimuli[confidence_stimuli.length - 2].line_color = grayscale(start_gray);
+      confidence_stimuli[confidence_stimuli.length - 2].current_gray = start_gray;
+      confidence_stimuli[confidence_stimuli.length - 2].response = selected_X;
+
+      const response_indicator = {
+        obj_type: "line",
+        startX: selected_X + 6/2,
+        startY: window.screen.height/2 + 2*expInfo.STIMULI.OFFSET + expInfo.COLORWHEEL.size + expInfo.ARC_RESPONSE.offset,
+        line_length: expInfo.ARC_RESPONSE.size_respInd,
+        line_width: 6,
+        angle: 90,
+        line_color: grayscale(0),
+        fill_color: grayscale(0),
       }
-      const arcResponse = createArcResponse(window.screen.width/2, window.screen.height/2, startAngle, spreadAngle, expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, expInfo.ARC_RESPONSE.size_arc, offset);
-    
-      arc_all_stimuli.push(wheelStim);
-      arc_all_stimuli.push(arcResponse);
-      // Return both stimuli as an array
-      console.log(arc_all_stimuli);
-      return arc_all_stimuli; // Use spread operator to ensure a fresh copy
+
+      const confidence_indicator = {
+        obj_type: "line",
+        startX: selected_X + 6/2,
+        startY: window.screen.height/2 + 2*expInfo.STIMULI.OFFSET + expInfo.COLORWHEEL.size + expInfo.ARC_RESPONSE.offset,
+        line_length: spreadAngle,
+        line_width: 6,
+        angle: 0,
+        line_color: grayscale(0),
+        fill_color: grayscale(0),
+      }
+      confidence_stimuli.push(response_indicator);
+      confidence_stimuli.push(confidence_indicator);
+      
+      // Return all stimuli as an array
+      return confidence_stimuli; 
     },
     background_color: expInfo.DESIGN.backgroundCOLOR,
     response_type: "mouse", // This is important, as it provides a psychophysics-internal way of ending the trial when a mouse click is detected. 
@@ -165,91 +153,91 @@ export function createNewTrial(
       const currentTrial = jsPsych.getCurrentTrial(); // We need to get the current trial to access the stimuli we defined earlier
       const stim_array = currentTrial.stim_array; // Get the stimuli array from the current trial
 
-      const current_Wheel = stim_array[stim_array.length-2]; // Out of the circle and the color wheel in the stimuli array, we need to find the color wheel, because we need the offset
-      const current_arc = stim_array[stim_array.length-1]; // Same thing here
+      const StimuliCenterX = window.screen.width/2; // Same thing here
+      const dx = Math.abs(event.offsetX - (stim_array[stim_array.length - 1].startX)); // Same thing here
 
-      const StimuliCentreX = current_Wheel.startX; // Get the center of the circle, this would be relevant if the stimuli are not centered on the screen, we need 
-      const StimuliCentreY = current_Wheel.startY; // Same thing here
-
-      const dx = event.offsetX - StimuliCentreX; // Calculate the difference between the mouse position and the center of the circle
-      const dy = event.offsetY - StimuliCentreY; // Same thing here
-
-      const angleRadians = Math.atan2(dy, dx); // Calculate the angle in radians
-    
-      let angleDegrees = angleRadians * (180 / Math.PI); // Convert the angle to degrees
-      if (angleDegrees < 0) { // Ensure the angle is between 0 and 360 degrees
-        angleDegrees += 360;
-      }
-    
-      var diffAngle = Math.abs(current_arc.centerAngle - angleDegrees);
-
-      diffAngle = ((diffAngle + 180) % (2 * 180)) - 180
-      current_arc.spreadAngle =  diffAngle;
+      stim_array[stim_array.length - 1].line_length = 2*dx;
     },
     on_finish: function (data) {
       // To store the final circle stimuli and the selected color, we once again access the stimuli array from the current trial
-      const stimuli_array = jsPsych.getCurrentTrial().stim_array 
+      const stim_array = jsPsych.getCurrentTrial().stim_array 
 
       // Find the circle stimulus
-      const TargetStimulus = stimuli_array[stimuli_array.length-3];
-      const ColorWheelStimulus = stimuli_array[stimuli_array.length-2];
-      const ArcStimulus = stimuli_array[stimuli_array.length-1];
+      const response_stimulus = stim_array[stim_array.length-4];
+      const target_stimulus = stim_array[0];
+      const confidence_line = stim_array[stim_array.length-1];
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
       data.procedure = isPractice ? "practice" : "experiment";
-      data.offset_colorWheel = ColorWheelStimulus.offset;
-      data.selected_angle = TargetStimulus.selected_ang;
-      data.color_angle = TargetStimulus.color_ang;
-      data.color = TargetStimulus.fill_color;
-      data.confidence = ArcStimulus.spreadAngle;
+      data.selected_gray = response_stimulus.current_gray;
+      data.responseX = response_stimulus.response;
+      data.correct_gray = target_stimulus.correct_gray;
+      data.confidence_scaled = 1 - confidence_line.line_length / (2 * expInfo.COLORWHEEL.radius);
+      data.confidence_raw = confidence_line.line_length;
     },
   };
 
   // Feedback Screen
   const feedback_screen = {
     type: psychophysics,
-    correct_angle: correct_angle_no_offset,
+    correct_angle: correct_response,
     stimuli: function() {
-      const startAngle = jsPsych.data.get().last(2).values()[0].selected_angle;
-      const offset = jsPsych.data.get().last(2).values()[0].wheel_offset;
-      const spreadAngle = jsPsych.data.get().last(1).values()[0].confidence;
-      const colorAngle = startAngle + offset;
+      // Asjust the angle of the test stimulus to the selected angle
+      var feedback_stimuli = JSON.parse(JSON.stringify(stim_array));
 
-      var feedback_all_stimuli = JSON.parse(JSON.stringify(matching_stimuli));
-      var wheelStim_fb: any;
-      var feedbackInd: any;
-      if(feature === "color") {
-        wheelStim_fb = createColorWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, true);
-        feedback_all_stimuli[feedback_all_stimuli.length - 1].fill_color = CIElab.angle_to_rgb(colorAngle);
-        feedback_all_stimuli[feedback_all_stimuli.length - 1].line_color = CIElab.angle_to_rgb(colorAngle);
-        feedbackInd = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
-          expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset - offset);
-      } else if(feature === "orientation") {
-        wheelStim_fb = createGreyWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
-          feedback_all_stimuli[0].angle = startAngle;
-          var feedbackInd1 = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
-            expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset);
-          var feedbackInd2 = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
-              expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset + 180);
-          feedbackInd = [feedbackInd1, feedbackInd2];
+      const start_gray = jsPsych.data.get().last(1).values()[0].selected_gray;
+
+      feedback_stimuli[feedback_stimuli.length - 2].fill_color = grayscale(start_gray);
+      feedback_stimuli[feedback_stimuli.length - 2].line_color = grayscale(start_gray);
+
+      var selected_X = jsPsych.data.get().last(1).values()[0].responseX;
+      var conf_line_length = jsPsych.data.get().last(1).values()[0].confidence_raw;
+
+      const response_indicator = {
+        obj_type: "line",
+        startX: selected_X + 6/2,
+        startY: window.screen.height/2 + 2*expInfo.STIMULI.OFFSET + expInfo.COLORWHEEL.size + expInfo.ARC_RESPONSE.offset,
+        line_length: expInfo.ARC_RESPONSE.size_respInd,
+        line_width: 6,
+        angle: 90,
+        line_color: grayscale(0),
+        fill_color: grayscale(0),
       }
 
-      const arcResponse_fb = createArcResponse(window.screen.width/2, window.screen.height/2, 
-        startAngle, spreadAngle, expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, expInfo.ARC_RESPONSE.size_arc, offset);
-      
-      feedback_all_stimuli.push(arcResponse_fb);
-      if(feature === "color") {
-        feedback_all_stimuli.push(feedbackInd);
-      } else if(feature === "orientation") {
-        feedback_all_stimuli = feedback_all_stimuli.concat(feedbackInd);
+      const confidence_indicator = {
+        obj_type: "line",
+        startX: selected_X + 6/2,
+        startY: window.screen.height/2 + 2*expInfo.STIMULI.OFFSET + expInfo.COLORWHEEL.size + expInfo.ARC_RESPONSE.offset,
+        line_length: conf_line_length,
+        line_width: 6,
+        angle: 0,
+        line_color: grayscale(0),
+        fill_color: grayscale(0),
       }
-      
-      feedback_all_stimuli.push(wheelStim_fb);
 
-      // Return both stimuli as an array
-      return feedback_all_stimuli; // Use spread operator to ensure a fresh copy
+      var correct_gray = jsPsych.data.get().last(1).values()[0].correct_gray;
+
+      // calculate correct gray into X positions
+      var correctX = correct_gray - expInfo.STIMULI.MIN_GRAY;
+      correctX = correctX / (expInfo.STIMULI.MAX_GRAY - expInfo.STIMULI.MIN_GRAY) * 2 * expInfo.COLORWHEEL.radius;
+      correctX = correctX + (window.screen.width/2 - expInfo.COLORWHEEL.radius);
+
+
+      const feedback_indicator = {
+        obj_type: "line",
+        startX: correctX + 6/2,
+        startY: window.screen.height/2 + 2*expInfo.STIMULI.OFFSET + expInfo.COLORWHEEL.size + expInfo.ARC_RESPONSE.offset,
+        line_length: expInfo.ARC_RESPONSE.size_respInd,
+        line_width: 6,
+        angle: 90,
+        line_color: "rgb(0, 255, 0)",
+        fill_color: "rgb(0, 255, 0)",
+      }
+
+      feedback_stimuli.push(response_indicator);
+      feedback_stimuli.push(confidence_indicator);
+      feedback_stimuli.push(feedback_indicator);
+      return feedback_stimuli;
     },
     background_color: expInfo.DESIGN.backgroundCOLOR,
     choices: "NO-KEYS",
@@ -269,7 +257,7 @@ export function createNewTrial(
   // Push screens into trial_line
   trial_line.push(fixation_screen);
   trial_line.push(matching_screen);
-  trial_line.push(arc_response_screen);
+  trial_line.push(confidence_response_screen);
   trial_line.push(feedback_screen);
   trial_line.push(inter_trial_interval);
 
