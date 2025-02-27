@@ -43,15 +43,6 @@ export const chooseStimuli = function (
   const remainingWords = removeItem(localStimArray, chosenWord);
   stimArray.length = 0; // Clear the original array
   stimArray.push(...remainingWords); // Refill it with the updated array
-  console.log(
-    "Chosen Word: ",
-    chosenWord,
-    "Animacy: ",
-    isAnimate,
-    "Word Length: ",
-    nCharacters
-  );
-  console.log("Remaining Words: ", stimArray);
 
   let chosenStimulus = {
     word: chosenWord,
@@ -108,6 +99,7 @@ export function create_trialList(excludeWords: string[] = []) {
       excludeWords
     );
     trial.trial_number = i + 1;
+    localWords = removeItem(localWords, trial.stimulus.word);
   });
 
   return block_conditions;
