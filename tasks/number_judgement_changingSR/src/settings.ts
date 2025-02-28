@@ -22,7 +22,7 @@ export const expInfo = {
     CONDITIONS: ["odd","even"], // conditions of the experiment
     StimLimits: [10,99], // limits for the stimuli
     BOX_CHOICES: ["alt", "control"], // choices if experiment in lab 
-    CHOICES: ["d", "j"], // choices for the participants if experiment is online 
+    CHOICES: ["d", "k"], // choices for the participants if experiment is online 
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
 
@@ -79,7 +79,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: true, // a switch to run the experiment on JATOS
+  RUN_JATOS: false, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.
