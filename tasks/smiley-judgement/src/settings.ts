@@ -12,7 +12,7 @@ export const expInfo = {
   TITLE: "Smiley Processing Task",
   LANG: "de", // the default language of the experiment
 
-  USE_RESPONSEBOX: false, // a switch to use the response box in the lab
+  USE_RESPONSEBOX: true, // a switch to use the response box in the lab
 
   // design of the experiment
   DESIGN: {
@@ -21,7 +21,7 @@ export const expInfo = {
     BreaksAt: 0.5, // the proportion of trials after which a break is given
     nBLOCKS: 1, // number of blocks in the experiment
     BOX_CHOICES: ["alt", "control"], // the keys for the choices if experiment in lab with box
-    CHOICES: ["y", "n"], // the choices for the task if experiment online 
+    CHOICES: ["d", "k"], // the choices for the task if experiment online 
     MAPPING: [0, 1], // the mapping of the choices
     CONDITIONS: {
       DIFFICULTY: ["easy", "hard"], // the difficulty of the task
@@ -80,7 +80,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: true, // a switch to run the experiment on JATOS
+  RUN_JATOS: false, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.
