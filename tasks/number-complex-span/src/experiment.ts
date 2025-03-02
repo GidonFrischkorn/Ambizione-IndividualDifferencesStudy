@@ -78,7 +78,7 @@ export async function run({
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline = timeline.concat(practice_memory_task_line);
   timeline = timeline.concat(practice_judgement_task_line);
   timeline = timeline.concat(practice_dual_tasks_line);
