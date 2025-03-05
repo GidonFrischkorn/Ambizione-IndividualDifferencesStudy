@@ -7,6 +7,7 @@ export const demographics = function (language: string = "de") {
     var first_name_question = "Wie lautet Ihr Vorname?";
     var last_name_question = "Wie lautete Ihr Nachname?";
     var birthdate_question = "Wann sind Sie geboren?";
+    var age_question = "Wie alt sind Sie?";
 
     var gender_question = "Was ist Ihr Geschlecht?";
     var gender_options = [
@@ -38,6 +39,7 @@ export const demographics = function (language: string = "de") {
     var first_name_question = "What is your first name?";
     var last_name_question = "What is your last name?";
     var birthdate_question = "When were you born?";
+    var age_question = "How old are you?";
 
     var gender_question = "What gender do you identify with?";
     var gender_options = [
@@ -98,36 +100,8 @@ export const demographics = function (language: string = "de") {
         title: "E-Mail",
         inputType: "email",
         isRequired: true,
-      },
-      {
-        name: "phone",
-        title: "Telefonnummer",
-        inputType: "tel",
-        isRequired: true,
-      },
+      }
     ],
-  };
-
-  // Demographics Item: age, race, and sex, employment, education, income
-  const demographics_item = {
-
-  };
-
-  // First name
-  const first_name_item = {
-    type: "text",
-    name: "first_name",
-    title: first_name_question,
-    isRequired: true,
-  };
-
-  // Last name
-  const last_name_item = {
-    type: "text",
-    name: "last_name",
-    title: last_name_question,
-    isRequired: true,
-    startWithNewLine: false,
   };
 
   const birthdate_item = {
@@ -137,6 +111,39 @@ export const demographics = function (language: string = "de") {
     title: birthdate_question,
     isRequired: true,
   };
+  
+  const age_item = {
+    type: "text",
+    name: "age",
+    title: age_question,
+    isRequired: true,
+    inputType: "number",
+    validators: [
+      {
+        type: "numeric",
+        minValue: 18,
+        maxValue: 99,
+        text: "Bitte geben Sie ein gültiges Alter ein.",
+      },
+    ],
+  };
+
+  const language_item = {
+    "type": "dropdown",
+    "name": "language",
+    "title": "Was ist ihre Muttersprache?",
+    "isRequired": true,
+    "showOtherItem": true,
+    "choices": [ "(Schweizer)-Deutsch", "Französisch", "Englisch", "Räto-Romanisch"]
+  }
+
+  const german_level = {
+    "type": "dropdown",
+    "name": "german_level",
+    "title": "Auf welchem Niveau sprechen Sie Deutsch?",
+    "isRequired": true,
+    "choices": [ "Muttersprache", "Verhandlungssicher", "Fliessend", "Grundkenntnisse"]
+  }
 
   // Gender drop-down
   const gender_item = {
@@ -160,15 +167,28 @@ export const demographics = function (language: string = "de") {
   };
 
   // combine everything into a single survey page
-  var demographics_page = {
+  var demographics_page1 = {
     elements: [
       name_item,
       contact_item,
-      birthdate_item,
+    ],
+  };
+
+  var demographics_page2 = {
+    elements: [
+      age_item,
+      language_item,
+      german_level,
+      // birthdate_item,
       gender_item,
       education_item,
     ],
   };
 
-  return demographics_page;
+  const demographics_pages = [
+    demographics_page1,
+    demographics_page2
+  ]
+
+  return demographics_pages;
 };

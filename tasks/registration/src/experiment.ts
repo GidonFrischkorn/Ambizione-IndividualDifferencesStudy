@@ -21,7 +21,7 @@ import { jsPsych } from "./jsp";
 import { expInfo } from "./settings";
 
 // screens
-import { welcome_screen } from "./instructions/welcome";
+import { id_screen } from "./instructions/participant_id";
 import { participant_code, extract_code } from "./survey/participant_code";
 import { demographics } from "./survey/demographics";
 import { bmw3 } from "./survey/bmw3";
@@ -61,7 +61,7 @@ export async function run({
   const id_page = participant_code(expInfo.LANG);
 
   /************************************** Demographic Data *************************/
-  const demographic_page = demographics(expInfo.LANG);
+  const demographic_pages = demographics(expInfo.LANG);
 
   /************************************** BMW-3 ************************************/
   const bmw3_page = bmw3(expInfo.LANG);
@@ -82,7 +82,7 @@ export async function run({
   // Combine all survey pages
   var survey_pages: any[] = [];
   survey_pages.push(id_page);
-  survey_pages.push(demographic_page);
+  survey_pages = survey_pages.concat(demographic_pages);
 
   // add the questionnaires dependent on settings
   if (expInfo.DESIGN.ADD_BMW3) {
@@ -112,15 +112,16 @@ export async function run({
     on_finish: function (data) {
       // Get responses from questionnaires
       // if the welcome screen is not included: const search_object = jsPsych.data.get().values()[1].response
-      const search_object = jsPsych.data.get().values()[2].response
-      
+      const search_object = jsPsych.data.get().values()[1].response
+      console.log(search_object);
+
       // Extract the participant code from the survey responses
       let participant_id = extract_code(search_object);
+      console.log(participant_id);
       jsPsych.data.addProperties({participant_id: participant_id});
 
       // BMW-3 scale scores
       if (expInfo.DESIGN.ADD_BMW3) {
-
         const bmw3_scale_scores = bmw3_scores(search_object, expInfo);
 
         data.bmw3_i_sum = bmw3_scale_scores[0][0];
@@ -134,9 +135,8 @@ export async function run({
       
       // BFI-2 scale scores
       if (expInfo.DESIGN.ADD_BFI2) {
-
         const bif2_scale_scores = bfi2_scores(search_object, expInfo);
-       
+        
         if (expInfo.DESIGN.BFI2_type === "extra-short") {
           data.bif2_extraversion_sum = bif2_scale_scores[0][0];
           data.bif2_agreeableness_sum = bif2_scale_scores[0][1];
@@ -209,11 +209,9 @@ export async function run({
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
-  timeline.push(welcome_screen);
-  timeline = timeline.concat(ishihara_page);
-  //timeline.push(ishihara_page);
   timeline.push(registration_survey);
-
+  timeline = timeline.concat(ishihara_page);
+  
   await jsPsych.run(timeline);
 
   // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this

@@ -1,12 +1,14 @@
 export const participant_code = function (language: string = "de") {
     if (language == "de") {
+        var instructions = "Bitte generieren Sie Ihren Teilnehmercode aus den folgenden Informationen:"
+        
         var prompts = [
-            "dem letzten Buchstaben ihres eigenen Vornamens",
-            "dem letzten Buchstaben ihres eigenen Nachnamens",
-            "dem zweiten Buchstaben des Vornamens ihrer Mutter",
-            "dem zweiten Buchstaben des Vornames ihres Vaters",
-            "der zweiten Ziffer ihres Geburtstages (bei einstelligen Tagen die Ziffer selbst)",
-            "der letzten Ziffer ihres Geburtsjahres",
+            "Dem letzten Buchstaben ihres eigenen Vornamens",
+            "Dem letzten Buchstaben ihres eigenen Nachnamens",
+            "Dem zweiten Buchstaben des Vornamens ihrer Mutter",
+            "Dem zweiten Buchstaben des Vornames ihres Vaters",
+            "Der zweiten Ziffer ihres Geburtstages (bei einstelligen Tagen die Ziffer selbst)",
+            "Der letzten Ziffer ihres Geburtsjahres",
         ]
     } else {
         throw new Error("Language not supported");
@@ -27,9 +29,11 @@ export const participant_code = function (language: string = "de") {
         var single_item = {
             name: item_labels[i],
             title: prompts[i],
-            cellType: "text",
-            inputType: "text",
+            type: "text",
+            inputType: item_labels[i].includes("letter") ? "text" : "number",
             isRequired: true,
+            maxLength: 1,
+
         };
 
         id_items.push(single_item);
@@ -37,26 +41,8 @@ export const participant_code = function (language: string = "de") {
 
     // combine everything into a single survey page
     var id_page = {
-        elements: [
-            {
-                type: "matrixdynamic",
-                name: "participant-code",
-                title: "Bitte generieren Sie Ihren Teilnehmercode",
-                description: "Bitte geben Sie die folgenden Informationen ein",
-                transposeData: true,
-                rows: [{
-                    text: "Bitte geben Sie die folgenden Informationen ein",
-                    name: "participant-code"
-                }],
-                columns: id_items,
-                confirmDelete: true,
-                minRowCount: 1,
-                rowCount: 1,
-                maxRowCount: 1,
-                rowTitleWidth: "50%",
-                isRequired: true,
-            }
-        ],
+        elements: id_items,
+        title: instructions,
         showQuestionNumbers: "off",
     };
 
@@ -66,8 +52,12 @@ export const participant_code = function (language: string = "de") {
 
 export const extract_code = function (responses: { [key: string]: any }) {
     // Extract the participant code from the survey responses
-    const code_responses = responses["participant-code"]
+    const code_responses = responses
+    console.log(code_responses);
 
-    var participant_code = code_responses.letter_firstname + code_responses.letter_lastname + code_responses.letter_mother + code_responses.letter_father + code_responses.digit_birthdate + code_responses.digit_birthyear;
+    const participant_code_characters = code_responses.letter_firstname + code_responses.letter_lastname + code_responses.letter_mother + code_responses.letter_father;
+    console.log(participant_code_characters);
+    const participant_code_digits = code_responses.digit_birthdate + code_responses.digit_birthyear.toString();
+    const participant_code = participant_code_characters.toUpperCase() + participant_code_digits;
     return participant_code;
 }
