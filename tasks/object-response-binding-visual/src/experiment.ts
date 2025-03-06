@@ -1,7 +1,7 @@
 /**
  * @title Object Response Binding Task Visual
  * @description Visual bindings (objects-responses)
- * @version 0.0.1 
+ * @version ProcBinding_Objects_PreTest
  *
  * @assets assets/
  */
@@ -314,6 +314,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   
   // run the experiment
   await jsPsych.run(timeline);
+  //jsPsych.simulate(timeline, "data-only");
   
   // return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)

@@ -7,7 +7,7 @@ import { random } from "@coglabuzh/webpsy.js";
 setCSS();
 
 export const varOnline = {
-    RUN_JATOS: false, // true, if you run your experiment in jatos
+    RUN_JATOS: true, // true, if you run your experiment in jatos
     RUN_PROLIFIC: false, // true, if you run your experiment in Prolific 
 
     CODES: {
@@ -31,7 +31,7 @@ export const varSystem = {
     nBLUR: 0, // use to count how many times participants left the browser
     MAX_BLUR: 3, // the maximum number of times participants can leave the browser
     LOOP: true, // a switch to control whether participants need to read the instruction and practice again
-    STATUS: "offline"
+    STATUS: "online"
 };
 
 // define experimental variables and color condition
