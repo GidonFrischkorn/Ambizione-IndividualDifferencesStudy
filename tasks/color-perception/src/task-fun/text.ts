@@ -16,9 +16,7 @@ export const SCREEN_INFO = {
       Vielen Dank für Ihre Teilnahme an diesem Experiment.
     </p>
     </div>`,
-    cn: `<div class='main'>
-    <h1 class='title'>欢迎您参与本实验!</h1>
-    </div>`
+    
   },
 
   startTrial: {
@@ -26,23 +24,11 @@ export const SCREEN_INFO = {
     <p>Press the space bar to start directly.</p>`,
     de: ` <p>Der nächste Durchgang beginnt in <span id="clock" style="color:red">10</span> Sekunden.</p>
     <p>Drücken Sie die Leertaste, um direkt zu beginnen.</p>`,
-    cn: ` <p>下一个试次将在 <span id="clock" style="color:red">10</span> 秒后开始。</p>
-    <p>按下空格键后将直接开始</p>`,
+    
   },
 
   blockBreak: function (blockID: number, nBlock: number, lang: string) {
     switch (lang) {
-      case "cn":
-        return `<div class='main'>
-          <h1 class='title'>休息一下吧</h1>
-          <p class='fb-text'>
-            你已经完成了 ${blockID}/${nBlock} 的实验,
-            实验将在 <span id='break' style='color:red'>${expInfo.TIMING.BREAK}</span> 秒后继续。
-          </p>
-          <p class="fb-text">你可以按下空格键直接开始</p>
-          <br>
-
-        </div>`;
       case "en":
         return `<div class='main'>
           <h1 class='title'>Take a break</h1>
@@ -59,7 +45,6 @@ export const SCREEN_INFO = {
   fullScreen: {
     en: "The experiment will switch to full screen",
     de: "Das Experiment wechselt in den Vollbildmodus",
-    cn: "即将进入全屏模式",
   },
 
   feedback: function (accuracy: number, nTest: number, lang: string) {
@@ -68,8 +53,6 @@ export const SCREEN_INFO = {
         return `<div class='fb-text'>You correctly recalled ${accuracy} out of ${nTest} letters.</div>`;
       case "de":
         return `<div class='fb-text'>Sie haben ${accuracy} von ${nTest} Buchstaben korrekt erinnert.</div>`;
-      case "cn":
-        return `<div class='fb-text'>您正确回忆了${accuracy}/${nTest}个字母。</div>`;
     }
   },
 
@@ -82,10 +65,7 @@ export const SCREEN_INFO = {
         <h1 class='title'>Übung</h1>
         <p class='fb-text'>Wir werden nun einige Übungen machen, damit Sie mit dem Experiment vertraut werden.</p>
       </div>`,
-    cn: `<div class='main'>
-        <h1 class='title'>练习环节</h1>
-        <p class='fb-text'>接下来我们将进行一些练习以熟悉实验流程。</p>
-      </div>`,
+   
   },
 
   startExperiment: {
@@ -97,10 +77,7 @@ export const SCREEN_INFO = {
         <h1 class='title'>Experiment</h1>
         <p class='fb-text'>Gut gemacht! Jetzt beginnen wir mit dem Experiment.</p>
       </div>`,
-    cn: `<div class='main'>
-        <h1 class='title'>实验环节</h1>
-        <p class='fb-text'>练习结束！现在我们将开始进行正式实验。</p>
-      </div>`,
+   
   },
 };
 
@@ -109,25 +86,21 @@ export const BUTTON_INFO = {
   continueButton: {
     en: ["Continue"],
     de: ["Weiter"],
-    cn: ["继续"],
   },
 
   prevButton: {
     en: ["Previous"],
     de: ["Zurück"],
-    cn: ["上一页"],
   },
 
   nextButton: {
     en: ["Next"],
     de: ["Weiter"],
-    cn: ["下一页"],
   },
 
   submitButton: {
     en: "Submit",
     de: "Bestätigen",
-    cn: "提交",
   },
 };
 
@@ -138,7 +111,7 @@ export const BUTTON_INFO = {
       <h1 class="title">Experiment discontinued</h1>
       <p>
           Unfortunately, your window size is too small to continue the experiment.
-          we therefore have to end this experiment and we cannot grant you any course credit.
+          we therefore have to end this experiment.
           If you have any questions, please contact the researcher.
       </p>
       </div>`,
@@ -146,16 +119,8 @@ export const BUTTON_INFO = {
       <h1 class="title">Experiment abgebrochen</h1>
       <p>
           Leider ist Ihre Fenstergröße zu klein, um das Experiment fortzusetzen.
-          Daher müssen wir dieses Experiment beenden und können Ihnen keine Kurspunkte gewähren.
+          Daher müssen wir dieses Experiment beenden.
           Wenn Sie Fragen haben, wenden Sie sich bitte an den Forscher.
-      </p>
-      </div>`,
-      cn: `<div class="main">
-      <h1 class="title">实验中止</h1>
-      <p>
-          很抱歉，您的窗口尺寸过小，无法继续实验。
-          我们不得不结束此实验，无法为您提供任何课程学分。
-          如果您有任何问题，请联系研究人员。
       </p>
       </div>`,
     },
@@ -179,13 +144,6 @@ export const BUTTON_INFO = {
           Wenn Sie Fragen haben, wenden Sie sich bitte an die Studienleitung.
       </p>
       </div>`,
-      cn: `<div class="main">
-      <h1 class="title">实验中止</h1>
-      <p>
-          很抱歉，由于您离开标签或浏览器窗口的次数超过了最大值，实验不得不提前结束。
-          您将无法获得课程时长或被试费。如果您有任何问题，请联系主试。
-      </p>
-      </div>`,
     },
   
     completedOnline: {
@@ -194,9 +152,8 @@ export const BUTTON_INFO = {
       <p>
           You have successfully completed the experiment! 
           We are now transferring data to the server. 
-          Please copy the following completion code: ${CODES.OFFLINE}. 
-          If the window is not redirected to Prolific after 5 minutes, 
-          you can just close it and submit the completion code to Prolific.
+          If the window is not redirected to the next task after 5 minutes, 
+          please contact the researcher.
       </p>
       </div>`,
       de: `<div class="main">
@@ -204,17 +161,8 @@ export const BUTTON_INFO = {
       <p>
           Sie haben das Experiment erfolgreich abgeschlossen! 
           Die Daten werden nun an den Server übertragen. 
-          Bitte kopieren Sie den folgenden Abschlusscode: ${CODES.OFFLINE}. 
-          Wenn das Fenster nach 5 Minuten nicht zu Prolific weitergeleitet wird, 
-          können Sie es einfach schließen und den Abschlusscode an Prolific senden.
-      </p>
-      </div>`,
-      cn: `<div class="main">
-      <h1 class="title">实验结束</h1>
-      <p>
-          恭喜你顺利完成实验！我们正在将数据上传至服务器。
-          请复制以下完成代码：${CODES.OFFLINE}。
-          如果窗口在5分钟内未重定向到Prolific，请直接关闭窗口并将完成代码提交至Prolific。
+          Wenn Sie nicht nach 5 Minuten zur nächsten Aufgabe weitergeleitet werden, 
+          wenden Sie sich bitte an die Studienleitung.
       </p>
       </div>`,
     },
@@ -224,7 +172,7 @@ export const BUTTON_INFO = {
             <h1 class="title">Congratulation!(Offline Mode)</h1>
             <p class="body-center">
             You have successfully completed the experiment while in offline mode.
-            Your data failed to transfer to the server due to network issues.
+            Your data failed to transfer to the server.
             It has been automatically downloaded to your "Downloads" folder.
             Please contact the researcher for further assistance.
             </p>
@@ -233,16 +181,9 @@ export const BUTTON_INFO = {
             <h1 class="title">Herzlichen Glückwunsch!(Offline-Modus)</h1>
             <p class="body-center">
             Sie haben das Experiment im Offline-Modus erfolgreich abgeschlossen.
-            Ihre Daten konnten aufgrund von Netzwerkproblemen nicht auf den Server übertragen werden.
+            Ihre Daten konnten nicht auf den Server übertragen werden.
             Sie wurden automatisch in Ihren "Downloads"-Ordner heruntergeladen.
-            Bitte kontaktieren Sie den Studienleiter für weitere Unterstützung.
-            </p>
-            </div>`,
-      cn: `<div class="main">
-            <h1 class="title">实验结束（离线模式）</h1>
-            <p class="body-center">
-            您已成功完成了实验，但是由于网络问题，您的数据未能上传至服务器。
-            数据已自动下载至您的“下载”文件夹，请联系研究人员以获取进一步的帮助。
+            Bitte kontaktieren Sie den Studienleitung für weitere Unterstützung.
             </p>
             </div>`,
     },
@@ -256,7 +197,6 @@ export const SURVEY_INFO = {
     de: `<h1 class="title">Fragebogen nach dem Experiment</h1>`,
   },
   DESCRIPTION: {
-    cn: `<div class="main">本问卷的内容仅用于实验数据的处理，对您是否能够获取实验报酬没有影响。请您如实填写。</div>`,
     en: `<div class="main">
     This questionnaire is only used for the processing of experimental data 
     and has no effect on whether you can receive the credit. 
@@ -270,33 +210,27 @@ export const SURVEY_INFO = {
   AGE_QUES: {
     en: "How old are you?",
     de: "Wie alt sind Sie",
-    cn: "您的年龄是？",
   },
 
   SEX_QUES: {
     en: "What is your sex?",
     de: "Was ist Ihr Geschlecht?",
-    cn: "您的性别是？",
   },
 
   SEX_OPT: {
     en: ["Male", "Female", "Other"],
     de: ["Männlich", "Weiblich", "Andere"],
-    cn: ["男", "女", "其他"],
   },
 
   ATTENTION_QUES: {
-    cn: "在实验过程中，您是否受到了外界环境的干扰？",
     en: "Were you distracted during the experiment?",
     de: "Wurden Sie während des Experiments abgelenkt?",
   },
   ATTENTION_OPT: {
-    cn: ["是", "否"],
     en: ["Yes", "No"],
     de: ["Ja", "Nein"],
   },
   COMMENT_QUES: {
-    cn: "您对本次实验是否有任何建议或意见？",
     en: "Do you have any suggestions or comments on this experiment?",
     de: "Haben Sie irgendwelche Vorschläge oder Kommentare zu diesem Experiment?",
   },
