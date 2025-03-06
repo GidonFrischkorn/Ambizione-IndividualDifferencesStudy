@@ -2,7 +2,7 @@
  * @title Word Processing Task - changing SR 
  * @description Participant has to tell whether the word represents somthing animate or inanimate. 
  * @author Elena Venturi 
- * @version 0.3.1
+ * @version word_judgement_SR_pretest
  *
  *
  * @assets assets/
@@ -69,7 +69,7 @@ export async function run({
     usedWords.push(chosenStimulus);
 
     // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
-    let practice_trial = createNewTrial(j, true, expInfo.RESPONSE_BOX, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus, prac_list[j].mapping);
+    let practice_trial = createNewTrial(j, true, expInfo.USE_RESPONSEBOX, prac_list[j].word_animacy, prac_list[j].word_length, chosenStimulus, prac_list[j].mapping);
     practice_line = practice_line.concat(practice_trial);
   
   }
@@ -83,7 +83,7 @@ export async function run({
     let chosenStimulus = chooseStimuli(words, trial_list[j].word_animacy, trial_list[j].word_length, usedWords);
 
     // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
-    let exp_trial = createNewTrial(j, false, expInfo.RESPONSE_BOX, trial_list[j].word_animacy, trial_list[j].word_length, chosenStimulus, trial_list[j].mapping);
+    let exp_trial = createNewTrial(j, false, expInfo.USE_RESPONSEBOX, trial_list[j].word_animacy, trial_list[j].word_length, chosenStimulus, trial_list[j].mapping);
     exp_line = exp_line.concat(exp_trial);
   }
   
@@ -110,5 +110,5 @@ export async function run({
 
   // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
-  // return jsPsych;
+  return jsPsych;
 }
