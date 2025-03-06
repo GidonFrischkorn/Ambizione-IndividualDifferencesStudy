@@ -22,7 +22,7 @@ export const varOnline = {
 };
 
 export const varSystem = {
-    TITLE: "BindingVisualProcedural", // experiment name
+    TITLE: "BindingVerbalProcedural", // experiment name
     LANG: "de", // the language of the instructions
     RESPONSE_BOX: false, // a switch to control whether participants use a response box or not (i.e., keyboard)
     TRACK: false, // a switch to track participants' interactions with the browser
@@ -43,7 +43,7 @@ export function MakeExpInfo(task_condition) {
     const expInfo = {
 
         // experiment name
-        exp_name: "BindingVisual_" + exp_task , // experiment name
+        exp_name: "BindingVerbal_" + exp_task , // experiment name
         
         // define list conditions
         list_condition: ['Control', 'Control', 'Hebb'], // list conditions

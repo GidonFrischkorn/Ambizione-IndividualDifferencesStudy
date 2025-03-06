@@ -59,7 +59,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // define whether to run practice and processing speed task (0 = no, 1 = yes)
   var is_practice = 1;
-  var is_proc_speed = 1;
+  var is_proc_speed = 0;
 
   // define response box usage
   var response_box = varSystem.RESPONSE_BOX;
@@ -134,6 +134,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     // create practice trials
     var {Trial, stim_idx} = MakeTrial(exp_info, is_prac_local, task_condition); // no stim_index
     var prac_trials_task = Trial, stim_index_prac_task = stim_idx;
+    console.log(Trial);
   
     // chunk practice trials into blocks
     const prac_chunks = chunkTrials(prac_trials_task, exp_info.n_prac_blocks);
