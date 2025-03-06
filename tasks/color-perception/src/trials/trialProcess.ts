@@ -17,6 +17,7 @@ import { jsPsych } from "../jsp";
 export function createNewTrial(
   XY: number,
   isPractice: boolean,
+  box: boolean,
   majority: string,
   difficulty: string,
   nBlueDots: number,
@@ -41,20 +42,10 @@ export function createNewTrial(
   const stimuli_screen = {
     type: psychophysics,
     stimuli: targetStim,
-    choices: expInfo.DESIGN.CHOICES,
+    choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES,
     mapping: {
-      moreBlue:
-        expInfo.DESIGN.CHOICES[
-          expInfo.DESIGN.MAPPING[
-            expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreBlue")
-          ]
-        ],
-      moreRed:
-        expInfo.DESIGN.CHOICES[
-          expInfo.DESIGN.MAPPING[
-            expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreRed")
-          ]
-        ],
+      moreBlue: box ? expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreBlue")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreBlue")]],
+      moreRed: box ? expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreRed")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreRed")]],
     },
     background_color: expInfo.DESIGN.backgroundCOLOR, // white background
     response_ends_trial: true,
@@ -64,7 +55,7 @@ export function createNewTrial(
       condition: difficulty,
       majorityBLUE: nBlueDots > nRedDots,
       fix_duration: fixation_screen.trial_duration,
-      practice: function () {
+      procedure: function () {
         if (isPractice) {
           return "practice";
         } else {
