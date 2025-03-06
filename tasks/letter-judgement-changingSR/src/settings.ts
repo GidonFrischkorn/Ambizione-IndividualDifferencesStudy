@@ -11,19 +11,15 @@ export const expInfo = {
   TITLE: "Letter Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
-  RESPONSE_BOX: true, // whether the experiment uses a response box
+  USE_RESPONSEBOX: false, // whether the experiment uses a response box
 
   // design of the experiment
   DESIGN: {
     nTRIALS: 50, // number of experiment trials for each condition
     nPRACTICE: 10, // number of practice trials for each condition
     nBLOCKS: 1, // number of blocks
-    CONDITIONS: {
-      ANIMACY: ["animate", "inanimate"], 
-      WORDLENGTH: [4, 5, 6, 7, 8]
-    }, // conditions of the experiment
-    ANIMACY_VALUE: [0, 1],
-    BOX_CHOICES: ["alt", "control"], // choices for the participants if experiment in lab with box 
+    CONDITIONS: ["vowel","consonant"], // conditions of the experiment
+    BOX_CHOICES: ["alt", "control"], // choices for the participants if experiment in lab 
     CHOICES: ["d", "j"], // choices for the participants if experiment online 
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
@@ -39,6 +35,19 @@ export const expInfo = {
     BREAK: 30, // break duration in seconds
     FINGERS: 5000, // duration of the finger instruction
     CUE: 1000, // duration of the cue
+  },
+
+   // layout of the experiment display
+  LAYOUT: {
+     CAN_W: Math.min(screen.width, screen.height/9*16)*0.9, // width of the canvas
+     CAN_H: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.5, // height of the canvas
+     CENTER: [(Math.min(screen.width, screen.height/9*16)*0.9) / 2, 
+             ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) / 2], // center of canvas 
+     LEFT: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.4, // left position of canvas
+     RIGHT: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.6, // right position of canvas
+     TOP: ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) * 0.3, // top position of canvas
+     BOTTOM: ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) * 0.7, // bottom position of canvas
+     
   },
 
   // when using Prolific, you can set customized completion codes for different situations
@@ -68,7 +77,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.
