@@ -26,8 +26,8 @@ export const screen_feedback_proc_speed = function(exp_info, task) {
       var accuracy = Math.round(proc_speed_correct / exp_info.n_proc_speed_trials * 100)
   
       // display accuracy
-      return `<p class='fb-text'> You have an accuracy of ${accuracy}% </p>
-      <p class='fb-text'> Press any key to continue </p>`; 
+      return `<p class='fb-text'> Sie haben in ${accuracy}% der Durchgänge richtig geantwortet. </p>
+      <p class='fb-text'> Drücken Sie eine beliebige Taste um weiter zu machen. </p>`; 
       
     },
     choices: 'ALL_KEYS',
@@ -42,7 +42,7 @@ export const screen_feedback_proc_speed = function(exp_info, task) {
   
       // end experiment if accuracy is below 75%
       if (accuracy < 75) {
-        endExpProcSpeed(varOnline.FAIL_CODE);
+        endExpProcSpeed("Fail");
       }; 
     }
   };

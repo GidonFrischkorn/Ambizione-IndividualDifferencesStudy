@@ -5,12 +5,12 @@ import { words } from "../assets/stimuli";
 setCSS();
 
 export const varOnline = {
-    RUN_JATOS: false, // true, if you run your experiment in jatos
+    RUN_JATOS: true, // true, if you run your experiment in jatos
     RUN_PROLIFIC: false, // true, if you run your experiment in Prolific 
 
     CODES: {
         SUCCESS: "success", // the code for a successfully completion of the experiment
-        OFFLINE: "offline", // the code for the offline situation
+        OFFLINE: "online", // the code for the offline situation
         FAILED_ATTENTION: "failedAttention", // the code for the failed experiment
         FAILED_OTHERS: "failedOthers", // the code for other failed situations (e.g., failed to resize the window)
         // You can specify the codes for different situations here.
@@ -64,9 +64,9 @@ export function MakeExpInfo(task_condition) {
         // set sizes and certain variable values
         setsize: 6, // number of stimulus in experimental trials
         prac_setsize: [2, 2, 3, 3, 4, 4, 6, 6], // setsizes for practice trials
-        stim_count: 274, // number of stimuli
-        stim_index_dec: Array.from(Array(332).keys()).map(i => i),
-        stim_index_proc: Array.from(Array(332).keys()).map(i => i),
+        stim_count: words.length, // number of stimuli
+        stim_index_dec: Array.from(Array(246).keys()).map(i => i),
+        stim_index_proc: Array.from(Array(246).keys()).map(i => i),
         stim_words: words.map(i => i.Word), 
         instruction_keys_keyboard: ['ArrowLeft', 'ArrowRight'], // instruction keys on keyboard
         instruction_keys_box: ['alt', 'control'], // instruction keys on response box
