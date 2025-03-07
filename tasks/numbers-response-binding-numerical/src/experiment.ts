@@ -55,7 +55,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // define whether to run practice, finger check, and processing speed task (0 = no, 1 = yes)
   var is_practice = 1;
-  var is_proc_speed = 1;
+  var is_proc_speed = 0;
 
   // define response box usage
   var response_box = varSystem.RESPONSE_BOX;
@@ -294,7 +294,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 timeline.push(preload_screen);
 timeline.push(welcome_screen);
 timeline.push(browser_screen);
-timeline.push(fullMode_screen);
+//timeline.push(fullMode_screen);
 timeline = timeline.concat(proc_speed_instr_line_task);
 timeline = timeline.concat(proc_speed_line_task);
 timeline = timeline.concat(prac_line_all_task); 

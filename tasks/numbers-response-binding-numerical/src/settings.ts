@@ -69,7 +69,7 @@ export function MakeExpInfo(task_condition) {
 
     // set sizes and certain variable values
     setsize: 5, // number of stimulus in experimental trials
-    prac_setsize: [1, 1, 2, 2, 3, 3, 5, 5], // setsizes for practice trials
+    prac_setsize: [2, 2, 3, 3, 5, 5], // setsizes for practice trials
     stim_count: 90, // number of stimuli (10-99)
     stim_index_dec: random.sample(
       Array.from(Array(90).keys()).map((i) => i + 10),
