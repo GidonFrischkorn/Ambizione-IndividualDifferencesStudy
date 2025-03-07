@@ -2,10 +2,11 @@
 import { setCSS } from "./task-fun/setCSS";
 import { words } from "../assets/stimuli";
 
+
 setCSS();
 
 export const varOnline = {
-    RUN_JATOS: false, // true, if you run your experiment in jatos
+    RUN_JATOS: true, // true, if you run your experiment in jatos
     RUN_PROLIFIC: false, // true, if you run your experiment in Prolific 
 
     CODES: {
@@ -22,14 +23,14 @@ export const varOnline = {
 };
 
 export const varSystem = {
-    TITLE: "BindingVisualDeclarative", // experiment name
+    TITLE: "BindingVerbalDeclarative", // experiment name
     LANG: "de", // the language of the instructions
     RESPONSE_BOX: false, // a switch to control whether participants use a response box or not (i.e., keyboard)
     TRACK: false, // a switch to track participants' interactions with the browser
     nBLUR: 0, // use to count how many times participants left the browser
     MAX_BLUR: 3, // the maximum number of times participants can leave the browser
     LOOP: true, // a switch to control whether participants need to read the instruction and practice again
-    STATUS: "offline"
+    STATUS: "online"
 };
 
 // define experimental variables and color condition
@@ -43,7 +44,7 @@ export function MakeExpInfo(task_condition) {
     const expInfo = {
 
         // experiment name
-        exp_name: "BindingVisual_" + exp_task , // experiment name
+        exp_name: "BindingVerbal_" + exp_task , // experiment name
         
         // define list conditions
         list_condition: ['Control', 'Control', 'Hebb'], // list conditions
@@ -64,9 +65,9 @@ export function MakeExpInfo(task_condition) {
         // set sizes and certain variable values
         setsize: 6, // number of stimulus in experimental trials
         prac_setsize: [2, 2, 3, 3, 4, 4, 6, 6], // setsizes for practice trials
-        stim_count: 274, // number of stimuli
-        stim_index_dec: Array.from(Array(332).keys()).map(i => i),
-        stim_index_proc: Array.from(Array(332).keys()).map(i => i),
+        stim_count: words.length, // number of stimuli
+        stim_index_dec: Array.from(Array(246).keys()).map(i => i),
+        stim_index_proc: Array.from(Array(246).keys()).map(i => i),
         stim_words: words.map(i => i.Word), 
         instruction_keys_keyboard: ['ArrowLeft', 'ArrowRight'], // instruction keys on keyboard
         instruction_keys_box: ['alt', 'control'], // instruction keys on response box

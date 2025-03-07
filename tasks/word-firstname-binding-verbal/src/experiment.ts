@@ -1,7 +1,7 @@
 /**
  * @title Word Firstname Binding Task Verbal
  * @description Verbal bindings (words-firstnames)
- * @version 0.0.1
+ * @version DecBinding_Verbal_PreTest
  *
  * @assets assets/
  */
@@ -57,7 +57,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // define whether to run practice, finger check, and processing speed task (0 = no, 1 = yes)
   var is_practice = 1;
-  var is_proc_speed = 1;
+  var is_proc_speed = 0;
 
   // define response box usage
   var response_box = varSystem.RESPONSE_BOX;
@@ -130,7 +130,8 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     // create practice trials
     var {Trial, stim_idx} = MakeTrial(exp_info, is_prac_local, task_condition); // no stim_index
     var prac_trials_task = Trial, stim_index_prac_task = stim_idx;
-  
+    console.log(Trial);
+
     // chunk practice trials into blocks
     const prac_chunks = chunkTrials(prac_trials_task, exp_info.n_prac_blocks);
     
@@ -264,7 +265,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // create experiment trials
   var {Trial, stim_idx} = MakeTrial(exp_info, is_prac_local_task, task_condition); // use stim_index from practice
   let exp_trials_task = Trial, stim_index_exp_task = stim_idx;
-  
+  console.log(Trial);
   // chunk experiment trials into blocks
   const exp_chunks_task = chunkTrials(exp_trials_task, exp_info.n_exp_blocks);
   
@@ -296,7 +297,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  //timeline.push(fullMode_screen);
   timeline = timeline.concat(proc_speed_instr_line_task);
   timeline = timeline.concat(proc_speed_line_task);
   timeline = timeline.concat(prac_line_all_task);
