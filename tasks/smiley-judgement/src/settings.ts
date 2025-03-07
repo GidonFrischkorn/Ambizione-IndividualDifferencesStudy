@@ -12,13 +12,16 @@ export const expInfo = {
   TITLE: "Smiley Processing Task",
   LANG: "de", // the default language of the experiment
 
+  USE_RESPONSEBOX: false, // a switch to use the response box in the lab
+
   // design of the experiment
   DESIGN: {
     nTRIALS: 25, // number of experiment trials per condition
     nPRACTICE: 10, // number of practice trials
     BreaksAt: 0.5, // the proportion of trials after which a break is given
     nBLOCKS: 1, // number of blocks in the experiment
-    CHOICES: ["y", "n"], // the choices for the task
+    BOX_CHOICES: ["alt", "control"], // the keys for the choices if experiment in lab with box
+    CHOICES: ["y", "n"], // the choices for the task if experiment online 
     MAPPING: [0, 1], // the mapping of the choices
     CONDITIONS: {
       DIFFICULTY: ["easy", "hard"], // the difficulty of the task
@@ -43,10 +46,10 @@ export const expInfo = {
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 60 * 1000, // break duration in seconds
     STIMULI: 3000, // stimuli duration in milliseconds
-    FIXATION: 200, // fixation duration in milliseconds
+    FIXATION: 400, // fixation duration in milliseconds
     JITTER: 200, // jitter duration in milliseconds
     FEEDBACK: 1000, // feedback duration in milliseconds
-    ITI: 800, // inter-trial interval in milliseconds
+    ITI: 1000, // inter-trial interval in milliseconds
     FINGERS: 5000, // duration of the finger instruction
   },
 
@@ -77,7 +80,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

@@ -6,34 +6,60 @@ import { expInfo } from "../settings";
 
 export const instructions_screen = {
     type: instructions,
-    pages: [
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_1.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_2.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_3.jpg"></img>'
+    pages: expInfo.USE_RESPONSEBOX ? [
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructionsBOX_1.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructionsBOX_2.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructionsBOX_3.jpg"></img>'
+    ] : [
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_1.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_2.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_3.jpg"></img>'
     ],
     button_label_next: BUTTON_INFO.continueButton[expInfo.LANG],
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],
     allow_backward: true,
-    allow_keys: false,
+    allow_keys: true,
+    key_forward: expInfo.USE_RESPONSEBOX ? "control" : "ArrowRight",
+    key_backward: expInfo.USE_RESPONSEBOX ? "alt" :"ArrowLeft",
+    /* IF EXPERIMENT IN THE LAB 
+    key_forward: expInfo.DESIGN.BOX_CHOICES[1],
+    key_backward: expInfo.DESIGN.BOX_CHOICES[0],
+    */
     show_clickable_nav: true,
 };
 
 export const fingers_instructions_practice = {
     type: htmlKeyboardResponse,
-    stimulus: `<div style='font-size:40px; line-height: 2em;'>
+    stimulus: 
+    //IF EXPERIMENT IN THE LAB - Text muss nocch angepasst werden/Ideen? 
+    `<div style='font-size:35px; line-height: 1.5;'>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die zwei <strong>untersten</strong> Tasten links und rechts.<br>
+    Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
+    </div>`,
+
+    /*IF EXPERIMENT IS ONLINE
+    `<div style='font-size:40px; line-height: 2em;'>
     Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>K</strong>.<br>
     Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.<br>
-    </div>`,
+    </div>`,*/
     choices: "ALL_KEYS",
     trial_duration: expInfo.TIMING.FINGERS,
 };
 
 export const fingers_instructions_exp = {
     type: htmlKeyboardResponse,
-    stimulus: `<div style='font-size:40px; line-height: 2em;'>
+    stimulus: 
+    // IF EXPERIMENT IN THE LAB - Text muss nocch angepasst werden/Ideen? 
+    `<div style='font-size:35px; line-height: 1.5;'>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die zwei <strong>untersten</strong> Tasten links und rechts.<br>
+    Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
+    </div>`,
+
+    /* IF EXPERIMENT IS ONLINE
+    `<div style='font-size:40px; line-height: 2em;'>
     Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>K</strong>.<br>
     Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.<br>
-    </div>`,
+    </div>`,*/
     choices: "ALL_KEYS",
     trial_duration: expInfo.TIMING.FINGERS,
 };
@@ -42,8 +68,8 @@ export const break_screen = {
     type: htmlKeyboardResponse,
     stimulus: `<div style='font-size:40px; line-height: 2em;'>
     <strong>Kleine Pause</strong><br>
-    Das Experiment fängt in 1 Minute wieder an oder wenn Sie entweder die Taste <strong>D</strong> oder <strong>K</strong> drücken.<br>
+    Das Experiment fängt in 1 Minute wieder an oder wenn Sie irgendeine Taste drücken.<br>
     </div>`,
-    choice: ["y", "n"],
+    choice: "ALL_KEYS",
     trial_duration: expInfo.TIMING.BREAK,
 }
