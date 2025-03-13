@@ -320,5 +320,4 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
   return jsPsych;
-
 }
