@@ -10,7 +10,7 @@ export const varOnline = {
 
     CODES: {
         SUCCESS: "success", // the code for a successfully completion of the experiment
-        OFFLINE: "online", // the code for the offline situation
+        OFFLINE: "offline", // the code for the offline situation
         FAILED_ATTENTION: "failedAttention", // the code for the failed experiment
         FAILED_OTHERS: "failedOthers", // the code for other failed situations (e.g., failed to resize the window)
         // You can specify the codes for different situations here.
@@ -29,7 +29,7 @@ export const varSystem = {
     nBLUR: 0, // use to count how many times participants left the browser
     MAX_BLUR: 3, // the maximum number of times participants can leave the browser
     LOOP: true, // a switch to control whether participants need to read the instruction and practice again
-    STATUS: "offline"
+    STATUS: "online"
 };
 
 // define experimental variables and color condition

@@ -1,7 +1,7 @@
 /**
  * @title Word Response Binding Task Verbal
  * @description Verbal bindings (word-responses)
- * @version ProcBinding_Verbal_PreTest 
+ * @version ProcBinding_Verbal_PreTest
  *
  * @assets assets/
  */
