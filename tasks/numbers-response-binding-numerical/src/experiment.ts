@@ -1,7 +1,7 @@
 /**
  * @title Numbers Response Binding Task Numerical
  * @description Numerical bindings (numbers-responses)
- * @version 0.0.1 
+ * @version ProcBinding_Numerical_PreTest 
  *
  * @assets assets/
  */
@@ -217,7 +217,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
                   if (correct_last_practice_if < 2) {
                     
-                    endExpPractice(varOnline.FAIL_CODE);
+                    endExpPractice(varOnline.CODES.FAILED_OTHERS);
 
                   } else { //correct_last_practice_if = 2
 
