@@ -5,7 +5,7 @@ import { words } from "../assets/stimuli";
 setCSS();
 
 export const varOnline = {
-    RUN_JATOS: true, // true, if you run your experiment in jatos
+    RUN_JATOS: false, // true, if you run your experiment in jatos
     RUN_PROLIFIC: false, // true, if you run your experiment in Prolific 
 
     CODES: {
