@@ -8,10 +8,18 @@ setCSS();
 export const varOnline = {
   RUN_JATOS: false, // true, if you run your experiment in jatos
   RUN_PROLIFIC: false, // true, if you run your experiment in Prolific
-  COMPLETION_CODE: "XXX", // for Prolific
-  FAIL_CODE: "XXX", // for Prolific
-  INTERNET_CODE: "XXX", // for Prolific
-  DRIVE_LINK: "XXX",
+  
+  CODES: {
+    SUCCESS: "success", // the code for a successfully completion of the experiment
+    OFFLINE: "offline", // the code for the offline situation
+    FAILED_ATTENTION: "failedAttention", // the code for the failed experiment
+    FAILED_OTHERS: "failedOthers", // the code for other failed situations (e.g., failed to resize the window)
+    // You can specify the codes for different situations here.
+  },
+  
+  TIMING: {
+    BREAK: 30
+  } 
 };
 
 export const varSystem = {
@@ -23,7 +31,7 @@ export const varSystem = {
   MAX_BLUR: 3, // the maximum number of times participants can leave the browser
   LOOP: true, // a switch to control whether participants need to read the instruction and practice again
   FAILED_ATTENTION_CHECK: false,
-  STATUS: "offline",
+  STATUS: "online",
 };
 
 // define experimental variables and color condition

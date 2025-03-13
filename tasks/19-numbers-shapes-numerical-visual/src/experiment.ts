@@ -222,7 +222,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
                   if (correct_last_practice_if < 2) {
                     
-                    endExpPractice(varOnline.FAIL_CODE);
+                    endExpPractice(varOnline.CODES.FAILED_OTHERS);
 
                   } else { //correct_last_practice_if = 2
 
@@ -299,7 +299,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline = timeline.concat(proc_speed_instr_line_task);
   timeline = timeline.concat(proc_speed_line_task);
   timeline = timeline.concat(prac_line_all_task); 
