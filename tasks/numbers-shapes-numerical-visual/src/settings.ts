@@ -6,7 +6,7 @@ import { random } from "@coglabuzh/webpsy.js";
 setCSS();
 
 export const varOnline = {
-  RUN_JATOS: false, // true, if you run your experiment in jatos
+  RUN_JATOS: true, // true, if you run your experiment in jatos
   RUN_PROLIFIC: false, // true, if you run your experiment in Prolific
   
   CODES: {
