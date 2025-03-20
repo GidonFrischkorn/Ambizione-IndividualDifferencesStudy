@@ -13,7 +13,7 @@ setCSS();
 export const expInfo = {
   // settings for the experiment
   TITLE: "the_name_of_your_experiment",
-  LANG: "en", // the default language of the experiment
+  LANG: "de", // the default language of the experiment
 
   // design of the experiment
   DESIGN: {
@@ -24,8 +24,8 @@ export const expInfo = {
 
   // settings for each trial
   TIMING: {
-    START: 10 * 1000, // time for the countdown before a new trial starts
-    BREAK: 30, // break duration in seconds
+    START: 300 * 1000, // time for the countdown before a new trial starts
+    BREAK: 300, // break duration in seconds
   },
 
   // when using Prolific, you can set customized completion codes for different situations

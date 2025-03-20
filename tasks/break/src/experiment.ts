@@ -21,6 +21,7 @@ import { jsPsych } from "./jsp";
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
+import { break_screen } from "./instructions/InstrTrial";
 
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -57,11 +58,12 @@ export async function run({
 
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
-  timeline.push(preload_screen);
-  timeline.push(welcome_screen);
-  timeline.push(consent_screen);
-  timeline.push(notice_screen);
-  timeline.push(browser_screen);
+  //timeline.push(preload_screen);
+  //timeline.push(welcome_screen);
+  //timeline.push(consent_screen);
+  //timeline.push(notice_screen);
+  //timeline.push(browser_screen);
+  timeline.push(break_screen);
 
   await jsPsych.run(timeline);
 

@@ -31,6 +31,12 @@ export const SCREEN_INFO = {
     <p>按下空格键后将直接开始</p>`,
   },
 
+  break: {
+    de: ` <p>Bitte nehmen Sie sich eine kurze Pause, bevor das Experiment weitergeht. Falls nötig, können Sie den Versuchsraum gern verlassen. </p> 
+    <p>Ihnen bleiben noch <span id="clock" style="color:red">&nbsp; &nbsp; &nbsp; &nbsp;</span> Minuten, bevor das Experiment automatisch fortgesetzt wird.</p>
+    `,
+  },
+
   blockBreak: function (blockID: number, nBlock: number, lang: string) {
     switch (lang) {
       case "cn":
