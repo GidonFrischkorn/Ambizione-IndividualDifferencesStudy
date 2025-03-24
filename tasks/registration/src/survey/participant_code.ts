@@ -55,9 +55,10 @@ export const extract_code = function (responses: { [key: string]: any }) {
     const code_responses = responses
     console.log(code_responses);
 
-    const participant_code_characters = code_responses.letter_firstname + code_responses.letter_lastname + code_responses.letter_mother + code_responses.letter_father;
+    const participant_code_characters = code_responses["letter-firstname"] + code_responses["letter-lastname"] + code_responses["letter-mother"] + code_responses["letter-father"];
     console.log(participant_code_characters);
-    const participant_code_digits = code_responses.digit_birthdate + code_responses.digit_birthyear.toString();
-    const participant_code = participant_code_characters.toUpperCase() + participant_code_digits;
+    var digit_birthdate = code_responses["digit-birthdate"];
+    var digit_birthyear = code_responses["digit-birthyear"];
+    const participant_code = participant_code_characters.toUpperCase() + digit_birthdate.toString() + digit_birthyear.toString();
     return participant_code;
 }

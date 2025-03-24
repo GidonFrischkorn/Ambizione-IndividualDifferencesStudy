@@ -1,5 +1,6 @@
 import { expInfo } from "../settings";
 import imageButtonResponse from '@jspsych/plugin-image-button-response';
+import instructions from "@jspsych/plugin-instructions";
 
 export const ishihara_test = (lang: string) => {
     let ishihara_line: any[] = [];
@@ -28,14 +29,23 @@ export const ishihara_test = (lang: string) => {
     var prompt_double_digit_second = "<p>Welche <strong>2. Zahl</strong> sehen Sie in dieser Farbtafel?</p>";
 
     // Instructions
-    // ishihara_instructions = ;
+    const ishihara_instructions = {
+        type: instructions,
+        pages: [
+            '<img style="width: 100%" src="./assets/Ishihara_Instructions.jpeg"></img>',
+        ],
+        button_label_next: "Weiter",
+        allow_backward: false,
+        show_clickable_nav: true,
+    };
+    ishihara_line.push(ishihara_instructions);;
 
     for (let i = 0; i < 10; i++) {
         if (double_digit_items.includes(i)) {
             for (let j = 0; j < 2; j++) {
                 var ishihara_trial = {
                     type: imageButtonResponse,
-                    stimulus: 'assets/ishihara_JPEG/' + ishihara_filenames[i],
+                    stimulus: './assets/Ishihara_JPEG/' + ishihara_filenames[i],
                     choices: ishihara_choices,
                     prompt: j == 0 ? prompt_double_digit_first : prompt_double_digit_second,
                     button_layout: 'grid',
@@ -46,7 +56,7 @@ export const ishihara_test = (lang: string) => {
         } else {
             var ishihara_trial = {
                 type: imageButtonResponse,
-                stimulus: 'assets/ishihara_JPEG/' + ishihara_filenames[i],
+                stimulus: './assets/Ishihara_JPEG/' + ishihara_filenames[i],
                 choices: ishihara_choices,
                 prompt: prompt_single_digit,
                 button_layout: 'grid',
@@ -55,7 +65,6 @@ export const ishihara_test = (lang: string) => {
             ishihara_line.push(ishihara_trial);
         }
     }
-
 
     return ishihara_line
 };

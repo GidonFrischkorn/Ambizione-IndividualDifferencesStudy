@@ -2,8 +2,7 @@
  * @title Registration: Ambizione Study
  * @description This experiment will collect individuals interested in the Ambizione Study, collect some demographic data, and questionnaire data.
  * @author Gidon Frischkorn
- * @version 0.3.1
- *
+ * @version registration_pretest
  *
  * @assets assets/
  */
@@ -106,7 +105,7 @@ export async function run({
     survey_json: {
       showQuestionNumbers: false,
       title:
-        "Registrierung: Interesse an der Studie zu kognitiver Leistungsfähigkeit",
+        "Registririerung für die Studie:\n Grundlagen Kognitiver Leistungsfähigkeit",
       pages: survey_pages,
     },
     on_finish: function (data) {
