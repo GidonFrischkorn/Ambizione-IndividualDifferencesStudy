@@ -17,7 +17,6 @@ import { jsPsych } from "../jsp";
 export function createNewTrial(
   XY: number,
   isPractice: boolean,
-  box: boolean,
   majority: string,
   difficulty: string,
   nBlueDots: number,
@@ -42,10 +41,20 @@ export function createNewTrial(
   const stimuli_screen = {
     type: psychophysics,
     stimuli: targetStim,
-    choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES,
+    choices: expInfo.DESIGN.CHOICES,
     mapping: {
-      moreBlue: box ? expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreBlue")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreBlue")]],
-      moreRed: box ? expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreRed")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreRed")]],
+      moreBlue:
+        expInfo.DESIGN.CHOICES[
+          expInfo.DESIGN.MAPPING[
+            expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreBlue")
+          ]
+        ],
+      moreRed:
+        expInfo.DESIGN.CHOICES[
+          expInfo.DESIGN.MAPPING[
+            expInfo.DESIGN.CONDITIONS.MAJORITY.indexOf("moreRed")
+          ]
+        ],
     },
     background_color: expInfo.DESIGN.backgroundCOLOR, // white background
     response_ends_trial: true,

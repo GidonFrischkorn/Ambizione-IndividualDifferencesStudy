@@ -15,25 +15,17 @@ export const expInfo = {
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 40, // number of experiment trials for each condition
-    nPRACTICE: 3, // number of practice trials for each condition
+    nTRIALS: 50, // number of experiment trials for each condition
+    nPRACTICE: 10, // number of practice trials for each condition
     use_ArcResponse: true, // use the arc response
     BreakAt: 0.5, // the ratio of the trials to take a break
     nBLOCKS: 1, // number of blocks
     CONDITIONS: {
-      SETSIZE: [2,3,4],
+      SETSIZE: [3,4,5],
     }, // conditions of the experiment
-    nItemsTested: 4, // number of items tested in the experiment
+    nItemsTested: 1, // number of items tested in the experiment
     backgroundCOLOR: "#FFFFFF", // white background
     POS_OFFSET: 10,
-  },
-
-  COLOR_PATCHES: {
-    SHAPE: "circle",
-    SIZE: 40,
-    RADIUS: 100,
-    LOCATION: "circle",
-    MIN_DIST: 30,
   },
 
   // settings for each trial
@@ -89,7 +81,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: true, // a switch to run the experiment on JATOS
+  RUN_JATOS: false, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

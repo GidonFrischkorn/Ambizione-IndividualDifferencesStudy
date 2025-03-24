@@ -40,14 +40,6 @@ export const helpers = {
 			var filtered_array = array.filter( (element) => !elements_to_remove.includes(element));
 			return filtered_array;
 		}
-	},
-
-	circle_wrap: function(x: number, radians: boolean) {
-		if(radians){
-			return (x + Math.PI) % (2 * Math.PI) - Math.PI;
-		} else {
-			return (x + 180) % 360 - 180;
-		}
 	}
 };
 
@@ -258,8 +250,9 @@ export const checkItemSimilarity = function(array, minDist, gridsize){
 export const createDifference = (arr) => {
 	const differenceArray: number[] = [];
 	for(let i = 0; i < arr.length; i++){
+		let array_element = arr[i];
 		for (let j = i + 1; j < arr.length; j++){
-			differenceArray.push(helpers.circle_wrap(Math.abs(arr[i] - arr[j]), false));
+			differenceArray.push(Math.abs(array_element - arr[j]));
 		}
 	};
 	return differenceArray;

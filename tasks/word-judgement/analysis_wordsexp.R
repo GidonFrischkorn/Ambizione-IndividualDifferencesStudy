@@ -6,12 +6,9 @@ library(dplyr)
 library(smartr)
 library(ggplot2)
 
-json_files <- list.files(pattern = "*.json", path = paste(getwd(),"Downloads", sep = "/"), full.names = T)
-word_files <- json_files[grepl("Word Processing Speed Task", json_files)]
-
 # Convert the json file to a data frame and filter for behavioral data, correct responses and only experimental trials 
-words_result <- read_json_data(word_files[1]) %>% 
-  filter(procedure == "experiment")
+words_result <- read_json_data("Word Processing Speed Task_undefined-4.json") %>% 
+  filter(response %in% c("d", "j"), procedure == "experiment")
 
 ggplot(data = words_result,
        aes(y = rt, x = as.factor(animacy), fill = correct)) +

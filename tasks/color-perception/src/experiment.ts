@@ -2,7 +2,7 @@
  * @title Color perception task
  * @description In this task participants see a cloud of color (red or blue) dots and should decide if there are more red or blue dots.
  * @author Elena Venturi
- * @version color_perception_pretest
+ * @version 0.3.1
  *
  *
  * @assets assets/
@@ -66,7 +66,6 @@ export async function run({
     let practice_trial = createNewTrial(
       j,
       true,
-      expInfo.USE_RESPONSEBOX, // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
       prac_list[j].majority,
       prac_list[j].difficulty,
       prac_list[j].nBlueDots,
@@ -84,7 +83,6 @@ export async function run({
     let exp_trial = createNewTrial(
       j,
       false,
-      expInfo.USE_RESPONSEBOX, // if experiment is conducted in the lab, box (3rd parameter) is true, when online, box is false
       trial_list[j].majority,
       trial_list[j].difficulty,
       trial_list[j].nBlueDots,
@@ -110,7 +108,7 @@ export async function run({
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
   timeline.push(fingers_instructions_practice);
@@ -123,5 +121,5 @@ export async function run({
 
   // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
   // if you handle results yourself, be it here or in `on_finish()`)
-  return jsPsych;
+  // return jsPsych;
 }
