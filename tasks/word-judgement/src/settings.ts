@@ -12,6 +12,8 @@ export const expInfo = {
   TITLE: "Word Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
+  USE_RESPONSEBOX: false, // whether the response box is used in the lab
+
   // design of the experiment
   DESIGN: {
     nTRIALS: 10, // number of experiment trials for each condition
@@ -23,6 +25,7 @@ export const expInfo = {
     }, // conditions of the experiment
     ANIMACY_VALUE: [0, 1],
     CHOICES: ["d", "j"], // choices for the participants
+    BOX_CHOICES: ["alt", "control"], // choices for the response box
     MAPPING: [0, 1], // mapping of the conditions to the choices
   },
 
@@ -32,7 +35,7 @@ export const expInfo = {
     JITTER: 200, // duration of the jitter
     TARGET: 5000, // duration of the target stimulus
     FEEDBACK: 1000, // duration of the feedback
-    ITI: 1200, // duration of the inter-trial interval
+    ITI: 1000, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
     FINGERS: 5000, // duration of the finger instruction
@@ -65,7 +68,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.
