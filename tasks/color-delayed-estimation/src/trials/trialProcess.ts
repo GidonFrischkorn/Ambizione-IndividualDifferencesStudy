@@ -20,7 +20,7 @@ export function createNewTrial(
   isPractice: boolean,
   retrieval_order: number[]
 ): any[] {
-  var trial_line: any[] = [];
+  var trial_line: any[] = []; 
 
   // Fixation Screen
   const fixation_cross = {
@@ -30,7 +30,8 @@ export function createNewTrial(
     origin_center: true, // if true, the location is the center of the rectangle
     width: 20, // of the rectangle
     height: 20,
-    line_length: 20
+    line_length: 30, 
+    line_width: 2.5
   };
 
   const fixation_screen = {
@@ -44,8 +45,8 @@ export function createNewTrial(
   };
 
   // Encoding Screen
-  var memory_stims = generateStims(setsize, "circle", 25, "circle", 100);
-  console.log(memory_stims);
+  var memory_stims = generateStims(setsize, expInfo.COLOR_PATCHES.SHAPE, expInfo.COLOR_PATCHES.SIZE, expInfo.COLOR_PATCHES.LOCATION, expInfo.COLOR_PATCHES.RADIUS);
+  //console.log(memory_stims);
 
   const encoding_screen = {
     type: psychophysics,
@@ -70,13 +71,13 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
   const offset = Math.floor(Math.random() * 360); // Random offset between 0 and 359
 
   // get correct response 
-  const correct_angle = memory_stims[retrieval_order[0]].angle_col;
+  const correct_angle = memory_stims[retrieval_order[retPos]].angle_col;
 
   // set placeholder objects
   const placeholders = generatePlaceholders(memory_stims);
 
   // create retrieval cue object
-  const retrieval_cue = generateRetrievalCue(retrieval_order[0], memory_stims);
+  const retrieval_cue = generateRetrievalCue(retrieval_order[retPos], memory_stims);
 
   // combine all stimuli into one array
   var all_stimuli: any[] = [];
@@ -154,10 +155,15 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
       }
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
+      data.trial_type = isPractice ? "practice" : "experiment";
       data.offset_colorWheel = ColorWheelStimulus.offset;
       data.selected_angle = CircleStimulus.selected_ang;
       data.color_angle = CircleStimulus.color_ang;
       data.color = CircleStimulus.fill_color;
+      for(let i = 0; i < memory_stims.length; i++) {
+        data[`color_angle_${i}`] = memory_stims[i].angle_col;
+        data[`location_angle_${i}`] = memory_stims[i].angle_loc;
+      }
     },
   };
 
@@ -234,11 +240,17 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
       }
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
+      data.trial_type = isPractice ? "practice" : "experiment";
       data.offset_colorWheel = ColorWheelStimulus.offset;
-      data.selected_angle = CircleStimulus.selected_ang;
+      data.selected_angle = ArcStimulus.startAngle;
       data.color_angle = CircleStimulus.color_ang;
       data.color = CircleStimulus.fill_color;
       data.confidence = ArcStimulus.spreadAngle;
+
+      for(let i = 0; i < memory_stims.length; i++) {
+        data[`color_angle_${i}`] = memory_stims[i].angle_col;
+        data[`location_angle_${i}`] = memory_stims[i].angle_loc;
+      }
     },
   };
 
@@ -288,8 +300,6 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
   }
 }
   
-
-
   // Inter Trial Interval Screen
   const inter_trial_interval = {
     type: htmlKeyboardResponse,
