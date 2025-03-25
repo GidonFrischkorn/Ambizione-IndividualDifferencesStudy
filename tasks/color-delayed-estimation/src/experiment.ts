@@ -108,7 +108,7 @@ export async function run({
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(id_survey);
-  timeline.push(welcome_screen);
+  // timeline.push(welcome_screen);
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
