@@ -1,7 +1,7 @@
 /**
  * @title Numbers Response Binding Task Numerical
  * @description Numerical bindings (numbers-responses)
- * @version ProcBinding_Numerical_PreTest 
+ * @version ProcBinding_Numerical_PreTest
  *
  * @assets assets/
  */
