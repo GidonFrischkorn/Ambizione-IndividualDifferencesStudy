@@ -59,7 +59,7 @@ export async function run({
     survey_json: {
       showQuestionNumbers: false,
       title:
-        "Registririerung für die Studie:\n Grundlagen Kognitiver Leistungsfähigkeit",
+        "Teilnehmer Code: Color Delayed Estimation Task",
       pages: [id_page],
     },
     on_finish: function (data) {
@@ -74,9 +74,6 @@ export async function run({
       jsPsych.data.addProperties({participant_id: participant_id});
     }
   };
-
-  /************************************** Instruction ***********************************/
-
 
   /************************************** Practice **************************************/
   
