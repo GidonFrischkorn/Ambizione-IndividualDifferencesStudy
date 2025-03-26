@@ -10,6 +10,7 @@
 
 import "../styles/main.scss"; // stylesheets (.scss or .css)
 import preload from '@jspsych/plugin-preload'; // plugins from jspsych
+import survey from "@jspsych/plugin-survey";
 
 import { MakeExpInfo, varOnline, varSystem} from "./settings"; // settings
 import { jsPsych } from "./jsp";
@@ -22,6 +23,7 @@ import { createIfNode } from "./task-fun/createIfNode";
 import { endExpPractice} from "./task-fun/endExperiment";
 
 import { welcome_screen } from "./instructions/welcome";
+import { participant_code, extract_code } from "./survey/participant_code";
 import { browser_screen } from "./instructions/browserCheck";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { end_screen } from "./instructions/end";
@@ -51,6 +53,29 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     images: assetPaths.images,
     // audio: assetPaths.audio,
     // video: assetPaths.video,
+  };
+
+  /************************************** Participant Code ******************************/
+  const id_page = participant_code("de");
+  const id_survey = {
+    type: survey,
+    survey_json: {
+      showQuestionNumbers: false,
+      title:
+        "Teilnehmer Code: Color Delayed Estimation Task",
+      pages: [id_page],
+    },
+    on_finish: function (data) {
+      // Get responses from questionnaires
+      // if the welcome screen is not included: const search_object = jsPsych.data.get().values()[1].response
+      const search_object = jsPsych.data.get().values()[1].response
+      console.log(search_object);
+
+      // Extract the participant code from the survey responses
+      let participant_id = extract_code(search_object);
+      console.log(participant_id);
+      jsPsych.data.addProperties({participant_id: participant_id});
+    }
   };
 
   /************************************** Experiment **************************************/
@@ -294,7 +319,8 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // push all the screen slides into timeline
   timeline.push(preload_screen);
-  timeline.push(welcome_screen);
+  timeline.push(id_survey);
+  // timeline.push(welcome_screen);
   timeline.push(browser_screen);
   timeline.push(fullMode_screen);
   timeline = timeline.concat(proc_speed_instr_line_task);
