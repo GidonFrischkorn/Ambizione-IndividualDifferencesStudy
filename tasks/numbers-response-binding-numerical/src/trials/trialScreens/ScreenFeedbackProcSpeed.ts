@@ -27,7 +27,7 @@ export const screen_feedback_proc_speed = function(exp_info, task) {
   
       // display accuracy
       return `<p class='fb-text'> Sie haben in ${accuracy}% der Durchgänge richtig geantwortet.</p>
-      <p class='fb-text'> Drücken Sie eine beliebige Taste um fortzufahren.</p>`; 
+      <p class='fb-text'> Drücken Sie eine beliebige Taste, um fortzufahren.</p>`; 
       
     },
     choices: 'ALL_KEYS',
