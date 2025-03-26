@@ -27,8 +27,8 @@ import { exp_start_screen, pra_instr_screen } from "./instructions/InstrTrial";
 import { createNewTrial } from "./trials/trialProcess";
 import { create_trialList, chooseStimuli } from "./trials/trialStim";
 import { instructions_screen } from "./instructions/InstrScreen";
-import { fingers_instructions_practice } from "./instructions/InstrScreen";
-import { fingers_instructions_exp } from "./instructions/InstrScreen";
+import { fingers_instructions_practice, fingers_instructions_practice_BOX } from "./instructions/InstrScreen";
+import { fingers_instructions_exp, fingers_instructions_exp_BOX } from "./instructions/InstrScreen";
 import { words } from "./../assets/stimuli";
 
 
@@ -97,13 +97,21 @@ export async function run({
   //timeline.push(consent_screen);
   //timeline.push(notice_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
-  timeline.push(fingers_instructions_practice);
+  if (expInfo.USE_RESPONSEBOX) {
+    timeline.push(fingers_instructions_practice_BOX)
+  } else {
+    timeline.push(fingers_instructions_practice);
+  }
   timeline = timeline.concat(practice_line);
   timeline.push(exp_start_screen);
-  timeline.push(fingers_instructions_exp);
+  if (expInfo.USE_RESPONSEBOX) {
+    timeline.push(fingers_instructions_exp_BOX)
+  } else {
+    timeline.push(fingers_instructions_exp);
+  }
   timeline = timeline.concat(exp_line);
 
   await jsPsych.run(timeline);
