@@ -26,7 +26,7 @@ import { pra_instr_screen, exp_start_screen } from "./instructions/InstrTrial";
 import { fullMode_screen } from "./instructions/fullScreen";
 import {
   instructions_color_screen,
-  instructions_orientation_screen,
+  instructions_luminance_screen,
   break_screen,
 } from "./instructions/InstrStart";
 
@@ -86,9 +86,9 @@ export async function run({
     block_line = block_line.concat(exp_line);
 
     // Add a break screen + instructions for the second block 
-    if (j === 0) { // After the first block
-      block_line.push(instructions_orientation_screen);
-    }
+    /*if (j === 0) { // After the first block
+      block_line.push(instructions_luminance_screen);
+    }*/
   }
 
   
@@ -103,11 +103,11 @@ export async function run({
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline.push(instructions_color_screen);
   timeline.push(pra_instr_screen);
   timeline = timeline.concat(block_line);
-  // timeline.push(exp_start_screen);
+  //timeline.push(exp_start_screen);
   // timeline.push(fingers_instructions_exp);
   // timeline = timeline.concat(exp_line);
 
