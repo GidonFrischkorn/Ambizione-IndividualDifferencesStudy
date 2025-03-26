@@ -303,10 +303,11 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline = timeline.concat(exp_instr_line_task);
   timeline = timeline.concat(exp_line_task);
   timeline = timeline.concat(end_instr_line_task);
-  timeline.push(question_serious_participation);
-  timeline.push(question_cheat_participation);
-  timeline.push(problems);
-  timeline.push(conditional_problems);
+  //NO SURVEY for the lab experiment 
+  //timeline.push(question_serious_participation);
+  //timeline.push(question_cheat_participation);
+  //timeline.push(problems);
+  //timeline.push(conditional_problems);
   timeline.push(end_screen);
   
   // run the experiment
