@@ -146,7 +146,7 @@ export async function run({
   timeline.push(preload_screen);
   timeline.push(welcome_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
 
   // Experiment screens
   timeline = timeline.concat(finger_check_instr_line);
