@@ -67,15 +67,15 @@ export const screen_feedback_finger_check = function(exp_info) {
         if(last_trial_correct === 1){
 
           // display 'correct'
-          return `<p class='fb-text' style = "color: lime;" >CORRECT</p>` //,'<p style = "color: lime;" >CORRECT</p>'; // the parameter value has to be returned from the function
+          return `<p class='fb-text' style = "color: lime;" >Richtig</p>` //,'<p style = "color: lime;" >CORRECT</p>'; // the parameter value has to be returned from the function
         
         } else { // last trial incorrect
 
           // display 'incorrect'
-          return `<p class='fb-text' style = "color: red;" >INCORRECT <br>
-                  Please position your fingers on the correct positions on the keyboard. <br>
-                  Press the finger that is marked by the red circle. <br>
-                  Press space bar to continue.</p>` // the parameter value has to be returned from the function
+          return `<p class='fb-text' style = "color: red;" >Falsch <br>
+                  Bitte positionieren Sie Ihre Finger an den richtigen Stellen auf der Tastatur. <br>
+                  Drücken Sie den Finger, der durch den roten Kreis markiert ist. <br>
+                  Drücken Sie die Leertaste, um fortzufahren.</p>` // the parameter value has to be returned from the function
         
         }
       },
