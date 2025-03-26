@@ -72,13 +72,13 @@ export function MakeExpInfo(task_condition) {
     n_blocks_break: 4, // number of mini blocks before break
     repeat_controls_stims_after: 4, // number of times control stimuli are repeated
 
-    // number of slides for isntructions
+    // number of slides for instructions
     n_proc_speed_slides_proc: 6,
     n_prac_slides_proc: 6,
 
     // set sizes and certain variable values
     setsize: 5, // number of stimulus in experimental trials
-    prac_setsize: [2, 2, 3, 3, 5, 5], // setsizes for practice trials
+    prac_setsize: [1, 1, 2, 2, 3, 3, 5, 5], // setsizes for practice trials
     stim_count: 90, // number of stimuli (10-99)
     stim_index_dec: random.sample(
       Array.from(Array(90).keys()).map((i) => i + 10),

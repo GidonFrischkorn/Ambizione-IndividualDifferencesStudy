@@ -327,17 +327,18 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline.push(id_survey);
   timeline.push(welcome_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline = timeline.concat(proc_speed_instr_line_task);
   timeline = timeline.concat(proc_speed_line_task);
   timeline = timeline.concat(prac_line_all_task); 
   timeline = timeline.concat(exp_instr_line_task);
   timeline = timeline.concat(exp_line_task);
   timeline = timeline.concat(end_instr_line_task);
-  timeline.push(question_serious_participation);
-  timeline.push(question_cheat_participation);
-  timeline.push(problems);
-  timeline.push(conditional_problems);
+  //NO SURVEY for lab experiment
+  //timeline.push(question_serious_participation);
+  //timeline.push(question_cheat_participation);
+  //timeline.push(problems);
+  //timeline.push(conditional_problems);
   timeline.push(end_screen);
   
   // run the experiment
