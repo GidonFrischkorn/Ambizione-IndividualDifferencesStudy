@@ -2,7 +2,7 @@
  * @title Perceptual Matching Task
  * @description In this task participants have to match a visual feature (color, orientation, or shape) of a target stimulus as accuractely as possible.
  * @author Gidon Frischkorn
- * @version 0.3.1
+ * @version luminance_matching_final
  *
  * @assets assets/
  */
@@ -127,8 +127,8 @@ export async function run({
   // timeline.push(welcome_screen);
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
-  // timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  timeline.push(browser_screen);
+  // timeline.push(fullMode_screen);
   timeline.push(instructions_luminance_screen);
   timeline.push(pra_instr_screen);
   timeline = timeline.concat(block_line);
