@@ -12,7 +12,7 @@ export const expInfo = {
   TITLE: "Color Perception Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
-  USE_RESPONSEBOX: false, // a switch to use the response box
+  USE_RESPONSEBOX: true, // a switch to use the response box
 
   // design of the experiment
   DESIGN: {

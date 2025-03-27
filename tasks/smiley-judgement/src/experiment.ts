@@ -2,7 +2,7 @@
  * @title Smiley Processing Task
  * @description Two dots and a line are shown and participants have to judge if the line fits in between the two dots or not.
  * @author Elena Venturi
- * @version smiley_judgement_pretest
+ * @version smiley_judgement_final
  * @assets assets/
  */
 

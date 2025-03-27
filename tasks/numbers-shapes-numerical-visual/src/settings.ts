@@ -25,7 +25,7 @@ export const varOnline = {
 export const varSystem = {
   TITLE: "BindingVisualDeclarative", // experiment name
   LANG: "de", // the language of the instructions
-  RESPONSE_BOX: false, // a switch to control whether participants use a response box or not (i.e., keyboard)
+  RESPONSE_BOX: true, // a switch to control whether participants use a response box or not (i.e., keyboard)
   TRACK: false, // a switch to track participants' interactions with the browser
   nBLUR: 0, // use to count how many times participants left the browser
   MAX_BLUR: 3, // the maximum number of times participants can leave the browser

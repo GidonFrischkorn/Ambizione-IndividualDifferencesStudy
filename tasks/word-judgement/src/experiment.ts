@@ -2,8 +2,7 @@
  * @title Word Processing Task
  * @description Participant has to tell whether the word represents somthing animate or inanimate.
  * @author Elena Venturi
- * @version word_judgement_pretest
- *
+ * @version word_judgement_final
  *
  * @assets assets/
  */

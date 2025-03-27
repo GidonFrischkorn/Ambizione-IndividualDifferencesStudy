@@ -1,7 +1,7 @@
 /**
  * @title Number - Novel Object Binding Task (Numerical - declarative)
  * @description Numerical bindings (numbers - novel objects)
- * @version DecBinding_Numerical_PreTest
+ * @version DecBinding_Numerical_final
  *
  *
  * @assets assets/
@@ -325,9 +325,9 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // push all the screen slides into timeline
   timeline.push(preload_screen);
   timeline.push(id_survey);
-  timeline.push(welcome_screen);
+  // timeline.push(welcome_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline = timeline.concat(proc_speed_instr_line_task);
   timeline = timeline.concat(proc_speed_line_task);
   timeline = timeline.concat(prac_line_all_task); 

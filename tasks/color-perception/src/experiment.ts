@@ -2,8 +2,7 @@
  * @title Color perception task
  * @description In this task participants see a cloud of color (red or blue) dots and should decide if there are more red or blue dots.
  * @author Elena Venturi
- * @version color_perception_pretest
- *
+ * @version color_perception_final
  *
  * @assets assets/
  */

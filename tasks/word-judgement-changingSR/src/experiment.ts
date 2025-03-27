@@ -2,7 +2,7 @@
  * @title Word Processing Task - changing SR 
  * @description Participant has to tell whether the word represents somthing animate or inanimate. 
  * @author Elena Venturi 
- * @version word_judgement_SR_pretest
+ * @version word_judgement_SR_final
  *
  *
  * @assets assets/

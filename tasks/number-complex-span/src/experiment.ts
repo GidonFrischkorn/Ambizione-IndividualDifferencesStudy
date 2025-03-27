@@ -1,7 +1,7 @@
 /**
  * @title Number Complex Span Task (Object) Exp 2
  * @description A short description of the task
- * @version number_CS_pretest
+ * @version number_CS_final
  *
  * @assets assets/
  */
@@ -104,7 +104,7 @@ export async function run({
   timeline.push(preload_screen);
   timeline.push(id_survey);
   // timeline.push(welcome_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline = timeline.concat(practice_memory_task_line);
   timeline = timeline.concat(practice_judgement_task_line);
   timeline = timeline.concat(practice_dual_tasks_line);

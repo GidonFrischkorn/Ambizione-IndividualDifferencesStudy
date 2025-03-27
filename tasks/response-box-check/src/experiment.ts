@@ -2,7 +2,7 @@
  * @title Response box check
  * @description Check the functionality of all response keys on the response box
  * @author Isabel Courage
- * @version 0.0.1
+ * @version response-box-check_final
  *
  *
  * @assets assets/

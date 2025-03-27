@@ -2,7 +2,7 @@
  * @title Letter Processing Task 
  * @description Participant has to tell whether the letter is a vowel or a consonant as fast as possible. 
  * @author Elena Venturi 
- * @version letter_judgement_pretest
+ * @version letter_judgement_final
  *
  * @assets assets/
  */
@@ -113,7 +113,7 @@ export async function run({
   //timeline.push(consent_screen);
   //timeline.push(notice_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
   if (expInfo.USE_RESPONSEBOX) {

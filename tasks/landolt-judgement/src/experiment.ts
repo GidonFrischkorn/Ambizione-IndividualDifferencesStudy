@@ -5,7 +5,6 @@
  * @author Elena Venturi
  * @version landolt_judgement_final
  *
- *
  * @assets assets/
  */
 
@@ -140,7 +139,7 @@ export async function run({
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  timeline.push(fullMode_screen);
+  // timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
   if (expInfo.USE_RESPONSEBOX) {

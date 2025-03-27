@@ -11,7 +11,7 @@ export const expInfo = {
   TITLE: "Letter Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
-  USE_RESPONSEBOX: false, // whether the experiment uses a response box
+  USE_RESPONSEBOX: true, // whether the experiment uses a response box
 
   // design of the experiment
   DESIGN: {
@@ -76,7 +76,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

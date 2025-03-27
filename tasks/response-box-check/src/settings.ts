@@ -76,8 +76,8 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
-  RESPONSE_BOX: false, // a switch to run experiment with a response box
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
+  RESPONSE_BOX: true, // a switch to run experiment with a response box
 };
 
 // Global variables for the system. Normally, you don't need to change them.
