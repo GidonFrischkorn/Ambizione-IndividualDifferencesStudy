@@ -19,7 +19,7 @@ export const instructions_color_screen = {
     show_clickable_nav: true,
 };
 
-export const instructions_orientation_screen = {
+export const instructions_luminance_screen = {
     type: instructions,
     pages: [
         '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_5.jpg"></img>',
