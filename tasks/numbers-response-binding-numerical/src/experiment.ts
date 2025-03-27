@@ -83,7 +83,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // define whether to run practice, finger check, and processing speed task (0 = no, 1 = yes)
   var is_practice = 1;
-  var is_proc_speed = 0;
+  var is_proc_speed = 1;
 
   // define response box usage
   var response_box = varSystem.RESPONSE_BOX;
