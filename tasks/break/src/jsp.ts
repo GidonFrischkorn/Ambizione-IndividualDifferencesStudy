@@ -50,7 +50,7 @@ export const jsPsych = initJsPsych({
         endScreen = END_INFO.failedResize[expInfo.LANG];
         endInfo = "FAILED_RESIZE";
         endStatus = false;
-        redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.FAILED_OTHERS}`;
+        redirectLink = `https://www.coglab.xyz/publix/SbWi23mwB14`;
         break;
       // when the participants run the experiment online and pass the attention check
       case "success":
@@ -58,10 +58,10 @@ export const jsPsych = initJsPsych({
         endStatus = true;
         if (RUN_JATOS && navigator.onLine === true) {
           endScreen = END_INFO.completedOnline[expInfo.LANG];
-          redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.SUCCESS}`;
+          redirectLink = ``;
         } else {
           endScreen = END_INFO.completedOffline[expInfo.LANG];
-          redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.OFFLINE}`;
+          redirectLink = `https://www.coglab.xyz/publix/SbWi23mwB14`;
         }
         break;
       // when the participants fail the attention check reagardless of the internet status
@@ -69,7 +69,7 @@ export const jsPsych = initJsPsych({
         endScreen = END_INFO.failed[expInfo.LANG];
         endInfo = "FAILED_ATTENTION_CHECK";
         endStatus = false;
-        redirectLink = `https://app.prolific.co/submissions/complete?cc=${CODES.FAILED_ATTENTION}`;
+        redirectLink = `https://www.coglab.xyz/publix/SbWi23mwB14`;
         break;
     }
 
@@ -83,8 +83,9 @@ export const jsPsych = initJsPsych({
       // redirect to the Prolific page after 10 seconds
       setTimeout(function () {
         //@ts-ignore
-        jatos.endStudyAndRedirect(redirectLink, endStatus, endInfo);
-      }, 10000);
+        jatos.endStudy(endStatus, endInfo);
+        // jatos.endStudyAndRedirect(redirectLink, endStatus, endInfo);
+      }, 1000);
     } else {
       // if the participants are offline, download the data as a json file
       if (varSystem.STATUS === "success") {

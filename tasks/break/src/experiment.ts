@@ -2,8 +2,9 @@
  * @title Short Break 
  * @description A single screen that shows a break message for a given number of time and offers to continue early after a set time.
  * @author Chenyu Li and Hannah (Dames) Tschannen
- * @version break_a2
- *
+ * @version break_a1
+ * 
+ * 
  * @assets assets/
  */
 

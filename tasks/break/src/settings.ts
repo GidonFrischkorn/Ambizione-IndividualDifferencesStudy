@@ -25,7 +25,6 @@ export const expInfo = {
   // settings for each trial
   TIMING: {
     MIN_Break: 1.5 * 60 * 1000, // minimum time for the break
-    MAX_Break: 5 * 60 * 1000, // maximum time for the break
     START: 4 * 60 * 1000, // time for the countdown before a new trial starts
     BREAK: 4 * 60, // break duration in seconds
   },
@@ -57,7 +56,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: true, // a switch to run the experiment on JATOS
+  RUN_JATOS: false, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

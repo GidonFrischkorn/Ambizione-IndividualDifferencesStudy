@@ -7,10 +7,10 @@ import { expInfo } from "../settings";
 export const instructions_color_screen = {
     type: instructions,
     pages: [
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_1.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_2.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_3.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_4.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_1.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_2.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_3.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_4.jpg"></img>',
     ],
     button_label_next: BUTTON_INFO.continueButton[expInfo.LANG],
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],
@@ -22,10 +22,10 @@ export const instructions_color_screen = {
 export const instructions_luminance_screen = {
     type: instructions,
     pages: [
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_5.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_6.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_7.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="../assets/images/instructions_8.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_5.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_6.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_7.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_8.jpg"></img>',
     ],
     button_label_next: BUTTON_INFO.continueButton[expInfo.LANG],
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],

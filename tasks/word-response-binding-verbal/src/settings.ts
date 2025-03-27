@@ -54,7 +54,7 @@ export function MakeExpInfo(task_condition) {
         n_exp_trials: 3, // number of experiment trials within mini block
         n_proc_speed_blocks: 1, // number of processing speed blocks
         n_prac_blocks: 1, // number of practice blocks
-        n_exp_blocks: 20, // number of experimental blocks
+        n_exp_blocks: 16, // number of experimental blocks
         n_blocks_break: 4, // number of mini blocks before break
 
         // number of slides for isntructions

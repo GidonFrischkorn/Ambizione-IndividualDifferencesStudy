@@ -60,6 +60,16 @@ export const SCREEN_INFO = {
           <p class="fb-text">Press the space bar to skip the break</p>
           <br>
         </div>`;
+      case "de":
+        return `<div class='main'> 
+          <h1 class='title'>Pause</h1>
+          <p class='fb-text'>
+            Sie haben ${blockID}/${nBlock} Blöcke abgeschlossen.
+            Der nächste Block beginnt in <span id='break' style='color:red'>${expInfo.TIMING.BREAK}</span> Sekunden.
+          </p>
+          <p class="fb-text">Drücken Sie die Leertaste, um die Pause zu überspringen</p>
+          <br>
+        </div>`;
     }
   },
 
@@ -127,6 +137,14 @@ export const END_INFO = {
         如果您有任何问题，请联系研究人员。
     </p>
     </div>`,
+    de: `<div class="main">
+    <h1 class="title">Experiment abgebrochen</h1>
+    <p>
+        Leider ist Ihre Fenstergröße zu klein, um das Experiment fortzusetzen.
+        Daher müssen wir dieses Experiment beenden.
+        Wenn Sie Fragen haben, wenden Sie sich bitte an die Studienleitung.
+    </p>
+    </div>`,
   },
 
   failed: {
@@ -144,7 +162,7 @@ export const END_INFO = {
     <p>
         Leider haben Sie das Browser-Tab oder das Browserfenster öfter verlassen als erlaubt.
         Wie wir Ihnen zu Beginn des Experiments mitgeteilt haben,
-        müssen wir das Experiment daher vorzeitig beenden und können Ihnen keine Versuchspersonenstunden gutschreiben.
+        müssen wir das Experiment daher vorzeitig beenden.
         Wenn Sie Fragen haben, wenden Sie sich bitte an die Studienleitung.
     </p>
     </div>`,
@@ -176,6 +194,15 @@ export const END_INFO = {
         如果窗口在5分钟内未重定向到Prolific，请直接关闭窗口并将完成代码提交至Prolific。
     </p>
     </div>`,
+    de: `<div class="main">
+    <h1 class="title">Herzlichen Glückwunsch!</h1>
+    <p>
+        Sie haben das Experiment erfolgreich abgeschlossen!
+        Wir übertragen die Daten jetzt auf den Server.
+        Wenn das Fenster nach 1 Minute nicht schliesst und sie zur nächsten Aufgabe weiterleitet,
+        dann wenden Sie sich bitte an die Studienleitung.
+    </p>
+    </div>`,
   },
 
   completedOffline: {
@@ -195,6 +222,13 @@ export const END_INFO = {
           数据已自动下载至您的“下载”文件夹，请联系研究人员以获取进一步的帮助。
           </p>
           </div>`,
+    de: `<div class="main">
+          <p h1 class="title">Herzlichen Glückwunsch!</h1>
+          <p class="body-center"> 
+          Sie haben das Experiment erfolgreich abgeschlossen, 
+          aber aufgrund von Netzwerkproblemen konnten Ihre Daten nicht auf den Server hochgeladen werden.
+          </p>
+          </div>`,
   },
 };
 
@@ -202,6 +236,7 @@ export const SURVEY_INFO = {
   TITLE_INFO: {
     cn: `<h1 class="title">事后问卷</h1>`,
     en: `<h1 class="title">Post-Experiment Questionnaire</h1>`,
+    de: `<h1 class="title">Abschlussfrageboebn</h1>`,
   },
   DESCRIPTION: {
     cn: `<div class="main">本问卷的内容仅用于实验数据的处理，对您是否能够获取实验报酬没有影响。请您如实填写。</div>`,
@@ -209,6 +244,10 @@ export const SURVEY_INFO = {
     This questionnaire is only used for the processing of experimental data 
     and has no effect on whether you can receive the credit. 
     Please fill in truthfully.</div>`,
+    de: `<div class="main">
+    Dieser Fragebogen dient nur der Verarbeitung der experimentellen Daten
+    und hat keinen Einfluss darauf, ob Sie die Versuchspersonenstunden erhalten.
+    Bitte füllen Sie ihn wahrheitsgemäß aus.</div>`,
   },
 
   AGE_QUES: {
@@ -232,13 +271,16 @@ export const SURVEY_INFO = {
   ATTENTION_QUES: {
     cn: "在实验过程中，您是否受到了外界环境的干扰？",
     en: "Were you distracted during the experiment?",
+    de: "Wurden Sie während des Experiments abgelenkt?",
   },
   ATTENTION_OPT: {
     cn: ["是", "否"],
     en: ["Yes", "No"],
+    de: ["Ja", "Nein"],
   },
   COMMENT_QUES: {
     cn: "您对本次实验是否有任何建议或意见？",
     en: "Do you have any suggestions or comments on this experiment?",
+    de:  " Haben Sie Vorschläge oder Kommentare zu diesem Experiment?",
   },
 };

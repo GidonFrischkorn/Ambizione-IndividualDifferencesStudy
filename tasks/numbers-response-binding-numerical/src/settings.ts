@@ -63,12 +63,12 @@ export function MakeExpInfo(task_condition) {
     // number of blocks and trials
     n_finger_check_trials: 8, // number of finger check trials
     n_proc_speed_trials: 64, // number of processing speed trials 64
-    n_prac_trials: 8, // number of practice trials
+    n_prac_trials: 6, // number of practice trials
     n_exp_trials: 3, // number of experiment trials within mini block
     n_finger_check_blocks: 1, // number of finger check blocks
     n_proc_speed_blocks: 1, // number of processing speed blocks
     n_prac_blocks: 1, // number of practice blocks
-    n_exp_blocks: 20, // number of experimental blocks --> too long?
+    n_exp_blocks: 16, // number of experimental blocks --> too long?
     n_blocks_break: 4, // number of mini blocks before break
     repeat_controls_stims_after: 4, // number of times control stimuli are repeated
 
@@ -78,7 +78,7 @@ export function MakeExpInfo(task_condition) {
 
     // set sizes and certain variable values
     setsize: 5, // number of stimulus in experimental trials
-    prac_setsize: [1, 1, 2, 2, 3, 3, 5, 5], // setsizes for practice trials
+    prac_setsize: [2, 2, 3, 3, 5, 5], // setsizes for practice trials
     stim_count: 90, // number of stimuli (10-99)
     stim_index_dec: random.sample(
       Array.from(Array(90).keys()).map((i) => i + 10),
