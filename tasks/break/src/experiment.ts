@@ -1,9 +1,8 @@
 /**
- * @title The name of the task
- * @description A short description of the task
+ * @title Short Break 
+ * @description A single screen that shows a break message for a given number of time and offers to continue early after a set time.
  * @author Chenyu Li and Hannah (Dames) Tschannen
- * @version 0.3.1
- *
+ * @version break_a2
  *
  * @assets assets/
  */

@@ -125,7 +125,7 @@ export const break_screen = {
           jsPsych.finishTrial();
         });
       }
-    }, 120000);
+    }, expInfo.TIMING.MIN_Break); // Show button after minimum break time
   },
   on_finish: function () {},
 };
