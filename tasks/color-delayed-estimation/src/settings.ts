@@ -42,7 +42,7 @@ export const expInfo = {
     JITTER: 200, // duration of the jitter
     ENCODING: 1000, // duration of the encoding stimulus
     RETENTION: 1000, // duration of the retention interval
-    FEEDBACK: 1500, // duration of the feedback
+    FEEDBACK: 1000, // duration of the feedback
     ITI: 1000, // duration of the inter-trial interval
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 60 * 1000, // break duration in seconds
