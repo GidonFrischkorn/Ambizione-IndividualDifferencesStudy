@@ -51,7 +51,7 @@ export function MakeExpInfo(task_condition) {
 
         // number of blocks and trials
         n_proc_speed_trials: 64, // number of processing speed trials
-        n_prac_trials: 8, // number of practice trials
+        n_prac_trials: 6, // number of practice trials
         n_exp_trials: 3, // number of experiment trials within mini block
         n_proc_speed_blocks: 1, // number of processing speed blocks
         n_prac_blocks: 1, // number of practice blocks
@@ -64,7 +64,7 @@ export function MakeExpInfo(task_condition) {
         
         // set sizes and certain variable values
         setsize: 6, // number of stimulus in experimental trials
-        prac_setsize: [2, 2, 3, 3, 4, 4, 6, 6], // setsizes for practice trials
+        prac_setsize: [2, 2, 3, 3, 6, 6], // setsizes for practice trials
         stim_count: words.length, // number of stimuli
         stim_index_dec: Array.from(Array(246).keys()).map(i => i),
         stim_index_proc: Array.from(Array(246).keys()).map(i => i),
