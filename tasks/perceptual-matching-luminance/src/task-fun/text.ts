@@ -204,9 +204,8 @@ export const BUTTON_INFO = {
       <p>
           Sie haben das Experiment erfolgreich abgeschlossen! 
           Die Daten werden nun an den Server übertragen. 
-          Bitte kopieren Sie den folgenden Abschlusscode: ${CODES.OFFLINE}. 
-          Wenn das Fenster nach 5 Minuten nicht zu Prolific weitergeleitet wird, 
-          können Sie es einfach schließen und den Abschlusscode an Prolific senden.
+          Wenn sich das Fenster nach 1 Minute nicht schliesst, 
+          dann wenden Sie sich bitte an die Studienleitung.
       </p>
       </div>`,
       cn: `<div class="main">
