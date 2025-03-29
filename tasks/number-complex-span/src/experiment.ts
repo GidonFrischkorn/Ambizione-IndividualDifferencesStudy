@@ -64,7 +64,7 @@ export async function run({
     survey_json: {
       showQuestionNumbers: false,
       title:
-        "Teilnehmer Code: Color Delayed Estimation Task",
+        "Teilnehmer Code: Number Complex Span Task",
       pages: [id_page],
     },
     on_finish: function (data) {
@@ -104,7 +104,7 @@ export async function run({
   timeline.push(preload_screen);
   timeline.push(id_survey);
   // timeline.push(welcome_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline = timeline.concat(practice_memory_task_line);
   timeline = timeline.concat(practice_judgement_task_line);
   timeline = timeline.concat(practice_dual_tasks_line);

@@ -34,6 +34,7 @@ export const jsPsych = initJsPsych({
   on_finish: function (data) {
     // stop tracking interactions
     varSystem.TRACK = false;
+    console.log(varSystem);
 
     // get the data
     var resultJson = jsPsych.data.get().json();
@@ -76,6 +77,7 @@ export const jsPsych = initJsPsych({
 
     // show the end screen
     document.body.innerHTML = endScreen;
+    // console.log(endStatus, endInfo);
 
     // upload the data to JATOS and redirect to the Prolific page
     if (RUN_JATOS && navigator.onLine === true) {
@@ -90,14 +92,15 @@ export const jsPsych = initJsPsych({
           //@ts-ignore
           jatos.endStudy(endStatus, endInfo);
         }
-      }, 3000);
+      }, 1000);
     } else {
       // if the participants are offline, download the data as a json file
       if (varSystem.STATUS === "success") {
         // get the participant ID
         const participant_id = jsPsych.data
           .getLastTrialData()
-          .values()[0].participant;
+          .values()[0].participant_id;
+        console.log(participant_id);
         // set the file name
         var file_name = expInfo.TITLE + "_" + participant_id + ".json";
         // download the data as a json file

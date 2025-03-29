@@ -1,4 +1,3 @@
-import { fail } from "assert";
 import { expInfo } from "../settings";
 
 // Text on the screens
@@ -249,6 +248,15 @@ export const END_INFO = {
     </div>`,
     en: `<div class="main">
     <h1 class="title">We are switching to the next task ... </h1>
+    </div>`,
+    de: `<div class="main">
+    <h1 class="title">Herzlichen Glückwunsch!</h1>
+      <p>
+          Sie haben das Experiment erfolgreich abgeschlossen! 
+          Die Daten werden nun an den Server übertragen. 
+          Wenn sich das Fenster nach 1 Minuten nicht schliesst, 
+          dann wenden Sie sich bitte an die Studienleitung.
+      </p>
     </div>`,
   },
 };

@@ -85,7 +85,7 @@ export const jsPsych = initJsPsych({
         //@ts-ignore
         jatos.endStudy(endStatus, endInfo);
         //jatos.endStudyAndRedirect(redirectLink, endStatus, endInfo);
-      }, 10000);
+      }, 1000);
     } else {
       // if the participants are offline, download the data as a json file
       if (varSystem.STATUS === "success") {
