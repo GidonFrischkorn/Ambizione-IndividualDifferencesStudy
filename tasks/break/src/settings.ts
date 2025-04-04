@@ -12,7 +12,7 @@ setCSS();
 
 export const expInfo = {
   // settings for the experiment
-  TITLE: "the_name_of_your_experiment",
+  TITLE: "Break",
   LANG: "de", // the default language of the experiment
 
   // design of the experiment
@@ -24,7 +24,7 @@ export const expInfo = {
 
   // settings for each trial
   TIMING: {
-    MIN_Break: 1.5 * 60 * 1000, // minimum time for the break
+    MIN_Break: 1 * 60 * 1000, //1.5 * 60 * 1000, // minimum time for the break
     START: 4 * 60 * 1000, // time for the countdown before a new trial starts
     BREAK: 4 * 60, // break duration in seconds
   },
@@ -56,7 +56,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: false, // a switch to run the experiment on JATOS
+  RUN_JATOS: true, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

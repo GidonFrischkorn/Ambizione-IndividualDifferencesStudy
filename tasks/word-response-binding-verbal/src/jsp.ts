@@ -84,7 +84,7 @@ export const jsPsych = initJsPsych({
       setTimeout(function () {
         //@ts-ignore
         jatos.endStudy(endStatus, endInfo);
-      }, 1000);
+      }, 10000);
     } else {
       // if the participants are offline, download the data as a json file
       if (varSystem.STATUS === "success") {

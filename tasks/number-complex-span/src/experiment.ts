@@ -20,6 +20,7 @@ let { DESIGN } = expInfo;
 
 // screens
 import { welcome_screen } from "./instructions/welcome";
+import { browser_screen } from "./instructions/browserCheck";
 import { participant_code, extract_code } from "./survey/participant_code";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { createNewTrial } from "./trials/trialProcess";
@@ -102,7 +103,8 @@ export async function run({
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
-  timeline.push(id_survey);
+  // timeline.push(id_survey);
+  timeline.push(browser_screen);
   // timeline.push(welcome_screen);
   timeline.push(fullMode_screen);
   timeline = timeline.concat(practice_memory_task_line);
