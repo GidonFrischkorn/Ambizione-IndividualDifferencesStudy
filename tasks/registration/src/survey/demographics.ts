@@ -19,7 +19,7 @@ export const demographics = function (language: string = "de") {
       "eigene Angabe",
     ];
 
-    var education_question = "Was ist ihr höchster Bildungsabschluss?";
+    var education_question = "Was ist Ihr höchster Bildungsabschluss?";
     var education_options = [
       "Eidg. Berufsattest",
       "Eidg. Fähigkeitszeugnis",
@@ -51,7 +51,7 @@ export const demographics = function (language: string = "de") {
       "other",
     ];
 
-    var education_question = "Was ist ihr höchster Bildungsabschluss?";
+    var education_question = "Was ist Ihr höchster Bildungsabschluss?";
     var education_options = [
       "Eidg. Berufsattest",
       "Eidg. Fähigkeitszeugnis",
@@ -71,7 +71,7 @@ export const demographics = function (language: string = "de") {
   const name_item = {
     type: "multipletext",
     name: "name",
-    title: "Bitte geben Sie ihren Vor- und Nachnamen an.",
+    title: "Bitte geben Sie Ihren Vor- und Nachnamen an.",
     isRequired: true,
     items: [
       {
@@ -92,7 +92,7 @@ export const demographics = function (language: string = "de") {
   const contact_item = {
     type: "multipletext",
     name: "contact",
-    title: "Bitte geben Sie ihre Kontaktdaten an, damit wir Sie für die Teilnahme an der Studie kontaktieren können.",
+    title: "Bitte geben Sie Ihre Kontaktdaten an, damit wir Sie für die Teilnahme an der Studie kontaktieren können.",
     isRequired: true,
     items: [
       {
@@ -131,7 +131,7 @@ export const demographics = function (language: string = "de") {
   const language_item = {
     "type": "dropdown",
     "name": "language",
-    "title": "Was ist ihre Muttersprache?",
+    "title": "Was ist Ihre Muttersprache?",
     "isRequired": true,
     "showOtherItem": true,
     "choices": [ "(Schweizer)-Deutsch", "Französisch", "Englisch", "Räto-Romanisch"]

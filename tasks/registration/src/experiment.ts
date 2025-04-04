@@ -105,7 +105,7 @@ export async function run({
     survey_json: {
       showQuestionNumbers: false,
       title:
-        "Registririerung für die Studie:\n Grundlagen Kognitiver Leistungsfähigkeit",
+        "Registrierung für die Studie:\n Grundlagen Kognitiver Leistungsfähigkeit",
       pages: survey_pages,
     },
     on_finish: function (data) {
