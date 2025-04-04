@@ -16,8 +16,8 @@ export const bmw3 = function (language: string) {
 
     var title = "Skala zur Erfassung gedanklichen Abschweifens (BMW-3)";
     var instruction =
-      "Sie werden eine Reihe von Aussagen lesen, die ganz allgemein beschreiben, wo Menschen im Alltag mit ihren Gedanken sind." +
-      "Bitte kennzeichnen Sie auf der Antwortskala, inwieweit diese Aussagen im Allgemeinen auf Sie zutreffen." +
+      "Sie werden eine Reihe von Aussagen lesen, die ganz allgemein beschreiben, wo Menschen im Alltag mit ihren Gedanken sind. " +
+      "Bitte kennzeichnen Sie auf der Antwortskala, inwieweit diese Aussagen im Allgemeinen auf Sie zutreffen. " +
       "Es gibt dabei keine richtigen oder falschen Antworten, beantworten Sie die Fragen also einfach aus dem Bauch heraus.";
 
     var items = [

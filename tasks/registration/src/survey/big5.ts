@@ -62,7 +62,7 @@ export const bfi2 = function (
       "Ich bin manchmal unhöflich und schroff.",
       "Ich bin effizient, erledige Dinge schnell.",
       "Ich fühle mich oft bedrückt, freudlos.",
-      "Es macht mir Spaß, gründlich über komplexe Dinge nachzudenken und sie zu verstehen.",
+      "Es macht mir Spass, gründlich über komplexe Dinge nachzudenken und sie zu verstehen.",
 
       "Ich bin voller Energie und Tatendrang.",
       "Ich bin anderen gegenüber misstrauisch.",
