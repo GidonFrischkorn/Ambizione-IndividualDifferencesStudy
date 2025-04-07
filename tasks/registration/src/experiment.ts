@@ -2,7 +2,7 @@
  * @title Registration: Ambizione Study
  * @description This experiment will collect individuals interested in the Ambizione Study, collect some demographic data, and questionnaire data.
  * @author Gidon Frischkorn
- * @version registration_pretest
+ * @version registration_final
  *
  * @assets assets/
  */
