@@ -327,6 +327,7 @@ export const bfi2 = function (
         description: element_description,
         alternateRows: true,
         isAllRowRequired: true,
+        requiredMark: "Bitte beantworten Sie alle Fragen.",
         rows: final_items.slice(i * header_repeat, (i + 1) * header_repeat),
         rowsOrder: "random",
         columns: likert_columns,
@@ -337,17 +338,21 @@ export const bfi2 = function (
     }
 
     bfi2_line = [{
-      elements: element_array,  
-      
+      title: "BFI-2",
+      elements: element_array,
+      requiredErrorText: "Bitte beantworten Sie alle Fragen.",
+      requiredMark: "Bitte beantworten Sie alle Fragen.",
+      requiredText: "Bitte beantworten Sie alle Fragen.", 
     }];
   } else {
-    var item_per_page = 60;
+    var item_per_page = 10;
     var num_pages = Math.ceil(final_items.length / item_per_page);
 
     for(let i = 0; i < num_pages; i++) {
       var matrix_title = "bfi2-matrix-" + i;
 
       var bfi2_page = {
+        title: "BFI-2" + "(Seite " + (i + 1) + " von " + num_pages + ")",
         elements: [
           {
             type: "matrix",
@@ -356,6 +361,7 @@ export const bfi2 = function (
             description: instruction,
             alternateRows: true,
             isAllRowRequired: true,
+            required: "Bitte beantworten Sie alle Fragen.",
             rows: final_items.slice(i * item_per_page, (i + 1) * item_per_page),
             rowsOrder: "random",
             columns: likert_columns,

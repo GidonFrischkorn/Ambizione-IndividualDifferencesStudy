@@ -79,12 +79,14 @@ export const demographics = function (language: string = "de") {
         title: "Vorname",
         inputType: "text",
         isRequired: true,
+        requiredErrorText: "Bitte beantworten Sie alle Fragen.",
       },
       {
         name: "last_name",
         title: "Nachname",
         inputType: "text",
         isRequired: true,
+        requiredErrorText: "Bitte beantworten Sie alle Fragen.",
       },
     ]
   };
@@ -100,6 +102,7 @@ export const demographics = function (language: string = "de") {
         title: "E-Mail",
         inputType: "email",
         isRequired: true,
+        requiredErrorText: "Bitte beantworten Sie alle Fragen.",
       }
     ],
   };
@@ -110,6 +113,7 @@ export const demographics = function (language: string = "de") {
     name: "birthdate",
     title: birthdate_question,
     isRequired: true,
+    requiredErrorText: "Bitte beantworten Sie alle Fragen.",
   };
   
   const age_item = {
@@ -117,6 +121,7 @@ export const demographics = function (language: string = "de") {
     name: "age",
     title: age_question,
     isRequired: true,
+    requiredErrorText: "Bitte beantworten Sie alle Fragen.",
     inputType: "number",
     validators: [
       {
@@ -151,6 +156,7 @@ export const demographics = function (language: string = "de") {
     name: "gender",
     title: gender_question,
     isRequired: true,
+    requiredErrorText: "Bitte beantworten Sie alle Fragen.",
     showNoneItem: true,
     showOtherItem: true,
     choices: gender_options,
@@ -163,11 +169,14 @@ export const demographics = function (language: string = "de") {
     name: "education",
     title: education_question,
     isRequired: true,
+    requiredErrorText: "Bitte beantworten Sie alle Fragen.",
     choices: education_options,
   };
 
   // combine everything into a single survey page
   var demographics_page1 = {
+    title: "Kontaktdaten",
+    description: "Diese Daten werden nur zur Kontaktaufnahme verwendet und seperat von allen anderen Informationen gespeichert.",
     elements: [
       name_item,
       contact_item,
@@ -175,6 +184,7 @@ export const demographics = function (language: string = "de") {
   };
 
   var demographics_page2 = {
+    title: "Demografische Angaben",
     elements: [
       age_item,
       language_item,

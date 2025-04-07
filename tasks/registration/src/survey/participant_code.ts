@@ -7,7 +7,7 @@ export const participant_code = function (language: string = "de") {
             "Dem letzten Buchstaben ihres eigenen Nachnamens",
             "Dem zweiten Buchstaben des Vornamens ihrer Mutter",
             "Dem zweiten Buchstaben des Vornames ihres Vaters",
-            "Der zweiten Ziffer ihres Geburtstages (bei einstelligen Tagen die Ziffer selbst)",
+            "Der zweiten Ziffer ihres Geburtstages (bei einstelligen Tagen die Ziffer selbst, z. Bsp. 5. Januar = 5, 12 . Juni = 2)",
             "Der letzten Ziffer ihres Geburtsjahres",
         ]
     } else {
@@ -32,6 +32,7 @@ export const participant_code = function (language: string = "de") {
             type: "text",
             inputType: item_labels[i].includes("letter") ? "text" : "number",
             isRequired: true,
+            requiredErrorText: "Bitte beantworten Sie alle Fragen.",
             maxLength: 1,
 
         };
@@ -42,7 +43,8 @@ export const participant_code = function (language: string = "de") {
     // combine everything into a single survey page
     var id_page = {
         elements: id_items,
-        title: instructions,
+        title: "Teilnehmercode",
+        description: instructions,
         showQuestionNumbers: "off",
     };
 

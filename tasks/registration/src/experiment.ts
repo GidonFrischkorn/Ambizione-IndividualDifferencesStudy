@@ -106,7 +106,14 @@ export async function run({
       showQuestionNumbers: false,
       title:
         "Registrierung für die Studie:\n Grundlagen Kognitiver Leistungsfähigkeit",
+      pageNextText: "Weiter",
+      pagePrevText: "Zurück",
+      completeText: "Fertig",
+      showProgressBar: "top",
+      progressBarShowPageNumbers: true,
+      progressBarShowPageTitles: true,
       pages: survey_pages,
+      
     },
     on_finish: function (data) {
       // Get responses from questionnaires
