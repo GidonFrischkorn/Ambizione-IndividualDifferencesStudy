@@ -44,6 +44,7 @@ export async function run({
   title,
   version,
 }) {
+  
   // Initialize a timeline to hold the trials
   var timeline: any[] = [];
 
@@ -94,7 +95,7 @@ export async function run({
     }
 
     /************************************** Experiment **************************************/
-    const exp_trials = jsPsych.randomization.factorial(expInfo.DESIGN.CONDITIONS, 20, false);
+    const exp_trials = jsPsych.randomization.factorial(expInfo.DESIGN.CONDITIONS, expInfo.DESIGN.nTRIALS, false);
     console.log(exp_trials);
 
     // Here we need to create the trial_list with 50 trials for each feature 

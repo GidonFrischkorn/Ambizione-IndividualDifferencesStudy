@@ -62,7 +62,7 @@ export function createNewTrial(
       var wheelStim: any;
       if(feature === "color") {
         wheelStim = createColorWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, true);
+          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, false);
       } else if(feature === "orientation") {
         wheelStim = createGreyWheel(window.screen.width/2, window.screen.height/2, 
           expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset)
@@ -139,7 +139,7 @@ export function createNewTrial(
       var wheelStim: any;
       if(feature === "color") {
         wheelStim = createColorWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, true);
+          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, false);
         arc_all_stimuli[arc_all_stimuli.length - 1].fill_color = CIElab.angle_to_rgb(colorAngle);
         arc_all_stimuli[arc_all_stimuli.length - 1].line_color = CIElab.angle_to_rgb(colorAngle);
       } else if(feature === "orientation") {
@@ -216,7 +216,7 @@ export function createNewTrial(
       var feedbackInd: any;
       if(feature === "color") {
         wheelStim_fb = createColorWheel(window.screen.width/2, window.screen.height/2, 
-          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, true);
+          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset, false);
         feedback_all_stimuli[feedback_all_stimuli.length - 1].fill_color = CIElab.angle_to_rgb(colorAngle);
         feedback_all_stimuli[feedback_all_stimuli.length - 1].line_color = CIElab.angle_to_rgb(colorAngle);
         feedbackInd = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 

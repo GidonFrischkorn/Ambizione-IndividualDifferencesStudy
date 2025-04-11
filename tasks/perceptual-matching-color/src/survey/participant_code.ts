@@ -33,7 +33,6 @@ export const participant_code = function (language: string = "de") {
             inputType: item_labels[i].includes("letter") ? "text" : "number",
             isRequired: true,
             maxLength: 1,
-
         };
 
         id_items.push(single_item);
