@@ -94,6 +94,7 @@ export const nfc = function (language: string) {
 
   // combine everything into a single survey page
   var nfc_page = {
+    title: "Need for Cognition",
     elements: [
       {
         type: "matrix",

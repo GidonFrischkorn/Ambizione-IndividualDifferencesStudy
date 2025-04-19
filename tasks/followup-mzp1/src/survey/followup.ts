@@ -302,8 +302,7 @@ export const followup = function (language: string = "de", timepoint: number = 1
 
   const followup_pages = [
     followup_page1,
-    followup_page2,
-    followup_page3
+    followup_page2
   ]
 
   return followup_pages;
