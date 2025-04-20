@@ -70,6 +70,8 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
   // We also need to calculate the random offset of the colored circle. We do this here so that the offset is the same for the color wheel as for the "invisible" color wheel that the participant selects from.
   const offset = Math.floor(Math.random() * 360); // Random offset between 0 and 359
 
+  const retrieval_position = retrieval_order[retPos]; // Get the current retrieval position
+
   // get correct response 
   const correct_angle = memory_stims[retrieval_order[retPos]].angle_col;
 
@@ -130,10 +132,11 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
         angleDegrees += 360;
       }
 
-      current_circle.selected_ang = angleDegrees; // Change the angle of the circle
-
       // Apply the offset and ensure it stays within 0–360 degrees
       var offset_angleDegrees = (angleDegrees + offset) % 360;
+
+      current_circle.selected_ang = angleDegrees; // Change the angle of the circle
+      current_circle.selected_ang_offset = offset_angleDegrees;
 
       // Calculate the ever-changing color during the trial
       const color = CIElab.angle_to_rgb(offset_angleDegrees);
@@ -155,11 +158,14 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
       }
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
-      data.trial_type = isPractice ? "practice" : "experiment";
+      data.procedure = isPractice ? "practice" : "experiment";
       data.offset_colorWheel = ColorWheelStimulus.offset;
       data.selected_angle = CircleStimulus.selected_ang;
+      data.selected_angle_offset = CircleStimulus.selected_ang_offset;
       data.color_angle = CircleStimulus.color_ang;
       data.color = CircleStimulus.fill_color;
+      data.ret_position = retrieval_position;
+      data.correct_angle = correct_angle;
       for(let i = 0; i < memory_stims.length; i++) {
         data[`color_angle_${i}`] = memory_stims[i].angle_col;
         data[`location_angle_${i}`] = memory_stims[i].angle_loc;
@@ -240,13 +246,14 @@ for (let retPos = 0; retPos < retrieval_order.length; retPos++) {
       }
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
-      data.trial_type = isPractice ? "practice" : "experiment";
+      data.procedure = isPractice ? "practice" : "experiment";
       data.offset_colorWheel = ColorWheelStimulus.offset;
       data.selected_angle = ArcStimulus.startAngle;
       data.color_angle = CircleStimulus.color_ang;
       data.color = CircleStimulus.fill_color;
       data.confidence = ArcStimulus.spreadAngle;
-
+      data.ret_position = retrieval_position;
+      data.correct_angle = correct_angle;
       for(let i = 0; i < memory_stims.length; i++) {
         data[`color_angle_${i}`] = memory_stims[i].angle_col;
         data[`location_angle_${i}`] = memory_stims[i].angle_loc;

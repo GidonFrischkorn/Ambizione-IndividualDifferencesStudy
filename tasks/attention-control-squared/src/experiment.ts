@@ -1,8 +1,8 @@
 /**
- * @title Attention Control Squared
+ * @title Stroop Squared
  * @description Participant has to tell whether the word represents somthing animate or inanimate.
  * @author Luca Läubin
- * @version attention_control_squared_pretest
+ * @version stroop_squared_pretest
  *
  *
  * @assets assets/

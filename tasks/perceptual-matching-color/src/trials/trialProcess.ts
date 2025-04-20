@@ -47,7 +47,7 @@ export function createNewTrial(
 
   // Matching Screen
   const matching_stimuli = generateStims(feature, trial_type);
-
+  console.log(matching_stimuli);
   // get correct response 
   var correct_response: number = matching_stimuli[0].correct_angle;
   
@@ -118,6 +118,7 @@ export function createNewTrial(
       data.procedure = isPractice ? "practice" : "experiment";
       data.wheel_offset = stim_array[stim_array.length - 1].offset;
       data.selected_angle = stim_array[stim_array.length - 2].current_angle;
+      data.correct_angle = correct_response;
       data.color = stim_array[stim_array.length - 2].fill_color;
     },
   };
@@ -152,7 +153,6 @@ export function createNewTrial(
       arc_all_stimuli.push(wheelStim);
       arc_all_stimuli.push(arcResponse);
       // Return both stimuli as an array
-      console.log(arc_all_stimuli);
       return arc_all_stimuli; // Use spread operator to ensure a fresh copy
     },
     background_color: expInfo.DESIGN.backgroundCOLOR,
@@ -184,7 +184,8 @@ export function createNewTrial(
     },
     on_finish: function (data) {
       // To store the final circle stimuli and the selected color, we once again access the stimuli array from the current trial
-      const stimuli_array = jsPsych.getCurrentTrial().stim_array 
+      const stimuli_array = jsPsych.getCurrentTrial().stim_array
+      
 
       // Find the circle stimulus
       const TargetStimulus = stimuli_array[stimuli_array.length-3];
@@ -193,11 +194,10 @@ export function createNewTrial(
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
       data.procedure = isPractice ? "practice" : "experiment";
-      data.offset_colorWheel = ColorWheelStimulus.offset;
-      data.selected_angle = TargetStimulus.selected_ang;
-      data.color_angle = TargetStimulus.color_ang;
+      data.wheel_offset = stimuli_array[stimuli_array.length-2].offset;
+      data.correct_angle = correct_response;
       data.color = TargetStimulus.fill_color;
-      data.confidence = ArcStimulus.spreadAngle;
+      data.confidence = stimuli_array[stimuli_array.length-1].spreadAngle;
     },
   };
 
