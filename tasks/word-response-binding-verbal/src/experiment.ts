@@ -1,7 +1,7 @@
 /**
  * @title Word Response Binding Task Verbal
  * @description Verbal bindings (word-responses)
- * @version ProcBinding_Verbal_final
+ * @version ProcBinding_Verbal_final2
  *
  * @assets assets/
  */
@@ -248,7 +248,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
                 } else { // counter_loop_task >= 1 then end study and redirect to Prolific 
 
                   if (correct_last_practice_if < 4) {
-                   
+                  
                     endExpPractice(varOnline.CODES.FAILED_OTHERS);
 
                   } else { //correct_last_practice_if = 4
@@ -334,12 +334,12 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   timeline = timeline.concat(exp_instr_line_task);
   timeline = timeline.concat(exp_line_task);
   timeline = timeline.concat(end_instr_line_task);
-  //NO SURVEY for lab experiment
-  //timeline.push(question_serious_participation);
-  //timeline.push(question_cheat_participation);
-  //timeline.push(problems);
-  //timeline.push(conditional_problems);
-  timeline.push(end_screen);
+  // NO SURVEY for lab experiment
+  // timeline.push(question_serious_participation);
+  // timeline.push(question_cheat_participation);
+  // timeline.push(problems);
+  // timeline.push(conditional_problems);
+  // timeline.push(end_screen);
   
   // run the experiment
   await jsPsych.run(timeline);

@@ -78,6 +78,10 @@ export async function run({
     }
   };
 
+  console.log("Hello from the experiment!");
+
+
+
   /************************************** Practice **************************************/
   const prac_list = create_trialList();
   
