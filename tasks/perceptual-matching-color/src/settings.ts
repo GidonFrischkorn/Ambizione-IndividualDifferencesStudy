@@ -25,7 +25,7 @@ export const expInfo = {
   // design of the experiment
   DESIGN: {
     nTRIALS: 40, // number of experiment trials for each condition
-    nPRACTICE: 10, // number of practice trials for each condition
+    nPRACTICE: 6, // number of practice trials for each condition
     use_ArcResponse: true, // use the arc response
     BreakAt: 0.5, // the ratio of the trials to take a break
     nBLOCKS: 1, // number of blocks
@@ -90,7 +90,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: true, // a switch to run the experiment on JATOS
+  RUN_JATOS: false, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

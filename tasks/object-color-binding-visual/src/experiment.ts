@@ -1,7 +1,7 @@
 /**
  * @title Object Color Binding Task Visual
  * @description Visual bindings (objects-colors)
- * @version DecBinding_Visual_final
+ * @version DecBinding_Visual_final2
  *
  * @assets assets/
  */

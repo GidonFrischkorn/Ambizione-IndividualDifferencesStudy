@@ -20,6 +20,7 @@ export function createNewTrial(
   feature: string,
   trial_type: string, 
   isPractice: boolean,
+  trial_number: number,
   arc_confidence: boolean,
 ): any[] {
   var trial_line: any[] = [];
@@ -116,8 +117,11 @@ export function createNewTrial(
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
       data.procedure = isPractice ? "practice" : "experiment";
+      data.trial_type = "color_matching";
+      data.trial_number = trial_number;
       data.wheel_offset = stim_array[stim_array.length - 1].offset;
       data.selected_angle = stim_array[stim_array.length - 2].current_angle;
+      data.selected_angle_offset = stim_array[stim_array.length - 2].current_angle + stim_array[stim_array.length - 1].offset;
       data.correct_angle = correct_response;
       data.color = stim_array[stim_array.length - 2].fill_color;
     },
@@ -194,6 +198,8 @@ export function createNewTrial(
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
       data.procedure = isPractice ? "practice" : "experiment";
+      data.trial_type = "confidence";
+      data.trial_number = trial_number;
       data.wheel_offset = stimuli_array[stimuli_array.length-2].offset;
       data.correct_angle = correct_response;
       data.color = TargetStimulus.fill_color;
