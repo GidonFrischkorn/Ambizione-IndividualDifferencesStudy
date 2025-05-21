@@ -11,9 +11,9 @@ export const instructions_screen = {
         '<img style="width: 100%; height: 80vh" src="./assets/images/instructionsBOX_2.jpg"></img>',
         '<img style="width: 100%; height: 80vh" src="./assets/images/instructionsBOX_3.jpg"></img>'
     ] : [
-        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_1.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_2.jpg"></img>',
-        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions_3.jpg"></img>'
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions1.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions2.jpg"></img>',
+        '<img style="width: 100%; height: 80vh" src="./assets/images/instructions3.jpg"></img>'
     ],
     button_label_next: BUTTON_INFO.continueButton[expInfo.LANG],
     button_label_previous: BUTTON_INFO.prevButton[expInfo.LANG],

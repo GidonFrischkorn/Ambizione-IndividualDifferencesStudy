@@ -29,6 +29,16 @@ export const expInfo = {
     MAPPING: [0, 1], // mapping of the conditions to the choices
   },
 
+  // Stroop task parameters
+  STROOP: {
+    targetWords: ["RED", "GREEN", "BLUE"] as const, // Wörter die gezeigt werden
+    targetCongruencies: ["congruent", "incongruent"] as const, // Kongruenz Bedingungen für Target
+    responseCongruencies: ["congruent", "incongruent"] as const, // Kongruenz Bedingungen für Antworten
+    nRepsPerCondition: 10, // Anzahl Wiederholungen pro (word x targetCongruency x responseCongruency)-Kombination
+    nPracticeTrials: 10, // Anzahl Practice-Trials
+    choices: ["d", "j"] as const, // erlaubte Antworttasten
+  },
+
   // settings for each trial
   TIMING: {
     FIXATION: 400, // duration of the fixation cross
@@ -68,7 +78,7 @@ export const expInfo = {
   // https://www.toptal.com/developers/keycode/
 
   // Running environment variables
-  RUN_JATOS: true, // a switch to run the experiment on JATOS
+  RUN_JATOS: false, // a switch to run the experiment on JATOS
 };
 
 // Global variables for the system. Normally, you don't need to change them.

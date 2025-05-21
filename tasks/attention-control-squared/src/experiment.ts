@@ -32,7 +32,7 @@ import { fingers_instructions_exp } from "./instructions/InstrScreen";
 import { words } from "../assets/stimuli";
 
 
-// StroopTrials
+// Import trials
 import { createStroopTrials } from "./trials/stroopTrialList"
 /**
  * This function will be executed by jsPsych Builder and is expected to run the jsPsych experiment
@@ -71,17 +71,21 @@ import { createStroopTrials } from "./trials/stroopTrialList"
     const jsPsychTrial = {
       type: jsPsychHtmlKeyboardResponse,
       stimulus: `
-        <div style="font-size: 48px; color: ${trial.textColor.toLowerCase()}; font-weight: bold;">
+        <div style="font-size:48px;color:${trial.textColor.toLowerCase()};">
           ${trial.targetWord}
         </div>
-        <div style="display: flex; justify-content: center; margin-top: 60px; font-size: 28px;">
-          <div style="color: ${trial.leftColor.toLowerCase()}; padding: 0 40px";> ${trial.leftOption}</div>
-          <div style="color: ${trial.rightColor.toLowerCase()}; padding: 0 40px";> ${trial.rightOption}</div>
+        <div style="display:flex;justify-content:center;margin-top:60px;font-size:28px;">
+          <div style="color:${trial.leftColor.toLowerCase()};padding:0 40px">
+            ${trial.leftOption}
+          </div>
+          <div style="color:${trial.rightColor.toLowerCase()};padding:0 40px">
+            ${trial.rightOption}
+          </div>
         </div>
       `,
-      choices: ["d", "j"],
+      choices: expInfo.STROOP.choices,       
       data: trial,
-      on_finish: function (data: any) {
+      on_finish: (data: any) => {
         data.correct = (
           (data.response === "d" && trial.correctAnswer === "left") ||
           (data.response === "j" && trial.correctAnswer === "right")
@@ -90,30 +94,26 @@ import { createStroopTrials } from "./trials/stroopTrialList"
     };
   
     // First 10 are practice
-    if (i < 10) {
+    if (i < expInfo.STROOP.nPracticeTrials) { 
       practice_line.push(jsPsychTrial);
-      const feedback_trial = {
+      practice_line.push({
         type: jsPsychHtmlKeyboardResponse,
-        stimulus: function () {
-          const lastTrial = jsPsych.data.get().last(1).values()[0];
-          return lastTrial.correct
-            ? "<p style='color:green; font-size:24px;'>That was correct :) </p>"
-            : "<p style='color:red; font-size:24px;'>That was incorrect :(</p>";
+        stimulus: () => {
+          const last = jsPsych.data.get().last(1).values()[0];
+          return last.correct
+            ? "<p style='color:green;'>Richtig!</p>"
+            : "<p style='color:red;'>Falsch!</p>";
         },
         choices: "ALL_KEYS",
-        trial_duration: 1000
-      };
-
-      practice_line.push(feedback_trial)
+        trial_duration: expInfo.TIMING.FEEDBACK   
+      });
     } else {
-      const fixation = {
+      exp_line.push({
         type: jsPsychHtmlKeyboardResponse,
-        stimulus: "<p style='font-size: 40px;'>+</p>",
+        stimulus: "<p style='font-size:40px;'>+</p>",
         choices: "NO_KEYS",
-        trial_duration: 500
-      };
-
-      exp_line.push(fixation);
+        trial_duration: expInfo.TIMING.FIXATION  
+      });
       exp_line.push(jsPsychTrial);
     }
   }

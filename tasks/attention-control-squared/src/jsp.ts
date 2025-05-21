@@ -1,5 +1,5 @@
 //Added this against the "jatos is not defined" 
-declare var jatos: any;
+//declare var jatos: any;
 // jsPsych official plugin
 import { initJsPsych } from "jspsych";
 
@@ -18,7 +18,7 @@ import { setCSS } from "./task-fun/setCSS";
 setCSS(); // set the CSS style of the experiment
 
 // Set for the condition in which the data fails to be uploaded to JATOS
- if (RUN_JATOS && typeof jatos !== "undefined") {
+ if (RUN_JATOS) {
   //@ts-ignore
   jatos.httpRetry = 10; // attempts 10 retries of failed requests
   //@ts-ignore
