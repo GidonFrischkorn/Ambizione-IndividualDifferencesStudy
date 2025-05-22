@@ -17,6 +17,7 @@ import { circle_functions } from "../task-fun/circleFun";
  * @returns An array containing all the slides of a trial.
  */
 export function createNewTrial(
+  XY: number,
   feature: string,
   trial_type: string, 
   isPractice: boolean,
@@ -51,17 +52,28 @@ export function createNewTrial(
   // get correct response 
   var correct_response: number = matching_stimuli[matching_stimuli.length - 1].correct_gray;
 
-  var response_scale: any
-  response_scale = {
-    obj_type: "line",
-    startX: window.screen.width/2,
-    startY: window.screen.height/2 + 2*expInfo.STIMULI.OFFSET,
-    line_length: 2*expInfo.COLORWHEEL.radius,
-    line_width: expInfo.COLORWHEEL.size,
-    line_color: grayscale(0),
-    fill_color: grayscale(0),
-    angle: 0
-  }
+  var response_scale: any = {
+        obj_type: 'manual',
+        horiz_pix_sec: 0,
+        show_start_time: 0,
+        startX: window.screen.width/2 - expInfo.COLORWHEEL.radius,
+        startY: window.screen.height/2 + 2*expInfo.STIMULI.OFFSET,
+        drawFunc: function(stimulus, canvas, context){
+            context.beginPath();
+
+            const gradLength = expInfo.COLORWHEEL.radius * 2;
+            const gradWidth = expInfo.STIMULI.SIZE/2;
+            const grad  = context.createLinearGradient(stimulus.startX, stimulus.startY, stimulus.startX + gradLength, stimulus.startY);
+
+            grad.addColorStop(0,`hsl(0, 0%, ${expInfo.STIMULI.MIN_GRAY}%)`); // black
+            grad.addColorStop(1,`hsl(0, 0%, ${expInfo.STIMULI.MAX_GRAY}%)`); // white
+
+            context.fillStyle = grad;
+            context.rect(stimulus.currentX, stimulus.currentY, gradLength, gradWidth);
+            context.fill();
+            context.closePath();
+        }
+    }
 
   var stim_array = JSON.parse(JSON.stringify(matching_stimuli));
   stim_array.push(response_scale);
@@ -97,8 +109,11 @@ export function createNewTrial(
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
       data.procedure = isPractice ? "practice" : "experiment";
+      data.trial_number = XY;
+      data.condition = trial_type;
       data.selected_gray = ResponseStimulus.current_gray;
       data.correct_gray = TargetStimulus.correct_gray;
+      data.correct_response = correct_response;
       data.responseX = ResponseStimulus.response;
     }
   };
@@ -109,8 +124,9 @@ export function createNewTrial(
     type: psychophysics,
     stimuli: function() {
       // Asjust the angle of the test stimulus to the selected angle
-      var confidence_stimuli = JSON.parse(JSON.stringify(stim_array));
-
+      var confidence_stimuli = JSON.parse(JSON.stringify(matching_stimuli));
+      confidence_stimuli.push(response_scale);
+      
       const start_gray = jsPsych.data.get().last(1).values()[0].selected_gray;
       var selected_X = jsPsych.data.get().last(1).values()[0].responseX;
       const spreadAngle = 1;
@@ -169,9 +185,12 @@ export function createNewTrial(
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
       data.procedure = isPractice ? "practice" : "experiment";
+      data.trial_number = XY;
+      data.condition = trial_type;
       data.selected_gray = response_stimulus.current_gray;
       data.responseX = response_stimulus.response;
       data.correct_gray = target_stimulus.correct_gray;
+      data.correct_response = correct_response;
       data.confidence_scaled = 1 - confidence_line.line_length / (2 * expInfo.COLORWHEEL.radius);
       data.confidence_raw = confidence_line.line_length;
     },
@@ -183,7 +202,8 @@ export function createNewTrial(
     correct_angle: correct_response,
     stimuli: function() {
       // Asjust the angle of the test stimulus to the selected angle
-      var feedback_stimuli = JSON.parse(JSON.stringify(stim_array));
+      var feedback_stimuli = JSON.parse(JSON.stringify(matching_stimuli));
+      feedback_stimuli.push(response_scale);
 
       const start_gray = jsPsych.data.get().last(1).values()[0].selected_gray;
 

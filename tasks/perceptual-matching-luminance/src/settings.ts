@@ -24,7 +24,7 @@ export const expInfo = {
 
   // design of the experiment
   DESIGN: {
-    nTRIALS: 50, // number of experiment trials for each condition
+    nTRIALS: 40, // number of experiment trials for each condition
     nPRACTICE: 5, // number of practice trials for each condition
     use_ArcResponse: true, // use the arc response
     BreakAt: 0.5, // the ratio of the trials to take a break

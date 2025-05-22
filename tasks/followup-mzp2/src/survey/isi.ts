@@ -70,7 +70,7 @@ export const isi_questionnaire = function (language: string) {
 
   // combine everything into a single survey page
   var isi_page = {
-    title: title,
+    title: "ISI",
     description: instruction,
     elements: scale_items,
   };

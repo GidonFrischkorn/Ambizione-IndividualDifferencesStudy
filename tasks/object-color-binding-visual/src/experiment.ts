@@ -62,7 +62,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     survey_json: {
       showQuestionNumbers: false,
       title:
-        "Teilnehmer Code: Color Delayed Estimation Task",
+        "Teilnehmer Code: Object Color Binding Task",
       pages: [id_page],
     },
     on_finish: function (data) {

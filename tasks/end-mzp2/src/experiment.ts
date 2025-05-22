@@ -75,7 +75,7 @@ export async function run({
     survey_json: {
       showQuestionNumbers: false,
       title:
-        "Schlussbefragung MZP 1:\n Grundlagen Kognitiver Leistungsfähigkeit",
+        "Schlussbefragung MZP 2:\n Grundlagen Kognitiver Leistungsfähigkeit",
       pageNextText: "Weiter",
       pagePrevText: "Zurück",
       completeText: "Fertig",

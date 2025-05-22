@@ -125,7 +125,7 @@ export const followup = function (language: string = "de", timepoint: number = 1
 
   const notice_binding_item = {
     type: "comment",
-    name: "notice_task",
+    name: "notice_task_binding",
     title: notice_binding_question,
     isRequired: false,
     requiredErrorText: "Bitte beantworten Sie alle Fragen.",
@@ -302,8 +302,7 @@ export const followup = function (language: string = "de", timepoint: number = 1
 
   const followup_pages = [
     followup_page1,
-    followup_page2,
-    followup_page3
+    followup_page2
   ]
 
   return followup_pages;

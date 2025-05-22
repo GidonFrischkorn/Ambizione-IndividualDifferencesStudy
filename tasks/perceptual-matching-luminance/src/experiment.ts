@@ -90,18 +90,18 @@ export async function run({
 
     // Here we should create 9 practice trials for each feature 
     for (let i = 0; i < expInfo.DESIGN.nPRACTICE; i++) {
-      let trial = createNewTrial(prac_trials[i].feature, prac_trials[i].trial_type, true, false);
+      let trial = createNewTrial(i,prac_trials[i].feature, prac_trials[i].trial_type, true, false);
       prac_line = prac_line.concat(trial);
     }
 
     /************************************** Experiment **************************************/
-    const exp_trials = jsPsych.randomization.factorial(expInfo.DESIGN.CONDITIONS, 20, false);
+    const exp_trials = jsPsych.randomization.factorial(expInfo.DESIGN.CONDITIONS, expInfo.DESIGN.nTRIALS, false);
     console.log(exp_trials);
 
     // Here we need to create the trial_list with 50 trials for each feature 
     let exp_line: any[] = [];
     for (let k = 0; k < exp_trials.length; k++) {
-      let trial = createNewTrial(exp_trials[k].feature, exp_trials[k].trial_type, false, false);
+      let trial = createNewTrial(k, exp_trials[k].feature, exp_trials[k].trial_type, false, false);
       exp_line = exp_line.concat(trial);
     }
 

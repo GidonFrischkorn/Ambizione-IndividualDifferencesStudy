@@ -1,8 +1,8 @@
 /**
- * @title Follow Up - MZP 1: Ambizione Study
+ * @title Follow Up - MZP 2: Ambizione Study
  * @description This experiment will collect individuals interested in the Ambizione Study, collect some demographic data, and questionnaire data.
  * @author Gidon Frischkorn
- * @version followup1_final
+ * @version followup2_final
  *
  * @assets assets/
  */
@@ -105,7 +105,7 @@ export async function run({
     survey_json: {
       showQuestionNumbers: false,
       title:
-        "Nachbefragung MZP 1:\n Grundlagen Kognitiver Leistungsfähigkeit",
+        "Nachbefragung MZP 2:\n Grundlagen Kognitiver Leistungsfähigkeit",
       pageNextText: "Weiter",
       pagePrevText: "Zurück",
       completeText: "Fertig",
