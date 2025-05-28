@@ -1,7 +1,7 @@
 /**
  * @title Number Complex Span Task (Object) Exp 2
  * @description A short description of the task
- * @version number_CS_pretest
+ * @version number_CS_final
  *
  * @assets assets/
  */
@@ -11,6 +11,7 @@ import "../styles/main.scss";
 
 // jsPsych official plugin
 import preload from "@jspsych/plugin-preload";
+import survey from "@jspsych/plugin-survey";
 
 // Global variables
 import { jsPsych } from "./jsp";
@@ -19,6 +20,8 @@ let { DESIGN } = expInfo;
 
 // screens
 import { welcome_screen } from "./instructions/welcome";
+import { browser_screen } from "./instructions/browserCheck";
+import { participant_code, extract_code } from "./survey/participant_code";
 import { fullMode_screen } from "./instructions/fullScreen";
 import { createNewTrial } from "./trials/trialProcess";
 import {
@@ -55,6 +58,29 @@ export async function run({
     // video: assetPaths.video,
   };
 
+  /************************************** Participant Code ******************************/
+  const id_page = participant_code(expInfo.LANG);
+  const id_survey = {
+    type: survey,
+    survey_json: {
+      showQuestionNumbers: false,
+      title:
+        "Teilnehmer Code: Number Complex Span Task",
+      pages: [id_page],
+    },
+    on_finish: function (data) {
+      // Get responses from questionnaires
+      // if the welcome screen is not included: const search_object = jsPsych.data.get().values()[1].response
+      const search_object = jsPsych.data.get().values()[1].response
+      console.log(search_object);
+
+      // Extract the participant code from the survey responses
+      let participant_id = extract_code(search_object);
+      console.log(participant_id);
+      jsPsych.data.addProperties({participant_id: participant_id});
+    }
+  };
+
   // ********************** Experiment ********************** //
 
 
@@ -77,13 +103,15 @@ export async function run({
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
-  timeline.push(welcome_screen);
-  // timeline.push(fullMode_screen);
+  // timeline.push(id_survey);
+  timeline.push(browser_screen);
+  // timeline.push(welcome_screen);
+  timeline.push(fullMode_screen);
   timeline = timeline.concat(practice_memory_task_line);
   timeline = timeline.concat(practice_judgement_task_line);
   timeline = timeline.concat(practice_dual_tasks_line);
   timeline = timeline.concat(experiment_line);
-  //timeline.push(survey_screen);
+  // timeline.push(survey_screen);
 
   
 

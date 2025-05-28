@@ -118,6 +118,7 @@ export function createNewTrial(
       const stim_array = jsPsych.getCurrentTrial().stim_array;
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
+      data.procedure = isPractice ? "practice" : "experiment";
       data.wheel_offset = stim_array[stim_array.length - 1].offset;
       data.selected_angle = stim_array[0].current_angle;
       data.color = stim_array[0].fill_color;
@@ -136,13 +137,22 @@ export function createNewTrial(
 
       // Asjust the angle of the test stimulus to the selected angle
       var arc_all_stimuli = JSON.parse(JSON.stringify(matching_stimuli));
-      arc_all_stimuli[0].fill_color = CIElab.angle_to_rgb(colorAngle);
-      arc_all_stimuli[0].line_color = CIElab.angle_to_rgb(colorAngle);
+      
 
-      const colorWheel = createColorWheel(window.screen.width/2, window.screen.height/2, expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
+      var wheelStim: any;
+      if(feature === "color") {
+        wheelStim = createColorWheel(window.screen.width/2, window.screen.height/2, 
+          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
+        arc_all_stimuli[0].fill_color = CIElab.angle_to_rgb(colorAngle);
+        arc_all_stimuli[0].line_color = CIElab.angle_to_rgb(colorAngle);
+      } else if(feature === "orientation") {
+        wheelStim = createGreyWheel(window.screen.width/2, window.screen.height/2, 
+          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
+        arc_all_stimuli[0].angle = startAngle;
+      }
       const arcResponse = createArcResponse(window.screen.width/2, window.screen.height/2, startAngle, spreadAngle, expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, expInfo.ARC_RESPONSE.size_arc, offset);
     
-      arc_all_stimuli.push(colorWheel);
+      arc_all_stimuli.push(wheelStim);
       arc_all_stimuli.push(arcResponse);
       // Return both stimuli as an array
       return arc_all_stimuli; // Use spread operator to ensure a fresh copy
@@ -184,6 +194,7 @@ export function createNewTrial(
       const ArcStimulus = stimuli_array[stimuli_array.length-1];
     
       // Add the selected stimuli (containing the selected color value) to the dataframe
+      data.procedure = isPractice ? "practice" : "experiment";
       data.offset_colorWheel = ColorWheelStimulus.offset;
       data.selected_angle = TargetStimulus.selected_ang;
       data.color_angle = TargetStimulus.color_ang;
@@ -203,19 +214,37 @@ export function createNewTrial(
       const colorAngle = startAngle + offset;
 
       var feedback_all_stimuli = JSON.parse(JSON.stringify(matching_stimuli));
-      feedback_all_stimuli[0].fill_color = CIElab.angle_to_rgb(colorAngle);
-      feedback_all_stimuli[0].line_color = CIElab.angle_to_rgb(colorAngle);
+      var wheelStim_fb: any;
+      var feedbackInd: any;
+      if(feature === "color") {
+        wheelStim_fb = createColorWheel(window.screen.width/2, window.screen.height/2, 
+          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
+          feedback_all_stimuli[0].fill_color = CIElab.angle_to_rgb(colorAngle);
+          feedback_all_stimuli[0].line_color = CIElab.angle_to_rgb(colorAngle);
+          feedbackInd = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
+            expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset - offset);
+      } else if(feature === "orientation") {
+        wheelStim_fb = createGreyWheel(window.screen.width/2, window.screen.height/2, 
+          expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
+          feedback_all_stimuli[0].angle = startAngle;
+          var feedbackInd1 = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
+            expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset);
+          var feedbackInd2 = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
+              expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset + 180);
+          feedbackInd = [feedbackInd1, feedbackInd2];
+      }
 
-      const colorWheel_fb = createColorWheel(window.screen.width/2, window.screen.height/2, 
-        expInfo.COLORWHEEL.radius, expInfo.COLORWHEEL.size, offset);
       const arcResponse_fb = createArcResponse(window.screen.width/2, window.screen.height/2, 
         startAngle, spreadAngle, expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, expInfo.ARC_RESPONSE.size_arc, offset);
-      const feedbackInd = createFeedbackIndicator(window.screen.width/2, window.screen.height/2, 
-        expInfo.ARC_RESPONSE.offset * expInfo.COLORWHEEL.radius, expInfo.ARC_RESPONSE.size_respInd, correct_angle_no_offset - offset);
-
+      
       feedback_all_stimuli.push(arcResponse_fb);
-      feedback_all_stimuli.push(feedbackInd);
-      feedback_all_stimuli.push(colorWheel_fb);
+      if(feature === "color") {
+        feedback_all_stimuli.push(feedbackInd);
+      } else if(feature === "orientation") {
+        feedback_all_stimuli = feedback_all_stimuli.concat(feedbackInd);
+      }
+      
+      feedback_all_stimuli.push(wheelStim_fb);
 
       // Return both stimuli as an array
       return feedback_all_stimuli; // Use spread operator to ensure a fresh copy
@@ -239,7 +268,11 @@ export function createNewTrial(
   trial_line.push(fixation_screen);
   trial_line.push(matching_screen);
   trial_line.push(arc_response_screen);
-  trial_line.push(feedback_screen);
+
+  if (isPractice) {
+    trial_line.push(feedback_screen);
+  }
+  
   trial_line.push(inter_trial_interval);
 
   // return

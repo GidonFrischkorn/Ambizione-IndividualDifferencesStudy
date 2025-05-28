@@ -1,0 +1,78 @@
+<style>
+body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            max-width: 500px;
+        }
+        .form-group {
+            display: grid;
+            grid-template-columns: 1fr auto; /* Label nimmt mehr Platz ein, Input bleibt schmal */
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        label {
+            text-align: left;
+            padding-right: 10px;
+        }
+        input {
+            width: 40px;
+            text-align: center;
+            font-size: 18px;
+            text-transform: uppercase; /* Automatische Umwandlung in Großbuchstaben */
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+        }
+</style>
+
+<div id=consent class="main">
+    <h1 class="title">Teilnehmercode Generieren</h1>
+    
+    <form id="charForm">
+        <div class="form-group">
+            <label for="vornameLetzter">Letzter Buchstabe Ihres Vornamens</label>
+            <input type="text" id="vornameLetzter" name="vornameLetzter" maxlength="1" pattern="[A-Za-zÄÖÜäöü]" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nachnameLetzter">Letzter Buchstabe Ihres Nachnamens</label>
+            <input type="text" id="nachnameLetzter" name="nachnameLetzter" maxlength="1" pattern="[A-Za-zÄÖÜäöü]" required>
+        </div>
+
+        <div class="form-group">
+            <label for="mutterZweiter">Zweiter Buchstabe des Vornamens Ihrer Mutter</label>
+            <input type="text" id="mutterZweiter" name="mutterZweiter" maxlength="1" pattern="[A-Za-zÄÖÜäöü]" required>
+        </div>
+
+        <div class="form-group">
+            <label for="vaterZweiter">Zweiter Buchstabe des Vornamens Ihres Vaters</label>
+            <input type="text" id="vaterZweiter" name="vaterZweiter" maxlength="1" pattern="[A-Za-zÄÖÜäöü]" required>
+        </div>
+
+        <div class="form-group">
+            <label for="geburtstagZweite">Zweite Ziffer Ihres Geburtstages</label>
+            <input type="text" id="geburtstagZweite" name="geburtstagZweite" maxlength="1" pattern="[0-9]" required>
+        </div>
+
+        <div class="form-group">
+            <label for="geburtsjahrLetzte">Letzte Ziffer Ihres Geburtsjahres</label>
+            <input type="text" id="geburtsjahrLetzte" name="geburtsjahrLetzte" maxlength="1" pattern="[0-9]" required>
+        </div>
+
+        <button type="submit">Absenden</button>
+    </form>
+    <br>
+
+    <button type=button class="button" id=agree> Experiment starten </button>
+</div>

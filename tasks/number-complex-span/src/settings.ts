@@ -14,11 +14,11 @@ export const expInfo = {
 
   // experiment design
   DESIGN: {
-    nPRACTICE_RETRO: 3, // number of memory trials in the retro-cue condition
-    nJUDGE: 3, // number of judgement trials
-    nDUAL: 3, // number of dual-task trials
-    nTRIALS: 15, // number of experiment trials for each condition
-    SETSIZE: 3, // set size
+    nPRACTICE_RETRO: 2, // number of memory trials in the retro-cue condition
+    nJUDGE: 2, // number of judgement trials
+    nDUAL: 2, // number of dual-task trials
+    nTRIALS: 12, // number of experiment trials for each condition
+    SETSIZE: 4, // set size
     QUESTION: "question", // questions
     ROWS_ResponseMat: 3, // number of rows in the response matrix
     COLS_ResponseMat: 4, // number of columns in the response matrix

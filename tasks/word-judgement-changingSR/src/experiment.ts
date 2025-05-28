@@ -2,7 +2,7 @@
  * @title Word Processing Task - changing SR 
  * @description Participant has to tell whether the word represents somthing animate or inanimate. 
  * @author Elena Venturi 
- * @version word_judgement_SR_pretest
+ * @version word_judgement_SR_final
  *
  *
  * @assets assets/
@@ -13,6 +13,7 @@ import "../styles/main.scss";
 
 // jsPsych official plugin
 import preload from "@jspsych/plugin-preload";
+import survey from "@jspsych/plugin-survey";
 
 // Global variables
 import { jsPsych } from "./jsp";
@@ -20,6 +21,7 @@ import { expInfo } from "./settings";
 
 // screens
 import { welcome_screen } from "./instructions/welcome";
+import { participant_code, extract_code } from "./survey/participant_code";
 import { consent_screen, notice_screen } from "./instructions/consent";
 import { browser_screen } from "./instructions/browserCheck";
 import { fullMode_screen } from "./instructions/fullScreen";
@@ -27,8 +29,8 @@ import { exp_start_screen, pra_instr_screen } from "./instructions/InstrTrial";
 import { createNewTrial } from "./trials/trialProcess";
 import { create_trialList, chooseStimuli } from "./trials/trialStim";
 import { instructions_screen } from "./instructions/InstrScreen";
-import { fingers_instructions_practice } from "./instructions/InstrScreen";
-import { fingers_instructions_exp } from "./instructions/InstrScreen";
+import { fingers_instructions_practice, fingers_instructions_practice_BOX } from "./instructions/InstrScreen";
+import { fingers_instructions_exp, fingers_instructions_exp_BOX } from "./instructions/InstrScreen";
 import { words } from "./../assets/stimuli";
 
 
@@ -56,7 +58,28 @@ export async function run({
   };
   
 
-  /************************************** Instruction **************************************/
+  /************************************** Participant Code ******************************/
+  const id_page = participant_code(expInfo.LANG);
+  const id_survey = {
+    type: survey,
+    survey_json: {
+      showQuestionNumbers: false,
+      title:
+        "Teilnehmer Code: Word Judgement (changing SR)",
+      pages: [id_page],
+    },
+    on_finish: function (data) {
+      // Get responses from questionnaires
+      // if the welcome screen is not included: const search_object = jsPsych.data.get().values()[1].response
+      const search_object = jsPsych.data.get().values()[1].response
+      console.log(search_object);
+
+      // Extract the participant code from the survey responses
+      let participant_id = extract_code(search_object);
+      console.log(participant_id);
+      jsPsych.data.addProperties({participant_id: participant_id});
+    }
+  };
 
   /************************************** Practice **************************************/
   let usedWords: string[] = [];
@@ -93,17 +116,26 @@ export async function run({
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
-  timeline.push(welcome_screen);
-  //timeline.push(consent_screen);
-  //timeline.push(notice_screen);
+  timeline.push(id_survey);
+  // timeline.push(welcome_screen);
+  // timeline.push(consent_screen);
+  // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
-  timeline.push(fingers_instructions_practice);
+  if (expInfo.USE_RESPONSEBOX) {
+    timeline.push(fingers_instructions_practice_BOX)
+  } else {
+    timeline.push(fingers_instructions_practice);
+  }
   timeline = timeline.concat(practice_line);
   timeline.push(exp_start_screen);
-  timeline.push(fingers_instructions_exp);
+  if (expInfo.USE_RESPONSEBOX) {
+    timeline.push(fingers_instructions_exp_BOX)
+  } else {
+    timeline.push(fingers_instructions_exp);
+  }
   timeline = timeline.concat(exp_line);
 
   await jsPsych.run(timeline);

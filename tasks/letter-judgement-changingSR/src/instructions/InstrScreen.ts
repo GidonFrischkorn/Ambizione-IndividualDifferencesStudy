@@ -27,45 +27,49 @@ export const instructions_screen = {
     allow_keys: true,
     key_forward: expInfo.USE_RESPONSEBOX ? "control" : "ArrowRight",
     key_backward: expInfo.USE_RESPONSEBOX ? "alt" : "ArrowLeft",
-    /* IF EXPERIMENT IN THE LAB 
-    key_forward: expInfo.DESIGN.BOX_CHOICES[1],
-    key_backward: expInfo.DESIGN.BOX_CHOICES[0],
-    */
     show_clickable_nav: true,
 };
 
 export const fingers_instructions_practice = {
     type: htmlKeyboardResponse,
+    stimulus:
+    `<div style='font-size:40px; line-height: 1.5;'>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>K</strong>.<br>
+    Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
+    </div>`,
+    choices: "ALL_KEYS",
+    trial_duration: expInfo.TIMING.FINGERS,
+};
+
+export const fingers_instructions_practice_BOX = {
+    type: htmlKeyboardResponse,
     stimulus: 
-    // IF EXPERIMENT IN THE LAB - Text muss nocch angepasst werden/Ideen? 
     `<div style='font-size:35px; line-height: 1.5;'>
     Bitte legen Sie beide <strong>Zeigefinger</strong> auf die zwei <strong>untersten</strong> Tasten links und rechts.<br>
     Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
     </div>`,
-
-    /*IF EXPERIMENT IS ONLINE
-    `<div style='font-size:40px; line-height: 1.5;'>
-    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>J</strong>.<br>
-    Die Versuchsdurchgänge fangen in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
-    </div>`,*/
     choices: "ALL_KEYS",
     trial_duration: expInfo.TIMING.FINGERS,
 };
 
 export const fingers_instructions_exp = {
     type: htmlKeyboardResponse,
+    stimulus:
+    `<div style='font-size:40px; line-height: 1.5;'>
+    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>K</strong>.<br>
+    Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
+    </div>`,
+    choices: "ALL_KEYS",
+    trial_duration: expInfo.TIMING.FINGERS,
+};
+
+export const fingers_instructions_exp_BOX = {
+    type: htmlKeyboardResponse,
     stimulus: 
-    // IF EXPERIMENT IN THE LAB - Text muss nocch angepasst werden/Ideen? 
     `<div style='font-size:35px; line-height: 1.5;'>
     Bitte legen Sie beide <strong>Zeigefinger</strong> auf die zwei <strong>untersten</strong> Tasten links und rechts.<br>
     Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
     </div>`,
-
-    /* IF EXPERIMENT IS ONLINE
-    `<div style='font-size:40px; line-height: 1.5;'>
-    Bitte legen Sie beide <strong>Zeigefinger</strong> auf die Tasten <strong>D</strong> und <strong>J</strong>.<br>
-    Das Experimemt fängt in 5 Sekunden an oder wenn Sie irgendeine Taste drücken.
-    </div>`,*/
     choices: "ALL_KEYS",
     trial_duration: expInfo.TIMING.FINGERS,
 };
