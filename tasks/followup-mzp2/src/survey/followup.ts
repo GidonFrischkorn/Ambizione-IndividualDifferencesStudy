@@ -12,7 +12,7 @@ export const followup = function (language: string = "de", timepoint: number = 1
     
     var variety_question = "Wie abwechslungsreich fanden Sie die Aufgaben?";
     var strain_question = "Wie anstrengend fanden Sie die Aufgaben?";
-    var notice_binding_question = "Ist Ihnen bei den Binding Aufgaben (Zahlen - Figuren, Objekte - Antworten, oder Wörter - Vornamen Paare merken) irgendetwas besonderes aufgefallen?";
+    var notice_binding_question = "Ist Ihnen bei den Binding Aufgaben (Wörter - Antworten, Objekte - Farben, oder Zahlen - Antworten Paare merken) irgendetwas besonderes aufgefallen?";
     var notice_task_question = "Ist Ihnen bei den anderen Aufgaben irgendetwas besonderes aufgefallen?";
     var comment_task_question = "Haben Sie sonst noch Anmerkungen zu den Aufgaben?";
     
