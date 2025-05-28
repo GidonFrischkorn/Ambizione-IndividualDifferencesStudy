@@ -83,8 +83,8 @@ export const jsPsych = initJsPsych({
       // redirect to the Prolific page after 10 seconds
       setTimeout(function () {
         //@ts-ignore
-        jatos.endStudyAndRedirect(redirectLink, endStatus, endInfo);
-      }, 10000);
+        jatos.endStudy(endStatus, endInfo);
+      }, 1000);
     } else {
       // if the participants are offline, download the data as a json file
       if (varSystem.STATUS === "success") {

@@ -215,6 +215,15 @@ export const END_INFO = {
     en: `<div class="main">
     <h1 class="title">We are switching to the next task ... </h1>
     </div>`,
+    de: `<div class="main" lang="de">
+            <h1 class="title">Herzlichen Glückwunsch!(Offline-Modus)</h1>
+            <p class="body-center">
+            Sie haben das Experiment im Offline-Modus erfolgreich abgeschlossen.
+            Ihre Daten konnten aufgrund von Netzwerkproblemen nicht auf den Server übertragen werden.
+            Sie wurden automatisch in Ihren "Downloads"-Ordner heruntergeladen.
+            Bitte kontaktieren Sie den Studienleiter für weitere Unterstützung.
+            </p>
+            </div>`,
   },
 };
 

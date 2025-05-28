@@ -25,7 +25,7 @@ export const varOnline = {
 export const varSystem = {
   TITLE: "BindingNumericalProcedural", // experiment name
   LANG: "de", // the language of the instructions
-  RESPONSE_BOX: false, // a switch to control whether participants use a response box or not (i.e., keyboard)
+  RESPONSE_BOX: true, // a switch to control whether participants use a response box or not (i.e., keyboard)
   TRACK: false, // a switch to track participants' interactions with the browser
   nBLUR: 0, // use to count how many times participants left the browser
   MAX_BLUR: 3, // the maximum number of times participants can leave the browser
@@ -63,16 +63,16 @@ export function MakeExpInfo(task_condition) {
     // number of blocks and trials
     n_finger_check_trials: 8, // number of finger check trials
     n_proc_speed_trials: 64, // number of processing speed trials 64
-    n_prac_trials: 8, // number of practice trials
+    n_prac_trials: 6, // number of practice trials
     n_exp_trials: 3, // number of experiment trials within mini block
     n_finger_check_blocks: 1, // number of finger check blocks
     n_proc_speed_blocks: 1, // number of processing speed blocks
     n_prac_blocks: 1, // number of practice blocks
-    n_exp_blocks: 20, // number of experimental blocks --> too long?
+    n_exp_blocks: 16, // number of experimental blocks --> too long?
     n_blocks_break: 4, // number of mini blocks before break
     repeat_controls_stims_after: 4, // number of times control stimuli are repeated
 
-    // number of slides for isntructions
+    // number of slides for instructions
     n_proc_speed_slides_proc: 6,
     n_prac_slides_proc: 6,
 

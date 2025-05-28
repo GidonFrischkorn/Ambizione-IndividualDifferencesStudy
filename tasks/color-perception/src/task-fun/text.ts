@@ -161,7 +161,7 @@ export const BUTTON_INFO = {
       <p>
           Sie haben das Experiment erfolgreich abgeschlossen! 
           Die Daten werden nun an den Server übertragen. 
-          Wenn Sie nicht nach 5 Minuten zur nächsten Aufgabe weitergeleitet werden, 
+          Wenn Sie nicht nach 1 Minuten zur nächsten Aufgabe weitergeleitet werden, 
           wenden Sie sich bitte an die Studienleitung.
       </p>
       </div>`,

@@ -24,9 +24,9 @@ export const createIfNode = function(exp_info, is_prac, prev_setsize, task){
     var {Trial, number_idx} = MakeTrial(exp_info, is_prac, task); // stim_index
     var prac_trials_if = Trial, stim_index_prac_if = number_idx;
     
-    var {trial_line, trial_body} = createNewTrial(exp_info, prac_trials_if[0], is_prac, prev_setsize, task);
+    var {trial_line, trial_body} = createNewTrial(exp_info, prac_trials_if[0], is_prac, prev_setsize, task, true);
     prac_if_line = prac_if_line.concat(trial_line); 
-    var {trial_line, trial_body} = createNewTrial(exp_info, prac_trials_if[1], is_prac, 2, task); // last setsize = 2
+    var {trial_line, trial_body} = createNewTrial(exp_info, prac_trials_if[1], is_prac, 2, task, true); // last setsize = 2
     prac_if_line = prac_if_line.concat(trial_line);
 
     // create if node for practice trials

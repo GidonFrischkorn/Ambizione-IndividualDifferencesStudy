@@ -7,7 +7,7 @@ export const screen_prac_setsize_dec = function(exp_info, exp_trial) {
     // text object with setsize
     const stim_cue = {
       obj_type: 'text',
-      content: `You will see now ${exp_trial.setsize} numbers and their objects`,
+      content: `Sie werden nun ${exp_trial.setsize} Paare von Zahlen und Objekte sehen.`,
       font: exp_info.font_cues,
       startX: exp_info.center[0],
       startY: exp_info.center[1]

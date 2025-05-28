@@ -5,8 +5,8 @@ import { jsPsych } from "../jsp";
 
 // answer scale yes/no question
 const scale_yesno = [
-	"Yes",
-	"No"
+	"Ja",
+	"Nein"
 ];
 
 // yes/no technical problems question
@@ -14,7 +14,7 @@ export const problems = {
 	type: surveyMultiChoice,
 	questions: [
 		{
-			prompt: 'Did you encounter any technical problems during the experiment? <br>',
+			prompt: 'Sind Sie während des Experiments auf irgendwelche technischen Probleme gestossen? <br>',
 			options: scale_yesno,
 			name: 'problems',
 			required: true
@@ -22,10 +22,10 @@ export const problems = {
 		
 	],
 	name: "problem_question",
-	button_label: "Continue",
+	button_label: "Weiter",
 	on_finish: function (data) {
 		
-		if (data.response.problems =='Yes') {
+		if (data.response.problems =='Ja') {
 			data.problems_text_answer = true;
 		} else {
 			data.problems_text_answer = false;
@@ -42,14 +42,14 @@ export var problems_text: boolean|any = {
 	type: surveyText,
 	questions: [
 		{
-			prompt: `Please briefly describe the problems you encountered: <br>`,
+			prompt: `Bitte beschreiben Sie kurz die Probleme, auf die Sie gestossen sind: <br>`,
 			rows: 4, columns: 40,
 			name: 'problems_text',
 			required: true
 		}
 	],
 	name: "problem_question_open",
-	button_label: "Continue",
+	button_label: "Weiter",
 	function () {
 		console.log(problems_text)
 	},

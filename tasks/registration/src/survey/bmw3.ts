@@ -16,8 +16,8 @@ export const bmw3 = function (language: string) {
 
     var title = "Skala zur Erfassung gedanklichen Abschweifens (BMW-3)";
     var instruction =
-      "Sie werden eine Reihe von Aussagen lesen, die ganz allgemein beschreiben, wo Menschen im Alltag mit ihren Gedanken sind." +
-      "Bitte kennzeichnen Sie auf der Antwortskala, inwieweit diese Aussagen im Allgemeinen auf Sie zutreffen." +
+      "Sie werden eine Reihe von Aussagen lesen, die ganz allgemein beschreiben, wo Menschen im Alltag mit ihren Gedanken sind. " +
+      "Bitte kennzeichnen Sie auf der Antwortskala, inwieweit diese Aussagen im Allgemeinen auf Sie zutreffen. " +
       "Es gibt dabei keine richtigen oder falschen Antworten, beantworten Sie die Fragen also einfach aus dem Bauch heraus.";
 
     var items = [
@@ -110,6 +110,7 @@ export const bmw3 = function (language: string) {
 
   // combine everything into a single survey page
   var bmw3_page = {
+    title: "BMW-3",
     elements: [
       {
         type: "matrix",
@@ -118,12 +119,18 @@ export const bmw3 = function (language: string) {
         description: instruction,
         alternateRows: true,
         isAllRowRequired: true,
+        requiredMark: "Bitte beantworten Sie alle Fragen.",
+        requiredErrorText: "Bitte beantworten Sie alle Fragen.",
+        requiredText: "Bitte beantworten Sie alle Fragen.", 
         rows: scale_items,
         rowsOrder: "random",
         columns: likert_columns,
         rowTitleWidth: "50%",
       },
     ],
+    requiredErrorText: "Bitte beantworten Sie alle Fragen.",
+    requiredMark: "Bitte beantworten Sie alle Fragen.",
+    requiredText: "Bitte beantworten Sie alle Fragen.", 
   };
 
   return bmw3_page;

@@ -25,7 +25,7 @@ export const varOnline = {
 export const varSystem = {
     TITLE: "BindingVerbalDeclarative", // experiment name
     LANG: "de", // the language of the instructions
-    RESPONSE_BOX: false, // a switch to control whether participants use a response box or not (i.e., keyboard)
+    RESPONSE_BOX: true, // a switch to control whether participants use a response box or not (i.e., keyboard)
     TRACK: false, // a switch to track participants' interactions with the browser
     nBLUR: 0, // use to count how many times participants left the browser
     MAX_BLUR: 3, // the maximum number of times participants can leave the browser
@@ -51,11 +51,11 @@ export function MakeExpInfo(task_condition) {
 
         // number of blocks and trials
         n_proc_speed_trials: 64, // number of processing speed trials
-        n_prac_trials: 8, // number of practice trials
+        n_prac_trials: 6, // number of practice trials
         n_exp_trials: 3, // number of experiment trials within mini block
         n_proc_speed_blocks: 1, // number of processing speed blocks
         n_prac_blocks: 1, // number of practice blocks
-        n_exp_blocks: 20, // number of experimental blocks
+        n_exp_blocks: 16, // number of experimental blocks
         n_blocks_break: 4, // number of mini blocks before break
 
         // number of slides for isntructions
@@ -64,7 +64,7 @@ export function MakeExpInfo(task_condition) {
         
         // set sizes and certain variable values
         setsize: 6, // number of stimulus in experimental trials
-        prac_setsize: [2, 2, 3, 3, 4, 4, 6, 6], // setsizes for practice trials
+        prac_setsize: [2, 2, 3, 3, 6, 6], // setsizes for practice trials
         stim_count: words.length, // number of stimuli
         stim_index_dec: Array.from(Array(246).keys()).map(i => i),
         stim_index_proc: Array.from(Array(246).keys()).map(i => i),

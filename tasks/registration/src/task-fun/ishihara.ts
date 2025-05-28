@@ -20,7 +20,9 @@ export const ishihara_test = (lang: string) => {
         "Ishihara_12.jpg"
     ];
 
-    const double_digit_items = [0, 2, 4, 6, 8, 10]
+    const double_digit_items = [0, 2, 4, 6, 8, 10];
+
+    const correct_answers = [7, 4, 6, 1, 6, 2, 2, 9, 7, 4, 5, 5, 9, 7, 8];
 
     var ishihara_choices = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'keine'];
 
@@ -38,7 +40,9 @@ export const ishihara_test = (lang: string) => {
         allow_backward: false,
         show_clickable_nav: true,
     };
-    ishihara_line.push(ishihara_instructions);;
+    ishihara_line.push(ishihara_instructions);
+
+    var response_count = 0;
 
     for (let i = 0; i < 10; i++) {
         if (double_digit_items.includes(i)) {
@@ -49,9 +53,17 @@ export const ishihara_test = (lang: string) => {
                     choices: ishihara_choices,
                     prompt: j == 0 ? prompt_double_digit_first : prompt_double_digit_second,
                     button_layout: 'grid',
-                    grid_rows: 3
+                    data: {
+                        
+                        correct_answer: correct_answers[response_count],
+                    },
+                    on_finish: function (data: any) {
+                        data.answer = ishihara_choices[data.response],
+                        data.resp_correct = data.correct_answer == data.response
+                    },
                 };
                 ishihara_line.push(ishihara_trial);
+                response_count++;
             }
         } else {
             var ishihara_trial = {
@@ -60,9 +72,16 @@ export const ishihara_test = (lang: string) => {
                 choices: ishihara_choices,
                 prompt: prompt_single_digit,
                 button_layout: 'grid',
-                grid_rows: 3
+                data: {
+                    correct_answer: correct_answers[response_count],
+                },
+                on_finish: function (data: any) {
+                    data.answer = ishihara_choices[data.response],
+                    data.resp_correct = data.correct_answer == data.response
+                },
             };
             ishihara_line.push(ishihara_trial);
+            response_count++;
         }
     }
 

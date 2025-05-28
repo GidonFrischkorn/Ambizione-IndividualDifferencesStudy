@@ -11,7 +11,7 @@ export const expInfo = {
   TITLE: "Letter Processing Speed Task", // the title of the experiment
   LANG: "de", // the default language of the experiment
 
-  USE_RESPONSEBOX: false, // whether the experiment uses a response box
+  USE_RESPONSEBOX: true, // whether the experiment uses a response box
 
   // design of the experiment
   DESIGN: {
@@ -20,7 +20,7 @@ export const expInfo = {
     nBLOCKS: 1, // number of blocks
     CONDITIONS: ["vowel","consonant"], // conditions of the experiment
     BOX_CHOICES: ["alt", "control"], // choices for the participants if experiment in lab 
-    CHOICES: ["d", "j"], // choices for the participants if experiment online 
+    CHOICES: ["d", "k"], // choices for the participants if experiment online 
     MAPPING: [0, 1] // mapping of the conditions to the choices
   },
 
@@ -46,8 +46,7 @@ export const expInfo = {
      LEFT: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.4, // left position of canvas
      RIGHT: (Math.min(screen.width, screen.height/9*16)*0.9) * 0.6, // right position of canvas
      TOP: ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) * 0.3, // top position of canvas
-     BOTTOM: ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) * 0.7, // bottom position of canvas
-     
+     BOTTOM: ((Math.min(screen.width, screen.height/9*16)*0.9) * 0.5) * 0.7, // bottom position of canvas    
   },
 
   // when using Prolific, you can set customized completion codes for different situations
