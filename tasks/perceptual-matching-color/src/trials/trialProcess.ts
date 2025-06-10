@@ -72,6 +72,7 @@ export function createNewTrial(
       console.log(stim_array);
       return stim_array;
     },
+    trial_duration: 15000,
     background_color: expInfo.DESIGN.backgroundCOLOR,
     response_type: "mouse", // This is important, as it provides a psychophysics-internal way of ending the trial when a mouse click is detected. 
     mouse_move_func: function(event) { // This function is the most important part of the trial. We use an event listener that is integrated into the psychophysics plugin, minimizing any conflict with external event listeners. We use it to constantly redraw the color of the item every time the mouse moves.
@@ -160,6 +161,7 @@ export function createNewTrial(
       // Return both stimuli as an array
       return arc_all_stimuli; // Use spread operator to ensure a fresh copy
     },
+    trial_duration: 10000,
     background_color: expInfo.DESIGN.backgroundCOLOR,
     response_type: "mouse", // This is important, as it provides a psychophysics-internal way of ending the trial when a mouse click is detected. 
     mouse_move_func: function(event) {
