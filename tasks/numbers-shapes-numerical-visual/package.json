@@ -16,6 +16,7 @@
     "@jspsych/plugin-image-keyboard-response": "^1.1.3",
     "@jspsych/plugin-instructions": "^1.1.3",
     "@jspsych/plugin-preload": "^1.1.2",
+    "@jspsych/plugin-survey": "^2.1.0",
     "@jspsych/plugin-survey-multi-choice": "^1.1.3",
     "@jspsych/plugin-survey-text": "^1.1.3",
     "@kurokida/jspsych-psychophysics": "^3.6.0",

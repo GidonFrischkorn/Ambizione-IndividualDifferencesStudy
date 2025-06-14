@@ -67,6 +67,7 @@ export const generateStims = function (
         angle_loc: circle_locations[i],
         angle_col: trial_colors[i],
         selected_col: 0,
+        selected_col_offset: 0,
         origin_center: true,
         fill_color: CIElab.angle_to_rgb(trial_colors[i]),
         line_color: CIElab.angle_to_rgb(trial_colors[i]),

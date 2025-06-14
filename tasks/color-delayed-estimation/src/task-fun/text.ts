@@ -204,9 +204,8 @@ export const BUTTON_INFO = {
       <p>
           Sie haben das Experiment erfolgreich abgeschlossen! 
           Die Daten werden nun an den Server übertragen. 
-          Bitte kopieren Sie den folgenden Abschlusscode: ${CODES.OFFLINE}. 
-          Wenn das Fenster nach 5 Minuten nicht zu Prolific weitergeleitet wird, 
-          können Sie es einfach schließen und den Abschlusscode an Prolific senden.
+          Wenn sich das Fenster nach 1 Minuten nicht schliesst, 
+          wenden Sie sich bitte an die Studienleitung.
       </p>
       </div>`,
       cn: `<div class="main">
@@ -230,7 +229,7 @@ export const BUTTON_INFO = {
             </p>
             </div>`,
       de: `<div class="main" lang="de">
-            <h1 class="title">Herzlichen Glückwunsch!(Offline-Modus)</h1>
+            <h1 class="title">Herzlichen Glückwunsch!</h1>
             <p class="body-center">
             Sie haben das Experiment im Offline-Modus erfolgreich abgeschlossen.
             Ihre Daten konnten aufgrund von Netzwerkproblemen nicht auf den Server übertragen werden.

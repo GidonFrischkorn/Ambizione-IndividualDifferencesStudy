@@ -18,12 +18,12 @@ export const screen_feedback_proc = function(exp_info) {
         if(last_trial_correct === 1){
 
           // display 'correct'
-          return `<p class='fb-text' style = "color: lime;" >CORRECT</p>` //,'<p style = "color: lime;" >CORRECT</p>'; // the parameter value has to be returned from the function
+          return `<p class='fb-text' style = "color: lime;" >Richtig</p>` //,'<p style = "color: lime;" >CORRECT</p>'; // the parameter value has to be returned from the function
         
         } else { // last trial incorrect
 
           // display 'incorrect'
-          return `<p class='fb-text' style = "color: red;" >INCORRECT</p>` // the parameter value has to be returned from the function
+          return `<p class='fb-text' style = "color: red;" >Falsch</p>` // the parameter value has to be returned from the function
         
         }
       },

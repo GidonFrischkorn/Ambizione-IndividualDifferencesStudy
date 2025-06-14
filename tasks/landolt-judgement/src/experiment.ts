@@ -3,8 +3,7 @@
  * @description One rectangle is presented with a gap on the left and on the right side.
  * The participant has to indicat on which side the gap is bigger.
  * @author Elena Venturi
- * @version landolt_judgement_pretest
- *
+ * @version landolt_judgement_final
  *
  * @assets assets/
  */
@@ -14,6 +13,7 @@ import "../styles/main.scss";
 
 // jsPsych official plugin
 import preload from "@jspsych/plugin-preload";
+import survey from "@jspsych/plugin-survey";
 
 // Global variables
 import { jsPsych } from "./jsp";
@@ -21,6 +21,7 @@ import { jsPsych } from "./jsp";
 // screens
 import { welcome_screen } from "./instructions/welcome";
 import { consent_screen, notice_screen } from "./instructions/consent";
+import { participant_code, extract_code } from "./survey/participant_code";
 import { browser_screen } from "./instructions/browserCheck";
 import { create_trialList } from "./trials/trialStim";
 import { createNewTrial } from "./trials/trialProcess";
@@ -30,7 +31,9 @@ import { fullMode_screen } from "./instructions/fullScreen";
 import {
   instructions_screen,
   fingers_instructions_practice,
+  fingers_instructions_practice_BOX,
   fingers_instructions_exp,
+  fingers_instructions_exp_BOX,
   break_screen,
 } from "./instructions/InstrStart";
 
@@ -55,8 +58,28 @@ export async function run({
     images: assetPaths.images,
   };
 
-  /************************************** Instruction **************************************/
+  /************************************** Participant Code ******************************/
+  const id_page = participant_code(expInfo.LANG);
+  const id_survey = {
+    type: survey,
+    survey_json: {
+      showQuestionNumbers: false,
+      title:
+        "Teilnehmer Code: Landolt Judgement Task",
+      pages: [id_page],
+    },
+    on_finish: function (data) {
+      // Get responses from questionnaires
+      // if the welcome screen is not included: const search_object = jsPsych.data.get().values()[1].response
+      const search_object = jsPsych.data.get().values()[1].response
+      console.log(search_object);
 
+      // Extract the participant code from the survey responses
+      let participant_id = extract_code(search_object);
+      console.log(participant_id);
+      jsPsych.data.addProperties({participant_id: participant_id});
+    }
+  };
   /************************************** Practice **************************************/
   const prac_list = create_trialList();
 
@@ -111,17 +134,26 @@ export async function run({
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
-  timeline.push(welcome_screen);
+  timeline.push(id_survey);
+  // timeline.push(welcome_screen);
   // timeline.push(consent_screen);
   // timeline.push(notice_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline.push(instructions_screen);
   timeline.push(pra_instr_screen);
-  timeline.push(fingers_instructions_practice);
+  if (expInfo.USE_RESPONSEBOX) {
+    timeline.push(fingers_instructions_practice_BOX)
+  } else {
+    timeline.push(fingers_instructions_practice);
+  }
   timeline = timeline.concat(practice_line);
   timeline.push(exp_start_screen);
-  timeline.push(fingers_instructions_exp);
+  if (expInfo.USE_RESPONSEBOX) {
+    timeline.push(fingers_instructions_exp_BOX)
+  } else {
+    timeline.push(fingers_instructions_exp);
+  }
   timeline = timeline.concat(exp_line);
 
   await jsPsych.run(timeline);

@@ -35,11 +35,11 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, co
     choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES, 
     mapping: {
       vowel:
-        expInfo.DESIGN.CHOICES[
+        (box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES)[
           expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("vowel")]
         ],
       consonant:
-        expInfo.DESIGN.CHOICES[
+        (box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES)[
           expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.indexOf("consonant")]
         ],
     },

@@ -22,7 +22,7 @@
     "@jspsych/plugin-survey-likert": "^2.0.0",
     "@jspsych/plugin-survey-multi-choice": "^2.0.0",
     "@kurokida/jspsych-psychophysics": "^3.6.0",
-    "jspsych": "^7.3.4",
+    "jspsych": "^8.2.1",
     "jss-browserify": "^0.6.0",
     "ml-matrix": "^6.10.4",
     "numeric": "^1.2.6",
