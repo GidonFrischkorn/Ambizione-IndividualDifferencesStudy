@@ -30,7 +30,7 @@ import { instructions_screen } from "./instructions/InstrScreen";
 import { fingers_instructions_practice } from "./instructions/InstrScreen";
 import { fingers_instructions_exp } from "./instructions/InstrScreen";
 import { words } from "../assets/stimuli";
-
+import { break_screen } from "./instructions/breakScreen";
 
 // Import trials
 import { createStroopTrials } from "./trials/stroopTrialList"
@@ -48,7 +48,8 @@ import { createStroopTrials } from "./trials/stroopTrialList"
   }) {
   // Initialize a timeline to hold the trials
   var timeline: any[] = [];
-
+  // Farblabels aus settings.ts auf Deutsch
+  const colorLabels = expInfo.STROOP.colorLabels;
   // Preload assets
   const preload_screen = {
     type: preload,
@@ -64,7 +65,8 @@ import { createStroopTrials } from "./trials/stroopTrialList"
   console.log("Generated Stroop Trials:", stroop_trials);
   let practice_line: any[] = [];
   let exp_line: any[] = [];
-  
+  let expCount = 0;
+
   for (let i = 0; i < stroop_trials.length; i++) {
     const trial = stroop_trials[i];
   
@@ -72,14 +74,14 @@ import { createStroopTrials } from "./trials/stroopTrialList"
       type: jsPsychHtmlKeyboardResponse,
       stimulus: `
         <div style="font-size:48px;color:${trial.textColor.toLowerCase()};">
-          ${trial.targetWord}
+          ${colorLabels[trial.targetWord as keyof typeof colorLabels]}
         </div>
         <div style="display:flex;justify-content:center;margin-top:60px;font-size:28px;">
           <div style="color:${trial.leftColor.toLowerCase()};padding:0 40px">
-            ${trial.leftOption}
+            ${colorLabels[trial.leftOption as keyof typeof colorLabels]}
           </div>
           <div style="color:${trial.rightColor.toLowerCase()};padding:0 40px">
-            ${trial.rightOption}
+            ${colorLabels[trial.rightOption as keyof typeof colorLabels]}
           </div>
         </div>
       `,
@@ -108,6 +110,10 @@ import { createStroopTrials } from "./trials/stroopTrialList"
         trial_duration: expInfo.TIMING.FEEDBACK   
       });
     } else {
+      expCount++;
+      if (expCount === 61) {
+        exp_line.push(break_screen); //Break screen after 60 trials
+      }
       exp_line.push({
         type: jsPsychHtmlKeyboardResponse,
         stimulus: "<p style='font-size:40px;'>+</p>",

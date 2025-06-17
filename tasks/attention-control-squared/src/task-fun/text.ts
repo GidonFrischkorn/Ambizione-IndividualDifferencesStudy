@@ -53,6 +53,13 @@ export const SCREEN_INFO = {
           <p class="fb-text">Press the space bar to skip the break</p>
           <br>
         </div>`;
+      case "de":
+        return `<div class='main'>
+        <h1 class='title'>Machen Sie eine Pause</h1>
+        <p class='fb-text'>
+          Sie sind in der Hälfte des Experiments angekommen. Wenn Sie bereit sind, drücken sie auf "Weiter".
+        </p>
+        </div>`
     }
   },
 

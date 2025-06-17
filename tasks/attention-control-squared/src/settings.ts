@@ -37,6 +37,11 @@ export const expInfo = {
     nRepsPerCondition: 10, // Anzahl Wiederholungen pro (word x targetCongruency x responseCongruency)-Kombination
     nPracticeTrials: 10, // Anzahl Practice-Trials
     choices: ["d", "j"] as const, // erlaubte Antworttasten
+    colorLabels: {
+      RED: "ROT",
+      GREEN: "GRÜN",
+      BLUE: "BLAU"
+    } as Record<"RED"|"GREEN"|"BLUE",string>
   },
 
   // settings for each trial
