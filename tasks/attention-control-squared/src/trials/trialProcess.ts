@@ -44,12 +44,7 @@ export function createNewTrial(XY: number, isPractice: boolean, box: boolean, an
       animacy: animacy,
       wordlength: wordlength,
       fix_duration: fixation_screen.trial_duration,
-      procedure: function (data) {
-        if (isPractice) {
-          return "practice";
-        } else {
-          return "experiment";
-        }
+      procedure: isPractice ? "practice" : "experiment"
       },
       stimulus: targetStim,
     },
