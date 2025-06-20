@@ -92,6 +92,13 @@ import { createStroopTrials } from "./trials/stroopTrialList"
           (data.response === "d" && trial.correctAnswer === "left") ||
           (data.response === "j" && trial.correctAnswer === "right")
         );
+        // Save additional information of each trial into the data
+        data.response_congruency = trial.responseCongruency;
+        data.target_congruency = trial.targetCongruency;
+        data.target_word = trial.targetWord;
+        data.target_color = trial.textColor;
+        data.correct_response = trial.correctAnswer;
+        // etc.
       }
     };
   
