@@ -36,12 +36,14 @@ export const expInfo = {
     responseCongruencies: ["congruent", "incongruent"] as const, // Kongruenz Bedingungen für Antworten
     nRepsPerCondition: 10, // Anzahl Wiederholungen pro (word x targetCongruency x responseCongruency)-Kombination
     nPracticeTrials: 10, // Anzahl Practice-Trials
+    nTrials: 120, // Anzahl Experiment-Trials
     choices: ["d", "j"] as const, // erlaubte Antworttasten
     colorLabels: {
       RED: "ROT",
       GREEN: "GRÜN",
       BLUE: "BLAU"
-    } as Record<"RED"|"GREEN"|"BLUE",string>
+    } as Record<"RED"|"GREEN"|"BLUE",string>,
+    nBreakAfter: 60
   },
 
   // settings for each trial

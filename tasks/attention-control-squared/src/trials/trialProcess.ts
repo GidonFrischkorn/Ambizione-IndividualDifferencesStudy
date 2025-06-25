@@ -6,101 +6,122 @@ import { expInfo } from "../settings";
 // Third party plugins
 import htmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
 import { jsPsych } from "../jsp";
+// Stroop Trial List
+import { StroopTrial } from "./stroopTrialList";
 
-/**
- * A function used to create a single trial.
- * @param XY The number of items in a trial.
- * @param targetStim The stimulus of a trial.
- * @param isPractice A boolean value indicating whether the trial is a practice trial or not.
- *
- * @returns An array containing all the slides of a trial.
- */
-export function createNewTrial(XY: number, isPractice: boolean, box: boolean, animacy: number, wordlength: number, targetStim: string) {  
-  let trial_line: any[] = [];
-
-  // Fixation Screen
-  const fixation_screen = {
+// 1) Practice-Trial
+export function createPracticeTrial(trial: StroopTrial): any[] {
+  const trial_line: any[] = [];
+   trial_line.push({
     type: htmlKeyboardResponse,
-    stimulus: "<div style='font-size:60px;'>+</div>",
-    choices: "NO-KEYS",
-    trial_duration:
-      expInfo.TIMING.FIXATION +
-      Math.floor(Math.random() * (expInfo.TIMING.JITTER + 1)),
-  };
-
-  // Target and Response Screen
-  const target_response_screen = {
+    stimulus: "<p style='font-size:40px;'>+</p>",
+    choices: "NO_KEYS",
+    trial_duration: expInfo.TIMING.FIXATION
+  });
+  // Stimulus-Screen
+  trial_line.push({
     type: htmlKeyboardResponse,
-    stimulus: `<div style='font-size:50px;'> ${targetStim} </div>`,
-    choices: box ? expInfo.DESIGN.BOX_CHOICES : expInfo.DESIGN.CHOICES, 
-    mapping: {
-      animate: box ? expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("animate")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("animate")]], 
-      inanimate: box ?  expInfo.DESIGN.BOX_CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("inanimate")]] : expInfo.DESIGN.CHOICES[expInfo.DESIGN.MAPPING[expInfo.DESIGN.CONDITIONS.ANIMACY.indexOf("inanimate")]],
-    },
-    trial_duration: expInfo.TIMING.TARGET,
-    response_ends_trial: true,
-    data: {
-      trial_number: XY,
-      animacy: animacy,
-      wordlength: wordlength,
-      fix_duration: fixation_screen.trial_duration,
-      procedure: isPractice ? "practice" : "experiment"
-      },
-      stimulus: targetStim,
-    },
-    on_finish: function (data) {
-      let correct =
-        data.response ==
-        (data.animacy == 1 ? this.mapping.animate : this.mapping.inanimate);
-      let correctKey =
-        data.animacy == 1 ? this.mapping.animate : this.mapping.inanimate;
-      jsPsych.data
-        .get()
-        .addToLast({ correct: correct, correct_key: correctKey });
-    },
-  };
+    stimulus: `
+      <div style="font-size:48px; color:${trial.textColor.toLowerCase()};">
+        ${trial.targetWord}
+      </div>
+      <div style="display:flex; justify-content:center; margin-top:60px; font-size:28px;">
+        <div style="color:${trial.leftColor.toLowerCase()}; padding:0 40px;">
+          ${trial.leftOption}
+        </div>
+        <div style="color:${trial.rightColor.toLowerCase()}; padding:0 40px;">
+          ${trial.rightOption}
+        </div>
+      </div>
+    `,
+    choices: expInfo.STROOP.choices,
+    data: trial,
+    on_finish: (data: any) => {
+      data.correct = (
+        (data.response === "d" && trial.correctAnswer === "left") ||
+        (data.response === "j" && trial.correctAnswer === "right")
+      );
+    }
+  });
 
-  // Feedback Stimuls for Practice Trials
-  const feedback = {
+  // Feedback-Screen
+  trial_line.push({
     type: htmlKeyboardResponse,
-    stimulus: function () {
-      let lastTrialCorrect = jsPsych.data.get().last(1).values()[0].correct;
-      if (lastTrialCorrect) {
-        return "<div style='font-size:60px; color:green;'>Richtig :)</div>";
-      } else {
-        return "<div style='font-size:60px; color:red'>Falsch :(</div>";
-      }
+    stimulus: () => {
+      const last = jsPsych.data.get().last(1).values()[0];
+      return last.correct
+        ? "<p style='color:green; font-size:32px;'>Richtig! :)</p>"
+        : "<p style='color:red; font-size:32px;'>Falsch! :(</p>";
     },
-    trial_duration: expInfo.TIMING.FEEDBACK,
-  };
-
-  // Inter Trial Interval Screen
-  const inter_trial_interval = {
+    choices: "ALL_KEYS",
+    trial_duration: expInfo.TIMING.FEEDBACK
+  });
+  // ITI-Screen
+  trial_line.push({
     type: htmlKeyboardResponse,
     stimulus: "",
-    choices: "NO-KEYS",
-    trial_duration:
-      expInfo.TIMING.ITI +
-      Math.floor(Math.random() * 2 * (expInfo.TIMING.JITTER + 1)),
-  };
+    choices: "NO_KEYS",
+    trial_duration: expInfo.TIMING.ITI
+  });
+  return trial_line;
+}
 
-  // Push screens into trial_line
+// Experimental-Trial
+export function createExperimentTrial(trial: StroopTrial): any[] {
+  const trial_line: any[] = [];
 
-  if (isPractice) {
-    trial_line.push(
-      fixation_screen,
-      target_response_screen,
-      feedback,
-      inter_trial_interval
-    );
-  } else {
-    trial_line.push(
-      fixation_screen,
-      target_response_screen,
-      inter_trial_interval
-    );
-  }
+  // Fixations-Kreuz
+  trial_line.push({
+    type: htmlKeyboardResponse,
+    stimulus: "<p style='font-size:40px;'>+</p>",
+    choices: "NO_KEYS",
+    trial_duration: expInfo.TIMING.FIXATION
+  });
 
-  // return
+  // Stimulus-Screen
+  trial_line.push({
+    type: htmlKeyboardResponse,
+    stimulus: `
+      <div style="font-size:48px;color:${trial.textColor.toLowerCase()};">
+        ${trial.targetWord}
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:60px;font-size:28px;">
+        <div style="color:${trial.leftColor.toLowerCase()};padding:0 40px">
+          ${trial.leftOption}
+        </div>
+        <div style="color:${trial.rightColor.toLowerCase()};padding:0 40px">
+          ${trial.rightOption}
+        </div>
+      </div>
+    `,
+    choices: expInfo.STROOP.choices,
+    data: trial,
+    on_finish: (data: any) => {
+      data.correct = (
+        (data.response === "d" && trial.correctAnswer === "left") ||
+        (data.response === "j" && trial.correctAnswer === "right")
+      );
+      data.response_congruency = trial.responseCongruency;
+      data.target_congruency   = trial.targetCongruency;
+      data.target_word         = trial.targetWord;
+      data.target_color        = trial.textColor;
+      data.correct_response    = trial.correctAnswer;
+      data.left_option         = data.leftOption;
+      data.left_color          = data.leftColor;
+      data.rigt_option         = data.rightOption;
+      data.right_color         = data.rightColor;
+      data.key_press           = data.response;
+      data.rt                  = data.rt
+      data.trial_index         = jsPsych.data.get().last(1).values()[0].trial_index;
+      data.time_elapsed        = jsPsych.getProgress().current_trial_global;
+    }
+  });
+  // ITI-Screen
+  trial_line.push({
+    type: htmlKeyboardResponse,
+    stimulus: "",
+    choices: "NO_KEYS",
+    trial_duration: expInfo.TIMING.ITI
+  });
   return trial_line;
 }
