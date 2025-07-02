@@ -16,8 +16,8 @@ export const expInfo = {
   DESIGN: {
     nSCALE_REV: 6, // the total number of choice options for scale for reverse coding
     ADD_BMW3: false, // a switch to add the BMW-3 questionnaire
-    ADD_BFI2: false, // a switch to add the BFI-2 questionnaire
-    BFI2_type: "short", // "full", "short" or "extra-short"
+    ADD_BFI2: true, // a switch to add the BFI-2 questionnaire
+    BFI2_type: "full", // "full", "short" or "extra-short"
     ADD_NFC: false, // a switch to add the NFC questionnaire
     ADD_ISI: false, // a switch to add the ISI questionnaire
   },

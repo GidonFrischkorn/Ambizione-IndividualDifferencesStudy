@@ -2,7 +2,7 @@ export const end_questionnaire = function (language: string = "de", timepoint: n
   if (language == "de") {
     var instruction =
       "<h1>Schlussfragebogen MZP " + timepoint.toString() + "</h1>" +
-      "<p>Bitte beantworten Sie die folgenden Fragen zu dem 1. Messzeitpunk an dem sie gerade teilgenommen haben.</p>";
+      "<p>Bitte beantworten Sie die folgenden Fragen zu dem 3. Messzeitpunk an dem sie gerade teilgenommen haben.</p>";
 
     // sleep questions
     var sleep_quality = "Wie würden sie die Qualität Ihres Schlafes letzte Nacht beurteilen?";
@@ -15,101 +15,12 @@ export const end_questionnaire = function (language: string = "de", timepoint: n
     var sleep_start_question = "Wie müde waren Sie zu Beginn des Messzeitpunkts?";
     var sleep_end_question = "Wie müde waren Sie am Ende des Messzeitpunkts?";
 
-
-    // handedness questions
-    var hand_questions = [
-      "Mit welcher Hand schreiben Sie?",
-      "In welcher Hand halten Sie den Löffel wenn Sie Suppe essen?",
-      "In welcher Hand halten Sie die Zahnbürste beim Zähneputzen?",
-      "In welcher Hand halten Sie das Streichholz beim Anzünden?",
-      "Mit welcher Hand benutzen Sie einen Radiergummi?",
-      "In welcher Hand halten Sie das Messer beim Bestreichen eines Brotes?",
-      "Mit welcher Hand benutzen Sie einen Hammer?",
-      "In welcher Hand halten Sie einen Schäler beim Schälen eines Apfels?",
-      "Mit welcher Hand zeichnen Sie?",
-      "Mit welcher Hand benutzen Sie eine Schere?"
-    ];
-  
-
-    var hand_scale = [
-      "links",
-      "beide",
-      "rechts",
-    ];
-
-    var hand_title = "Fragebogen zur Erfassung der Händigkeit";
-    var hand_instruction =
-      "Die zehn untenstehenden Fragen erfassen mit welcher Hand sie bestimmte" +
-      "Tätigkeiten bevorzugt ausführen. Bitte kreuzen Sie für jede der Fragen an, ob Sie" +
-      "die “linke Hand”, “beide Hände gleichermaßen“ oder die “rechte Hand“ zum" +
-      "Ausführen der jeweiligen Tätigkeit bevorzugen. Wählen Sie “beide Hände” nur wenn" +
-      "Sie die Tätigkeiten mit der linken und rechten Hand gleichermaßen gut ausführen" +
-      "können. Bitte beantworten Sie alle Fragen, selbst dann wenn Sie gewisse" +
-      "Tätigkeiten nie oder nur selten ausführen. Stellen Sie sich vor wie Sie die" +
-      "entsprechende Tätigkeit ausführen und wählen Sie die entsprechende Antwort.";
+    // Feedback questions
+    var feedback_questions = "Zu welchen Aufgaben möchten Sie gerne eine Rückmeldung zu Ihrer Leistung erhalten?";
+    var feedback_options = ["Intelligenztest", "Binding Aufgaben", "Entscheidungsaufgaben", "Gedächtnisaufgaben", "keine Rückmeldung"];
   }  else {
     throw new Error("Language not supported");
   }
-
-  const hand_labels: string[] = [
-    "hand_write",
-    "hand_spoon",
-    "hand_brush",
-    "hand_match",
-    "hand_eraser",
-    "hand_knife",
-    "hand_hammer",
-    "hand_peeler",
-    "hand_draw",
-    "hand_scissors"
-  ];
-
-  // Create array of items
-  var hand_items: any[] = [];
-  for (let i = 0; i < hand_questions.length; i++) {
-    var single_item = {
-      text: hand_questions[i],
-      value: hand_labels[i],
-    };
-
-    hand_items.push(single_item);
-  }
-
-  // create array of response colums
-  var hand_columns: any[] = [];
-  for (let i = 0; i < hand_scale.length; i++) {
-    var single_column = {
-      value: i + 1,
-      text: hand_scale[i],
-    };
-
-    hand_columns.push(single_column);
-  }
-
-  // combine everything into a single survey page
-  var hand_page = {
-    title: "Händigkeit",
-    elements: [
-      {
-        type: "matrix",
-        name: "hand-matrix",
-        title: hand_title,
-        description: hand_instruction,
-        alternateRows: true,
-        isAllRowRequired: true,
-        requiredMark: "Bitte beantworten Sie alle Fragen.",
-        requiredErrorText: "Bitte beantworten Sie alle Fragen.",
-        requiredText: "Bitte beantworten Sie alle Fragen.", 
-        rows: hand_items,
-        rowsOrder: "random",
-        columns: hand_columns,
-        rowTitleWidth: "50%",
-      },
-    ],
-    requiredErrorText: "Bitte beantworten Sie alle Fragen.",
-    requiredMark: "Bitte beantworten Sie alle Fragen.",
-    requiredText: "Bitte beantworten Sie alle Fragen.", 
-  };
 
   // Sleep items
   const sleep_quality_item = {
@@ -232,8 +143,7 @@ export const end_questionnaire = function (language: string = "de", timepoint: n
     maxRateDescription: "überhaupt nicht müde",
   };  
 
-  // Handedness items
-
+  // Sleep Page
   const end_page1 = {
     title: "Schlaf & Müdigkeit",
     description: "",
@@ -249,9 +159,41 @@ export const end_questionnaire = function (language: string = "de", timepoint: n
     ],
   };
 
+  // Feedback Items
+  const feedback_tasks = {
+    type: "checkbox",
+    name: "feedback_tasks",
+    title: feedback_questions,
+    description: "Für den Intelligenztest können Sie eine Rückmeldung gemäss der verfügbaren Normen erhalten. Bei den anderen Aufgaben bekommen Sie eine Rückmeldung zu Ihrer Leistung im Vergleich zu anderen Teilnehmern der Studie.",
+    choices: feedback_options,
+    isRequired: true,
+    colCount: 2,
+    separateSpecialChoices: true
+  };
+
+  const feedback_contact = {
+    name: "email",
+    type: "text",
+    title: "An welche E-Mail-Adresse möchten Sie die Rückmeldung erhalten?",
+    inputType: "email",
+    placeholder: "foobar@example.com",
+    isRequired: true,
+    autocomplete: "email"
+  };
+
+  // Feedback Page
+  const end_page2 = {
+    title: "Feedback",
+    description: "",
+    elements: [
+      feedback_tasks,
+      feedback_contact,
+    ],
+  }
+
   const followup_pages = [
     end_page1,
-    hand_page,
+    end_page2
   ]
 
   return followup_pages;
