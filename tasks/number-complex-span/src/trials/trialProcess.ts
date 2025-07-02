@@ -328,6 +328,7 @@ createTrialBody.prototype.displayMemoryPhase = function () {
                 blockID: this.blockID,
                 trialID: this.trialID,
                 condition: this.condition,
+                pair: this.pairList[i],
                 cue: this.condition === "retro" ? this.cueList[i] : "null"
             },
         }

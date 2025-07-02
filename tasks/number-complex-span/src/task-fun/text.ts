@@ -266,7 +266,7 @@ export const END_INFO = {
           Wenn sich das Fenster nach 1 Minuten nicht schliesst, 
           dann wenden Sie sich bitte an die Studienleitung.
       </p>
-      <div id="jspsych-data-display"></div>
+      <div id="jspsych-data-display" style="color:white"></div>
     </div>`,
   },
 };

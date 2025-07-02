@@ -35,13 +35,13 @@ export const expInfo = {
     BG_NAME: "white",
     BACKGROUND: "#FFFFFF",
     POOL: [
-      "#2e8b57",
+      "#1f5e3aff",
       "#ff0000",
-      "#ffd700",
-      "#c71585",
-      "#00ff00",
-      "#0000ff",
-      "#1e90ff",
+      "#e1c111ff",
+      "#af0772ff",
+      "#00fb00ff",
+      "#0505bcff",
+      "#4ea4f9ff",
     ],
   },
 
@@ -54,7 +54,7 @@ export const expInfo = {
     START: 10 * 1000, // time for the countdown before a new trial starts
     BREAK: 30, // break duration in seconds
     RETRIEVAL: 10 * 1000, // time for retrieval
-    DEBRIEF: 2000, // time for feedback
+    DEBRIEF: 1500, // time for feedback
   },
 
   SIZE: {

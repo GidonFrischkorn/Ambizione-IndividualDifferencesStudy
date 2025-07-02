@@ -223,7 +223,8 @@ export const END_INFO = {
             Sie wurden automatisch in Ihren "Downloads"-Ordner heruntergeladen.
             Bitte kontaktieren Sie den Studienleiter für weitere Unterstützung.
             </p>
-            </div>`,
+            <div id="jspsych-data-display" style="color:white"></div>
+        </div>`,
   },
 };
 

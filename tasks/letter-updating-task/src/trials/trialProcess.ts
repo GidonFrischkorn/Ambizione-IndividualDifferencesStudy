@@ -25,7 +25,7 @@ import { trial_start_screen } from "../instructions/InstrTrial";
 class createTrialBody {
   blockID: number;
   trialID: number;
-  trial_type: string;
+  procedure: string;
   setsize: number;
   updStep: number;
   canW: number;
@@ -46,7 +46,7 @@ class createTrialBody {
     this.trialID = trialID;
     this.setsize = setsize;
     this.updStep = updStep;
-    this.trial_type = trial_type;
+    this.procedure = trial_type;
 
     // center of the canvas
     this.canW = varSystem.CANVAS_WIDTH;
@@ -171,7 +171,7 @@ createTrialBody.prototype.displayEncodingPhase = function () {
           screenID: "encoding",
           blockID: this.blockID,
           trialID: this.trialID,
-          trial_type: this.trial_type,
+          procedure: this.procedure,
           stepID: index,
           setsize: this.setsize,
           color: color,
@@ -220,7 +220,7 @@ createTrialBody.prototype.displayUpdatingPhase = function () {
           screenID: "updating",
           blockID: this.blockID,
           trialID: this.trialID,
-          trial_type: this.trial_type,
+          procedure: this.procedure,
           stepID: index,
           setsize: this.setsize,
           color: color,
@@ -288,7 +288,7 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
         screenID: "retrieval",
         blockID: this.blockID,
         trialID: this.trialID,
-        trial_type: this.trial_type,
+        procedure: this.procedure,
         setsize: this.setsize,
         color: color,
         initial_item: this.initialResp[color].letter,

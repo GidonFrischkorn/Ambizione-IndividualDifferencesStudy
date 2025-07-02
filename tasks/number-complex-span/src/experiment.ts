@@ -103,7 +103,7 @@ export async function run({
   // Push all the screen slides into timeline
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
-  // timeline.push(id_survey);
+  timeline.push(id_survey);
   timeline.push(browser_screen);
   // timeline.push(welcome_screen);
   timeline.push(fullMode_screen);
