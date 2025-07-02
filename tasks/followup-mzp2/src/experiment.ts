@@ -216,7 +216,7 @@ export async function run({
   // When you want to test the experiment, you can easily comment out the screens you don't want
   timeline.push(preload_screen);
   timeline.push(registration_survey);
-  timeline = timeline.concat(ishihara_page);
+
   
   await jsPsych.run(timeline);
 
