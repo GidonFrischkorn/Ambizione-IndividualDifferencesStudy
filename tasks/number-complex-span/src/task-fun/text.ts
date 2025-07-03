@@ -158,6 +158,11 @@ export const SCREEN_INFO = {
       or your <span style="color:red">memory task</span> has an accuracy lower than 33%. 
       Please try again.</p>
       </div>`,
+    de: `<div class="main">
+      <p class="fb-text"> Entschuldigung, Ihre Genauigkeit in der <span style="color:red">Größenbeurteilung</span> 
+      oder der <span style="color:red">Gedächtnisaufgabe</span> ist niedriger als 33%.
+      Bitte versuchen Sie es erneut.</p> 
+      </div>`,
     cn: `<div class="main">
       <p class="fb-text">
       抱歉，您的<span style="color:red">大小判断任务</span>或<span style="color:red">记忆任务</span>准确率低于33%。

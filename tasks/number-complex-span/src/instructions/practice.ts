@@ -7,7 +7,6 @@ import { BUTTON_INFO, SCREEN_INFO } from "../task-fun/text";
 
 
 /**************************** Practice for the memory task ****************************/   
-
 const instr_start_screen = {
   type: htmlButtonResponse,
   stimulus: `<div class="image">
@@ -56,7 +55,7 @@ const failed_memory_task_line = {
     let acc = jsPsych.data
       .get()
       .filter({ screenID: "debrief", blockID: -2 })
-      .last(5)
+      .last(DESIGN.nPRACTICE_RETRO)
       .select("response")
       .mean();
 
@@ -137,17 +136,15 @@ const failed_judgement_task_screen = {
 const failed_judgement_task_line = {
   timeline: [failed_judgement_task_screen],
   conditional_function: function () {
-    let correct = jsPsych.data
+    let acc = jsPsych.data
       .get()
       .filter({ screenID: "memory", blockID: -3 })
       .last(DESIGN.nJUDGE*DESIGN.SETSIZE)
       .select("acc")
-      .count();
-
-      let acc = correct / (DESIGN.nJUDGE*DESIGN.SETSIZE);
+      .mean();
 
     // if the accuracy is less 2 items, then we loop through the practice again
-    if (acc >= 0.5) {
+    if (acc >= 0.6) {
       return false;
     } else {
       return true;
@@ -163,17 +160,15 @@ export const practice_judgement_task_line = {
   ),
   loop_function: function (data) {
 
-    let correct = jsPsych.data
+    let acc = jsPsych.data
       .get()
       .filter({ screenID: "memory", blockID: -3 })
       .last(DESIGN.nJUDGE * DESIGN.SETSIZE)
       .select("acc")
-      .count();
-
-    let acc = correct / (DESIGN.nJUDGE * DESIGN.SETSIZE);
+      .mean();
 
     // if the accuracy is less 1 item, then we loop through the practice again
-    if (acc >= 0.5) {
+    if (acc >= 0.6) {
       return false;
     } else {
       return true;

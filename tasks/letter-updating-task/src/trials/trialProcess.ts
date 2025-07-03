@@ -382,9 +382,12 @@ export function createNewTrial(
   // retrieval screen
   let retrievalLine = trialBody.displayRetrievalPhase();
   trialLine = trialLine.concat(retrievalLine);
+  
   // debriefing screen
-  let debriefingScreen = trialBody.displayDebriefingPhase();
-  trialLine.push(debriefingScreen);
+  if (trial_type === "practice") {
+    let debriefingScreen = trialBody.displayDebriefingPhase();
+    trialLine.push(debriefingScreen);
+  }
 
   return trialLine;
 }

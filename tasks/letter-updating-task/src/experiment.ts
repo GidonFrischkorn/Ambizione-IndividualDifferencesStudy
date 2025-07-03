@@ -115,7 +115,7 @@ export async function run({
   timeline.push(id_survey);
   // timeline.push(welcome_screen);
   timeline.push(browser_screen);
-  // timeline.push(fullMode_screen);
+  timeline.push(fullMode_screen);
   timeline.push(instr_line);
   timeline = timeline.concat(practice_line);
   timeline = timeline.concat(experiment_line);
