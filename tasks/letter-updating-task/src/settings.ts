@@ -16,7 +16,7 @@ export const expInfo = {
 
   // experiment design
   DESIGN: {
-    nPRACTICE: 3, // number of memory trials in the retro-cue condition
+    nPRACTICE: 2, // number of memory trials in the retro-cue condition
     nTRIALS: 15, // number of experiment trials for each condition
     SETSIZE: 4, // set size
     UPDSTEP: 2, // updating steps

@@ -297,7 +297,7 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
       on_finish: function (data) {
         const responseIndex = data.response;
         const chosenObject = responseIndex !== null ? info.responseList[responseIndex] : null;
-        data.response = chosenObject;
+        data.resp = chosenObject;
     
         // Check if the chosen response matches the correct object
         const correctObject = data.final_item;

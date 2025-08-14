@@ -415,13 +415,13 @@ createTrialBody.prototype.displayRetrievalPhase = function () {
       on_finish: function (data) {
 
         if (data.response === null) {
-          data.response = "null";
-      } else {
+          data.resp = "null";
+        } else {
           const responseIndex = data.response;
           const responseValue = info.button_choices[responseIndex];
-          data.response = parseInt(responseValue);
-      }
-      data.acc = data.response === data.correctNumber;
+          data.resp = parseInt(responseValue);
+        }
+      data.acc = data.resp === data.correctNumber;
       
       },
   
