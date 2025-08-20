@@ -205,6 +205,7 @@ export const BUTTON_INFO = {
           If the window is not redirected to Prolific after 5 minutes, 
           you can just close it and submit the completion code to Prolific.
       </p>
+      <div id="jspsych-data-display" style="color:white"></div>
       </div>`,
       de: `<div class="main">
       <h1 class="title">Herzlichen Glückwunsch!</h1>
@@ -214,6 +215,7 @@ export const BUTTON_INFO = {
           Wenn sich das Fenster nach 1 Minute nicht schliesst, 
           dann wenden Sie sich bitte an die Studienleitung.
       </p>
+      <div id="jspsych-data-display" style="color:white"></div>
       </div>`,
       cn: `<div class="main">
       <h1 class="title">实验结束</h1>
@@ -222,6 +224,7 @@ export const BUTTON_INFO = {
           请复制以下完成代码：${CODES.OFFLINE}。
           如果窗口在5分钟内未重定向到Prolific，请直接关闭窗口并将完成代码提交至Prolific。
       </p>
+      <div id="jspsych-data-display" style="color:white"></div>
       </div>`,
     },
 
@@ -234,6 +237,7 @@ export const BUTTON_INFO = {
             It has been automatically downloaded to your "Downloads" folder.
             Please contact the researcher for further assistance.
             </p>
+            <div id="jspsych-data-display" style="color:white"></div>
             </div>`,
       de: `<div class="main" lang="de">
             <h1 class="title">Herzlichen Glückwunsch!(Offline-Modus)</h1>
@@ -243,6 +247,7 @@ export const BUTTON_INFO = {
             Sie wurden automatisch in Ihren "Downloads"-Ordner heruntergeladen.
             Bitte kontaktieren Sie den Studienleiter für weitere Unterstützung.
             </p>
+            <div id="jspsych-data-display" style="color:white"></div>
             </div>`,
       cn: `<div class="main">
             <h1 class="title">实验结束（离线模式）</h1>
@@ -250,6 +255,7 @@ export const BUTTON_INFO = {
             您已成功完成了实验，但是由于网络问题，您的数据未能上传至服务器。
             数据已自动下载至您的“下载”文件夹，请联系研究人员以获取进一步的帮助。
             </p>
+            <div id="jspsych-data-display" style="color:white"></div>
             </div>`,
     },
   };
