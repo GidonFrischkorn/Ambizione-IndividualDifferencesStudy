@@ -7,7 +7,7 @@
 **/package-lock
 
 # file-types to ignore
-**.jzip
+**.zip
 **.DS_Store
 **.history
 __pycache__/
