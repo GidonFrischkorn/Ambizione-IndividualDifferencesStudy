@@ -19,6 +19,13 @@ export const bfi2 = function (
       "Würden Sie über sich z. B. sagen, dass Sie gerne Zeit mit anderen Menschen verbringen? " +
       "Bitte geben Sie für jede der folgenden Aussagen an, inwieweit Sie zustimmen.";
 
+    // NOTE: Slots 21 and 23 below (Assertiveness item 21 / Productiveness item 23R)
+    // were transposed in this array until this commit. All data collected before
+    // this fix has the responses to these two items swapped under each other's
+    // item_labels (BFI-E-21 / BFI-G-23R). The correction on the analysis side is
+    // implemented in Ambizione_DataPreparation (R/bfi2_key.R, bfi2_apply_key()),
+    // which exchanges the two columns and applies the published scoring key
+    // (Soto & John, 2017, JPSP, doi 10.1037/pspp0000096). Do not re-fix there.
     var items = [
       "Ich gehe aus mir heraus, bin gesellig.",
       "Ich bin einfühlsam, warmherzig.",
@@ -42,9 +49,9 @@ export const bfi2 = function (
       "Ich reagiere leicht angespannt.",
       "Ich kann mich für Kunst, Musik und Literatur begeistern.",
 
-      "Ich neige dazu, Aufgaben vor mir herzuschieben.",
-      "Ich habe oft Streit mit anderen.",
       "Ich neige dazu, die Führung zu übernehmen.",
+      "Ich habe oft Streit mit anderen.",
+      "Ich neige dazu, Aufgaben vor mir herzuschieben.",
       "Ich bin selbstsicher, mit mir zufrieden.",
       "Ich meide philosophische Diskussionen.",
       "Ich bin weniger aktiv und unternehmungslustig als andere.",
