@@ -27,7 +27,6 @@ import { bmw3 } from "./survey/bmw3";
 import { bfi2 } from "./survey/big5";
 import { nfc } from "./survey/nfc";
 import { isi_questionnaire } from "./survey/isi";
-import { mini_q } from "./survey/mini-q.ts";
 import { bmw3_scores } from "./survey/bmw3_scores.ts";
 import { bfi2_scores } from "./survey/big5_scores.ts";
 import { nfc_scores } from "./survey/nfc_scores.ts";

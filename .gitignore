@@ -27,3 +27,6 @@ __pycache__/
 ~$**.ppt*
 
 
+
+# local-only material (exports, rigor logs); never committed
+local/
